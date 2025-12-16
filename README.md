@@ -1,6 +1,6 @@
-# MemEval - Agentic Memory Evaluation System
+# MemEval - Chain-of-Stage Diagnosis for LLM Memory Systems
 
-MemEval 是一个用于评估智能体记忆系统（Agentic Memory）的诊断框架。它采用分阶段诊断方法，从一致性、提取、更新、检索到推理，全面评估记忆系统的表现。
+MemEval 是一个针对智能体记忆（Agentic Memory）的分阶段诊断系统，旨在精准定位记忆故障发生的具体环节。它采用“人工+大模型”的双轨诊断机制，将人工诊断与大模型自动诊断相结合，在分析记忆问题的同时评估两者的一致性。
 
 ## 📁 项目结构
 
