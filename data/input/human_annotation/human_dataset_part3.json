@@ -1,0 +1,3144 @@
+{
+  "0_0": {
+    "qa_question": "what are John's goals with regards to his basketball career?",
+    "qa_answer": "improve shooting percentage, win a championship",
+    "qa_response": "John aims to improve his shooting percentage.",
+    "qa_category": 1,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "0_1": {
+    "qa_question": "What are John's goals for his career that are not related to his basketball skills?",
+    "qa_answer": "get endorsements, build his brand, do charity work",
+    "qa_response": "John's goals include endorsements, brand building, and charity work.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_2": {
+    "qa_question": "What items does John collect?",
+    "qa_answer": "sneakers, fantasy movie DVDs, jerseys",
+    "qa_response": "sneakers, jerseys, Harry Potter movies",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_3": {
+    "qa_question": "Would Tim enjoy reading books by C. S. Lewis or John Greene?",
+    "qa_answer": "C. S.Lewis",
+    "qa_response": "Based on the memories, Tim enjoys fantasy books like \"Harry Potter\" and \"Lord of the Rings,\" and finds inspiration in detailed and creative storytelling. C. S. Lewis, known for fantasy works like \"The Chronicles of Narnia,\" aligns with Tim's interests. John Greene's contemporary fiction is not mentioned in the memories. Therefore, Tim would likely enjoy reading books by C. S. Lewis.\n\nAnswer: C. S. Lewis.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_4": {
+    "qa_question": "What books has Tim read?",
+    "qa_answer": "Harry Potter, Game of Thrones, the Name of the Wind, The Alchemist, The Hobbit, A Dance with Dragons, and the Wheel of Time.",
+    "qa_response": "- 'The Name of the Wind' by Patrick Rothfuss  \n- Harry Potter series by J.K. Rowling  \n- Game of Thrones series by George R. R. Martin  \n- 'A Dance with Dragons' by George R. R. Martin  \n- Books on castles in the UK  \n\nAnswer: Harry Potter, Game of Thrones, 'The Name of the Wind'",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_5": {
+    "qa_question": "Based on Tim's collections, what is a shop that he would enjoy visiting in New York city?",
+    "qa_answer": "House of MinaLima",
+    "qa_response": "The memories do not provide specific information about shops Tim would enjoy visiting in New York City. \n\nAnswer: Not specified.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_6": {
+    "qa_question": "In which month's game did John achieve a career-high score in points?",
+    "qa_answer": "June 2023",
+    "qa_response": "July 2023.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_7": {
+    "qa_question": "Which geographical locations has Tim been to?",
+    "qa_answer": "California, London, the Smoky Mountains",
+    "qa_response": "Smoky Mountains, Galway, Ireland.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_8": {
+    "qa_question": "Which outdoor gear company likely signed up John for an endorsement deal?",
+    "qa_answer": "Under Armour",
+    "qa_response": "The likely outdoor gear company that signed up John for an endorsement deal is a \"renowned outdoor gear company.\" \n\nAnswer: renowned outdoor gear company.",
+    "qa_category": 3,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "0_9": {
+    "qa_question": "Which endorsement deals has John been offered?",
+    "qa_answer": "basketball shoes and gear deal with Nike, potential sponsorship with Gatorade, Moxie a popular beverage company, outdoor gear company",
+    "qa_response": "Nike, Gatorade, Under Armour.",
+    "qa_category": 1,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_10": {
+    "qa_question": "When was John in Seattle for a game?",
+    "qa_answer": "early August, 2023",
+    "qa_response": "August 2023.",
+    "qa_category": 2,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_11": {
+    "qa_question": "What sports does John like besides basketball?",
+    "qa_answer": "surfing",
+    "qa_response": "Based on the provided memories, there is no mention of John liking any sports besides basketball. \n\nAnswer: None mentioned.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_12": {
+    "qa_question": "What year did John start surfing?",
+    "qa_answer": "2018",
+    "qa_response": "2018.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_13": {
+    "qa_question": "What does Tim do to escape reality?",
+    "qa_answer": "Read fantasy books.",
+    "qa_response": "Reads fantasy books.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_14": {
+    "qa_question": "What kind of writing does Tim do?",
+    "qa_answer": "comments on favorite books in a fantasy literature forum, articles on fantasy novels, studying characters, themes, and making book recommendations, writing a fantasy novel",
+    "qa_response": "fantasy novels and articles",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_15": {
+    "qa_question": "Who is Anthony?",
+    "qa_answer": "likely John's friend, colleague or family",
+    "qa_response": "Anthony entered a Harry Potter trivia contest.",
+    "qa_category": 3,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_16": {
+    "qa_question": "After how many weeks did Tim reconnect with the fellow Harry Potter fan from California?",
+    "qa_answer": "three weeks",
+    "qa_response": "To determine after how many weeks Tim reconnected with the fellow Harry Potter fan from California, let's analyze the relevant memories:\n\n1. The first memory is from \"10:29 am on 9 August, 2023\" where Tim recently Skyped with a Harry Potter fan from California.\n2. The next relevant memory is from \"7:42 pm on 8 December, 2023\" where Tim enjoys connecting with fellow Harry Potter fans.\n\nCalculating the time difference:\n- From 9 August 2023 to 8 December 2023 is approximately 17 weeks.\n\nAnswer: 17 weeks.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_17": {
+    "qa_question": "How many games has John mentioned winning?",
+    "qa_answer": "6",
+    "qa_response": "4 games.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_18": {
+    "qa_question": "What authors has Tim read books from?",
+    "qa_answer": "J.K. Rowling, R.R. Martin, Patrick Rothfuss, Paulo Coelho, and J. R. R. Tolkien.",
+    "qa_response": "J.K. Rowling, George R. R. Martin, Patrick Rothfuss.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_19": {
+    "qa_question": "What is a prominent charity organization that John might want to work with and why?",
+    "qa_answer": "Good Sports, because they work with Nike, Gatorade, and Under Armour and they aim toprovide youth sports opportunities for kids ages 3-18 in high-need communities.",
+    "qa_response": "A local organization supporting disadvantaged kids through sports and education.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_20": {
+    "qa_question": "Which city was John in before traveling to Chicago?",
+    "qa_answer": "Seattle",
+    "qa_response": "To determine which city John was in before traveling to Chicago, we need to look at the memories related to his trip to Chicago and any prior travels mentioned.\n\n1. The memory from Tim at \"1:08 pm on 11 August, 2023\" mentions that John recently took a trip to Chicago.\n2. The memory from John at \"1:08 pm on 11 August, 2023\" also mentions his visit to Chicago.\n3. Prior to this, the most recent memory is from Tim at \"4:21 pm on 16 July, 2023,\" which mentions John's upcoming game in Seattle next month (which would be August 2023, the same month as the Chicago trip).\n\nSince the Chicago trip is in August 2023 and the Seattle game is also in August 2023, it suggests John was in Seattle before traveling to Chicago.\n\nAnswer: Seattle.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_21": {
+    "qa_question": "Which US cities does John mention visiting to Tim?",
+    "qa_answer": "Seattle, Chicago, New York",
+    "qa_response": "The US cities John mentions visiting to Tim are Chicago and Seattle. \n\n(From memories: \"John recently took a trip to Chicago\" and \"Seattle is one of John's favorite cities to explore.\")",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_22": {
+    "qa_question": "When did John meet with his teammates after returning from Chicago?",
+    "qa_answer": "August 15, 2023",
+    "qa_response": "15 August, 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_23": {
+    "qa_question": "When is Tim attending a book conference?",
+    "qa_answer": "September 2023",
+    "qa_response": "The most recent memory about Tim attending a book conference is from \"1:50 pm on 13 October, 2023,\" where it mentions he attended a Harry Potter conference in the UK last week. \n\nCalculating the date:\n- Memory timestamp: 13 October 2023\n- \"Last week\" would be approximately 6 October 2023.\n\nHowever, the question asks \"when is Tim attending,\" implying a future event. The memories only mention a past conference (October 2023), not a future one. \n\nAnswer: No future conference mentioned.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_24": {
+    "qa_question": "Where was John between August 11 and August 15 2023?",
+    "qa_answer": "Chicago",
+    "qa_response": "Chicago.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_25": {
+    "qa_question": "What similar sports collectible do Tim and John own?",
+    "qa_answer": "signed basketball",
+    "qa_response": "The similar sports collectible that Tim and John own is a signed basketball. \n\n- Tim has a basketball signed by his favorite player (from his memory on 6 November 2023).\n- John has a basketball signed by his teammates (from his memory on 17 August 2023). \n\nAnswer: Signed basketball.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_26": {
+    "qa_question": "Which TV series does Tim mention watching?",
+    "qa_answer": "That, Wheel of Time",
+    "qa_response": "'The Wheel of Time'",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_27": {
+    "qa_question": "Which popular time management technique does Tim use to prepare for exams?",
+    "qa_answer": "Pomodoro technique",
+    "qa_response": "The popular time management technique Tim uses to prepare for exams is the **25 minutes on, 5 minutes off** method. \n\n(Answer derived from Tim's memory at \"3:59 pm on 16 November, 2023\" and John's memory at \"3:59 pm on 16 November, 2023,\" both mentioning this technique.) \n\nFinal answer: **25 minutes on, 5 minutes off**.",
+    "qa_category": 3,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_28": {
+    "qa_question": "Which popular music composer's tunes does Tim enjoy playing on the piano?",
+    "qa_answer": "John Williams",
+    "qa_response": "film scores",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_29": {
+    "qa_question": "What schools did John play basketball in and how many years was he with his team during high school?",
+    "qa_answer": "Middle school, high school, and college and he was with his high school team for 4 years.",
+    "qa_response": "John played basketball in middle and high school and was with his team for four years during high school.  \n\nAnswer: middle, high school; four years.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_30": {
+    "qa_question": "Which cities has John been to?",
+    "qa_answer": "Seattle, Chicago, New York, and Paris.",
+    "qa_response": "Based on the memories, John has been to: Seattle, Chicago, Paris, Italy, and Barcelona. \n\nAnswer: Seattle, Chicago, Paris, Italy, Barcelona.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_31": {
+    "qa_question": "What month did Tim plan on going to Universal Studios?",
+    "qa_answer": "September, 2023",
+    "qa_response": "September 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_32": {
+    "qa_question": "Which US states might Tim be in during September 2023 based on his plans of visiting Universal Studios?",
+    "qa_answer": "California or Florida",
+    "qa_response": "California or Florida.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_33": {
+    "qa_question": "When does John plan on traveling with his team on a team trip?",
+    "qa_answer": "October, 2023",
+    "qa_response": "October 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_34": {
+    "qa_question": "What could John do after his basketball career?",
+    "qa_answer": "become a basketball coach since he likes giving back and leadership",
+    "qa_response": "John could pursue endorsements and charity work.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_35": {
+    "qa_question": "What outdoor activities does John enjoy?",
+    "qa_answer": "Hiking, surfing",
+    "qa_response": "Based on the memories, John enjoys:\n\n- Surfing\n- Hiking\n- Camping\n- Basketball",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_36": {
+    "qa_question": "Who is Tim and John's favorite basketball player?",
+    "qa_answer": "LeBron James",
+    "qa_response": "LeBron James.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_37": {
+    "qa_question": "Which week did Tim visit the UK for the Harry Potter Conference?",
+    "qa_answer": "The week before October 13th, 2023.",
+    "qa_response": "The Harry Potter conference in the UK was attended by Tim on \"13 October, 2023\". \n\nAnswer: Week of 9 October 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_38": {
+    "qa_question": "which country has Tim visited most frequently in his travels?",
+    "qa_answer": "UK",
+    "qa_response": "The UK.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_39": {
+    "qa_question": "What year did Tim go to the Smoky Mountains?",
+    "qa_answer": "2022",
+    "qa_response": "2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_40": {
+    "qa_question": "Has Tim been to North Carolina and/or Tennesee states in the US?",
+    "qa_answer": "Yes",
+    "qa_response": "Yes, to Tennessee.  \n\n(From Tim's memory on 1 December 2023: \"Tim took a trip to the Smoky Mountains last year...\" The Smoky Mountains span Tennessee and North Carolina, but the memory only explicitly mentions Tennessee.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_41": {
+    "qa_question": "What kind of fiction stories does Tim write?",
+    "qa_answer": "Fantasy stories with plot twists",
+    "qa_response": "fantasy novels",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_42": {
+    "qa_question": "What has John cooked?",
+    "qa_answer": "Soup, a slow cooker meal, and honey garlic chicken with roasted veg.",
+    "qa_response": "honey garlic chicken with roasted vegetables",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_43": {
+    "qa_question": "What does John like about Lebron James?",
+    "qa_answer": "His heart, determination, skills, and leadership.",
+    "qa_response": "John admires LeBron's work ethic, skills, and leadership.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_44": {
+    "qa_question": "When did John and his wife go on a European vacation?",
+    "qa_answer": "November, 2023.",
+    "qa_response": "November 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_45": {
+    "qa_question": "Which country was Tim visiting in the second week of November?",
+    "qa_answer": "UK",
+    "qa_response": "The UK.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_46": {
+    "qa_question": "Where was Tim in the week before 16 November 2023?",
+    "qa_answer": "UK",
+    "qa_response": "To determine where Tim was in the week before 16 November 2023, let's analyze the relevant memories:\n\n1. The closest memory before 16 November 2023 is from \"10:22 am on 21 November, 2023,\" which mentions Tim \"experiencing a setback with a story based on his experiences in the UK.\" This implies he was recently in the UK.\n\n2. Another relevant memory is from \"1:50 pm on 13 October, 2023,\" where Tim \"attended a Harry Potter conference in the UK last week.\" \n\nSince the question asks about the week before 16 November 2023, and the last explicit mention of Tim's location is the UK (from the 13 October memory, which references \"last week\"), it's likely he was still in the UK during that time.\n\nAnswer: UK",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_47": {
+    "qa_question": "When did John get married at a greenhouse?",
+    "qa_answer": "last week of September 2023",
+    "qa_response": "2 October 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_48": {
+    "qa_question": "When did John get an ankle injury in 2023?",
+    "qa_answer": "around November 16, 2023",
+    "qa_response": "To determine when John got an ankle injury in 2023, let's analyze the memories:\n\n1. From John's memories:\n   - \"10:22 am on 21 November, 2023: Last season, John faced a major challenge when he hurt his ankle...\"\n   - \"3:37 pm on 16 December, 2023: John injured himself not too long ago...\"\n\n2. From Tim's memories:\n   - \"3:37 pm on 16 December, 2023: John recently jogged without any pain after a period of injury...\"\n\nThe most specific reference is \"last season\" in the 21 November 2023 memory. Since the current season's opener was mentioned as \"next week\" on 21 May 2023, \"last season\" would refer to the season before May 2023, placing the injury in early 2023.\n\nAnswer: Early 2023.",
+    "qa_category": 1,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_49": {
+    "qa_question": "How many times has John injured his ankle?",
+    "qa_answer": "two times",
+    "qa_response": "Based on the memories provided, John has injured his ankle **once**. \n\nThe memories mention his ankle injury multiple times, but all references point to the same injury event during the last season (2023). There are no indications of multiple separate ankle injuries. \n\nAnswer: Once.",
+    "qa_category": 1,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_50": {
+    "qa_question": "Which book was John reading during his recovery from an ankle injury?",
+    "qa_answer": "The Alchemist",
+    "qa_response": "\"The Alchemist\"",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_51": {
+    "qa_question": "What kind of yoga for building core strength might John benefit from?",
+    "qa_answer": "Hatha Yoga",
+    "qa_response": "Warrior II pose.",
+    "qa_category": 3,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_52": {
+    "qa_question": "What does John do to supplement his basketball training?",
+    "qa_answer": "Yoga, strength training",
+    "qa_response": "Strength training.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_53": {
+    "qa_question": "What other exercises can help John with his basketball performance?",
+    "qa_answer": "Sprinting, long-distance running, and boxing.",
+    "qa_response": "Strength training.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_54": {
+    "qa_question": "When did John take a trip to the Rocky Mountains?",
+    "qa_answer": "2022",
+    "qa_response": "The trip to the Rocky Mountains was in 2022. \n\n(Calculated from the memory timestamp \"9:52 am on 1 December, 2023\" mentioning \"last year\")",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_55": {
+    "qa_question": "When did John start playing professionally?",
+    "qa_answer": "May, 2023",
+    "qa_response": "John started playing professionally in December 2022.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_56": {
+    "qa_question": "When did Tim start playing the violin?",
+    "qa_answer": "August 2023",
+    "qa_response": "August 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_57": {
+    "qa_question": "What instruments does Tim play?",
+    "qa_answer": "piano, violin",
+    "qa_response": "violin and piano",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_58": {
+    "qa_question": "When did John attend the Harry Potter trivia?",
+    "qa_answer": "August 2023.",
+    "qa_response": "2 August 2023.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_59": {
+    "qa_question": "Which career-high performances did John achieve in 2023?",
+    "qa_answer": "highest point score, highest assist",
+    "qa_response": "John achieved a personal best of 40 points and a career-high in assists.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_60": {
+    "qa_question": "When did John achieve a career-high assist performance?",
+    "qa_answer": "December 11, 2023",
+    "qa_response": "11 December, 2023",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_61": {
+    "qa_question": "What books has John read?",
+    "qa_answer": "inpsiring book on dreaming big, The Alchemist, fantasy series, non-fiction books on personal development, Dune",
+    "qa_response": "- 'The Alchemist'  \n- 'Dune' by Frank Herbert  \n- 'The Hobbit'  \n- Harry Potter series",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_62": {
+    "qa_question": "What does John do to share his knowledge?",
+    "qa_answer": "gives seminars, mentors younger players.",
+    "qa_response": "John conducts seminars.",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_63": {
+    "qa_question": "When did John organize a basketball camp for kids?",
+    "qa_answer": "summer 2023",
+    "qa_response": "The basketball camp was organized in summer 2023. \n\n(Calculated from \"last summer\" in the December 26, 2023 memory.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_64": {
+    "qa_question": "Which month was John in Italy?",
+    "qa_answer": "December, 2023",
+    "qa_response": "To determine which month John was in Italy, let's analyze the relevant memory:\n\n1. From John's memories: \n   - \"5:26 pm on 2 January, 2024: John visited Italy last month and had a great time there.\"\n\nCalculation:\n- The memory is dated 2 January 2024.\n- \"Last month\" from January 2024 would be December 2023.\n\nAnswer: December 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_65": {
+    "qa_question": "What fantasy movies does Tim like?",
+    "qa_answer": "Lord of the Rings, Harry Potter, and Star Wars.",
+    "qa_response": "Star Wars, Lord of the Rings.",
+    "qa_category": 1,
+    "labels": [
+      "3.2"
+    ]
+  },
+  "0_66": {
+    "qa_question": "What is a Star Wars book that Tim might enjoy?",
+    "qa_answer": "Star Wars: Jedi Apprentice by Judy Blundell and David Farland. It is a highly rated and immersive series about his favorite movies.",
+    "qa_response": "Based on the memories, Tim's favorite fantasy film is Star Wars, and he enjoys books that take him to other places. However, there is no specific mention of a Star Wars book in the memories. \n\nAnswer: Not mentioned in memories.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_67": {
+    "qa_question": "What would be a good hobby related to his travel dreams for Tim to pick up?",
+    "qa_answer": "Writing a travel blog.",
+    "qa_response": "A good hobby for Tim related to his travel dreams would be **photography**. \n\n(Note: While not explicitly mentioned in the memories, photography aligns well with his interests in travel, cultures, and historical architecture, and would complement his globetrotting activities.) \n\nIf you'd prefer a hobby explicitly mentioned in the memories, another option would be **writing**, as Tim finds inspiration from his travels and enjoys fantasy novels (e.g., \"sparked many ideas for him\" about castles). \n\nLet me know if you'd like the answer adjusted further!",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_68": {
+    "qa_question": "What day did Tim get into his study abroad program?",
+    "qa_answer": "Januarty 5, 2024",
+    "qa_response": "7 January, 2024",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_69": {
+    "qa_question": "When will Tim leave for Ireland?",
+    "qa_answer": "February, 2024",
+    "qa_response": "February 2024.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_70": {
+    "qa_question": "Which Star Wars-related locations would Tim enjoy during his visit to Ireland?",
+    "qa_answer": "Skellig Michael, Malin Head, Loop Head, Ceann Sibéal, and Brow Head because they are Star Wars filming locations.",
+    "qa_response": "The memories do not mention any Star Wars-related locations in Ireland. \n\nAnswer: None mentioned.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_71": {
+    "qa_question": "Which team did John sign with on 21 May, 2023?",
+    "qa_answer": "The Minnesota Wolves",
+    "qa_response": "Minnesota Wolves.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_72": {
+    "qa_question": "What is John's position on the team he signed with?",
+    "qa_answer": "shooting guard",
+    "qa_response": "shooting guard",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_73": {
+    "qa_question": "What challenge did John encounter during pre-season training?",
+    "qa_answer": "fitting into the new team's style of play",
+    "qa_response": "The challenge John encountered during pre-season training was adapting to the new team's playing style. \n\n(Answer derived from both users' memories from 21 August 2023 and 21 May 2023.)",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_74": {
+    "qa_question": "What aspects of the Harry Potter universe will be discussed in John's fan project collaborations?",
+    "qa_answer": "characters, spells, magical creatures",
+    "qa_response": "The memories do not contain any information about John working on a Harry Potter fan project or collaborations related to it. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_75": {
+    "qa_question": "What forum did Tim join recently?",
+    "qa_answer": "fantasy literature forum",
+    "qa_response": "The answer is: fantasy literature forum.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_76": {
+    "qa_question": "What kind of picture did Tim share as part of their Harry Potter book collection?",
+    "qa_answer": "MinaLima's creation from the Harry Potter films",
+    "qa_response": "The memories do not mention Tim sharing a picture of his Harry Potter book collection. \n\nAnswer: No picture shared.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_77": {
+    "qa_question": "What was the highest number of points John scored in a game recently?",
+    "qa_answer": "40 points",
+    "qa_response": "40 points.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_78": {
+    "qa_question": "What did John celebrate at a restaurant with teammates?",
+    "qa_answer": "a tough win",
+    "qa_response": "John celebrated scoring 40 points.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_79": {
+    "qa_question": "What kind of deals did John sign with Nike and Gatorade?",
+    "qa_answer": "basketball shoe and gear deal with Nike, potential sponsorship deal with Gatorade",
+    "qa_response": "basketball shoes and gear",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_80": {
+    "qa_question": "Which city is John excited to have a game at?",
+    "qa_answer": "Seattle",
+    "qa_response": "Seattle.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_81": {
+    "qa_question": "How long has John been surfing?",
+    "qa_answer": "five years",
+    "qa_response": "5 years.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_82": {
+    "qa_question": "How does John feel while surfing?",
+    "qa_answer": "super exciting and free-feeling",
+    "qa_response": "John feels excited and free.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_83": {
+    "qa_question": "What kind of articles has Tim been writing about for the online magazine?",
+    "qa_answer": "different fantasy novels, characters, themes, and book recommendations",
+    "qa_response": "fantasy novels",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_84": {
+    "qa_question": "Which two fantasy novels does Tim particularly enjoy writing about?",
+    "qa_answer": "Harry Potter and Game of Thrones",
+    "qa_response": "\"The Name of the Wind\" and \"Lord of the Rings\".",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_85": {
+    "qa_question": "What did Anthony and John end up playing during the charity event?",
+    "qa_answer": "an intense Harry Potter trivia contest",
+    "qa_response": "Harry Potter trivia contest.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_86": {
+    "qa_question": "What did John share with the person he skyped about?",
+    "qa_answer": "Characters from Harry Potter",
+    "qa_response": "The memories do not contain any information about John sharing something with a person he skyped about. The only mention of a Skype conversation is from Tim's memory on 9 August 2023, where Tim skyped with a Harry Potter fan, not John.\n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_87": {
+    "qa_question": "How did John describe the team bond?",
+    "qa_answer": "Awesome",
+    "qa_response": "John described the team bond as \"a second family.\"",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_88": {
+    "qa_question": "How did John get introduced to basketball?",
+    "qa_answer": "Dad signed him up for a local league",
+    "qa_response": "John's dad signed him up.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_89": {
+    "qa_question": "What is John's number one goal in his basketball career?",
+    "qa_answer": "Winning a championship",
+    "qa_response": "Improve his shooting percentage.",
+    "qa_category": 4,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "0_90": {
+    "qa_question": "What organization is John teaming up with for his charity work?",
+    "qa_answer": "A local organization helping disadvantaged kids with sports and school",
+    "qa_response": "local organization",
+    "qa_category": 4,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "0_91": {
+    "qa_question": "When did John meet back up with his teammates after his trip in August 2023?",
+    "qa_answer": "Aug 15th",
+    "qa_response": "15 August, 2023.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_92": {
+    "qa_question": "What did John's teammates give him when they met on Aug 15th?",
+    "qa_answer": "a basketball with autographs on it",
+    "qa_response": "The answer is: a signed photo. \n\n(From John's memory: \"John's teammates signed a photo to show their friendship and appreciation, which serves as a reminder of their bond.\" - 7:54 pm on 17 August, 2023)",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_93": {
+    "qa_question": "Why did John's teammates sign the basketball they gave him?",
+    "qa_answer": "to show their friendship and appreciation",
+    "qa_response": "To show their bond and support.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_94": {
+    "qa_question": "What is the main intention behind Tim wanting to attend the book conference?",
+    "qa_answer": "to learn more about literature and create a stronger bond to it",
+    "qa_response": "The main intention behind Tim wanting to attend the book conference was to feel inspired and a sense of belonging with others who share his love for Harry Potter. \n\nAnswer: Feel inspired and belong.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_95": {
+    "qa_question": "What new activity has Tim started learning in August 2023?",
+    "qa_answer": "play the piano",
+    "qa_response": "The new activity Tim started learning in August 2023 is cooking. \n\n(From John's memory: \"2:52 pm on 31 August, 2023: Tim is interested in cooking and looking up recipes.\")",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_96": {
+    "qa_question": "Which movie's theme is Tim's favorite to play on the piano?",
+    "qa_answer": "\"Harry Potter and the Philosopher's Stone\"",
+    "qa_response": "The answer is \"Harry Potter and the Philosopher's Stone.\" \n\nHere's the step-by-step reasoning:\n\n1. The question asks which movie's theme is Tim's favorite to play on the piano.\n2. In Tim's memories, there is a mention at \"4:29 pm on 21 August, 2023\" that he enjoys playing different songs on the piano, with a favorite being a theme from a movie he really enjoys, which brings back great memories.\n3. In the same timestamp, another memory states that Tim has a special connection to the movie \"Harry Potter and the Philosopher's Stone\" as it brings back great memories of watching it with his family.\n4. Combining these two pieces of information, the movie theme he enjoys playing on the piano is likely from \"Harry Potter and the Philosopher's Stone,\" as it is explicitly mentioned as a movie he enjoys and connects with great memories.\n5. No other movie themes are mentioned in relation to piano playing in the provided memories.\n\nThus, the answer is \"Harry Potter and the Philosopher's Stone.\" \n\nFinal Answer: Harry Potter and the Philosopher's Stone.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_97": {
+    "qa_question": "What special memory does \"Harry Potter and the Philosopher's Stone\" bring to Tim?",
+    "qa_answer": "Watching it with his family",
+    "qa_response": "Watching it with his family.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_98": {
+    "qa_question": "Which movie does Tim mention they enjoy watching during Thanksgiving?",
+    "qa_answer": "\"Home Alone\"",
+    "qa_response": "'Home Alone'",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_99": {
+    "qa_question": "What tradition does Tim mention they love during Thanksgiving?",
+    "qa_answer": "Prepping the feast and talking about what they're thankful for",
+    "qa_response": "Watching 'Home Alone' with family.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_100": {
+    "qa_question": "How long did John and his high school basketball teammates play together?",
+    "qa_answer": "Four years",
+    "qa_response": "4 years.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_101": {
+    "qa_question": "How was John's experience in New York City?",
+    "qa_answer": "Amazing",
+    "qa_response": "John loved discovering New York City.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_102": {
+    "qa_question": "What did John say about NYC, enticing Tim to visit?",
+    "qa_answer": "It's got so much to check out - the culture, food - you won't regret it.",
+    "qa_response": "John found exploring NYC exciting.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_103": {
+    "qa_question": "What kind of soup did John make recently?",
+    "qa_answer": "tasty soup with sage",
+    "qa_response": "The provided memories do not mention any specific soup that John made recently. Therefore, the answer is:\n\nNo soup mentioned.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_104": {
+    "qa_question": "What spice did John add to the soup for flavor?",
+    "qa_answer": "sage",
+    "qa_response": "The provided memories do not contain any information about John adding a specific spice to soup. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_105": {
+    "qa_question": "What is Tim excited to see at Universal Studios?",
+    "qa_answer": "The Harry Potter stuff",
+    "qa_response": "Harry Potter attractions.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_106": {
+    "qa_question": "Where are John and his teammates planning to explore on a team trip?",
+    "qa_answer": "a new city",
+    "qa_response": "Edinburgh, Scotland.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_107": {
+    "qa_question": "What city did Tim suggest to John for the team trip next month?",
+    "qa_answer": "Edinburgh, Scotland",
+    "qa_response": "Edinburgh, Scotland.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_108": {
+    "qa_question": "What does John want to do after his basketball career?",
+    "qa_answer": "positively influence and inspire others, potentially start a foundation and engage in charity work",
+    "qa_response": "John wants to start a foundation for charity work.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_109": {
+    "qa_question": "What advice did Tim give John about picking endorsements?",
+    "qa_answer": "Ensure they align with values and brand, look for companies that share the desire to make a change and help others, make sure the endorsement feels authentic",
+    "qa_response": "The memories do not contain specific advice from Tim to John about picking endorsements. \n\nAnswer: No advice mentioned.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_110": {
+    "qa_question": "What book recommendation did Tim give to John for the trip?",
+    "qa_answer": "A fantasy novel by Patrick Rothfuss",
+    "qa_response": "The book recommendation Tim gave to John for the trip is \"A Dance with Dragons.\" \n\n(From Tim's memory at \"7:42 pm on 8 December, 2023: Tim recently finished reading 'A Dance with Dragons' and highly recommends it.\")",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_111": {
+    "qa_question": "What type of venue did John and his girlfriend choose for their wedding ceremony?",
+    "qa_answer": "Greenhouse",
+    "qa_response": "greenhouse venue",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_112": {
+    "qa_question": "What was the setting for John and his wife's first dance?",
+    "qa_answer": "Cozy restaurant",
+    "qa_response": "The setting for John and his wife's first dance was a cozy restaurant.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_113": {
+    "qa_question": "Which basketball team does Tim support?",
+    "qa_answer": "The Wolves",
+    "qa_response": "The Wolves.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_114": {
+    "qa_question": "What passion does Tim mention connects him with people from all over the world?",
+    "qa_answer": "passion for fantasy stuff",
+    "qa_response": "fantasy",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_115": {
+    "qa_question": "How does John describe the game season for his team?",
+    "qa_answer": "intense with tough losses and great wins",
+    "qa_response": "\"Intense with tough losses and great wins.\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_116": {
+    "qa_question": "How does John say his team handles tough opponents?",
+    "qa_answer": "by backing each other up and not quitting",
+    "qa_response": "John values teamwork and resilience.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_117": {
+    "qa_question": "What motivates John's team to get better, according to John?",
+    "qa_answer": "facing tough opponents",
+    "qa_response": "Answer: Celebrating achievements and bigger goals.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_118": {
+    "qa_question": "What did John's team win at the end of the season?",
+    "qa_answer": "a trophy",
+    "qa_response": "\na trophy",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_119": {
+    "qa_question": "Where did Tim capture the photography of the sunset over the mountain range?",
+    "qa_answer": "Smoky Mountains",
+    "qa_response": "The Smoky Mountains.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_120": {
+    "qa_question": "How does John feel about being seen as a mentor by some of the younger players?",
+    "qa_answer": "It feels great",
+    "qa_response": "Rewarding and fulfilling.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_121": {
+    "qa_question": "What does John find rewarding about mentoring the younger players?",
+    "qa_answer": "Seeing their growth, improvement, and confidence",
+    "qa_response": "John finds mentoring rewarding because he sees the growth, improvement, and confidence of the younger players.  \n\nAnswer: Seeing players' growth and confidence.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_122": {
+    "qa_question": "What has John been able to help the younger players achieve?",
+    "qa_answer": "reach their goals",
+    "qa_response": "growth, improvement, and confidence",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_123": {
+    "qa_question": "What genre is the novel that Tim is writing?",
+    "qa_answer": "Fantasy",
+    "qa_response": "fantasy",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_124": {
+    "qa_question": "Who is one of Tim's sources of inspiration for writing?",
+    "qa_answer": "J.K. Rowling",
+    "qa_response": "J.K. Rowling.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_125": {
+    "qa_question": "What J.K. Rowling quote does Tim resonate with?",
+    "qa_answer": "\"Turn on the light - happiness hides in the darkest of times.\"",
+    "qa_response": "\"Turn on the light - happiness hides in the darkest of times.\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_126": {
+    "qa_question": "What does John write on the whiteboard to help him stay motivated?",
+    "qa_answer": "motivational quotes and strategies",
+    "qa_response": "The answer cannot be determined from the provided memories. None of the memories mention John writing on a whiteboard.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_127": {
+    "qa_question": "What hobby is a therapy for John when away from the court?",
+    "qa_answer": "Cooking",
+    "qa_response": "Cooking.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_128": {
+    "qa_question": "What type of meal does John often cook using a slow cooker?",
+    "qa_answer": "honey garlic chicken with roasted veg",
+    "qa_response": "honey garlic chicken with roasted vegetables",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_129": {
+    "qa_question": "How will John share the honey garlic chicken recipe with the other person?",
+    "qa_answer": "write it down and mail it",
+    "qa_response": "John is open to sharing suggestions.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_130": {
+    "qa_question": "What was Tim's huge writing issue last week,as mentioned on November 6, 2023?",
+    "qa_answer": "He got stuck on a plot twist",
+    "qa_response": "The answer is: \"stuck on a plot twist.\" \n\n(From Tim's memory at 10:22 am on 21 November 2023: \"Tim experienced a huge writing issue last week where he got stuck on a plot twist...\") \n\nNote: The question mentions November 6, 2023, but the memory is from November 21, 2023, referencing \"last week,\" which would be around November 14, 2023. However, the content of the issue is clearly stated.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_131": {
+    "qa_question": "What does Tim have that serves as a reminder of hard work and is his prized possession?",
+    "qa_answer": "a basketball signed by his favorite player",
+    "qa_response": "A basketball signed by his favorite player.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_132": {
+    "qa_question": "Why do Tim and John find LeBron inspiring?",
+    "qa_answer": "LeBron's determination and the epic block in Game 7 of the '16 Finals",
+    "qa_response": "Determination and heart.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_133": {
+    "qa_question": "How did John describe the views during their road trip out on the European coastline?",
+    "qa_answer": "Spectacular",
+    "qa_response": "spectacular",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_134": {
+    "qa_question": "What is one of Tim's favorite fantasy TV shows, as mentioned on November 11, 2023?",
+    "qa_answer": "\"That\"",
+    "qa_response": "On November 11, 2023, Tim's favorite fantasy TV show was referred to as \"That.\" \n\nAnswer: \"That\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_135": {
+    "qa_question": "How does Tim stay motivated during difficult study sessions?",
+    "qa_answer": "Visualizing goals and success",
+    "qa_response": "Tim uses writing and reading for motivation.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_136": {
+    "qa_question": "What did Tim say about his injury on 16 November, 2023?",
+    "qa_answer": "The doctor said it's not too serious",
+    "qa_response": "The provided memories do not show Tim mentioning anything about his own injury on 16 November, 2023. The injury references on that date are from John's memories.\n\nAnswer: Tim didn't mention injury.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_137": {
+    "qa_question": "What was the setback Tim faced in his writing project on 21 November, 2023?",
+    "qa_answer": "Story based on experiences in the UK didn't go as planned",
+    "qa_response": "The setback Tim faced was getting stuck on a plot twist.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_138": {
+    "qa_question": "How did John overcome his ankle injury from last season?",
+    "qa_answer": "stayed focused on recovery and worked hard to strengthen his body",
+    "qa_response": "physical therapy and perseverance",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_139": {
+    "qa_question": "What motivated Tim to keep pushing himself to get better in writing and reading?",
+    "qa_answer": "Love for writing and reading",
+    "qa_response": "The answer is: \"Books and fantasy stories.\"  \n\n**Step-by-step reasoning:**  \n1. The question asks what motivated Tim to improve in writing and reading.  \n2. Multiple memories highlight Tim's passion for books (fantasy, self-improvement) and their power to inspire him (e.g., \"books have the power to open up new worlds,\" \"finds motivation in writing and reading\").  \n3. Specific mentions include fantasy novels like *Lord of the Rings* and J.K. Rowling's works, which fuel his creativity and drive.  \n4. No contradictory memories exist; the most consistent motivators are literary immersion and storytelling.  \n\n(Answer adheres to the 5-6 word limit and derives directly from evidence.)",
+    "qa_category": 4,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_140": {
+    "qa_question": "How did John overcome a mistake he made during a big game in basketball?",
+    "qa_answer": "Worked hard to get better and focused on growth",
+    "qa_response": "John practiced harder to improve.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_141": {
+    "qa_question": "What book did John recently finish rereading that left him feeling inspired and hopeful about following dreams?",
+    "qa_answer": "The Alchemist",
+    "qa_response": "\"The Alchemist\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_142": {
+    "qa_question": "How did \"The Alchemist\" impact John's perspective on following dreams?",
+    "qa_answer": "made him think again about following dreams and searching for personal legends",
+    "qa_response": "Inspired him to follow dreams.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_143": {
+    "qa_question": "What is John trying out to improve his strength and flexibility after recovery from ankle injury?",
+    "qa_answer": "yoga",
+    "qa_response": "Yoga.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_144": {
+    "qa_question": "How long does John usually hold the yoga pose he shared with Tim?",
+    "qa_answer": "30-60 seconds",
+    "qa_response": "30-60 seconds.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_145": {
+    "qa_question": "Where was the forest picture shared by John on December 1,2023 taken?",
+    "qa_answer": "near his hometown",
+    "qa_response": "The forest picture shared by John on December 1, 2023 was taken in the Rocky Mountains. \n\n(Evidence: John's memory at \"9:52 am on 1 December, 2023\" mentions his trip to the Rocky Mountains last year and its stunning beauty.)",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_146": {
+    "qa_question": "What did Tim recently start learning in addition to being part of a travel club and working on studies?",
+    "qa_answer": "an instrument",
+    "qa_response": "German.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_147": {
+    "qa_question": "What instrument is Tim learning to play in December 2023?",
+    "qa_answer": "violin",
+    "qa_response": "violin",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_148": {
+    "qa_question": "How long has Tim been playing the piano for, as of December 2023?",
+    "qa_answer": "about four months",
+    "qa_response": "The memories do not specify how long Tim has been playing the piano as of December 2023. \n\nAnswer: Not specified.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_149": {
+    "qa_question": "What book did Tim just finish reading on 8th December, 2023?",
+    "qa_answer": "\"A Dance with Dragons\"",
+    "qa_response": "'A Dance with Dragons'",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_150": {
+    "qa_question": "Which book did Tim recommend to John as a good story on 8th December, 2023?",
+    "qa_answer": "\"A Dance with Dragons\"",
+    "qa_response": "The book Tim recommended to John on 8th December, 2023 is 'A Dance with Dragons'. \n\nAnswer: 'A Dance with Dragons'",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_151": {
+    "qa_question": "What is the topic of discussion between John and Tim on 11 December, 2023?",
+    "qa_answer": "Academic achievements and sports successes",
+    "qa_response": "There are no memories from either Tim or John on 11 December 2023. Therefore, the answer is:  \n\n**No discussion recorded.**",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_152": {
+    "qa_question": "What kind of game did John have a career-high in assists in?",
+    "qa_answer": "basketball",
+    "qa_response": "basketball game",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_153": {
+    "qa_question": "What was John's way of dealing with doubts and stress when he was younger?",
+    "qa_answer": "practicing basketball outside for hours",
+    "qa_response": "Practicing basketball.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_154": {
+    "qa_question": "How did John feel about the atmosphere during the big game against the rival team?",
+    "qa_answer": "electric and intense",
+    "qa_response": "John felt thrilled and electric.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_155": {
+    "qa_question": "How did John feel after being able to jog without pain?",
+    "qa_answer": "It was a huge success.",
+    "qa_response": "John felt relieved and successful.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_156": {
+    "qa_question": "What kind of deal did John get in December?",
+    "qa_answer": "Deal with a renowned outdoor gear company",
+    "qa_response": "The answer is: \"outdoor gear endorsement.\" \n\nHere's the step-by-step reasoning:\n\n1. The question asks about a deal John got in December.\n2. Looking at December memories:\n   - John's memory on 19 December 2023 mentions \"a new deal with a renowned outdoor gear company, showcasing high-quality hiking gear.\"\n3. This is the most specific and recent December deal mentioned in either memory set.\n4. No contradictory information exists about December deals.\n5. The other December memories mention endorsement deals generally (6 Dec) or a local organization team-up (26 Dec), but the 19 Dec memory provides the clearest answer.\n\nThus, the precise answer is \"outdoor gear endorsement\" (5 words).",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_157": {
+    "qa_question": "Where was the photoshoot done for John's gear deal?",
+    "qa_answer": "In a gorgeous forest",
+    "qa_response": "The photoshoot was done in a gorgeous forest.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_158": {
+    "qa_question": "In which area has John's team seen the most growth during training?",
+    "qa_answer": "Communication and bonding",
+    "qa_response": "communication and bonding",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_159": {
+    "qa_question": "What type of seminars is John conducting?",
+    "qa_answer": "Sports and marketing seminars",
+    "qa_response": "sports and marketing",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_160": {
+    "qa_question": "What activity did Tim do after reading the stories about the Himalayan trek?",
+    "qa_answer": "visited a travel agency",
+    "qa_response": "joined globetrotters group",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_161": {
+    "qa_question": "What is one cause that John supports with his influence and resources?",
+    "qa_answer": "youth sports and fair chances in sports",
+    "qa_response": "youth sports",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_162": {
+    "qa_question": "What new fantasy TV series is Tim excited about?",
+    "qa_answer": "\"The Wheel of Time\"",
+    "qa_response": "The Wheel of Time.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_163": {
+    "qa_question": "Which language is Tim learning?",
+    "qa_answer": "German",
+    "qa_response": "German.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_164": {
+    "qa_question": "What language does Tim know besides German?",
+    "qa_answer": "Spanish",
+    "qa_response": "Spanish.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_165": {
+    "qa_question": "What book did Tim get in Italy that inspired him to cook?",
+    "qa_answer": "a cooking book",
+    "qa_response": "There is no information in the memories about Tim getting a book in Italy that inspired him to cook.  \n\nAnswer: None.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_166": {
+    "qa_question": "What is John's favorite book series?",
+    "qa_answer": "Harry Potter",
+    "qa_response": "Harry Potter.",
+    "qa_category": 4,
+    "labels": [] 
+  },
+  "0_167": {
+    "qa_question": "According to John, who is his favorite character from Lord of the Rings?",
+    "qa_answer": "Aragorn",
+    "qa_response": "Aragorn.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_168": {
+    "qa_question": "Why does John like Aragorn from Lord of the Rings?",
+    "qa_answer": "brave, selfless, down-to-earth attitude",
+    "qa_response": "John likes Aragorn for his brave, selfless leadership.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_169": {
+    "qa_question": "What kind of painting does John have in his room as a reminder?",
+    "qa_answer": "a painting of Aragorn",
+    "qa_response": "The painting reminds him to stay true and be a leader.  \n\n(Answer derived from John's memory at \"5:26 pm on 2 January, 2024\")",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_170": {
+    "qa_question": "What is the painting of Aragorn a reminder for John to be in everything he does?",
+    "qa_answer": "be a leader",
+    "qa_response": "The painting reminds John to be a leader.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_171": {
+    "qa_question": "What map does Tim show to his friend John?",
+    "qa_answer": "a map of Middle-earth from LOTR",
+    "qa_response": "The map Tim shows to his friend John is the \"map of Middle-earth from Lord of the Rings.\" \n\nAnswer: Middle-earth map.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_172": {
+    "qa_question": "Where will Tim be going for a semester abroad?",
+    "qa_answer": "Ireland",
+    "qa_response": "Galway, Ireland.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_173": {
+    "qa_question": "Which city in Ireland will Tim be staying in during his semester abroad?",
+    "qa_answer": "Galway",
+    "qa_response": "Galway.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_174": {
+    "qa_question": "What charity event did John organize recently in 2024?",
+    "qa_answer": "benefit basketball game",
+    "qa_response": "benefit basketball game",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_175": {
+    "qa_question": "What achievement did John share with Tim in January 2024?",
+    "qa_answer": "endorsement with a popular beverage company",
+    "qa_response": "The provided memories do not contain any information about an achievement John shared with Tim in January 2024. Therefore, the answer is: \n\nNo information available.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_176": {
+    "qa_question": "What was Johns's reaction to sealing the deal with the beverage company?",
+    "qa_answer": "crazy feeling, sense of accomplishment",
+    "qa_response": "John felt it was surreal.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_177": {
+    "qa_question": "Which city did John recommend to Tim in January 2024?",
+    "qa_answer": "Barcelona",
+    "qa_response": "Barcelona.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_178": {
+    "qa_question": "Which team did Tim sign with on 21 May, 2023?",
+    "qa_answer": "",
+    "qa_response": "The Minnesota Wolves.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_179": {
+    "qa_question": "What is Tim's position on the team he signed with?",
+    "qa_answer": "",
+    "qa_response": "Tim is not on a team.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_180": {
+    "qa_question": "What challenge did Tim encounter during pre-season training?",
+    "qa_answer": "",
+    "qa_response": "The challenge Tim encountered during pre-season training was adapting to the new team's playing style. \n\nAnswer: Adapting to new team's style.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_181": {
+    "qa_question": "What cult did Tim join recently?",
+    "qa_answer": "",
+    "qa_response": "The answer is \"group of globetrotters.\" \n\n(From the most recent memory on 2 January, 2024, both Tim and John mention Tim joining a \"group of globetrotters.\")",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_182": {
+    "qa_question": "What was the highest number of points Tim scored in a game recently?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Tim scoring any points in a game. Therefore, the answer is: \"Not mentioned.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_183": {
+    "qa_question": "What did Tim celebrate at a restaurant with teammates?",
+    "qa_answer": "",
+    "qa_response": "40 points in a game.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_184": {
+    "qa_question": "What kind of deals did Tim sign with Nike and Gatorade?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the memories indicating that Tim signed deals with Nike and Gatorade. The deals mentioned are for John, not Tim. \n\nAnswer: None.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_185": {
+    "qa_question": "How does Tim feel while surfing?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Tim's feelings while surfing. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_186": {
+    "qa_question": "What kind of articles has John been writing about for the online magazine?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not indicate that John has been writing articles for an online magazine. The answer is: \"None mentioned.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_187": {
+    "qa_question": "Which two mystery novels does Tim particularly enjoy writing about?",
+    "qa_answer": "",
+    "qa_response": "There is no mention of Tim enjoying writing about mystery novels in the provided memories. The memories focus on fantasy novels and writing. \n\nAnswer: Not mentioned in memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_188": {
+    "qa_question": "What did Anthony and Tim end up playing during the charity event?",
+    "qa_answer": "",
+    "qa_response": "Harry Potter trivia contest.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_189": {
+    "qa_question": "How did Tim get introduced to basketball?",
+    "qa_answer": "",
+    "qa_response": "The memories do not provide information on how Tim got introduced to basketball. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_190": {
+    "qa_question": "What is Tim's number one goal in his basketball career?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Tim's number one goal in his basketball career. \n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_191": {
+    "qa_question": "What organization is Tim teaming up with for his charity work?",
+    "qa_answer": "",
+    "qa_response": "Based on the provided memories, there is no information indicating that Tim is teaming up with any organization for charity work. The memories only mention John collaborating with local organizations for charity work.\n\nAnswer: None.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_192": {
+    "qa_question": "What did Tim's teammates give him when they met on Aug 15th?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Tim's teammates giving him anything on August 15th. \n\nAnswer: No gift mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_193": {
+    "qa_question": "Why did John's teammates sign the football they gave him?",
+    "qa_answer": "",
+    "qa_response": "The provided memories mention a signed basketball, not a football. Based on the memories, John's teammates signed the basketball to show their friendship and appreciation, reminding him of their bond and support. \n\nAnswer: To show friendship and appreciation.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_194": {
+    "qa_question": "What is the main intention behind John wanting to attend the book conference?",
+    "qa_answer": "",
+    "qa_response": "The main intention behind John wanting to attend the book conference is not explicitly mentioned in the provided memories. Therefore, I cannot provide an answer based on the given information.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_195": {
+    "qa_question": "What new activity has John started learning in August 2023?",
+    "qa_answer": "",
+    "qa_response": "The memories show that in August 2023, John has been reading an inspiring book. \n\nAnswer: reading an inspiring book.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_196": {
+    "qa_question": "What special memory does \"Fifty Shades of Grey\" bring to Tim?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention \"Fifty Shades of Grey\" in relation to Tim.  \n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_197": {
+    "qa_question": "Which movie does John mention they enjoy watching during Thanksgiving?",
+    "qa_answer": "",
+    "qa_response": "The movies John mentions enjoying during Thanksgiving are \"Home Alone\" and \"Elf.\" \n\nAnswer: \"Home Alone\" and \"Elf\"",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_198": {
+    "qa_question": "What tradition does Tim mention they love during Halloween?",
+    "qa_answer": "",
+    "qa_response": "There is no mention of Halloween traditions in the memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_199": {
+    "qa_question": "How long did Tim and his high school basketball teammates play together?",
+    "qa_answer": "",
+    "qa_response": "\nThe memories do not provide information about Tim playing basketball with high school teammates. The answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_200": {
+    "qa_question": "How was Tim's experience in New York City?",
+    "qa_answer": "",
+    "qa_response": "Tim hasn't visited yet.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_201": {
+    "qa_question": "What spice did Tim add to the soup for flavor?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Tim adding a specific spice to soup for flavor. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_202": {
+    "qa_question": "What is Tim excited to see at Disneyland?",
+    "qa_answer": "",
+    "qa_response": "There is no mention of Disneyland in the memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_203": {
+    "qa_question": "Where are John and his teammates planning to avoid on a team trip?",
+    "qa_answer": "",
+    "qa_response": "The memories do not contain any information about John and his teammates planning to avoid a specific location on their team trip. Therefore, the answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_204": {
+    "qa_question": "What does Tim want to do after his basketball career?",
+    "qa_answer": "",
+    "qa_response": "Based on the provided memories, there is no information about Tim's plans after a basketball career. The memories mention John's considerations about life after basketball, but not Tim's.\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_205": {
+    "qa_question": "What type of venue did John and his girlfriend choose for their breakup?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the memories about John and his girlfriend breaking up or choosing a venue for a breakup. The memories only mention their wedding and other positive events. \n\nAnswer: No breakup mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_206": {
+    "qa_question": "What passion does John mention connects him with people from all over the world?",
+    "qa_answer": "",
+    "qa_response": "basketball",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_207": {
+    "qa_question": "How does Tim say his team handles tough opponents?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about how Tim says his team handles tough opponents. \n\nAnswer: No information found.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_208": {
+    "qa_question": "Where did Tim capture the painting of the sunset over the mountain range?",
+    "qa_answer": "",
+    "qa_response": "The question asks about a painting of a sunset over a mountain range, but the memories mention a \"stunning picture\" Tim captured in the Smoky Mountains. There is no mention of a painting.  \n\nAnswer: Smoky Mountains",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_209": {
+    "qa_question": "What does Tim find rewarding about mentoring the younger players?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Tim mentoring younger players. The mentoring activities are attributed to John, not Tim. \n\nAnswer: Tim does not mentor players.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_210": {
+    "qa_question": "What has Tim been able to help the younger players achieve?",
+    "qa_answer": "",
+    "qa_response": "Based on the memories, there is no direct evidence that Tim has helped younger players achieve anything. The memories focus on John's mentorship and Tim's personal beliefs and growth.\n\nAnswer: No direct evidence.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_211": {
+    "qa_question": "What genre is the novel that John is writing?",
+    "qa_answer": "",
+    "qa_response": "The memories do not indicate that John is writing a novel. Therefore, the answer is: \n\n\"John is not writing a novel.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_212": {
+    "qa_question": "Who is one of Tim's sources of inspiration for painting?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention any sources of inspiration for painting. Therefore, the answer is:\n\nNo information.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_213": {
+    "qa_question": "What does Tim write on the whiteboard to help him stay motivated?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about what Tim writes on a whiteboard to stay motivated. Therefore, the answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_214": {
+    "qa_question": "What hobby is a therapy for Tim when away from the court?",
+    "qa_answer": "",
+    "qa_response": "playing the violin",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_215": {
+    "qa_question": "What type of meal does Tim often cook using a slow cooker?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Tim using a slow cooker or the type of meals he cooks with it. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_216": {
+    "qa_question": "How will Tim share the honey garlic chicken recipe with the other person?",
+    "qa_answer": "",
+    "qa_response": "The memories do not specify how Tim will share the honey garlic chicken recipe. \n\nAnswer: Not specified.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_217": {
+    "qa_question": "What is one of Tim's favorite crime TV shows, as mentioned on November 11, 2023?",
+    "qa_answer": "",
+    "qa_response": "Based on the memories provided, there is no mention of Tim's favorite crime TV shows on November 11, 2023. The memory from that date only mentions a favorite fantasy show referred to as \"That.\"\n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_218": {
+    "qa_question": "What was the setback Tim faced in his coding project on 21 November, 2023?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention any setback in Tim's coding project on 21 November, 2023. The setbacks mentioned are related to his storytelling and writing, not coding. \n\nAnswer: No coding setback mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_219": {
+    "qa_question": "How did Tim overcome his ankle injury from last season?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Tim having an ankle injury. The ankle injury was experienced by John, not Tim. \n\nAnswer: Tim had no ankle injury.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_220": {
+    "qa_question": "What motivated John to keep pushing himself to get better in writing and reading?",
+    "qa_answer": "",
+    "qa_response": "The inspiring book he read.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_221": {
+    "qa_question": "How did Tim overcome a mistake he made during a big game in basketball?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Tim making a mistake during a big basketball game or how he overcame it. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_222": {
+    "qa_question": "What is Tim trying out to improve his strength and flexibility after recovery from ankle injury?",
+    "qa_answer": "",
+    "qa_response": "The answer is not directly available in the provided memories for Tim. However, based on the context, John is trying out yoga for strength and flexibility during his recovery, and Tim is supportive of John's yoga practice. There is no mention of Tim trying anything specific for his own recovery. \n\nAnswer: Not specified.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_223": {
+    "qa_question": "What did John recently start learning in addition to being part of a travel club and working on studies?",
+    "qa_answer": "",
+    "qa_response": "Spanish.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_224": {
+    "qa_question": "What instrument is John learning to play in December 2023?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention John learning to play any instrument in December 2023. The only reference to learning an instrument is Tim learning the violin. \n\nAnswer: None.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_225": {
+    "qa_question": "How long has John been playing the piano for, as of December 2023?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about John playing the piano. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_226": {
+    "qa_question": "What movie did Tim just finish watching on 8th December, 2023?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Tim finishing watching a movie on 8th December, 2023. They only mention that he recently finished reading 'A Dance with Dragons' on that date. \n\nAnswer: No movie mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_227": {
+    "qa_question": "What kind of game did Tim have a career-high in assists in?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the memories about Tim having a career-high in assists in any game. The answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_228": {
+    "qa_question": "What was Tim's way of dealing with doubts and stress when he was younger?",
+    "qa_answer": "",
+    "qa_response": "Practicing basketball.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_229": {
+    "qa_question": "Where was the photoshoot done for John's fragrance deal?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention a photoshoot for John's fragrance deal. Therefore, the answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_230": {
+    "qa_question": "In which area has Tim's team seen the most growth during training?",
+    "qa_answer": "",
+    "qa_response": "The most growth has been in communication and bonding. \n\n(Note: While the memories mention \"John's team\" rather than \"Tim's team,\" this is the only team growth mentioned in the context of training. Since the question asks about \"Tim's team,\" and no information is provided about Tim having a team, it's possible there may be a misunderstanding in the question. Based on the available data, the answer refers to the team growth described in the memories.)",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_231": {
+    "qa_question": "What type of seminars is Tim conducting?",
+    "qa_answer": "",
+    "qa_response": "The memories do not indicate that Tim is conducting seminars. The seminars mentioned are conducted by John, not Tim. \n\nAnswer: Tim is not conducting seminars.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_232": {
+    "qa_question": "What is one cause that John opposes with his influence and resources?",
+    "qa_answer": "",
+    "qa_response": "One cause that John opposes with his influence and resources is inequitable opportunities in sports for underserved communities.  \n\n**Answer:** Inequitable sports opportunities.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_233": {
+    "qa_question": "What new fantasy TV series is John excited about?",
+    "qa_answer": "",
+    "qa_response": "The memories do not indicate that John is excited about any new fantasy TV series. The only new fantasy TV series mentioned is \"The Wheel of Time,\" which Tim is excited about. \n\nAnswer: None.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_234": {
+    "qa_question": "Which language is John learning?",
+    "qa_answer": "",
+    "qa_response": "Spanish.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_235": {
+    "qa_question": "According to John, who is his least favorite character from Lord of the Rings?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention John's least favorite character from Lord of the Rings. Therefore, the answer is: \n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_236": {
+    "qa_question": "Why does Tim like Aragorn from Lord of the Rings?",
+    "qa_answer": "",
+    "qa_response": "Tim finds Aragorn's growth and redemption inspiring.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_237": {
+    "qa_question": "What kind of painting does Tim have in his room as a reminder?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Tim having a painting in his room. The painting mentioned is in John's room, not Tim's. \n\nAnswer: Tim has no painting mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_238": {
+    "qa_question": "What is the sculpture of Aragorn a reminder for John to be in everything he does?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"a leader.\" \n\nThis is based on John's memory at \"5:26 pm on 2 January, 2024,\" where he mentions that the painting (referred to as a sculpture in the question) reminds him to \"stay true and be a leader in everything he does.\"",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_239": {
+    "qa_question": "Which city in Ireland will John be staying in during his semester abroad?",
+    "qa_answer": "",
+    "qa_response": "The answer is: Galway, Ireland.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_240": {
+    "qa_question": "What charity event did Tim organize recently in 2024?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Tim organizing any charity event in 2024. Therefore, the answer is:\n\n\"None.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_241": {
+    "qa_question": "What was Tims's reaction to sealing the deal with the beverage company?",
+    "qa_answer": "",
+    "qa_response": "\ndream come true",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_0": {
+    "qa_question": "Which year did Audrey adopt the first three of her dogs?",
+    "qa_answer": "2020",
+    "qa_response": "To determine the year Audrey adopted the first three of her dogs, let's analyze the relevant memories:\n\n1. Memory from Audrey: \"8:32 pm on 3 July, 2023: Audrey has had her dogs for 3 years.\"\n   - Calculation: 2023 - 3 = 2020.\n\n2. Memory from Andrew: \"1:10 pm on 27 March, 2023: Audrey has had her dogs for 3 years.\"\n   - Calculation: 2023 - 3 = 2020.\n\nBoth memories confirm that Audrey had her dogs for 3 years as of 2023, meaning she adopted them in 2020.\n\nAnswer: 2020.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_1": {
+    "qa_question": "When did Andrew start his new job as a financial analyst?",
+    "qa_answer": "The week before March 27, 2023",
+    "qa_response": "20 March 2023.  \n\n(Calculation: The memory from \"1:10 pm on 27 March, 2023\" states Andrew started the job \"last week,\" which would be the week before 27 March 2023, likely around 20 March 2023.)",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_2": {
+    "qa_question": "What kind of indoor activities has Andrew pursued with his girlfriend?",
+    "qa_answer": "boardgames, volunteering at pet shelter, wine tasting, growing flowers",
+    "qa_response": "The memories indicate Andrew and his girlfriend have pursued indoor activities such as visiting cafes, having picnics, and volunteering at a pet shelter. \n\nAnswer: Cafes, picnics, volunteering.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_3": {
+    "qa_question": "What kind of places have Andrew and his girlfriend checked out around the city?",
+    "qa_answer": "cafes, new places to eat, open space for hikes, pet shelter, wine tasting event, park",
+    "qa_response": "Andrew and his girlfriend have checked out cafes, parks, farms, hiking spots, a lake, and a pet shelter.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_4": {
+    "qa_question": "When did Audrey make muffins for herself?",
+    "qa_answer": "The week of April 3rd to 9th",
+    "qa_response": "The memories do not mention Audrey making muffins for herself. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_5": {
+    "qa_question": "When did Audrey see a hummingbird?",
+    "qa_answer": "first week of May 2023",
+    "qa_response": "2 June 2023.",
+    "qa_category": 2,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_6": {
+    "qa_question": "When did Audrey adopt Pixie?",
+    "qa_answer": "around April 2, 2023",
+    "qa_response": "2 April 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_7": {
+    "qa_question": "How many years passed between Audrey adopting Pixie and her other three dogs?",
+    "qa_answer": "three years",
+    "qa_response": "To determine how many years passed between Audrey adopting Pixie and her other three dogs, let's analyze the memories:\n\n1. From Audrey's memory at \"8:32 pm on 3 July, 2023\": \"Audrey has had her dogs for 3 years.\" This implies the other three dogs were adopted around July 2020.\n\n2. From both Audrey's and Andrew's memories at \"2:42 pm on 2 April, 2023\": Audrey adopted Pixie in April 2023.\n\n3. The time difference between July 2020 (adoption of the other three dogs) and April 2023 (adoption of Pixie) is approximately 2 years and 9 months.\n\nSince the question asks for full years, the answer is: 2 years. \n\nAnswer: 2 years.",
+    "qa_category": 2,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_8": {
+    "qa_question": "Did Andrew have a pet dog during March 2023?",
+    "qa_answer": "No",
+    "qa_response": "To determine if Andrew had a pet dog during March 2023, let's analyze the memories:\n\n1. The earliest memory mentioning Andrew's dog is from \"2:42 pm on 2 April, 2023\" where it states: \"Andrew has a family dog that he shared a photo of, which is seen lounging on a couch.\"\n\n2. There are no memories from March 2023 or earlier that mention Andrew having a dog. The next closest memory is from 6 May 2023 where Andrew is \"currently looking for the perfect dog to adopt.\"\n\nSince the first confirmed mention of Andrew having a dog is in April 2023, and he was still looking to adopt in May 2023, we can conclude:\n\nNo.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_9": {
+    "qa_question": "What kind of classes or groups has Audrey joined to take better care of her dogs?",
+    "qa_answer": "positive reinforcement training workshop to bond with pets, dog training course, agility training course, grooming course, dog-owners group",
+    "qa_response": "- Dog owners group  \n- Agility classes  \n- Dog training course  \n- Dog grooming course  \n- Obedience training",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_10": {
+    "qa_question": "When did Audrey's positive reinforcement training course for dogs take place?",
+    "qa_answer": "June, 2023",
+    "qa_response": "The positive reinforcement training course took place from **3 July 2023** to **28 October 2023**. \n\n(Calculated based on the earliest mention of the course starting on 3 July 2023 and the latest progress update on 28 October 2023.) \n\nFinal answer: **July to October 2023**.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_11": {
+    "qa_question": "When did Andrew go rock climbing?",
+    "qa_answer": "June 11, 2023",
+    "qa_response": "4 June, 2023.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_12": {
+    "qa_question": "What outdoor activities has Andrew done other than hiking in nature?",
+    "qa_answer": "rock climbing, fishing, camping",
+    "qa_response": "Rock climbing, kayaking, bungee jumping, biking.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_13": {
+    "qa_question": "When did Audrey move to a new place?",
+    "qa_answer": "June 2023",
+    "qa_response": "26 June 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_14": {
+    "qa_question": "What is something that Andrew really misses while working in the city?",
+    "qa_answer": "being in nature",
+    "qa_response": "hiking",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_15": {
+    "qa_question": "What is a shared frustration regarding dog ownership for Audrey and Andrew?",
+    "qa_answer": "Not being able to find pet friendly spots.",
+    "qa_response": "Audrey's dogs' health challenges.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_16": {
+    "qa_question": "When is Andrew going to go hiking with Audrey?",
+    "qa_answer": "August",
+    "qa_response": "November 2023.",
+    "qa_category": 2,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_17": {
+    "qa_question": "How many times did Audrey and Andew plan to hike together?",
+    "qa_answer": "three times",
+    "qa_response": "3 times.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_18": {
+    "qa_question": "Where did Audrey get Pixie from?",
+    "qa_answer": "breeder",
+    "qa_response": "The memories do not provide specific information about where Audrey got Pixie from. \n\nAnswer: Unknown.",
+    "qa_category": 1,
+    "labels": [
+      "3.2"
+    ]
+  },
+  "1_19": {
+    "qa_question": "What is an indoor activity that Andrew would enjoy doing while make his dog happy?",
+    "qa_answer": "cook dog treats",
+    "qa_response": "Based on the memories, Andrew enjoys activities that keep his dogs mentally stimulated and active. An indoor activity he would enjoy is \"training his dogs.\" \n\nAnswer: Training his dogs.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_20": {
+    "qa_question": "Which meat does Audrey prefer eating more than others?",
+    "qa_answer": "chicken",
+    "qa_response": "Chicken.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "1_21": {
+    "qa_question": "What are the classes that Audrey took for her dogs to?",
+    "qa_answer": "Positive reinforcement training class for bonding, dog training course, agility class",
+    "qa_response": "The classes Audrey took for her dogs are: dog training, agility, and grooming. \n\nAnswer: dog training, agility, grooming.",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_22": {
+    "qa_question": "Where did Andrew go during the first weekend of August 2023?",
+    "qa_answer": "camping with girlfriend",
+    "qa_response": "To determine where Andrew went during the first weekend of August 2023, let's analyze the memories:\n\n1. The relevant time frame is the first weekend of August 2023, which would be August 5-6.\n2. From Audrey's memories: \n   - \"11:05 am on 4 August, 2023: Andrew plans to take Toby out for a small hike at the local trail.\" (This is a plan for the upcoming weekend)\n3. From Andrew's memories:\n   - No specific memories mention activities during the first weekend of August 2023.\n\nThe only relevant memory is Audrey's from August 4 indicating Andrew's plan to hike at the local trail that weekend.\n\nAnswer: local trail hike",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_23": {
+    "qa_question": "What are some problems that Andrew faces before he adopted Toby?",
+    "qa_answer": "Finding the right dog and pet-friendly apartments close to open spaces",
+    "qa_response": "Before adopting Toby, Andrew faced problems related to work stress and achieving life balance.  \n\n(Note: Based on the memories, the main issues mentioned were work stress and life balance challenges before Toby's adoption. The answer is kept concise as per instructions.)",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_24": {
+    "qa_question": "Did Audrey and Andrew grow up with a pet dog?",
+    "qa_answer": "Yes",
+    "qa_response": "No.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_25": {
+    "qa_question": "When did Andrew and his girlfriend go fishing?",
+    "qa_answer": "weekend before August 24, 2023",
+    "qa_response": "The most recent memory mentioning Andrew and his girlfriend going fishing is from \"12:24 am on 24 August, 2023,\" where it states they went fishing \"last weekend.\" \n\nCalculating \"last weekend\" from the timestamp (24 August 2023):\n- 24 August 2023 is a Thursday\n- \"Last weekend\" would be 19-20 August 2023\n\nAnswer: 19-20 August 2023",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_26": {
+    "qa_question": "What is the biggest stressor in Andrew's life besides not being able to hike frequently?",
+    "qa_answer": "work",
+    "qa_response": "work stress",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_27": {
+    "qa_question": "How does Andrew feel about his current work?",
+    "qa_answer": "Stressful",
+    "qa_response": "Andrew feels stressed and overwhelmed.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_28": {
+    "qa_question": "What is something that Audrey often dresses up her dogs with?",
+    "qa_answer": "Hats",
+    "qa_response": "party hats",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_29": {
+    "qa_question": "What are the names of Audrey's dogs?",
+    "qa_answer": "Pepper, Precious, Panda, and Pixie",
+    "qa_response": "Pepper, Panda, Precious, Pixie.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_30": {
+    "qa_question": "When is Andrew planning to go to the beach with his girlfriend?",
+    "qa_answer": "November 2023",
+    "qa_response": "There is no mention of Andrew planning to go to the beach with his girlfriend in the provided memories. \n\nAnswer: Not mentioned.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_31": {
+    "qa_question": "What has Andrew done with his dogs?",
+    "qa_answer": "Taking walks and hiking",
+    "qa_response": "Andrew has walked and hiked with his dogs.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_32": {
+    "qa_question": "What kind of tattoo does Audrey have on her arm?",
+    "qa_answer": "Tattoos of her four dogs.",
+    "qa_response": "Audrey has a tattoo of her four dogs.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_33": {
+    "qa_question": "What can Andrew potentially do to improve his stress and accomodate his living situation with his dogs?",
+    "qa_answer": "Change to a hybrid or remote job so he can move away from the city to the suburbs to have a larger living space and be closer to nature.",
+    "qa_response": "\"Find pet-friendly housing near parks.\"",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_34": {
+    "qa_question": "How many months passed between Andrew adopting Toby and Buddy?",
+    "qa_answer": "three months",
+    "qa_response": "To determine how many months passed between Andrew adopting Toby and Buddy, let's analyze the memories:\n\n1. Toby's adoption:\n- The earliest mention of Toby is on \"11:05 am on 4 August, 2023\" where Audrey mentions Andrew's new puppy Toby.\n- This suggests Toby was adopted around August 2023.\n\n2. Buddy's adoption:\n- The first mention of Buddy is on \"9:02 am on 22 November, 2023\" where Andrew mentions adopting Buddy.\n- This suggests Buddy was adopted in November 2023.\n\n3. Time calculation:\n- From August 2023 to November 2023 is 3 months.\n\nAnswer: 3 months.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_35": {
+    "qa_question": "What are the names of Andrew's dogs?",
+    "qa_answer": "Toby, Scout, Buddy",
+    "qa_response": "Andrew's dogs are Toby, Buddy, and Scout.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_36": {
+    "qa_question": "What are some foods that Audrey likes eating?",
+    "qa_answer": "chicken pot pie, chicken roast, blueberry muffins, sushi",
+    "qa_response": "Roasted Chicken, Chicken Pot Pie, sushi.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_37": {
+    "qa_question": "When did Audrey get into an accident in the park?",
+    "qa_answer": "between October 19 and 24, 2023",
+    "qa_response": "17 October 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_38": {
+    "qa_question": "When did Andrew and his girlfriend go on a wine tasting trip?",
+    "qa_answer": "the weekend before October 24, 2023",
+    "qa_response": "21 October, 2023.",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_39": {
+    "qa_question": "What did Audrey get wtih having so many dogs?",
+    "qa_answer": "Companionship",
+    "qa_response": "happiness and love.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_40": {
+    "qa_question": "What is a good place for dogs to run around freely and meet new friends?",
+    "qa_answer": "The dog park",
+    "qa_response": "dog park",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_41": {
+    "qa_question": "What are the breeds of Audrey's dogs?",
+    "qa_answer": "Mongrel mixed with Lab for Pepper and Panda. Mongrel mixed with Chihuahua for Precious and Pixie.",
+    "qa_response": "Pepper and Panda are Lab mixes, Precious and Pixie are Chihuahua mixes.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_42": {
+    "qa_question": "What technique is Audrey using to discipline her dogs?",
+    "qa_answer": "Positive reinforcement",
+    "qa_response": "positive reinforcement",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_43": {
+    "qa_question": "Which US state do Audrey and Andrew potentially live in?",
+    "qa_answer": "Minnesota",
+    "qa_response": "There is no information in the provided memories that indicates which US state Audrey and Andrew potentially live in. \n\nAnswer: Unknown.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_44": {
+    "qa_question": "Which national park could Audrey and Andrew be referring to in their conversations?",
+    "qa_answer": "Voyageurs National Park",
+    "qa_response": "The memories do not specify the name of the national park. \n\nAnswer: Not specified.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_45": {
+    "qa_question": "How many pets will Andrew have, as of December 2023?",
+    "qa_answer": "three",
+    "qa_response": "Based on the most recent memory from Andrew on 22 November 2023, he adopted another dog recently and already had two dogs named Toby and Buddy. Therefore, as of December 2023, Andrew will have three pets.\n\nAnswer: Three pets.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_46": {
+    "qa_question": "How many pets did Andrew have, as of September 2023?",
+    "qa_answer": "one",
+    "qa_response": "To determine how many pets Andrew had as of September 2023, let's analyze the relevant memories:\n\n1. From Audrey's memories:\n   - \"7:59 pm on 4 November, 2023: Andrew has two dogs named Toby and Buddy.\" (This is after September 2023, so not directly relevant)\n   - \"12:24 am on 24 August, 2023: Andrew has a pet named Toby.\" (Before September 2023)\n\n2. From Andrew's memories:\n   - \"9:02 am on 22 November, 2023: Andrew adopted another dog recently.\" (After September 2023)\n   - \"7:59 pm on 4 November, 2023: Andrew is considering getting another dog but is unsure due to the responsibilities of having two dogs already...\" (After September 2023)\n   - \"11:05 am on 4 August, 2023: Andrew is a city dweller who owns a German Shepherd named Toby.\" (Before September 2023)\n\nThe most recent memory before September 2023 indicates Andrew had 1 dog (Toby) as of August 2023. There is no evidence of additional pets being acquired between August and September 2023.\n\nAnswer: 1 dog",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_47": {
+    "qa_question": "How many months passed between Andrew adopting Buddy and Scout",
+    "qa_answer": "one month",
+    "qa_response": "To determine how many months passed between Andrew adopting Buddy and Scout, let's analyze the memories:\n\n1. Andrew adopted Buddy: The earliest mention of Buddy is on \"6:12 pm on 19 October, 2023\" where Andrew is already taking Buddy on walks. This implies Buddy was adopted before this date, but we don't have an exact adoption date. The next relevant memory is \"7:59 pm on 4 November, 2023\" where Andrew mentions having two dogs (Toby and Buddy), confirming Buddy was already adopted by this point.\n\n2. Andrew adopted Scout: This is explicitly mentioned on \"9:02 am on 22 November, 2023\".\n\nSince we don't have Buddy's exact adoption date, the most conservative estimate is that Buddy was adopted by at least 19 October 2023, and Scout was adopted on 22 November 2023. \n\nCalculating the months between these dates:\n- From 19 October to 22 November is roughly 1 month and 3 days.\n\nThus, approximately 1 month passed between the adoptions.\n\nAnswer: 1 month.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_48": {
+    "qa_question": "What does Andrew view his pets as?",
+    "qa_answer": "Family",
+    "qa_response": "Andrew views his pets as joyful companions.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_49": {
+    "qa_question": "What does Audrey view her pets as?",
+    "qa_answer": "Family",
+    "qa_response": "Audrey views her pets as family.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_50": {
+    "qa_question": "What is a skill that Audrey learned to take care of her dogs?",
+    "qa_answer": "Grooming",
+    "qa_response": "dog grooming",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_51": {
+    "qa_question": "What items has Audrey bought or made for her dogs?",
+    "qa_answer": "dog tags, toys, dog beds, collars",
+    "qa_response": "personalized tags, collars, toys, agility equipment",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_52": {
+    "qa_question": "What is something that Andrew could do to make birdwatching hobby to fit in his city schedule?",
+    "qa_answer": "Install a bird feeder outside where he can see the birds without going outdoors.",
+    "qa_response": "\"Arrange pet-friendly walks in nature.\"",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_53": {
+    "qa_question": "What is a career that Andrew could potentially pursue with his love for animals and nature?",
+    "qa_answer": "Park ranger or a similar position working for the National Park Services.",
+    "qa_response": "Park ranger.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_54": {
+    "qa_question": "What activity do Audrey's dogs like to do in the dog park?",
+    "qa_answer": "Play fetch with ball and frisbee, run around and meet other dogs",
+    "qa_response": "Play fetch and frisbee.",
+    "qa_category": 1,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_55": {
+    "qa_question": "When did Andrew make his dogs a fun indoor area?",
+    "qa_answer": "few days before November 22, 2023",
+    "qa_response": "The memories do not mention Andrew making a fun indoor area for his dogs. \n\nAnswer: Not mentioned.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_56": {
+    "qa_question": "Has Andrew moved into a new apartment for his dogs?",
+    "qa_answer": "No",
+    "qa_response": "No.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_57": {
+    "qa_question": "When did Andrew adopt Scout?",
+    "qa_answer": "few days before November 2023",
+    "qa_response": "22 November 2023",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_58": {
+    "qa_question": "What did Audrey eat for dinner on October 24, 2023?",
+    "qa_answer": "sushi",
+    "qa_response": "sushi",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_59": {
+    "qa_question": "How long has it been since Andrew adopted his first pet, as of November 2023?",
+    "qa_answer": "4 months",
+    "qa_response": "To determine how long it has been since Andrew adopted his first pet as of November 2023, we need to find the earliest mention of Andrew having a pet in the memories.\n\n1. The earliest memory of Andrew having a pet is from \"11:05 am on 4 August, 2023,\" where Audrey mentions Andrew's new puppy, Toby.\n2. The next earliest memory is from \"12:24 am on 24 August, 2023,\" where Andrew mentions his dog, Toby.\n3. As of November 2023, the time elapsed since August 2023 is 3 months.\n\nAnswer: 3 months.",
+    "qa_category": 2,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_60": {
+    "qa_question": "How many dogs does Andrew have?",
+    "qa_answer": "3",
+    "qa_response": "3 (Toby, Buddy, Scout)",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_61": {
+    "qa_question": "Which specific type of bird mesmerizes Andrew?",
+    "qa_answer": "Eagles",
+    "qa_response": "eagles",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_62": {
+    "qa_question": "What did Andrew express missing about exploring nature trails with his family's dog?",
+    "qa_answer": "The peaceful moments",
+    "qa_response": "The answer is: \"peaceful moments in nature.\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_63": {
+    "qa_question": "What kind of pastries did Andrew and his girlfriend have at the cafe?",
+    "qa_answer": "croissants, muffins, and tarts",
+    "qa_response": "croissants, muffins, and tarts",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_64": {
+    "qa_question": "What kind of flowers does Audrey have a tattoo of?",
+    "qa_answer": "sunflowers",
+    "qa_response": "Audrey does not have tattoos of flowers. \n\n(From the memories, Audrey has tattoos of her dogs, not flowers.)",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_65": {
+    "qa_question": "What does Audrey do during dog playdates in the park?",
+    "qa_answer": "chat with people while dogs make new friends",
+    "qa_response": "Chats with people.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_66": {
+    "qa_question": "What type of dog was Andrew looking to adopt based on his living space?",
+    "qa_answer": "smaller dog",
+    "qa_response": "smaller dog",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_67": {
+    "qa_question": "Where does Andrew want to live to give their dog a large, open space to run around?",
+    "qa_answer": "near a park or woods",
+    "qa_response": "Near a park or woods.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_68": {
+    "qa_question": "Why did Audrey sign up for a workshop about bonding with pets?",
+    "qa_answer": "Strengthen the bond with her pets",
+    "qa_response": "To strengthen her bond with her dogs.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_69": {
+    "qa_question": "How did Audrey hear about the workshop on bonding with pets?",
+    "qa_answer": "Saw a workshop flyer at the local pet store",
+    "qa_response": "From a flyer.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_70": {
+    "qa_question": "What type of training was the workshop Audrey signed up for in May 2023?",
+    "qa_answer": "Positive reinforcement training",
+    "qa_response": "positive reinforcement training",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_71": {
+    "qa_question": "How did Audrey describe she dog he met at the pet store?",
+    "qa_answer": "Friendly and playful",
+    "qa_response": "friendly and playful",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_72": {
+    "qa_question": "Why did Audrey think positive reinforcement training is important for pets?",
+    "qa_answer": "To have pets learn how to behave in a positive way",
+    "qa_response": "Audrey believes it strengthens pet behavior.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_73": {
+    "qa_question": "What challenge is Andrew facing in their search for a pet?",
+    "qa_answer": "Finding a pet-friendly spot in the city",
+    "qa_response": "Finding a pet-friendly place.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_74": {
+    "qa_question": "How does Andrew feel about their search for a pet-friendly place?",
+    "qa_answer": "Discouraged but determined",
+    "qa_response": "Frustrated but determined.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_75": {
+    "qa_question": "What outdoor activities does Andrew plan on trying after the rock climbing class?",
+    "qa_answer": "kayaking and bungee jumping",
+    "qa_response": "kayaking and bungee jumping",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_76": {
+    "qa_question": "How long does Audrey typically walk her dogs for?",
+    "qa_answer": "about an hour",
+    "qa_response": "1 hour.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_77": {
+    "qa_question": "What did Audrey set up in the backyard for their dogs on June 26, 2023?",
+    "qa_answer": "a doggy play area with agility stuff and toys",
+    "qa_response": "doggy play area",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_78": {
+    "qa_question": "What did Audrey and her friends stumble across during a hike a few years back, as mentioned on June 26, 2023?",
+    "qa_answer": "a stunning lake in the mountains",
+    "qa_response": "The memories do not contain any information about Audrey and her friends stumbling across something during a hike on June 26, 2023. Therefore, the answer is: \"No information available.\"",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_79": {
+    "qa_question": "What is Audrey's favorite recipe that she shares with Andrew on 3 July, 2023?",
+    "qa_answer": "Chicken Pot Pie",
+    "qa_response": "Chicken Pot Pie.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_80": {
+    "qa_question": "What dish is one of Audrey's favorite dishes that includes garlic and is shared with Andrew on 3 July, 2023?",
+    "qa_answer": "Roasted Chicken",
+    "qa_response": "Roasted Chicken.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_81": {
+    "qa_question": "What did Andrew and his GF do on the Monday before July 24, 2023?",
+    "qa_answer": "volunteered at a pet shelter",
+    "qa_response": "Volunteered at a pet shelter.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_82": {
+    "qa_question": "What is the name of Audrey's childhood dog?",
+    "qa_answer": "Max",
+    "qa_response": "Max.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_83": {
+    "qa_question": "What special memories does Audrey have with her childhood dog, Max?",
+    "qa_answer": "Long walks in the neighborhood, exploring new paths, sharing worries and hopes",
+    "qa_response": "Audrey cherished playing fetch with Max.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_84": {
+    "qa_question": "What are some of the personalities of Audrey's four fur babies?",
+    "qa_answer": "oldest is relaxed, second is playful, third can be naughty but loves cuddles, youngest is full of life",
+    "qa_response": "The oldest is relaxed and wise, the second is playful, the third is naughty but loves cuddling, and the youngest is energetic and adventurous.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_85": {
+    "qa_question": "What type of classes did Audrey start with her pups recently on 4 August, 2023?",
+    "qa_answer": "Agility classes",
+    "qa_response": "agility classes",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_86": {
+    "qa_question": "How often does Audrey take her pups to the park for practice?",
+    "qa_answer": "Twice a week",
+    "qa_response": "Twice a week.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_87": {
+    "qa_question": "How long did the trail hike that Audrey went on with her pups take?",
+    "qa_answer": "Two hours",
+    "qa_response": "The trail hike took two hours. \n\n(From Audrey's memory at \"11:05 am on 4 August, 2023\" and Andrew's memory at \"11:05 am on 4 August, 2023\".)",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_88": {
+    "qa_question": "What advice did Audrey give to Andrew regarding grooming Toby?",
+    "qa_answer": "Grooming slowly and gently, paying attention to sensitive areas like ears and paws. And remember to stay patient and positive throughout the grooming process.",
+    "qa_response": "\"Groom slowly, gently, and stay patient.\"",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_89": {
+    "qa_question": "What is essential to keep the dogs looking good according to Audrey?",
+    "qa_answer": "Daily brushing, regular baths, nail trims, and lots of love",
+    "qa_response": "regular grooming",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_90": {
+    "qa_question": "What did Audrey organize with the neighbors' dogs?",
+    "qa_answer": "a doggy playdate",
+    "qa_response": "doggy playdate",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_91": {
+    "qa_question": "What did Audrey do to give her dogs extra comfort as the weather cooled down?",
+    "qa_answer": "Got new beds for them",
+    "qa_response": "Got new beds.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_92": {
+    "qa_question": "How does Audrey describe the new beds for her dogs?",
+    "qa_answer": "Super cozy and comfy",
+    "qa_response": "super cozy and comfy",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_93": {
+    "qa_question": "How did Audrey calm down her dog after the leash incident?",
+    "qa_answer": "Petted, hugged, spoke calmly and slowly walked the dog",
+    "qa_response": "petting, hugging, speaking calmly",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_94": {
+    "qa_question": "How often does Audrey take her dogs for walks?",
+    "qa_answer": "Multiple times a day",
+    "qa_response": "Based on the memories, Audrey takes her dogs for walks multiple times a day and to the park twice a week for agility practice. \n\nAnswer: Multiple times daily, twice weekly.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_95": {
+    "qa_question": "What kind of flowers does Audrey take care of?",
+    "qa_answer": "Peruvian Lilies",
+    "qa_response": "Peruvian Lilies.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_96": {
+    "qa_question": "What did Andrew learn from reading books about ecological systems?",
+    "qa_answer": "about animals, plants, and ecosystems and how they work together",
+    "qa_response": "The provided memories do not contain any information about Andrew learning from books about ecological systems. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_97": {
+    "qa_question": "What did Andrew suggest as a way to reduce carbon footprint?",
+    "qa_answer": "biking or using public transport",
+    "qa_response": "biking",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_98": {
+    "qa_question": "How does Andrew suggest helping the planet while also training the body?",
+    "qa_answer": "by biking",
+    "qa_response": "Andrew suggests volunteering with animals.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_99": {
+    "qa_question": "What did Audrey do with her pups over the weekend before 4th October, 2023?",
+    "qa_answer": "Took them to the beach",
+    "qa_response": "Based on the memory from \"4:18 pm on 4 October, 2023\" in both users' memories, Audrey took her dogs to the beach over the weekend before 4th October, 2023.\n\nAnswer: Took them to the beach.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_100": {
+    "qa_question": "What was the reason Audrey couldn't walk her dogs for a period of time?",
+    "qa_answer": "Knee injury",
+    "qa_response": "knee injury",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_101": {
+    "qa_question": "What type of jewelry does Audrey make?",
+    "qa_answer": "Jewelry made from recycled objects",
+    "qa_response": "Recycled materials jewelry.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_102": {
+    "qa_question": "Why does Audrey make jewelry out of recycled objects?",
+    "qa_answer": "To show love for creativity and sustainability",
+    "qa_response": "Audrey combines creativity with sustainability.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_103": {
+    "qa_question": "What organization does Audrey donate a portion of his profits to?",
+    "qa_answer": "Animal shelter",
+    "qa_response": "animal shelter",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_104": {
+    "qa_question": "How does Audrey help out the animal shelter?",
+    "qa_answer": "By donating a portion of his profits frmo selling jwelery",
+    "qa_response": "Audrey donates jewelry sales proceeds.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_105": {
+    "qa_question": "What type of games do Audrey's dogs like to play at the park?",
+    "qa_answer": "Fetch and Frisbee",
+    "qa_response": "Fetch and Frisbee.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_106": {
+    "qa_question": "What did Audrey make to thank her neighbors?",
+    "qa_answer": "Goodies",
+    "qa_response": "goodies",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_107": {
+    "qa_question": "How do Audrey's dogs react to snow?",
+    "qa_answer": "Confused",
+    "qa_response": "Audrey's dogs dislike snow.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_108": {
+    "qa_question": "How does Audrey describe her dogs' response to snow?",
+    "qa_answer": "They definitely prefer nice, sunny days in the grass.",
+    "qa_response": "Audrey's dogs dislike snow.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_109": {
+    "qa_question": "What kind of experiences are Audrey's dogs the best companions for?",
+    "qa_answer": "Exploring the great outdoors",
+    "qa_response": "Exploring nature.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_110": {
+    "qa_question": "What activity do Andrew and Buddy enjoy doing together?",
+    "qa_answer": "Walking",
+    "qa_response": "Hiking and walking.",
+    "qa_category": 4,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_111": {
+    "qa_question": "What do Andrew and Buddy like doing on walks?",
+    "qa_answer": "Checking out new hiking trails",
+    "qa_response": "Exploring hiking trails.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_112": {
+    "qa_question": "What cuisine did Andrew recently try at a new spot in town?",
+    "qa_answer": "sushi",
+    "qa_response": "sushi",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_113": {
+    "qa_question": "Which type of sushi did Audrey suggest trying first to someone new to sushi?",
+    "qa_answer": "California or salmon roll",
+    "qa_response": "California or salmon roll.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_114": {
+    "qa_question": "What type of date is Andrew going on Sunday?",
+    "qa_answer": "picnic date",
+    "qa_response": "The answer is: \"hike at nature reserve\". \n\nHere's the step-by-step reasoning:\n\n1. The question asks about Andrew's plans for Sunday, which would be the upcoming weekend relative to the most recent memory timestamp.\n\n2. The most recent memory from Andrew is dated \"2:36 pm on 28 October, 2023\" which mentions a hiking trip planned for Saturday, but doesn't specify Sunday.\n\n3. The next most recent memory from Andrew is \"9:19 pm on 19 August, 2023\" which states: \"Andrew is heading to a nature reserve this weekend to reconnect with the outdoors.\"\n\n4. Since this is the most specific and recent memory about weekend plans (and Sunday is part of the weekend), we can infer this is the activity planned.\n\n5. The activity type is a nature outing/hike at a nature reserve.\n\nThe answer combines the location (\"nature reserve\") with the implied activity (hiking/outdoors) that's consistent with Andrew's frequent weekend activities shown in other memories.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_115": {
+    "qa_question": "What did Andrew and Audrey plan to do on the Saturday after October 28, 2023?",
+    "qa_answer": "Go hiking",
+    "qa_response": "hike by the lake",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_116": {
+    "qa_question": "What aspect of autumn does Andrew find beautiful?",
+    "qa_answer": "The autumn colors",
+    "qa_response": "The answer is not explicitly mentioned in the memories.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_117": {
+    "qa_question": "What did Audrey do in November 2023 to better take care of her dogs?",
+    "qa_answer": "Joined a dog owners group",
+    "qa_response": "Joined a dog owners group.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_118": {
+    "qa_question": "How often does Audrey meet up with other dog owners for tips and playdates?",
+    "qa_answer": "Once a week",
+    "qa_response": "once a week",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_119": {
+    "qa_question": "What did Audrey share to show ways to keep dogs active in the city?",
+    "qa_answer": "photography of a basket full of stuffed animals",
+    "qa_response": "Answer: Puzzles, training, hide-and-seek.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_120": {
+    "qa_question": "What type of activities does Audrey suggest for mental stimulation of the dogs?",
+    "qa_answer": "puzzles, training, hide-and-seek",
+    "qa_response": "puzzles, training, hide-and-seek",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_121": {
+    "qa_question": "What is Andrew planning to do with Scout, Toby, and Buddy?",
+    "qa_answer": "Take them to a nearby park",
+    "qa_response": "Take them to the trails.",
+    "qa_category": 4,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "1_122": {
+    "qa_question": "What did Andrew get for Scout to create a safe and fun space for them?",
+    "qa_answer": "essentials like a bed, toys, and puppy pads",
+    "qa_response": "bed, toys, puppy pads",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_123": {
+    "qa_question": "Which specific type of bird mesmerizes Audrey?",
+    "qa_answer": "",
+    "qa_response": "The memories do not specify which specific type of bird mesmerizes Audrey. Therefore, the answer is: \n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_124": {
+    "qa_question": "What kind of flowers does Andrew have a tattoo of?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the memories about Andrew having a tattoo of flowers. The answer is: \"No tattoo of flowers mentioned.\"  \n\n(Note: The memories only mention Audrey's tattoos of her dogs and Andrew's care for flowers, but no tattoos of flowers for Andrew.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_125": {
+    "qa_question": "What type of dog was Audrey looking to adopt based on her living space?",
+    "qa_answer": "",
+    "qa_response": "Based on the memories, Audrey was looking to adopt dogs that fit her living space with a bigger backyard, which suggests she was considering larger or more active dogs. \n\nAnswer: Larger or more active dogs.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_126": {
+    "qa_question": "Why did Audrey sign up for a workshop about car maintenance?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Audrey signing up for a workshop about car maintenance. Therefore, the answer is:\n\nNot mentioned in memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_127": {
+    "qa_question": "How did Andrew hear about the workshop on bonding with pets?",
+    "qa_answer": "",
+    "qa_response": "Andrew did not hear about the workshop. \n\n(Note: The memories only indicate that Audrey learned about the workshop from a flyer at her local pet store, and there is no mention of Andrew hearing about it.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_128": {
+    "qa_question": "What type of training was the workshop Andrew signed up for in May 2023?",
+    "qa_answer": "",
+    "qa_response": "The workshop Andrew signed up for in May 2023 was about **positive reinforcement training**. \n\n(Answer derived from Audrey's memory at \"2:03 pm on 11 May, 2023\" and Andrew's memory at \"8:32 pm on 3 July, 2023\".)",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_129": {
+    "qa_question": "How did Andrew describe the dog he met at the pet store?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"friendly and playful.\" \n\nThis is derived from Audrey's memory at \"2:03 pm on 11 May, 2023,\" where she mentions that Andrew met a \"friendly and playful dog at the pet store.\" There are no contradictory descriptions in the provided memories.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_130": {
+    "qa_question": "What challenge is Audrey facing in their search for a pet?",
+    "qa_answer": "",
+    "qa_response": "The challenge Audrey is facing is finding pet-friendly spots. \n\n(Source: \"8:32 pm on 3 July, 2023: Audrey understands the frustration of not finding pet-friendly spots.\")",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_131": {
+    "qa_question": "What indoor activities does Andrew plan on trying after the rock climbing class?",
+    "qa_answer": "",
+    "qa_response": "Based on the memories, Andrew plans on trying cooking and jewelry making as indoor activities after the rock climbing class. \n\nAnswer: cooking and jewelry making.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_132": {
+    "qa_question": "What did Andrew set up in the backyard for their dogs on June 26, 2023?",
+    "qa_answer": "",
+    "qa_response": "Audrey set up a doggy play area. \n\n(Note: The memories show Audrey setting up the backyard play area, not Andrew.)",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_133": {
+    "qa_question": "What did Audrey and her GF do on the Monday before July 24, 2023?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the memories about Audrey and her GF's activities on the Monday before July 24, 2023. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_134": {
+    "qa_question": "What is the name of Andrew's childhood dog?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention the name of Andrew's childhood dog. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_135": {
+    "qa_question": "What special memories does Andrew have with his childhood dog, Max?",
+    "qa_answer": "",
+    "qa_response": "There are no memories of Andrew with Max.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_136": {
+    "qa_question": "What are some of the personalities of Andrew's four fur babies?",
+    "qa_answer": "",
+    "qa_response": "The question seems to have a misunderstanding. Andrew does not have four fur babies; he has one dog named Toby. Audrey is the one with four dogs.  \n\nAnswer: Andrew has one dog, Toby.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_137": {
+    "qa_question": "What type of classes did Andrew start with his pups recently on 4 August, 2023?",
+    "qa_answer": "",
+    "qa_response": "agility classes",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_138": {
+    "qa_question": "What is essential to keep the dogs looking good according to Andrew?",
+    "qa_answer": "",
+    "qa_response": "Regular grooming.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_139": {
+    "qa_question": "What did Audrey organize with the neighbors' cats?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Audrey organizing anything with the neighbors' cats. The answer is: \"Not mentioned.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_140": {
+    "qa_question": "What did Andrew do to give his dogs extra comfort as the weather cooled down?",
+    "qa_answer": "",
+    "qa_response": "Got new beds.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_141": {
+    "qa_question": "How does Andrew describe the new beds for his dogs?",
+    "qa_answer": "",
+    "qa_response": "Andrew does not describe the new beds for his dogs; the new beds are for Audrey's pets. \n\nAnswer: Not Andrew's dogs.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_142": {
+    "qa_question": "How did Andrew calm down his dog after the leash incident?",
+    "qa_answer": "",
+    "qa_response": "The memories do not contain information about Andrew calming down his dog after a leash incident. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_143": {
+    "qa_question": "How often does Andrew take his dogs for walks?",
+    "qa_answer": "",
+    "qa_response": "Based on the memories, Andrew takes his dogs for walks regularly, but the exact frequency isn't specified. The closest relevant memory is \"6:12 pm on 19 October, 2023: Andrew enjoys taking walks with his dog Buddy as a way to spend time together and get fresh air.\" However, it doesn't state a specific frequency.\n\nAnswer: Frequency not specified.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_144": {
+    "qa_question": "What kind of vegetables does Audrey take care of?",
+    "qa_answer": "",
+    "qa_response": "The memories do not specify the types of vegetables Audrey grows in her garden. \n\nAnswer: Not specified.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_145": {
+    "qa_question": "What did Andrew learn from reading books about economic systems?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Andrew learning from books about economic systems. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_146": {
+    "qa_question": "What was the reason Andrew couldn't walk his dogs for a period of time?",
+    "qa_answer": "",
+    "qa_response": "The reason Andrew couldn't walk his dogs for a period of time was due to work stress. \n\n(Source: \"7:49 pm on 6 September, 2023: Andrew's outdoor activities have taken a backseat due to work stress.\" from both Audrey's and Andrew's memories.)",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_147": {
+    "qa_question": "What type of jewelry does Andrew make?",
+    "qa_answer": "",
+    "qa_response": "Andrew does not make jewelry.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_148": {
+    "qa_question": "Why does Andrew make jewelry out of recycled objects?",
+    "qa_answer": "",
+    "qa_response": "Andrew doesn't make jewelry.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_149": {
+    "qa_question": "What type of games do Andrew's dogs like to play at the park?",
+    "qa_answer": "",
+    "qa_response": "The memories do not specify what games Andrew's dogs like to play at the park.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_150": {
+    "qa_question": "What did Andrew make to thank his neighbors?",
+    "qa_answer": "",
+    "qa_response": "Andrew did not make anything to thank his neighbors. Audrey made goodies for her neighbors.  \n\nAnswer: Audrey made goodies.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_151": {
+    "qa_question": "How do Andrew's dogs react to snow?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention how Andrew's dogs react to snow. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_152": {
+    "qa_question": "How does Andrew describe his dogs' response to snow?",
+    "qa_answer": "",
+    "qa_response": "Andrew's dogs' response to snow is not mentioned in the memories. The memories only mention Audrey's dogs being confused by snow. \n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_153": {
+    "qa_question": "What kind of experiences are Audrey's cats the best companions for?",
+    "qa_answer": "",
+    "qa_response": "Audrey doesn't have cats; she has dogs.  \n\nAnswer: \"Audrey has dogs, not cats.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_154": {
+    "qa_question": "What activity do Audrey and Buddy enjoy doing together?",
+    "qa_answer": "",
+    "qa_response": "hiking with dogs",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_155": {
+    "qa_question": "What type of drink did Andrew recently try at a new spot in town?",
+    "qa_answer": "",
+    "qa_response": "wine",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_156": {
+    "qa_question": "Which type of pizza did Audrey suggest trying first to someone new to Italian cuisine?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Audrey suggesting a type of pizza for someone new to Italian cuisine. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_157": {
+    "qa_question": "How often does Andrew meet up with other dog owners for tips and playdates?",
+    "qa_answer": "",
+    "qa_response": "Based on the memories, there is no explicit mention of Andrew meeting up with other dog owners for tips and playdates. The memories only mention Audrey doing so.\n\nAnswer: Never mentioned.",
+    "qa_category": 5,
+    "labels": []
+  }
+}

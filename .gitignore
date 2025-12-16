@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.DS_Store
+.vscode/
+*.code-workspace
+
+# Data and Results (unless you want to track them)
+amem_results/
+evalresult/
+plot_result/
+llm_annotation_voting/
+llm_annotation_single/
+# Assuming amem_eval and amem_mem are data/results too, but maybe user wants to keep input data?
+# I'll exclude generated results but keep input data if possible. 
+# For now, I'll list the obvious output folders.
+
+# Logs
+*.log
+

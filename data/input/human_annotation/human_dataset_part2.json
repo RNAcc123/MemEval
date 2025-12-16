@@ -1,0 +1,3575 @@
+{
+  "0_0": {
+    "qa_question": "Who did Maria have dinner with on May 3, 2023?",
+    "qa_answer": "her mother",
+    "qa_response": "There is no information about who Maria had dinner with on May 3, 2023 in the provided memories. \n\nAnswer: No information available.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_1": {
+    "qa_question": "When did Maria donate her car?",
+    "qa_answer": "21 December 2022",
+    "qa_response": "21 December, 2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_2": {
+    "qa_question": "What martial arts has John done?",
+    "qa_answer": "Kickboxing, Taekwondo",
+    "qa_response": "The martial arts John has done are taekwondo and kickboxing. \n\nAnswer: taekwondo and kickboxing.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_3": {
+    "qa_question": "What type of volunteering have John and Maria both done?",
+    "qa_answer": "Volunteering at a homeless shelter",
+    "qa_response": "homeless shelter.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_4": {
+    "qa_question": "When did John join the online support group?",
+    "qa_answer": "The week before 1 January 2023",
+    "qa_response": "John joined the online support group in December 2022. \n\n(Calculation: The memory from 1 January 2023 states he joined \"last week,\" which would be December 2022.)  \n\nAnswer: December 2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_5": {
+    "qa_question": "When did Maria go to the beach?",
+    "qa_answer": "December 2022",
+    "qa_response": "8 December 2022",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_6": {
+    "qa_question": "Where has Maria made friends?",
+    "qa_answer": "homeless shelter, gym, church",
+    "qa_response": "- Homeless shelter (from John's memories: \"Maria has been volunteering at a homeless shelter, where she has built connections...\")\n- Gym (from Maria's memories: \"Maria has friends from the gym...\")\n- Church (from John's memories: \"Maria had a picnic with friends from church...\")\n\nAnswer: Shelter, gym, church.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_7": {
+    "qa_question": "What items des John mention having as a child?",
+    "qa_answer": "A doll, a film camera",
+    "qa_response": "little doll",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_8": {
+    "qa_question": "What might John's financial status be?",
+    "qa_answer": "Middle-class or wealthy",
+    "qa_response": "John's financial status is currently rough.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_9": {
+    "qa_question": "Who gave Maria's family money when she was younger and her family was going through tough times?",
+    "qa_answer": "Her aunt",
+    "qa_response": "Maria's auntie.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_10": {
+    "qa_question": "When did Maria meet Jean?",
+    "qa_answer": "February 24, 2023",
+    "qa_response": "25 February, 2023",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_11": {
+    "qa_question": "What people has Maria met and helped while volunteering?",
+    "qa_answer": "David, Jean, Cindy, Laura",
+    "qa_response": "Jean, Cindy, children.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_12": {
+    "qa_question": "What test has John taken multiple times?",
+    "qa_answer": "The military aptitude test",
+    "qa_response": "military aptitude test",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_13": {
+    "qa_question": "When did Maria's grandmother pass away?",
+    "qa_answer": "The week before 6 March 2023",
+    "qa_response": "To determine when Maria's grandmother passed away, let's analyze the relevant memories:\n\n1. Both John and Maria have a memory from \"6:03 pm on 6 March, 2023\" stating: \"Maria's grandma passed away last week.\"\n\nCalculation:\n- Memory timestamp: 6 March 2023\n- \"Last week\" would be the week before 6 March 2023\n- Therefore, the grandmother passed away around late February 2023\n\nAnswer: Late February 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_14": {
+    "qa_question": "Would John be considered a patriotic person?",
+    "qa_answer": "Yes",
+    "qa_response": "Yes.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_15": {
+    "qa_question": "What writing classes has Maria taken?",
+    "qa_answer": "Poetry, creative writing",
+    "qa_response": "creative writing, poetry",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_16": {
+    "qa_question": "When did John get his degree?",
+    "qa_answer": "The week before 2 April 2023",
+    "qa_response": "2 April 2023.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_17": {
+    "qa_question": "What might John's degree be in?",
+    "qa_answer": "Political science, Public administration, Public affairs",
+    "qa_response": "John's degree might be in mechanical engineering. \n\n(Evidence from Maria's memory on 5 August 2023: \"John has been looking into opportunities in the tech industry after losing his job at a mechanical engineering company.\" This implies his background/degree is in mechanical engineering.)",
+    "qa_category": 3,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_18": {
+    "qa_question": "Who did John go to yoga with?",
+    "qa_answer": "Rob",
+    "qa_response": "John's colleague Rob.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_19": {
+    "qa_question": "What damages have happened to John's car?",
+    "qa_answer": "Broken windshield, Car broke down",
+    "qa_response": "The damages to John's car are from potholes and a breakdown.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_20": {
+    "qa_question": "When did John take a road trip to the Pacific Northwest?",
+    "qa_answer": "2022",
+    "qa_response": "10 April 2023.",
+    "qa_category": 2,
+    "labels": [
+      "3.2"
+    ]
+  },
+  "0_21": {
+    "qa_question": "What areas of the U.S. has John been to or is planning to go to?",
+    "qa_answer": "Pacific northwest, east coast",
+    "qa_response": "East Coast, Pacific Northwest, California.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_22": {
+    "qa_question": "When did John go to a convention with colleagues?",
+    "qa_answer": "March 2023",
+    "qa_response": "March 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_23": {
+    "qa_question": "What desserts has Maria made?",
+    "qa_answer": "Banana split sundae, Peach cobbler",
+    "qa_response": "peach cobbler, cakes",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_24": {
+    "qa_question": "When did John start boot camp with his family?",
+    "qa_answer": "April.2023",
+    "qa_response": "April 2023. \n\n(Calculated from \"last month\" in the memory timestamped 4 May 2023.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_25": {
+    "qa_question": "What European countries has Maria been to?",
+    "qa_answer": "Spain, England",
+    "qa_response": "England, Spain.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_26": {
+    "qa_question": "What has Maria done to feel closer to her faith?",
+    "qa_answer": "Join a local church, buy a cross necklace",
+    "qa_response": "Joined a nearby church.",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_27": {
+    "qa_question": "When did John have a party with veterans?",
+    "qa_answer": "The Friday before 20 May 2023",
+    "qa_response": "20 May 2023",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_28": {
+    "qa_question": "What causes does John feel passionate about supporting?",
+    "qa_answer": "Veterans, schools, infrastructure",
+    "qa_response": "- Supporting military veterans  \n- Improving education  \n- Fire-fighting brigade  \n- Community activism",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_29": {
+    "qa_question": "What events is Maria planning for the homeless shelter funraiser?",
+    "qa_answer": "Chili cook-off, ring-toss tournament",
+    "qa_response": "Maria is planning a chili cook-off and a ring-toss tournament.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_30": {
+    "qa_question": "What shelters does Maria volunteer at?",
+    "qa_answer": "The homeless shelter, the dog shelter",
+    "qa_response": "homeless shelter.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_31": {
+    "qa_question": "When did John get his dog Max?",
+    "qa_answer": "In 2013",
+    "qa_response": "To determine when John got his dog Max, we can use the information from the memories:\n\n1. \"11:51 am on 3 June, 2023: John had a beloved dog named Max who was part of his family for 10 years.\"\n2. \"11:51 am on 3 June, 2023: John had to say goodbye to his pet Max, who was an important part of his family for 10 years.\"\n\nSince Max was part of John's family for 10 years and the memories are from June 2023, we can calculate the year John got Max by subtracting 10 years from 2023. \n\n2023 - 10 = 2013.\n\nAnswer: 2013.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_32": {
+    "qa_question": "What outdoor activities has John done with his colleagues?",
+    "qa_answer": "Hiking, mountaineering",
+    "qa_response": "hiking, mountaineering",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_33": {
+    "qa_question": "What types of yoga has Maria practiced?",
+    "qa_answer": "Aerial, kundalini",
+    "qa_response": "Kundalini and aerial yoga.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_34": {
+    "qa_question": "When did Maria join a gym?",
+    "qa_answer": "The week before 16 June 2023",
+    "qa_response": "Based on the memory from Maria at \"7:20 pm on 16 June, 2023: Maria joined a gym last week and has had a positive experience, sticking to her workout routine and enjoying the welcoming atmosphere,\" we can calculate that Maria joined the gym approximately one week before 16 June 2023. \n\nAnswer: Early June 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_35": {
+    "qa_question": "What states has Maria vacationed at?",
+    "qa_answer": "Oregon, Florida",
+    "qa_response": "Florida, Oregon, Spain (Note: Spain is a country, not a state)",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_36": {
+    "qa_question": "What music events has John attended?",
+    "qa_answer": "Live music event, violin concert",
+    "qa_response": "violin concert",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_37": {
+    "qa_question": "What events for veterans has John participated in?",
+    "qa_answer": "Petition, march, party, visiting veterans hospital, 5K charity run",
+    "qa_response": "- 5K charity run (August 2023)  \n- Marching event (July 2023)  \n- Veteran's hospital visit (July 2023)  \n- Veterans' story party (May 2023)",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_38": {
+    "qa_question": "When did Maria get in a car accident?",
+    "qa_answer": "July 2, 2023",
+    "qa_response": "3 July, 2023.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_39": {
+    "qa_question": "Around which US holiday did Maria get into a car accident?",
+    "qa_answer": "Independence Day",
+    "qa_response": "The car accident occurred on 3 July 2023. The closest US holiday to this date is Independence Day, which is on 4 July. \n\nAnswer: Independence Day.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_40": {
+    "qa_question": "What are the names of John's children?",
+    "qa_answer": "Kyle, Sara",
+    "qa_response": "Kyle and Sara.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_41": {
+    "qa_question": "Does John live close to a beach or the mountains?",
+    "qa_answer": "beach",
+    "qa_response": "Based on the memories, John has taken beach pictures and visited mountains, but there's no explicit mention of living close to either. The answer is: No explicit evidence.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_42": {
+    "qa_question": "What area was hit by a flood?",
+    "qa_answer": "West County",
+    "qa_response": "West County.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_43": {
+    "qa_question": "When was John's old area hit with a flood?",
+    "qa_answer": "The week before 7 July 2023",
+    "qa_response": "The flood hit John's old area in late June 2023. \n\n(Calculated from \"last week\" in the July 7, 2023 memory.)  \n\nAnswer: late June 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_44": {
+    "qa_question": "What activities has Maria done with her church friends?",
+    "qa_answer": "Hiking, picnic, volunteer work",
+    "qa_response": "Picnic, hiking, community work.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_45": {
+    "qa_question": "Would John be open to moving to another country?",
+    "qa_answer": "No, he has goals specifically in the U.S. like joining the military and running for office.",
+    "qa_response": "Based on the provided memories, there is no direct evidence that John would be open to moving to another country. The memories primarily discuss his local trips, volunteering interests, and job opportunities without any mention of international relocation.\n\nAnswer: No evidence.",
+    "qa_category": 3,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_46": {
+    "qa_question": "When did Maria go hiking with her church friends?",
+    "qa_answer": "The weekend before 22 July 2023",
+    "qa_response": "15 July, 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_47": {
+    "qa_question": "What exercises has John done?",
+    "qa_answer": "Weight training, Circuit training, Kickboxing, yoga",
+    "qa_response": "- Weight training  \n- Yoga  \n- Taekwondo  \n- Kickboxing  \n- Circuit training  \n- Boot camp workouts",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_48": {
+    "qa_question": "When did John have his first firefighter call-out?",
+    "qa_answer": "The sunday before 3` July 2023",
+    "qa_response": "John's first firefighter call-out was on 30 July 2023. \n\n(Calculated from \"last Sunday\" in the memory timestamped 31 July 2023.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_49": {
+    "qa_question": "What food item did Maria drop off at the homeless shelter?",
+    "qa_answer": "Cakes",
+    "qa_response": "baked goods",
+    "qa_category": 1,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "0_50": {
+    "qa_question": "What attributes describe John?",
+    "qa_answer": "Selfless, family-oriented, passionate, rational",
+    "qa_response": "Determined, family-oriented, supportive, passionate, inspirational.",
+    "qa_category": 3,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_51": {
+    "qa_question": "When did Maria start volunteering at the homeless shelter?",
+    "qa_answer": "Around August 2022",
+    "qa_response": "August 2022",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_52": {
+    "qa_question": "Who have written notes of gratitude to Maria?",
+    "qa_answer": "Cindy, Laura",
+    "qa_response": "Cindy and Laura.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_53": {
+    "qa_question": "When did John help renovate his hometown community center?",
+    "qa_answer": "2022",
+    "qa_response": "2022",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_54": {
+    "qa_question": "When did Maria take up community work with her church friends?",
+    "qa_answer": "August 4, 2023",
+    "qa_response": "4 August 2023",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_55": {
+    "qa_question": "When did Maria receive a medal from the homeless shelter?",
+    "qa_answer": "The week before 9 August 2023",
+    "qa_response": "9 August 2023",
+    "qa_category": 2,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_56": {
+    "qa_question": "When did John participate in a 5K charity run?",
+    "qa_answer": "first weekend of August 2023",
+    "qa_response": "5 August 2023.",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_57": {
+    "qa_question": "What causes has John done events for?",
+    "qa_answer": "Toy drive, Community food drive, veterans, domestic violence",
+    "qa_response": "- Domestic abuse victims  \n- Veterans and families  \n- Homeless shelter  \n- Kids in need  \n- Community issues",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_58": {
+    "qa_question": "When did Maria get Coco?",
+    "qa_answer": "Two weeks before 11 August 2023",
+    "qa_response": "The most recent memory from Maria states \"3:14 pm on 13 August, 2023: Maria got a puppy named Coco two weeks ago.\" \n\nCalculating two weeks before 13 August 2023 gives us 30 July 2023.\n\nAnswer: 30 July 2023.",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_59": {
+    "qa_question": "When did John go on a camping trip with Max?",
+    "qa_answer": "The summer of 2022",
+    "qa_response": "The camping trip with Max occurred in summer 2022. \n\n(Calculated from the memory timestamp \"12:10 am on 11 August, 2023\" mentioning \"last summer\")",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_60": {
+    "qa_question": "What are Maria's dogs' names?",
+    "qa_answer": "Coco, Shadow",
+    "qa_response": "Maria's dogs' names are Coco and Shadow.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_61": {
+    "qa_question": "When did Maria adopt Shadow?",
+    "qa_answer": "The week before 13 August 2023",
+    "qa_response": "13 August, 2023",
+    "qa_category": 2,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "0_62": {
+    "qa_question": "How many dogs has Maria adopted from the dog shelter she volunteers at?",
+    "qa_answer": "two",
+    "qa_response": "1. \n\nFrom Maria's memories:\n- \"3:14 pm on 13 August, 2023: Maria adopted a dog named Shadow from a shelter, and she has been a great addition to her life, bringing her much joy.\"\n\nThis is the only mention of Maria adopting a dog from a shelter.\n\nAnswer: 1",
+    "qa_category": 1,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "0_63": {
+    "qa_question": "How many weeks passed between Maria adopting Coco and Shadow?",
+    "qa_answer": "two weeks",
+    "qa_response": "To determine how many weeks passed between Maria adopting Coco and Shadow, let's analyze the relevant memories:\n\n1. **Coco's adoption**:  \n   - John's memory: \"12:10 am on 11 August, 2023: Maria got a puppy named Coco two weeks ago.\"  \n     - \"Two weeks ago\" from 11 August 2023 = 28 July 2023.  \n   - Maria's memory: \"3:14 pm on 13 August, 2023: Maria got a puppy named Coco two weeks ago.\"  \n     - \"Two weeks ago\" from 13 August 2023 = 30 July 2023.  \n   - **Most recent memory (Maria's)**: Coco was adopted on 30 July 2023.  \n\n2. **Shadow's adoption**:  \n   - Maria's memory: \"3:14 pm on 13 August, 2023: Maria adopted a dog named Shadow from a shelter...\"  \n     - Shadow was adopted on 13 August 2023.  \n\n3. **Time difference**:  \n   - From 30 July 2023 to 13 August 2023 = 14 days = **2 weeks**.  \n\nAnswer: 2 weeks.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_64": {
+    "qa_question": "What job might Maria pursue in the future?",
+    "qa_answer": "Shelter coordinator, Counselor",
+    "qa_response": "Based on the memories, Maria might pursue **community volunteering or charity work**. \n\n(Key evidence: Multiple mentions of her commitment to volunteering, charity work, and community support across both users' memories.)",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_65": {
+    "qa_question": "What is John's main focus in local politics?",
+    "qa_answer": "Improving education and infrastructure",
+    "qa_response": "John's main focus in local politics is improving education and infrastructure.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_66": {
+    "qa_question": "What sparked John's interest in improving education and infrastructure in the community?",
+    "qa_answer": "Seeing how lack of education and crumbling infrastructure affected his neighborhood while growing up.",
+    "qa_response": "John's childhood neighborhood struggles.",
+    "qa_category": 4,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "0_67": {
+    "qa_question": "How did the extra funding help the school shown in the photo shared by John?",
+    "qa_answer": "Enabled needed repairs and renovations, making the learning environment safer and more modern for students.",
+    "qa_response": "The extra funding enabled needed repairs and renovations.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_68": {
+    "qa_question": "What type of workout class did Maria start doing in December 2023?",
+    "qa_answer": "aerial yoga",
+    "qa_response": "There is no information in the memories about Maria starting a workout class in December 2023. The most recent memory is from 22 July 2023. \n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_69": {
+    "qa_question": "What did Maria donate to a homeless shelter in December 2023?",
+    "qa_answer": "old car",
+    "qa_response": "The memories do not mention any donation by Maria in December 2023. The most recent donation mentioned is her old car on 21 December 2022. \n\nAnswer: No donation in December 2023.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_70": {
+    "qa_question": "What kind of meal did John and his family make together in the photo shared by John?",
+    "qa_answer": "pizza",
+    "qa_response": "The meal John and his family made together was pizza. \n\n(Evidence from John's memory at \"6:10 pm on 22 December, 2022: John enjoys making pizza with his family, where they have fun picking out toppings and sharing a meal together.\")",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_71": {
+    "qa_question": "What kind of online group did John join?",
+    "qa_answer": "service-focused online group",
+    "qa_response": "service-focused online group",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_72": {
+    "qa_question": "What kind of activities did John and his mates from the online group do as part of their service efforts?",
+    "qa_answer": "gave out food and supplies at a homeless shelter, organized a toy drive for kids in need",
+    "qa_response": "- Gave out food and supplies at homeless shelter (1 Jan 2023)  \n- Raised money for good cause (9 Aug 2023)  \n- Collected donations (canned food, toiletries, clothes) (16 Aug 2023)  \n\nAnswer: Homeless shelter aid, fundraising, donations.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_73": {
+    "qa_question": "Who inspired Maria to start volunteering?",
+    "qa_answer": "Her aunt",
+    "qa_response": "Maria's aunt.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_74": {
+    "qa_question": "Why did Maria sit with the little girl at the shelter event in February 2023?",
+    "qa_answer": "The girl seemed sad and had no other family",
+    "qa_response": "The little girl was alone and sad.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_75": {
+    "qa_question": "What did Jean go through before meeting Maria?",
+    "qa_answer": "divorce, job loss, homelessness",
+    "qa_response": "Jean experienced divorce, job loss, and homelessness.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_76": {
+    "qa_question": "Why did John decide to run for office again?",
+    "qa_answer": "saw the impact he could make in the community through politics",
+    "qa_response": "To make a difference.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_77": {
+    "qa_question": "What activity did John's colleague, Rob, invite him to?",
+    "qa_answer": "beginner's yoga class",
+    "qa_response": "beginner's yoga class.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_78": {
+    "qa_question": "What is the name of John's one-year-old child?",
+    "qa_answer": "Kyle",
+    "qa_response": "Kyle.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_79": {
+    "qa_question": "How often does John take his kids to the park?",
+    "qa_answer": "A few times a week",
+    "qa_response": "A few times a week.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_80": {
+    "qa_question": "What did Maria make for her home to remind her of a trip to England?",
+    "qa_answer": "painting of a castle on a hill",
+    "qa_response": "a painting",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_81": {
+    "qa_question": "Where did Maria get the idea for the castle shadow box in her home?",
+    "qa_answer": "England",
+    "qa_response": "England.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_82": {
+    "qa_question": "What did John receive a certificate for?",
+    "qa_answer": "completion of a university degree",
+    "qa_response": "The memories do not mention John receiving a certificate. \n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_83": {
+    "qa_question": "What areas is John particularly interested in for policymaking?",
+    "qa_answer": "education and infrastructure",
+    "qa_response": "education and infrastructure",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_84": {
+    "qa_question": "What did Maria participate in last weekend before April 10, 2023?",
+    "qa_answer": "a 5K charity run",
+    "qa_response": "5K charity run.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_85": {
+    "qa_question": "What event did John volunteer at last weekend?",
+    "qa_answer": "career fair at a local school",
+    "qa_response": "5K charity run.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_86": {
+    "qa_question": "What did John do that put a strain on his wallet?",
+    "qa_answer": "His car broke down",
+    "qa_response": "John's car broke down.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_87": {
+    "qa_question": "Where did John explore on a road trip last year?",
+    "qa_answer": "Pacific Northwest",
+    "qa_response": "Based on the memories, John explored the coast in the Pacific Northwest and visited some national parks during a road trip last year. \n\nThe answer is: Pacific Northwest coast.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_88": {
+    "qa_question": "What topic has John been blogging about recently?",
+    "qa_answer": "politics and the government",
+    "qa_response": "politics and government",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_89": {
+    "qa_question": "Why did John start blogging about politics and policies?",
+    "qa_answer": "raise awareness and start conversations to create positive change",
+    "qa_response": "John wants to make a positive impact.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_90": {
+    "qa_question": "What was the focus of John's recent research and writing on his blog?",
+    "qa_answer": "education reform and infrastructure development",
+    "qa_response": "The focus of John's recent research and writing on his blog was \"education reform and infrastructure development.\" \n\n(Answer derived from John's memory at \"7:34 pm on 18 April, 2023: John is researching policies related to education reform and infrastructure development.\")\n\nAnswer: education reform and infrastructure development.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_91": {
+    "qa_question": "What did John attend with his colleagues in March 2023?",
+    "qa_answer": "a tech-for-good convention",
+    "qa_response": "The answer is: \"a convention\". \n\nHere's the step-by-step reasoning:\n1. The question asks about an event John attended with colleagues in March 2023.\n2. Looking at John's memories, the first one (\"7:34 pm on 18 April, 2023\") mentions he \"attended a convention last month with his colleagues\".\n3. \"Last month\" from April 18, 2023 would be March 2023.\n4. The memory explicitly states it was a convention focused on \"using technology for good\".\n5. Maria's memories also corroborate this with identical information about the convention.\n6. No contradictory memories exist about March 2023 events.\n7. The most precise answer is the type of event: a convention.",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_92": {
+    "qa_question": "How often does John work out with his family?",
+    "qa_answer": "Three times a week",
+    "qa_response": "Based on the memories, John started going to boot camps with his family in April 2023 (as indicated by the \"last month\" reference in the 4 May 2023 memory). The memories mention consistent family workouts and support during boot camp, but they don't specify the exact frequency. However, the most relevant detail is from the 4 May 2023 memory: \"John and his family have been helping and supporting each other during boot camp, cheering each other on during workouts and providing emotional support outside of them.\"  \n\nGiven the lack of explicit frequency, the closest answer is that John works out with his family **during boot camp**.  \n\n**Answer:** During boot camp.",
+    "qa_category": 4,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "0_93": {
+    "qa_question": "How has John's fitness improved since starting boot camps with his family?",
+    "qa_answer": "More energy, gains in strength and endurance",
+    "qa_response": "Increased energy, strength, endurance.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_94": {
+    "qa_question": "What kind of food did Maria have on her dinner spread iwth her mother?",
+    "qa_answer": "Salads, sandwiches, homemade desserts",
+    "qa_response": "The provided memories do not mention any dinner spread with Maria's mother. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_95": {
+    "qa_question": "What activity did Maria and her mom do together in May 2023?",
+    "qa_answer": "Made dinner together",
+    "qa_response": "The memories do not mention any specific activity Maria did with her mom in May 2023. \n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_96": {
+    "qa_question": "What did Maria do to feel closer to a community and her faith?",
+    "qa_answer": "joined a nearby church",
+    "qa_response": "Joined a nearby church.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_97": {
+    "qa_question": "Why did Maria join a nearby church recently?",
+    "qa_answer": "to feel closer to a community and her faith",
+    "qa_response": "To feel closer to community and faith.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_98": {
+    "qa_question": "What did John host for the veterans in May 2023 as part of the project?",
+    "qa_answer": "a small party to share their stories",
+    "qa_response": "John hosted a small party for veterans.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_99": {
+    "qa_question": "What did John and the veterans do during the small party?",
+    "qa_answer": "share stories and make connections",
+    "qa_response": "shared stories and fostered connections",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_100": {
+    "qa_question": "What emotions did John feel during the small party with the veterans?",
+    "qa_answer": "heartwarming",
+    "qa_response": "John felt hope and appreciation.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_101": {
+    "qa_question": "What event is Maria getting ready for at the shelter on May 25, 2023?",
+    "qa_answer": "fundraiser",
+    "qa_response": "fundraiser",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_102": {
+    "qa_question": "What does Maria need to spread the word about for the fundraiser for the volunteer shelter?",
+    "qa_answer": "chili cook-off",
+    "qa_response": "chili cook-off",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_103": {
+    "qa_question": "What was the name of the pet that John had to say goodbye to on 3 June, 2023?",
+    "qa_answer": "Max",
+    "qa_response": "Max",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_104": {
+    "qa_question": "How long was Max a part of John's family?",
+    "qa_answer": "10 years",
+    "qa_response": "10 years.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_105": {
+    "qa_question": "How does John plan to honor the memories of his beloved pet?",
+    "qa_answer": "By considering adopting a rescue dog",
+    "qa_response": "John plans to adopt a rescue dog.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_106": {
+    "qa_question": "What important values does John want to teach his kids through adopting a rescue dog?",
+    "qa_answer": "Responsibility and compassion",
+    "qa_response": "Responsibility and compassion.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_107": {
+    "qa_question": "What new activity did Maria start recently, as mentioned on 3 June, 2023?",
+    "qa_answer": "volunteering at a local dog shelter once a month",
+    "qa_response": "The memories do not mention any new activity started by Maria on 3 June, 2023. However, the closest mention is on 12 June, 2023, where Maria started doing aerial yoga. \n\nAnswer: aerial yoga.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_108": {
+    "qa_question": "What did Maria say it was like being at the waterfall in Oregon?",
+    "qa_answer": "Like being in a fairy tale",
+    "qa_response": "Magical, like a fairy tale.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_109": {
+    "qa_question": "What does Maria say she feels when doing upside-down yoga poses?",
+    "qa_answer": "Free and light",
+    "qa_response": "free and light",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_110": {
+    "qa_question": "What exciting news did Maria share on 16 June, 2023?",
+    "qa_answer": "joined a gym",
+    "qa_response": "There is no memory of Maria sharing exciting news on 16 June 2023.  \n\nAnswer: No memory found.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_111": {
+    "qa_question": "What yoga activity has Maria been trying to improve her strength and endurance?",
+    "qa_answer": "kundalini yoga",
+    "qa_response": "Kundalini yoga.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_112": {
+    "qa_question": "What did John recently get promoted to?",
+    "qa_answer": "assistant manager",
+    "qa_response": "\nfire-fighting brigade.",
+    "qa_category": 4,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "0_113": {
+    "qa_question": "What was one of the biggest challenges John faced in his journey to becoming assistant manager?",
+    "qa_answer": "self-doubt",
+    "qa_response": "One of the biggest challenges John faced in his journey to becoming assistant manager was self-doubt. \n\n(Evidence from John's memory at \"7:20 pm on 16 June, 2023: John faced various challenges in his career, including technical issues and workplace dynamics, but the most significant challenge was self-doubt.\")",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_114": {
+    "qa_question": "How does John describe the support he received during his journey to becoming assistant manager?",
+    "qa_answer": "having support at home and his own grit",
+    "qa_response": "John values support from loved ones.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_115": {
+    "qa_question": "What kind of event did John and his family attend in June 2023?",
+    "qa_answer": "live music event",
+    "qa_response": "To determine what kind of event John and his family attended in June 2023, let's analyze the memories:\n\n1. John's memory from \"6:21 pm on 22 July, 2023\" mentions: \"John attended a community event last month that featured arts and crafts, fun activities, and games for families...\"\n   - \"Last month\" from 22 July 2023 would be June 2023.\n   - The event was a community event with arts, crafts, and games.\n\nNo other memories mention an event in June 2023. \n\nAnswer: Community arts and crafts event",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_116": {
+    "qa_question": "Why did Maria need to help her cousin find a new place to live?",
+    "qa_answer": "Her cousin had to leave and find a new place in a hurry.",
+    "qa_response": "Maria's cousin had to leave in a hurry.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_117": {
+    "qa_question": "What event did John participate in to show support for veterans' rights?",
+    "qa_answer": "marching event",
+    "qa_response": "5K charity run.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_118": {
+    "qa_question": "What inspired John to join the marching event for veterans' rights?",
+    "qa_answer": "Respect for the military and the desire to show support",
+    "qa_response": "John's respect for the military.",
+    "qa_category": 4,
+    "labels": [
+      "4.1" 
+    ]
+  },
+  "0_119": {
+    "qa_question": "How often does John get to see sunsets like the one he shared with Maria?",
+    "qa_answer": "At least once a week",
+    "qa_response": "once a week",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_120": {
+    "qa_question": "What natural disaster affected John's old area on 7 July, 2023?",
+    "qa_answer": "Flood",
+    "qa_response": "flood",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_121": {
+    "qa_question": "How did the flood impact the homes in John's old area?",
+    "qa_answer": "Lots of homes were ruined.",
+    "qa_response": "The flood ruined many homes.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_122": {
+    "qa_question": "What motivated Maria and John to discuss potential solutions for their community on 7 July, 2023?",
+    "qa_answer": "Flood in John's old area",
+    "qa_response": "A flood hit John's area.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_123": {
+    "qa_question": "What did Maria plan to do later on the evening of 7 July, 2023?",
+    "qa_answer": "have dinner with friends from the gym",
+    "qa_response": "There is no information in the memories about Maria's plans for the evening of 7 July, 2023. \n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_124": {
+    "qa_question": "What kind of activities did Maria do at the picnic with her church friends?",
+    "qa_answer": "played games like charades and a scavenger hunt",
+    "qa_response": "The activities Maria did at the picnic with her church friends were playing charades and a scavenger hunt. \n\nAnswer: played charades and scavenger hunt",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_125": {
+    "qa_question": "What does John appreciate about the veteran's hospital visit?",
+    "qa_answer": "the resilience of the veterans and their inspiring stories",
+    "qa_response": "John appreciates the amazing people he met.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_126": {
+    "qa_question": "What did John take away from visiting the veteran's hospital?",
+    "qa_answer": "appreciation for giving back",
+    "qa_response": "John appreciated their sacrifices.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_127": {
+    "qa_question": "Why did John feel inspired to join the military after the visit to the hospital?",
+    "qa_answer": "seeing the resilience of the veterans",
+    "qa_response": "John appreciated veterans' contributions.  \n\n(From memories: \"John visited a veteran's hospital last week and met some amazing people, which made him appreciate what they have and the need to give back.\" - 6:21 pm on 22 July, 2023)",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_128": {
+    "qa_question": "In what activity did Maria and her church friends participate in July 2023?",
+    "qa_answer": "hiking",
+    "qa_response": "The activity Maria and her church friends participated in July 2023 was a picnic and hiking. \n\nAnswer: Picnic and hiking.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_129": {
+    "qa_question": "What does John think about trying new classes at the yoga studio?",
+    "qa_answer": "Trying new classes is a fun way to switch up the exercise routine.",
+    "qa_response": "John enjoys the chill vibe.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_130": {
+    "qa_question": "Which activity has John done apart from yoga at the studio?",
+    "qa_answer": "weight training",
+    "qa_response": "The answer is kickboxing.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_131": {
+    "qa_question": "What community service did Maria mention that she was involved in on 31 July, 2023?",
+    "qa_answer": "volunteered at a homeless shelter",
+    "qa_response": "The memories do not mention any specific community service Maria was involved in on 31 July 2023. \n\nAnswer: Not mentioned.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_132": {
+    "qa_question": "How did Maria start volunteering at the homeless shelter?",
+    "qa_answer": "Witnessed a family struggling on the streets and reached out to the shelter",
+    "qa_response": "Maria witnessed a family struggling on the streets.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_133": {
+    "qa_question": "What did John do the week before August 3, 2023 involving his kids?",
+    "qa_answer": "Had a meaningful experience at a military memorial",
+    "qa_response": "The answer is: \"visited a military memorial.\" \n\nThis is based on the memory from John at \"6:20 pm on 3 August, 2023: John had a meaningful experience at a military memorial last week that made an impact on his kids.\" The event occurred the week before August 3, 2023.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_134": {
+    "qa_question": "How did John describe his kids' reaction at the military memorial?",
+    "qa_answer": "awestruck and humbled",
+    "qa_response": "awestruck and humbled",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_135": {
+    "qa_question": "Why does Maria think it's important for younger generations to visit military memorials?",
+    "qa_answer": "To remember and appreciate those who served",
+    "qa_response": "Maria believes it helps them appreciate veterans' service.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_136": {
+    "qa_question": "What does John believe is important for children regarding veterans?",
+    "qa_answer": "Teaching them to respect and appreciate those who served",
+    "qa_response": "John believes children should learn veterans' importance.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_137": {
+    "qa_question": "What happened to John's job in August 2023?",
+    "qa_answer": "John lost his job at the mechanical engineering company.",
+    "qa_response": "John lost his job.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_138": {
+    "qa_question": "What activity did Maria take up with her friends from church in August 2023?",
+    "qa_answer": "community work",
+    "qa_response": "community work",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_139": {
+    "qa_question": "What did John do to help his community last year in his hometown?",
+    "qa_answer": "Helped renovate a rundown community center.",
+    "qa_response": "Renovated a community center.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_140": {
+    "qa_question": "What cause did the 5K charity run organized by John support?",
+    "qa_answer": "veterans and their families",
+    "qa_response": "veterans and their families",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_141": {
+    "qa_question": "Who did John work with to raise awareness and funds for victims of domestic abuse?",
+    "qa_answer": "a local organization",
+    "qa_response": "local organization",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_142": {
+    "qa_question": "What recognition did Maria receive at the homeless shelter in August 2023?",
+    "qa_answer": "a medal for volunteering",
+    "qa_response": "medal for her efforts",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_143": {
+    "qa_question": "What is the name of Maria's puppy she got two weeks before August 11, 2023?",
+    "qa_answer": "Coco",
+    "qa_response": "Coco.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_144": {
+    "qa_question": "What activity did John and Max enjoy together last summer?",
+    "qa_answer": "Camping",
+    "qa_response": "camping trip",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_145": {
+    "qa_question": "How does John describe the camping trip with Max?",
+    "qa_answer": "Peaceful and awesome",
+    "qa_response": "Peaceful and awesome.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_146": {
+    "qa_question": "Why does John say he feels stuck and questioning his decisions and goals?",
+    "qa_answer": "Not feeling like making much of an impact",
+    "qa_response": "John feels he's not making an impact.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_147": {
+    "qa_question": "What is the name of Maria's second puppy?",
+    "qa_answer": "Shadow",
+    "qa_response": "Shadow.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_148": {
+    "qa_question": "How is Maria's new puppy adjusting to its new home?",
+    "qa_answer": "doing great - learning commands and house training",
+    "qa_response": "The puppy is learning commands and house training.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_149": {
+    "qa_question": "What is John currently doing as a volunteer in August 2023?",
+    "qa_answer": "mentoring students at a local school",
+    "qa_response": "In August 2023, John is currently volunteering as a mentor for a local school and is part of the fire-fighting brigade. \n\nAnswer: mentoring and fire-fighting brigade.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_150": {
+    "qa_question": "What activities does John's family enjoy doing together?",
+    "qa_answer": "going for hikes, hanging out at the park, having picnics, playing board games, having movie nights",
+    "qa_response": "- Playing board games  \n- Having movie nights  \n- Hiking  \n- Picnics  \n- Making pizza  \n- Boot camps  \n- Park outings",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_151": {
+    "qa_question": "What did the donations help John's community acquire on 16 August, 2023?",
+    "qa_answer": "a brand new fire truck",
+    "qa_response": "brand new fire truck",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_152": {
+    "qa_question": "What is John's main focus in international politics?",
+    "qa_answer": "",
+    "qa_response": "John's main focus is not specified in international politics.  \n\n(Note: The memories only mention John's involvement in local politics, education reform, infrastructure development, and veterans' rights, but not international politics.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_153": {
+    "qa_question": "What did Maria donate to a luxury store in December 2023?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Maria donating anything to a luxury store in December 2023. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_154": {
+    "qa_question": "Who inspired John to start volunteering?",
+    "qa_answer": "",
+    "qa_response": "\nMaria's aunt.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_155": {
+    "qa_question": "Why did Maria decide to run for office again?",
+    "qa_answer": "",
+    "qa_response": "Maria did not run for office.  \n\n(Note: The memories show John decided to run for office, not Maria. Maria's actions focus on volunteering and community support.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_156": {
+    "qa_question": "What activity did Maria's colleague, Rob, invite her to?",
+    "qa_answer": "",
+    "qa_response": "The answer is: beginner's yoga class.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_157": {
+    "qa_question": "What is the name of Maria's one-year-old child?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention the name of Maria's one-year-old child. \n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_158": {
+    "qa_question": "How often does John take his kids to the library?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about John taking his kids to the library. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_159": {
+    "qa_question": "What did Maria make for her home to remind her of a trip to France?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Maria making anything for her home to remind her of a trip to France. The memories only reference trips to England, Spain, Florida, and Oregon.\n\nAnswer: Not mentioned in memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_160": {
+    "qa_question": "Where did John get the idea for the castle shadow box in his home?",
+    "qa_answer": "",
+    "qa_response": "Maria.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_161": {
+    "qa_question": "What did Maria receive a certificate for?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Maria receiving a certificate. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_162": {
+    "qa_question": "What areas is John particularly interested in for art appreciation?",
+    "qa_answer": "",
+    "qa_response": "community events  \n\n(From John's memory on 22 July 2023: \"John attended a community event last month that featured arts and crafts, fun activities, and games for families.\")",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_163": {
+    "qa_question": "Why did Maria start blogging about politics and policies?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Maria blogging about politics and policies. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_164": {
+    "qa_question": "What was the focus of John's recent travel and photography blog?",
+    "qa_answer": "",
+    "qa_response": "The focus of John's recent travel and photography blog was \"politics and the government.\" \n\n(From John's memory at 7:34 pm on 18 April, 2023: \"John has been blogging about politics and the government, which he finds satisfying and impactful.\")",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_165": {
+    "qa_question": "How often does Maria work out with her family?",
+    "qa_answer": "",
+    "qa_response": "The memories do not provide specific information about how often Maria works out with her family. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_166": {
+    "qa_question": "How has John's artistic skills improved since starting boot camps with his family?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention John's artistic skills improving.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_167": {
+    "qa_question": "What kind of food did Maria have on her dinner spread with her father?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Maria having a dinner spread with her father. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_168": {
+    "qa_question": "What did John do to feel closer to a community and his faith?",
+    "qa_answer": "",
+    "qa_response": "Joined a service-focused online group.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_169": {
+    "qa_question": "Why did John join a nearby church recently?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention John joining a nearby church. The answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_170": {
+    "qa_question": "How long was Max a part of Maria's family?",
+    "qa_answer": "",
+    "qa_response": "Max was not part of Maria's family.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_171": {
+    "qa_question": "How does Maria plan to honor the memories of her beloved pet?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Maria having a pet or plans to honor one.  \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_172": {
+    "qa_question": "What important values does Maria want to teach her kids through adopting a rescue dog?",
+    "qa_answer": "",
+    "qa_response": "responsibility and compassion",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_173": {
+    "qa_question": "What did Maria say it was like being at the desert in Oregon?",
+    "qa_answer": "",
+    "qa_response": "The answer is not present in the provided memories. None of the memories mention Maria being at a desert in Oregon. The memories mention a family trip to Oregon and a magical moment during a hike, but not a desert. \n\nAnswer: Not mentioned in memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_174": {
+    "qa_question": "What does John say she feels when doing upside-down yoga poses?",
+    "qa_answer": "",
+    "qa_response": "John does not mention upside-down yoga poses.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_175": {
+    "qa_question": "What did Maria recently get promoted to?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Maria getting promoted to any position. Therefore, the answer is:\n\nAnswer: No promotion mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_176": {
+    "qa_question": "What was one of the biggest challenges Maria faced in her journey to becoming assistant manager?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Maria's journey to becoming an assistant manager or challenges related to that specific role. Therefore, I cannot answer the question based on the available memories.\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_177": {
+    "qa_question": "Why did John need to help his cousin find a new place to live?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention John helping his cousin find a new place to live. The only mention of someone helping a cousin is Maria helping her cousin, not John. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_178": {
+    "qa_question": "What event did Maria participate in to show support for veterans' rights?",
+    "qa_answer": "",
+    "qa_response": "The event Maria participated in to show support for veterans' rights was a \"project to support military veterans\" (from her memory on 20 May 2023). \n\nAnswer: Project supporting military veterans.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_179": {
+    "qa_question": "How did the drought impact the homes in John's old area?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention a drought impacting homes in John's old area. The only natural disaster mentioned is a flood. \n\nAnswer: No drought mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_180": {
+    "qa_question": "What does John criticize about the veteran's hospital visit?",
+    "qa_answer": "",
+    "qa_response": "There is no criticism mentioned in the memories.  \n\nAnswer: No criticism mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_181": {
+    "qa_question": "What did John take away from visiting the orphanage?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention John visiting an orphanage. Therefore, I cannot answer the question based on the available information. \n\nAnswer: No orphanage visit mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_182": {
+    "qa_question": "Why did Maria feel inspired to join the military after the visit to the hospital?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Maria joining the military or visiting a hospital. Therefore, the answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_183": {
+    "qa_question": "How did Maria describe her kids' reaction at the military memorial?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Maria's kids at a military memorial. The memories about a military memorial involve John's children, not Maria's. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_184": {
+    "qa_question": "Why does Maria think it's important for younger generations to visit art galleries?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Maria's thoughts on younger generations visiting art galleries. Therefore, the answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_185": {
+    "qa_question": "What happened to Maria's job in August 2023?",
+    "qa_answer": "",
+    "qa_response": "There is no information about Maria's job in August 2023 in the provided memories. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_186": {
+    "qa_question": "What cause did the 5K charity run organized by Maria support?",
+    "qa_answer": "",
+    "qa_response": "homeless shelter.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_187": {
+    "qa_question": "Who did John work with to raise awareness and funds for animal welfare?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about John working with anyone to raise awareness and funds for animal welfare. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_188": {
+    "qa_question": "What recognition did John receive at the homeless shelter in August 2023?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention John receiving any recognition at the homeless shelter in August 2023. \n\nAnswer: None mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_189": {
+    "qa_question": "What is the name of John's puppy he got two weeks before August 11, 2023?",
+    "qa_answer": "",
+    "qa_response": "John did not get a puppy. Maria got a puppy named Coco. \n\nAnswer: No puppy (for John)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_190": {
+    "qa_question": "How does Maria describe the camping trip with Max?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any description from Maria about a camping trip with Max. The camping trip with Max is mentioned by John, not Maria. \n\nAnswer: No memory from Maria.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_191": {
+    "qa_question": "What is the name of Maria's second kitten?",
+    "qa_answer": "",
+    "qa_response": "There is no mention of Maria having a second kitten in the provided memories. The memories only mention dogs named Coco and Shadow. \n\nAnswer: No second kitten mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_192": {
+    "qa_question": "How is John's new puppy adjusting to its new home?",
+    "qa_answer": "",
+    "qa_response": "John doesn't have a new puppy.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_0": {
+    "qa_question": "Is it likely that Nate has friends besides Joanna?",
+    "qa_answer": "Yesteammates on hisvideo game team.",
+    "qa_response": "Based on the provided memories, there is no mention of Nate having friends besides Joanna. Therefore, the answer is:\n\nNo.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_1": {
+    "qa_question": "What kind of interests do Joanna and Nate share?",
+    "qa_answer": "Watching movies, making desserts",
+    "qa_response": "cooking, turtles, writing",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_2": {
+    "qa_question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+    "qa_answer": "2019",
+    "qa_response": "To determine when Joanna first watched \"Eternal Sunshine of the Spotless Mind,\" let's analyze the relevant memory:\n\n1. The memory from \"7:31 pm on 21 January, 2022\" states: \"Joanna first watched a romantic drama about memory and relationships around 3 years ago.\"\n\n2. \"Eternal Sunshine of the Spotless Mind\" is a romantic drama about memory and relationships, which matches the description.\n\n3. Calculating the time: The memory is from January 2022, and \"around 3 years ago\" would be approximately 2019.\n\nAnswer: 2019.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_3": {
+    "qa_question": "When did Nate win his first video game tournament?",
+    "qa_answer": "the week before 21Janury, 2022",
+    "qa_response": "Nate won his first video game tournament on 21 January, 2022. \n\n(Evidence: From Nate's memories - \"7:31 pm on 21 January, 2022: Nate has recently won his first video game tournament in Counter-Strike: Global Offensive with his team.\")",
+    "qa_category": 2,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "1_4": {
+    "qa_question": "What pets wouldn't cause any discomfort to Joanna?",
+    "qa_answer": "Hairless cats or pigs,since they don't have fur, which is one of the main causes of Joanna's allergy.",
+    "qa_response": "None.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_5": {
+    "qa_question": "What are Joanna's hobbies?",
+    "qa_answer": "Writing, watchingmovies, exploringnature, hanging withfriends.",
+    "qa_response": "Writing, cooking, baking, DIY projects.",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_6": {
+    "qa_question": "How long has Nate had his first two turtles?",
+    "qa_answer": "three years",
+    "qa_response": "3 years.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_7": {
+    "qa_question": "When did Joanna finish her first screenplay?",
+    "qa_answer": "The Friday before 23January, 2022",
+    "qa_response": "23 January, 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_8": {
+    "qa_question": "When did Nate get his first two turtles?",
+    "qa_answer": "2019",
+    "qa_response": "To determine when Nate got his first two turtles, let's analyze the relevant memories:\n\n1. From Nate's memories: \"6:03 pm on 5 September, 2022: Nate has had his turtles for 3 years...\"\n   \n   Calculation: \n   - Memory timestamp: September 2022\n   - \"For 3 years\" means he got them in 2019 (2022 - 3 = 2019)\n\nThe answer is: 2019",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_9": {
+    "qa_question": "What major achievement did Joanna accomplish in January 2022?",
+    "qa_answer": "finished her screenplay and printed it",
+    "qa_response": "There is no information about Joanna's achievements in January 2022 in the provided memories. \n\nAnswer: No data.",
+    "qa_category": 2,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_10": {
+    "qa_question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+    "qa_answer": "Relief, excitement,worry, hope,anxiety.",
+    "qa_response": "excitement and anxiety",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_11": {
+    "qa_question": "What is Joanna allergic to?",
+    "qa_answer": "Most reptiles,animals with fur,cockroaches, dairy",
+    "qa_response": "Joanna is allergic to turtles, reptiles, animals with fur, and cockroaches.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_12": {
+    "qa_question": "What underlying condition might Joanna have based on her allergies?",
+    "qa_answer": "asthma",
+    "qa_response": "The underlying condition Joanna might have based on her allergies is **atopy**. \n\n(Note: While the term \"atopy\" isn't explicitly mentioned in the memories, it is the medical term for a predisposition to develop certain allergic reactions, which aligns with Joanna's multiple allergies to animals, reptiles, and cockroaches. The answer is inferred from the pattern of allergies described.)",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_13": {
+    "qa_question": "When did Joanna have an audition for a writing gig?",
+    "qa_answer": "23 March, 2022.",
+    "qa_response": "23 March, 2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_14": {
+    "qa_question": "What nickname does Nate use for Joanna?",
+    "qa_answer": "Jo",
+    "qa_response": "There is no mention of a nickname for Joanna in the provided memories.  \n\nAnswer: Not mentioned.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_15": {
+    "qa_question": "When did Nate get purple hair?",
+    "qa_answer": "The week before 15April, 2022.",
+    "qa_response": "15 April 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_16": {
+    "qa_question": "What physical transformation did Nate undergo in April 2022?",
+    "qa_answer": "dyed his hair purple",
+    "qa_response": "There is no information in the provided memories about Nate undergoing a physical transformation in April 2022. \n\nAnswer: No data available.",
+    "qa_category": 2,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_17": {
+    "qa_question": "What movie did Joanna watch on 1 May, 2022?",
+    "qa_answer": "Lord of the Rings",
+    "qa_response": "'The Lord of the Rings' Trilogy.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_18": {
+    "qa_question": "Which outdoor spot did Joanna visit in May?",
+    "qa_answer": "Whispering Falls waterfall",
+    "qa_response": "Whispering Falls.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_19": {
+    "qa_question": "How many times has Joanna found new hiking trails?",
+    "qa_answer": "twice",
+    "qa_response": "3 times.",
+    "qa_category": 1,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_20": {
+    "qa_question": "When did Nate adopt Max?",
+    "qa_answer": "May 2022",
+    "qa_response": "20 May, 2022",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_21": {
+    "qa_question": "Who was the new addition to Nate's family in May 2022?",
+    "qa_answer": "Max",
+    "qa_response": "Max.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_22": {
+    "qa_question": "When did Joanna start writing her third screenplay?",
+    "qa_answer": "May 2022",
+    "qa_response": "20 May 2022.",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_23": {
+    "qa_question": "Which of Joanna's screenplay were rejected from production companies?",
+    "qa_answer": "first screenplay on drama and romance, third screenplay on loss identity and connection",
+    "qa_response": "The first and second screenplays.",
+    "qa_category": 1,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "1_24": {
+    "qa_question": "When is Nate hosting a gaming party?",
+    "qa_answer": "The weekend after 3June, 2022.",
+    "qa_response": "The gaming party is on 17 June 2022. \n\n(Calculated from \"5:44 pm on 3 June, 2022: organizing a gaming party in two weekends\")",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_25": {
+    "qa_question": "When did Joanna hike with her buddies?",
+    "qa_answer": "The weekend after 3June, 2022.",
+    "qa_response": "3 June 2022.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_26": {
+    "qa_question": "When did Nate win his third tourney?",
+    "qa_answer": "The week before 3June, 2022",
+    "qa_response": "To determine when Nate won his third tournament, let's analyze the memories:\n\n1. From Nate's memories:\n   - \"7:31 pm on 21 January, 2022: Nate has recently won his first video game tournament\"\n   - \"11:15 am on 6 October, 2022: Nate won his fourth video game tournament on Friday\"\n\n2. From Joanna's memory:\n   - \"2:34 pm on 10 July, 2022: ...while Nate was winning his fourth video game tournament\"\n\nThe progression shows:\n- 1st win: January 2022\n- 4th win: between July-October 2022\n\nSince the question asks about the third tournament win, and we know the fourth was in July/October 2022, the third win would have occurred between January 2022 and July 2022. However, there are no explicit memories mentioning the second or third wins specifically.\n\nGiven the available evidence, we cannot determine the exact date of Nate's third tournament win. The memories only provide clear information about his first and fourth wins.\n\nAnswer: Unknown (not in memories)",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_27": {
+    "qa_question": "What places has Joanna submitted her work to?",
+    "qa_answer": "film contest, film festival.",
+    "qa_response": "Film festivals, film contests.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_28": {
+    "qa_question": "When did Nate make vegan icecream and share it with a vegan diet group?",
+    "qa_answer": "The Friday before 24June, 2022.",
+    "qa_response": "24 June 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_29": {
+    "qa_question": "When is Joanna going to make Nate's ice cream for her family?",
+    "qa_answer": "The weekend of 24June, 2022.",
+    "qa_response": "24 June 2022.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_30": {
+    "qa_question": "What kind of writings does Joanna do?",
+    "qa_answer": "Screenplays,books, online blog posts, journal",
+    "qa_response": "Joanna writes about personal experiences, sadness, and loss.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_31": {
+    "qa_question": "When did Nate win his fourth video game tournament?",
+    "qa_answer": "The Friday before 10July, 2022.",
+    "qa_response": "6 October, 2022.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_32": {
+    "qa_question": "Where did Joanna travel to in July 2022?",
+    "qa_answer": "Woodhaven",
+    "qa_response": "Woodhaven.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_33": {
+    "qa_question": "When did someone write Joanna a touching letter?",
+    "qa_answer": "The week before 14August, 2022.",
+    "qa_response": "7 August 2022.",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_34": {
+    "qa_question": "What book recommendations has Joanna given to Nate?",
+    "qa_answer": "\"Little Women\",'A Court of Thorns andRoses'.",
+    "qa_response": "None.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_35": {
+    "qa_question": "When did Nate take time off to chill with his pets?",
+    "qa_answer": "The weekend of 22August, 2022.",
+    "qa_response": "The most specific memory about Nate taking time off to chill with his pets is from \"8:10 pm on 7 November, 2022,\" where he took his pets to the park. \n\nAnswer: 7 November 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.2"
+    ]
+  },
+  "1_36": {
+    "qa_question": "When did Joanna share her book with her writers group?",
+    "qa_answer": "The week before 22August, 2022.",
+    "qa_response": "22 August 2022.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_37": {
+    "qa_question": "When did Nate win an international tournament?",
+    "qa_answer": "21 August, 2022",
+    "qa_response": "22 August 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_38": {
+    "qa_question": "When did Joanna make a desert with almond milk?",
+    "qa_answer": "The Friday before 14September, 2022",
+    "qa_response": "9 September 2022. \n\n(Calculated from \"Last Friday\" mentioned in the 14 September 2022 memory, which would be 9 September 2022.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_39": {
+    "qa_question": "When did Nate attend a cooking show?",
+    "qa_answer": "The Monday before 14September, 2022",
+    "qa_response": "Based on the provided memories, there is no explicit mention of Nate attending a cooking show. However, Nate has a cooking show where he teaches vegan ice cream recipes, as mentioned in the memory from \"1:43 pm on 14 September, 2022.\" \n\nAnswer: No record of attending.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_40": {
+    "qa_question": "When did Joanna's laptop crash?",
+    "qa_answer": "The week before 14September, 2022",
+    "qa_response": "Joanna's laptop crashed on 7 September, 2022. \n\n(Calculated from the memory timestamp \"1:43 pm on 14 September, 2022\" mentioning \"last week\".)",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_41": {
+    "qa_question": "When did Joanna make a chocolate tart with raspberries?",
+    "qa_answer": "5 October, 2022",
+    "qa_response": "6 October 2022",
+    "qa_category": 2,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_42": {
+    "qa_question": "What movies have both Joanna and Nate seen?",
+    "qa_answer": "\"Little Women\", \"Lord of the Rings\"",
+    "qa_response": "None.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_43": {
+    "qa_question": "How long did it take for Joanna to finish writing her book?",
+    "qa_answer": "four months",
+    "qa_response": "To determine how long it took Joanna to finish writing her book, let's analyze the relevant memories:\n\n1. **Start Date**: \n   - \"2:34 pm on 10 July, 2022: Joanna started working on a book recently after her movie did well.\"  \n   This indicates she began the book around **July 2022**.\n\n2. **Completion Date**: \n   - \"11:15 am on 6 October, 2022: Joanna finished writing her book last week after putting in a lot of late nights and edits...\"  \n   The phrase \"last week\" relative to the timestamp (6 October 2022) means she finished around **late September 2022**.\n\n3. **Calculation**: \n   - From **July 2022** to **late September 2022** is approximately **3 months**.\n\n**Answer**: 3 months.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_44": {
+    "qa_question": "When did Nate win a lot of money in a video game tournament?",
+    "qa_answer": "September 2022",
+    "qa_response": "Based on the memories, Nate won his fourth video game tournament on 6 October 2022, where he mentioned making money doing what he loves. \n\nAnswer: 6 October 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_45": {
+    "qa_question": "When did Joanna finish up the writing for her book?",
+    "qa_answer": "The week before 6October, 2022",
+    "qa_response": "6 October 2022",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_46": {
+    "qa_question": "What board games has Nate played?",
+    "qa_answer": "Chess, Catan.",
+    "qa_response": "Catan.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_47": {
+    "qa_question": "What places has Nate met new people?",
+    "qa_answer": "A tournament and agaming convention.",
+    "qa_response": "Game convention, tournament.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_48": {
+    "qa_question": "When did Nate go to a convention and meet new people?",
+    "qa_answer": "The Friday before 9October, 2022.",
+    "qa_response": "9 October 2022",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_49": {
+    "qa_question": "How many times has Joanna's scripts been rejected?",
+    "qa_answer": "Twice",
+    "qa_response": "3",
+    "qa_category": 1,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_50": {
+    "qa_question": "What is something Nate gave to Joanna that brings her a lot of joy?",
+    "qa_answer": "stuffed toy pup",
+    "qa_response": "A stuffed animal.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_51": {
+    "qa_question": "When did Nate get Tilly for Joanna?",
+    "qa_answer": "25 May, 2022",
+    "qa_response": "There is no information in the memories about Nate getting Tilly for Joanna. The memories only mention that Joanna had a dog named Tilly in Michigan and now has a stuffed animal named Tilly. \n\nAnswer: No information available.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_52": {
+    "qa_question": "How many of Joanna's writing have made it to the big screen?",
+    "qa_answer": "two",
+    "qa_response": "3.",
+    "qa_category": 1,
+    "labels": [
+      "2.1"
+    ]
+  },
+  "1_53": {
+    "qa_question": "How many times has Nate taken his turtles on a walk?",
+    "qa_answer": "Twice.",
+    "qa_response": "2 times.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_54": {
+    "qa_question": "When was Joanna's second movie script shown on the big screens?",
+    "qa_answer": "The Sunday before 25October, 2022.",
+    "qa_response": "The memories do not provide a specific date for when Joanna's second movie script was shown on the big screens. \n\nAnswer: Unknown.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_55": {
+    "qa_question": "What is Joanna inspired by?",
+    "qa_answer": "Personal experiences,her own journey ofself discovery, Nate,nature, validation,stories about findingcourage and takingrisks, people she knows, stuff she sees, imagination",
+    "qa_response": "Joanna is inspired by self-discovery, nature, and personal experiences.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_56": {
+    "qa_question": "What animal do both Nate and Joanna like?",
+    "qa_answer": "Turtles.",
+    "qa_response": "turtles",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_57": {
+    "qa_question": "When did Joanna plan to go over to Nate's and share recipes?",
+    "qa_answer": "5 November, 2022.",
+    "qa_response": "4 November 2022.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_58": {
+    "qa_question": "What things has Nate reccomended to Joanna?",
+    "qa_answer": "A pet,\"The Lord of the Rings\" movies,a dragon book series,coconut flavoring,\"Project Hail Mary\" book,Xenoblade Chronicles, dairy-free margarine, coconut oil",
+    "qa_response": "coconut, magical adventure book series",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_59": {
+    "qa_question": "What does Joanna do to remember happy memories?",
+    "qa_answer": "Hangs them on a corkboard, writes themin a notebook.",
+    "qa_response": "Joanna writes down her favorite memories.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_60": {
+    "qa_question": "What Console does Nate own?",
+    "qa_answer": "A Nintendo Switch; since the game \"Xenoblade 2\" is made for this console.",
+    "qa_response": "Based on the provided memories, there is no explicit mention of the specific console Nate owns. Therefore, the answer is:\n\n\"Not specified.\"",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_61": {
+    "qa_question": "What mediums does Nate use to play games?",
+    "qa_answer": "Gamecube, PC,Playstation.",
+    "qa_response": "YouTube, tournaments, friends.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_62": {
+    "qa_question": "How many letters has Joanna recieved?",
+    "qa_answer": "Two",
+    "qa_response": "1. Examine all memories for mentions of letters received by Joanna.\n2. From Joanna's memories:\n   - \"6:12 pm on 14 August, 2022: Joanna received a letter last week from someone who read her online blog post...\"\n3. From Nate's memories:\n   - \"6:12 pm on 14 August, 2022: Joanna received a letter last week from someone who read her online blog post...\"\n   - \"6:12 pm on 14 August, 2022: Joanna received a letter from someone who read her online blog post...\" (This appears to be a duplicate or rephrased memory of the same event)\n4. No other memories mention letters received by Joanna.\n5. The evidence points to only one distinct letter mentioned across both sets of memories.\n\nAnswer: 1 letter.",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_63": {
+    "qa_question": "What video games does Nate play?",
+    "qa_answer": "Valorant, Counter Strike:Global Offensive,Xenoblade Chronicles, StreetFighter, Cyberpunk 2077",
+    "qa_response": "Cyberpunk 2077, Xeonoblade Chronicles, Counter-Strike: Global Offensive, Catan.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_64": {
+    "qa_question": "When did Nate win a big Valorant tourney?",
+    "qa_answer": "The Saturday before 7November, 2022",
+    "qa_response": "5 November 2022",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_65": {
+    "qa_question": "Which torunament did Nate win in the beginning of November 2022?",
+    "qa_answer": "Valorant",
+    "qa_response": "The answer is: Valorant tournament.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_66": {
+    "qa_question": "What alternative career might Nate consider after gaming?",
+    "qa_answer": "an animalkeeper at a localzoo and workingwith turtles; as heknows a great dealabout turtles andhow to care for them,and he enjoys it.",
+    "qa_response": "\nCreating YouTube gaming content.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_67": {
+    "qa_question": "What pets does Nate have?",
+    "qa_answer": "A dog and threeturtles.",
+    "qa_response": "Nate has turtles and a dog.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_68": {
+    "qa_question": "How many hikes has Joanna been on?",
+    "qa_answer": "Four",
+    "qa_response": "The memories do not provide a specific count of Joanna's hikes. \n\nAnswer: Unknown number of hikes.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_69": {
+    "qa_question": "How many turtles does Nate have?",
+    "qa_answer": "Three",
+    "qa_response": "3.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_70": {
+    "qa_question": "What activities does Nate do with his turtles?",
+    "qa_answer": "takes them onwalks, holds them,feeds themstrawberries, givesthem baths.",
+    "qa_response": "- Watching them eat snacks  \n- Holding them  \n- Taking them for walks  \n- Bringing them into the kitchen",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_71": {
+    "qa_question": "What do both Joanna and Nate appreciate the beauty of?",
+    "qa_answer": "Nature",
+    "qa_response": "nature",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_72": {
+    "qa_question": "When did Joanna plan on going to Nate's to watch him play with his turtles?",
+    "qa_answer": "10 November, 2022",
+    "qa_response": "5 November 2022.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_73": {
+    "qa_question": "What state did Joanna visit in summer 2021?",
+    "qa_answer": "Indiana",
+    "qa_response": "Let's analyze the memories step by step to find the answer:\n\n1. First, we need to identify any memories that mention Joanna traveling in summer 2021. However, all memories are from 2022.\n\n2. The closest reference is from Joanna's memory at \"5:54 pm on 9 November, 2022\" which mentions \"last summer near Fort Wayne\". Since this memory is from November 2022, \"last summer\" would be summer 2022, not 2021.\n\n3. There are no other memories that reference summer 2021 specifically.\n\n4. The memories do mention trips to Woodhaven and Fort Wayne, but these are all from 2022.\n\nSince there are no memories referencing summer 2021 travel, the answer is:\n\nUnknown.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_74": {
+    "qa_question": "What recommendations has Nate received from Joanna?",
+    "qa_answer": "\"Eternal Sunshine of the Spotless Mind\" movie, \"A Court of Thorns and Roses\" book, pointers for making living room comfy, starting a cork board for memories, \"Little Women\" movie",
+    "qa_response": "Movie recommendations.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_75": {
+    "qa_question": "What are Nate's favorite desserts?",
+    "qa_answer": "coconut milk icecream, dairy-free chocolate cake with berries, chocolate and mixed-berry icecream, dairy-free chocolate mousse",
+    "qa_response": "Nate's favorite desserts are coconut milk ice cream, dairy-free chocolate cake with berries.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_76": {
+    "qa_question": "How has Nate tried to disburse his vegan ice-cream recipes?",
+    "qa_answer": "teaching others, cooking show",
+    "qa_response": "Nate has a cooking show and shared with his vegan diet group.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_77": {
+    "qa_question": "When did Nate win his second tournament?",
+    "qa_answer": "The week before 2 May, 2022.",
+    "qa_response": "To determine when Nate won his second tournament, let's analyze the memories in chronological order:\n\n1. \"7:31 pm on 21 January, 2022: Nate has recently won his first video game tournament in Counter-Strike: Global Offensive with his team.\" - This is the first tournament win.\n\n2. \"10:57 am on 22 August, 2022: Nate won an international tournament on an unspecified date.\" - This is the second tournament win (after the first one in January).\n\n3. \"11:15 am on 6 October, 2022: Nate won his fourth video game tournament on Friday...\" - This is the fourth win, so we know the second win occurred before this.\n\nThe second tournament win is the international tournament mentioned on 22 August 2022 (though the exact date of the win isn't specified, this is when it was recorded in memory).\n\nAnswer: August 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_78": {
+    "qa_question": "How many video game tournaments has Nate participated in?",
+    "qa_answer": "nine",
+    "qa_response": "4.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_79": {
+    "qa_question": "How many screenplays has Joanna written?",
+    "qa_answer": "three",
+    "qa_response": "3.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_80": {
+    "qa_question": "How many tournaments has Nate won?",
+    "qa_answer": "seven",
+    "qa_response": "4.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_81": {
+    "qa_question": "What recipes has Joanna made?",
+    "qa_answer": "dairy free vanilla cake with strawberry filling and coconut cream frosting, parfait, strawberry chocolate cake, chocolate coconut cupcakes, chocolate raspberry tart, chocolate cake with raspberries, blueberry cheesecake bars",
+    "qa_response": "Joanna has made dairy-free chocolate cake, blueberry dessert with coconut milk, dairy-free vanilla cake, and chocolate coconut cupcakes.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_82": {
+    "qa_question": "What recipes has Nate made?",
+    "qa_answer": "coconut milk icecream, chocolate and vanilla swirl",
+    "qa_response": "- Homemade coconut ice cream  \n- Dairy-free chocolate cake with berries  \n- Vegan ice cream recipes",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_83": {
+    "qa_question": "What are the skills that Nate has helped others learn?",
+    "qa_answer": "coconut milk ice cream recipe, reset high scores, tips to improve gaming skills",
+    "qa_response": "- Gaming skills  \n- Vegan ice cream recipes  \n- Dairy-free desserts",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_84": {
+    "qa_question": "Was the first half of September 2022 a good month career-wise for Nate and Joanna? Answer yes or no.",
+    "qa_answer": "No; because both of them faced setbacks in their career",
+    "qa_response": "no",
+    "qa_category": 3,
+    "labels": []
+  },
+  "1_85": {
+    "qa_question": "What kind of job is Joanna beginning to preform the duties of because of her movie scripts?",
+    "qa_answer": "filmmaker.",
+    "qa_response": "filmmaker",
+    "qa_category": 3,
+    "labels": []
+  },
+  "1_86": {
+    "qa_question": "When did Nate take his turtles to the beach?",
+    "qa_answer": "10 November, 2022",
+    "qa_response": "10 November 2022.  \n\n(Calculated from Nate's memory timestamp \"12:06 am on 11 November, 2022\" mentioning the beach trip happened \"yesterday.\")",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_87": {
+    "qa_question": "What state did Nate visit?",
+    "qa_answer": "Florida",
+    "qa_response": "Indiana.",
+    "qa_category": 3,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_88": {
+    "qa_question": "What is one of Joanna's favorite movies?",
+    "qa_answer": "\"Eternal Sunshineof the Spotless Mind\"",
+    "qa_response": "\"Little Women\"",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_89": {
+    "qa_question": "What color did Nate choose for his hair?",
+    "qa_answer": "purple",
+    "qa_response": "bright and bold",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_90": {
+    "qa_question": "What is Nate's favorite movie trilogy?",
+    "qa_answer": "Lord of the Rings",
+    "qa_response": "The Lord of the Rings.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_91": {
+    "qa_question": "What is Nate's favorite book series about?",
+    "qa_answer": "dragons",
+    "qa_response": "Nate's favorite book series is about magical adventures.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_92": {
+    "qa_question": "What kind of lighting does Nate's gaming room have?",
+    "qa_answer": "red and purple lighting",
+    "qa_response": "dimmable lights",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_93": {
+    "qa_question": "What game was the second tournament that Nate won based on?",
+    "qa_answer": "Street Fighter",
+    "qa_response": "The second tournament Nate won was in \"Counter-Strike: Global Offensive.\" \n\n(From Nate's memory: \"7:31 pm on 21 January, 2022: Nate has recently won his first video game tournament in Counter-Strike: Global Offensive with his team.\")",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_94": {
+    "qa_question": "What is Joanna's third screenplay about?",
+    "qa_answer": "loss, identity, and connection",
+    "qa_response": "Joanna's third screenplay is about \"Finding Home,\" focusing on themes of loss, identity, and connection.  \n\n**Answer:** \"Finding Home,\" loss, identity, connection.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_95": {
+    "qa_question": "What is Nate's favorite video game?",
+    "qa_answer": "Xenoblade Chronicles",
+    "qa_response": "Based on the memories, there isn't a single definitive favorite video game mentioned for Nate. However, he has been playing \"Cyberpunk 2077\" nonstop and enjoys it, as well as \"Xeonoblade Chronicles\" and \"Counter-Strike: Global Offensive.\" \n\nAnswer: No single favorite mentioned.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_96": {
+    "qa_question": "What type of movies does Nate enjoy watching the most?",
+    "qa_answer": "action and sci-fi",
+    "qa_response": "action and sci-fi",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_97": {
+    "qa_question": "What did Joanna just finish last Friday on 23 January, 2022?",
+    "qa_answer": "screenplay",
+    "qa_response": "Joanna's first full screenplay.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_98": {
+    "qa_question": "What genre is Joanna's first screenplay?",
+    "qa_answer": "drama and romance",
+    "qa_response": "drama and romance",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_99": {
+    "qa_question": "What are Joanna's plans for her finished screenplay in January 2022?",
+    "qa_answer": "submit it to film festivals and get producers and directors to check it out",
+    "qa_response": "Submit to film festivals.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_100": {
+    "qa_question": "For how long has Nate had his turtles?",
+    "qa_answer": "3 years",
+    "qa_response": "3 years.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_101": {
+    "qa_question": "What did Nate think of the coconut milk ice cream he made?",
+    "qa_answer": "Super good, rich and creamy",
+    "qa_response": "Smooth and creamy.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_102": {
+    "qa_question": "Which dairy-free dessert flavors does Nate enjoy?",
+    "qa_answer": "chocolate and mixed berry",
+    "qa_response": "coconut milk, chocolate, mixed berry",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_103": {
+    "qa_question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+    "qa_answer": "\"Little Women\"",
+    "qa_response": "The provided memories do not contain any information about Joanna watching or recommending something to Nate on February 7, 2022. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_104": {
+    "qa_question": "What is \"Little Women\" about according to Joanna?",
+    "qa_answer": "Sisterhood, love, and reaching for your dreams",
+    "qa_response": "sisterhood, love, chasing dreams",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_105": {
+    "qa_question": "What flavor of ice cream did Nate make for his friend on 25 February, 2022?",
+    "qa_answer": "chocolate and vanilla swirl",
+    "qa_response": "The flavor of ice cream Nate made for his friend on 25 February, 2022 is not specified in the memories. \n\nAnswer: Not specified.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_106": {
+    "qa_question": "What inspired Joanna's new screenplay on 25 February, 2022?",
+    "qa_answer": "personal experiences and her own journey of self-discovery",
+    "qa_response": "Joanna's personal experiences.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ] 
+  },
+  "1_107": {
+    "qa_question": "Why does Nate like turtles as pets?",
+    "qa_answer": "Their slow pace and calming nature",
+    "qa_response": "Nate finds turtles calming and joyful.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_108": {
+    "qa_question": "How does Nate describe the process of taking care of turtles?",
+    "qa_answer": "Not tough; keep their area clean, feed them properly, give them enough light.",
+    "qa_response": "Nate describes turtle care as calming and low-maintenance.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_109": {
+    "qa_question": "What was Joanna's audition for?",
+    "qa_answer": "writing gig",
+    "qa_response": "writing gig",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_110": {
+    "qa_question": "Why did Nate choose the hair color he did?",
+    "qa_answer": "Bright and bold - like him",
+    "qa_response": "To stand out.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_111": {
+    "qa_question": "What are the main ingredients of the ice cream recipe shared by Nate?",
+    "qa_answer": "Coconut milk, vanilla extract, sugar, salt",
+    "qa_response": "The main ingredients of the ice cream recipe shared by Nate are **coconut milk**. \n\n(Note: While the memories frequently mention \"coconut milk ice cream,\" no other specific ingredients are explicitly listed in the provided memories.)",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_112": {
+    "qa_question": "What is Joanna's project called in the writers group?",
+    "qa_answer": "\"Finding Home\"",
+    "qa_response": "The memories do not provide the name of Joanna's project in the writers group. \n\nAnswer: Not mentioned.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_113": {
+    "qa_question": "What is Nate's favorite genre of movies?",
+    "qa_answer": "Fantasy and sci-fi",
+    "qa_response": "Nate's favorite genre of movies is action and sci-fi. \n\n(Source: Nate's memory from 7:31 pm on 21 January, 2022: \"Nate loves action and sci-fi movies, appreciating the cool effects.\")",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_114": {
+    "qa_question": "What kind of books does Nate enjoy?",
+    "qa_answer": "Adventures and magic",
+    "qa_response": "Based on the memories, there is no explicit mention of the kind of books Nate enjoys. The memories only mention that Nate recommended a book series to Joanna, but they do not specify the genre or type of books Nate himself enjoys.\n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_115": {
+    "qa_question": "What kind of films does Joanna enjoy?",
+    "qa_answer": "Dramas and emotionally-driven films",
+    "qa_response": "dramas and romantic comedies",
+    "qa_category": 4,
+    "labels": [
+      "1.2"
+    ]
+  },
+  "1_116": {
+    "qa_question": "Which activity helps Nate escape and stimulates his imagination?",
+    "qa_answer": "watching fantasy and sci-fi movies",
+    "qa_response": "Watching movies.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_117": {
+    "qa_question": "What filling did Joanna use in the cake she made recently in May 2022?",
+    "qa_answer": "strawberry",
+    "qa_response": "strawberry filling",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_118": {
+    "qa_question": "What kind of frosting did Joanna use on the cake she made recently in May 2022?",
+    "qa_answer": "coconut cream",
+    "qa_response": "coconut cream frosting.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_119": {
+    "qa_question": "What does Nate feel he could do when out in cool places like Whispering Falls?",
+    "qa_answer": "write a whole movie",
+    "qa_response": "Nate feels inspired by nature.",
+    "qa_category": 4,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_120": {
+    "qa_question": "What creative activity does Nate joke about pursuing after being inspired by their hikes with Jo?",
+    "qa_answer": "Start thinking about a drama and publish a screenplay",
+    "qa_response": "The memories do not contain any information about Nate joking about pursuing a creative activity after being inspired by hikes with Joanna. Therefore, the answer is: \n\n\"No information available.\"",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_121": {
+    "qa_question": "Who invited Nate to join her on the trails sometime?",
+    "qa_answer": "Joanna",
+    "qa_response": "Joanna.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_122": {
+    "qa_question": "What did Nate do for Joanna on 25 May, 2022?",
+    "qa_answer": "get her a stuffed animal",
+    "qa_response": "Supported her screenplay.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_123": {
+    "qa_question": "How does Nate describe the stuffed animal he got for Joanna?",
+    "qa_answer": "A stuffed animal to remind you of the good vibes",
+    "qa_response": "Thoughtful and meaningful.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_124": {
+    "qa_question": "What event is Nate organizing in June 2022?",
+    "qa_answer": "A gaming party",
+    "qa_response": "gaming party",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_125": {
+    "qa_question": "Who did Nate plan to invite to his gaming party in June 2022?",
+    "qa_answer": "Tournament friends, old friends, teammates",
+    "qa_response": "tournament friends, old friends, teammates",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_126": {
+    "qa_question": "What special items did Nate get for everyone at his gaming party?",
+    "qa_answer": "Custom controller decorations",
+    "qa_response": "custom controller decorations",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_127": {
+    "qa_question": "What did Joanna write yesterday that appeared on the big screen?",
+    "qa_answer": "screenplay bits",
+    "qa_response": "The answer is: \"Nothing appeared yesterday.\" \n\nHere's the reasoning:\n1. The most recent memory mentioning \"yesterday\" is from Nate at \"8:10 pm on 7 November, 2022,\" which states Joanna was working on a new script but doesn't mention anything appearing on the big screen.\n2. The other \"yesterday\" reference (Joanna's memory at \"5:54 pm on 9 November, 2022\") mentions pitching a script to producers, not anything appearing on screen.\n3. No memories indicate any of Joanna's work appeared on the big screen yesterday (relative to any memory timestamp).",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_128": {
+    "qa_question": "What superhero is Joanna a fan of?",
+    "qa_answer": "Spider-Man",
+    "qa_response": "Spider-Man.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_129": {
+    "qa_question": "Which superhero toy figure does Nate share a photo of?",
+    "qa_answer": "Iron Man",
+    "qa_response": "Iron Man.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_130": {
+    "qa_question": "What is displayed on Joanna's cork board for motivation and creativity?",
+    "qa_answer": "inspiring quotes, photos, and little keepsakes",
+    "qa_response": "Inspiring quotes and pictures.",
+    "qa_category": 4,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "1_131": {
+    "qa_question": "What does the photo on Joanna's cork board remind her of?",
+    "qa_answer": "love and encouragement from her family",
+    "qa_response": "The photo on Joanna's cork board reminds her of the love and encouragement from her family every day. \n\nAnswer: love and encouragement from family.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_132": {
+    "qa_question": "What did Nate make and share with his vegan diet group?",
+    "qa_answer": "vegan ice cream",
+    "qa_response": "vegan ice cream",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_133": {
+    "qa_question": "How many people attended the gaming party hosted by Nate in June 2022?",
+    "qa_answer": "7",
+    "qa_response": "The memories do not specify the exact number of people who attended Nate's gaming party in June 2022. \n\nAnswer: Unknown.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_134": {
+    "qa_question": "What recipe Nate offer to share with Joanna?",
+    "qa_answer": "vegan ice cream recipe",
+    "qa_response": "The recipe Nate offered to share with Joanna is **dairy-free ice cream**.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_135": {
+    "qa_question": "What did Joanna plan to do with the recipe Nate promised to share?",
+    "qa_answer": "make it for her family",
+    "qa_response": "\nmake ice cream tonight.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_136": {
+    "qa_question": "How many video game tournaments has Nate won by July 10, 2022?",
+    "qa_answer": "Four",
+    "qa_response": "To determine how many video game tournaments Nate had won by July 10, 2022, we examine the memories:\n\n1. From Nate's memories:\n   - \"7:31 pm on 21 January, 2022: Nate has recently won his first video game tournament in Counter-Strike: Global Offensive with his team.\"\n   - \"11:15 am on 6 October, 2022: Nate won his fourth video game tournament on Friday...\" (This is after July 10, 2022, so it doesn't count for the question.)\n\n2. From Joanna's memories:\n   - \"2:34 pm on 10 July, 2022: Joanna took a road trip... while Nate was winning his fourth video game tournament.\" (This indicates Nate won his fourth tournament on July 10, 2022.)\n\nThus, by July 10, 2022, Nate had won 4 tournaments.\n\nAnswer: 4.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_137": {
+    "qa_question": "Where did Joanna go for a road trip for research?",
+    "qa_answer": "Woodhaven",
+    "qa_response": "Woodhaven.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_138": {
+    "qa_question": "What did Joanna discover at the library in Woodhaven?",
+    "qa_answer": "cool old book collection",
+    "qa_response": "A 1900s book with stories and sketches.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_139": {
+    "qa_question": "What specific themes are explored in Joanna's new book?",
+    "qa_answer": "loss, redemption, and forgiveness",
+    "qa_response": "loss, redemption, forgiveness",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_140": {
+    "qa_question": "What inspired Joanna's new script in July 2022?",
+    "qa_answer": "Woodhaven's interesting past and people",
+    "qa_response": "Joanna's personal experiences.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_141": {
+    "qa_question": "What did Nate do while Joanna was on her road trip?",
+    "qa_answer": "Won a video game tournament",
+    "qa_response": "Nate won his fourth video game tournament.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_142": {
+    "qa_question": "What does Nate do that he loves and can make money from?",
+    "qa_answer": "Competing in video game tournaments",
+    "qa_response": "Playing video games.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_143": {
+    "qa_question": "How did Joanna feel when someone wrote her a letter after reading her blog post?",
+    "qa_answer": "Touched",
+    "qa_response": "Joanna felt touched and comforted.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_144": {
+    "qa_question": "What kind of impact does Joanna hope to have with her writing?",
+    "qa_answer": "share her stories and hopefully have an impact",
+    "qa_response": "Joanna hopes to inspire others.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_145": {
+    "qa_question": "What kind of content did Joanna share that someone wrote her a letter about?",
+    "qa_answer": "A blog post about a hard moment in her life",
+    "qa_response": "hard moment in her life",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_146": {
+    "qa_question": "What motivates Joanna to keep writing even on tough days?",
+    "qa_answer": "Knowing that her writing can make a difference",
+    "qa_response": "The impact her writing can have on others.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_147": {
+    "qa_question": "What type of ice cream does Joanna mention that Nate makes and is delicious?",
+    "qa_answer": "Coconut milk ice cream",
+    "qa_response": "coconut milk ice cream",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_148": {
+    "qa_question": "How did Nate feel about sharing his love for dairy-free desserts with Joanna?",
+    "qa_answer": "Happy to share",
+    "qa_response": "Nate felt passionate.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_149": {
+    "qa_question": "What did Joanna share with her writers group in August 2022?",
+    "qa_answer": "her book",
+    "qa_response": "Joanna shared her book.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_150": {
+    "qa_question": "How did Joanna celebrate after sharing her book with her writers group?",
+    "qa_answer": "making a delicious treat",
+    "qa_response": "made a delicious treat",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_151": {
+    "qa_question": "How did Nate celebrate winning the international tournament?",
+    "qa_answer": "Taking time off to chill with pets",
+    "qa_response": "The memories do not provide information on how Nate celebrated winning the international tournament. \n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.2"
+    ]
+  },
+  "1_152": {
+    "qa_question": "Why is Joanna experimenting with dairy-free options in her dessert recipes?",
+    "qa_answer": "lactose intolerance",
+    "qa_response": "Joanna is lactose intolerant.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_153": {
+    "qa_question": "What substitution does Nate suggest for butter in dairy-free baking?",
+    "qa_answer": "dairy-free margarine or coconut oil",
+    "qa_response": "The memories do not contain any information about Nate suggesting a substitution for butter in dairy-free baking. \n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_154": {
+    "qa_question": "What type of show did Nate host where he taught vegan ice cream recipes?",
+    "qa_answer": "a cooking show",
+    "qa_response": "The answer is: vegan ice cream cooking show.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_155": {
+    "qa_question": "What is Nate's favorite dish from the cooking show he hosted?",
+    "qa_answer": "Coconut milk ice cream",
+    "qa_response": "coconut milk ice cream",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_156": {
+    "qa_question": "What is one of Nate's favorite dairy-free treats besides coconut milk ice cream?",
+    "qa_answer": "dairy-free chocolate mousse",
+    "qa_response": "dairy-free chocolate cake with berries.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_157": {
+    "qa_question": "What dessert did Joanna share a photo of that has an almond flour crust, chocolate ganache, and fresh raspberries?",
+    "qa_answer": "chocolate raspberry tart",
+    "qa_response": "chocolate raspberry tart",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_158": {
+    "qa_question": "What kind of cake did Joanna share a photo of that she likes making for birthdays and special days?",
+    "qa_answer": "chocolate cake with raspberries",
+    "qa_response": "dairy-free chocolate cake with raspberries",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_159": {
+    "qa_question": "What two main ingredients are part of the dessert Joanna shared a photo of with blueberries, coconut milk, and a gluten-free crust?",
+    "qa_answer": "blueberries and coconut milk",
+    "qa_response": "The two main ingredients are blueberries and coconut milk.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_160": {
+    "qa_question": "What movie did Nate recently watch and enjoy on October 6, 2022?",
+    "qa_answer": "Little Women",
+    "qa_response": "'Little Women'",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_161": {
+    "qa_question": "What did Joanna make for one of the ladies at her writing club?",
+    "qa_answer": "a bookmark",
+    "qa_response": "A cute little bookmark.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_162": {
+    "qa_question": "What game did Nate play at the game convention he attended on 9 October, 2022?",
+    "qa_answer": "Catan",
+    "qa_response": "The memories do not specify which game Nate played at the game convention on 9 October, 2022. \n\nAnswer: Not specified.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_163": {
+    "qa_question": "What movie has Nate recently seen that blew his mind?",
+    "qa_answer": "\"Inception\"",
+    "qa_response": "\"Inception\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_164": {
+    "qa_question": "What game has Nate been playing nonstop with a futuristic setting and gameplay on October 9, 2022?",
+    "qa_answer": "Cyberpunk 2077",
+    "qa_response": "Cyberpunk 2077",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_165": {
+    "qa_question": "What did Nate share a photo of when mentioning unwinding at home?",
+    "qa_answer": "a bookcase filled with dvds and movies",
+    "qa_response": "The answer is: \"his dedicated gaming setup.\" \n\nThis is based on Nate's memory from \"8:10 pm on 7 November, 2022,\" where he describes his gaming setup as his own little haven to escape into the virtual world. This aligns with the context of unwinding at home.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_166": {
+    "qa_question": "How did Joanna describe the classic movie he watched?",
+    "qa_answer": "gripping with great actors",
+    "qa_response": "\nawesome.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_167": {
+    "qa_question": "What does Joanna recommend to make a living room comfy like hers?",
+    "qa_answer": "couch for multiple people, fluffy blanket, lights that can be dimmed",
+    "qa_response": "Based on the memories, Joanna recommends a \"comfy couch and good blanket\" (from 10:58 am on 9 October, 2022). \n\nAnswer: Comfy couch and blanket.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_168": {
+    "qa_question": "What helps Joanna stay focused and brings her joy?",
+    "qa_answer": "stuffed animal dog named Tilly",
+    "qa_response": "Tilly (stuffed animal dog).",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_169": {
+    "qa_question": "What does Joanna do while she writes?",
+    "qa_answer": "have a stuffed animal dog named Tilly with her",
+    "qa_response": "expresses her feelings and thoughts.",
+    "qa_category": 4,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "1_170": {
+    "qa_question": "Why did Joanna name the stuffed animal dog Tilly?",
+    "qa_answer": "after a dog she had in Michigan",
+    "qa_response": "Joanna named it after her Michigan dog.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_171": {
+    "qa_question": "What does Joanna do after receiving a rejection from a production company?",
+    "qa_answer": "keep grinding and moving ahead",
+    "qa_response": "After receiving a rejection from a production company, Joanna appreciates kind words and encouragement during tough times.  \n\nAnswer: Appreciates kind words and encouragement.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_172": {
+    "qa_question": "How does Nate feel about Joanna's ability to bounce back from setbacks?",
+    "qa_answer": "respect Joanna for being able to bounce back",
+    "qa_response": "Nate believes in her talent.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_173": {
+    "qa_question": "What encouragement does Nate give to Joanna after her setback?",
+    "qa_answer": "rejections don't define her, keep grinding and she'll find the perfect opportunity",
+    "qa_response": "Nate believes in her talent.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_174": {
+    "qa_question": "What does Nate rely on for cheer and joy?",
+    "qa_answer": "his turtles",
+    "qa_response": "Turtles and pets.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_175": {
+    "qa_question": "What does Joanna use to remember her dog from Michigan?",
+    "qa_answer": "naming a stuffed animal dog Tilly",
+    "qa_response": "stuffed animal dog named Tilly",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_176": {
+    "qa_question": "What did Joanna contribute to that was shown on the big screen on the Sunday before October 25, 2022?",
+    "qa_answer": "movie script",
+    "qa_response": "movie script",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_177": {
+    "qa_question": "What inspires Joanna to create drawings of her characters?",
+    "qa_answer": "visuals to help bring the characters alive in her head so she can write better",
+    "qa_response": "People, surroundings, and imagination.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_178": {
+    "qa_question": "Where does Joanna get her ideas for the characters from?",
+    "qa_answer": "people she knows, things she saw, her imagination",
+    "qa_response": "people, things seen, imagination",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_179": {
+    "qa_question": "How did Joanna feel on October 25, 2022 about seeing her characters come alive on the big screen?",
+    "qa_answer": "surreal and cool",
+    "qa_response": "Joanna felt surreal and satisfied.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_180": {
+    "qa_question": "What type of diet do Nate's turtles have?",
+    "qa_answer": "combination of vegetables, fruits, and insects",
+    "qa_response": "vegetables, fruits, and insects.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_181": {
+    "qa_question": "What ingredient did Nate use to make the ice cream lactose-free?",
+    "qa_answer": "coconut milk",
+    "qa_response": "coconut milk",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_182": {
+    "qa_question": "What did Joanna find in old notebooks last week that prompted her to reflect on her progress as a writer?",
+    "qa_answer": "early writings",
+    "qa_response": "Joanna found her early writings.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_183": {
+    "qa_question": "What game is Nate currently playing and recommends to others on November 7, 2022?",
+    "qa_answer": "\"Xenoblade Chronicles\"",
+    "qa_response": "'Xeonoblade Chronicles'",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_184": {
+    "qa_question": "What did Joanna receive from her brother that brought back childhood memories?",
+    "qa_answer": "a handwritten letter",
+    "qa_response": "cute notes",
+    "qa_category": 4,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "1_185": {
+    "qa_question": "What is the type of game \"Xenoblade Chronicles\" that Nate is playing?",
+    "qa_answer": "fantasy RPG",
+    "qa_response": "fantasy RPG",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_186": {
+    "qa_question": "What dish did Nate make on 9 November, 2022?",
+    "qa_answer": "Homemade coconut ice cream",
+    "qa_response": "homemade coconut ice cream",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_187": {
+    "qa_question": "What project is Joanna working on in her notebook on November 9, 2022?",
+    "qa_answer": "A suspenseful thriller set in a small Midwestern town",
+    "qa_response": "The memories do not mention any specific project in Joanna's notebook on November 9, 2022. The closest relevant memory from Joanna on that date states: \"Joanna is currently focused on her writing and hopes for some good news soon.\" There is no mention of a notebook or a specific project in that entry.\n\nTherefore, the answer is: No specific project mentioned.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_188": {
+    "qa_question": "What is Nate creating for YouTube on 9 November, 2022?",
+    "qa_answer": "gaming content",
+    "qa_response": "gaming content",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_189": {
+    "qa_question": "What inspired Nate to start making gaming videos?",
+    "qa_answer": "Love of gaming and connecting with others who enjoy it too",
+    "qa_response": "Nate's love of gaming.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_190": {
+    "qa_question": "What new content is Nate creating for YouTube?",
+    "qa_answer": "Gaming videos",
+    "qa_response": "Gaming content.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_191": {
+    "qa_question": "What advice does Joanna give to Nate about making YouTube videos?",
+    "qa_answer": "Watch other people's videos to understand what the audience likes",
+    "qa_response": "The provided memories do not contain any information about Joanna giving Nate advice about making YouTube videos. Therefore, the answer is:\n\nNo advice given.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_192": {
+    "qa_question": "What did Joanna take a picture of near Fort Wayne last summer?",
+    "qa_answer": "Sunset",
+    "qa_response": "sunset on a hike",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_193": {
+    "qa_question": "What inspired Joanna to take a picture of the sunset in the field near Fort Wayne?",
+    "qa_answer": "The incredible sunset and surrounding beauty",
+    "qa_response": "The answer is: nature's beauty.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_194": {
+    "qa_question": "Why did Nate get a third turtle?",
+    "qa_answer": "He saw another one at a pet store and wanted to get it",
+    "qa_response": "Nate saw one at a pet store.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_195": {
+    "qa_question": "What does Nate want to do when he goes over to Joanna's place?",
+    "qa_answer": "Watch one of Joanna's movies together or go to the park",
+    "qa_response": "set up a similar space",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_196": {
+    "qa_question": "What did Nate take to the beach in Tampa?",
+    "qa_answer": "turtles",
+    "qa_response": "Nate took his turtles to the beach in Tampa.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_197": {
+    "qa_question": "What does Nate love most about having turtles?",
+    "qa_answer": "They make him feel calm and don't require much looking after",
+    "qa_response": "Nate loves turtles for joy and peace.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_198": {
+    "qa_question": "What did Nate share a photo of as a part of his experimentation in November 2022?",
+    "qa_answer": "colorful bowls of coconut milk ice cream",
+    "qa_response": "colorful bowls of coconut milk ice cream.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_199": {
+    "qa_question": "What color did Joanna choose for her hair?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Joanna's hair color. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_200": {
+    "qa_question": "What is Joanna's favorite movie trilogy?",
+    "qa_answer": "",
+    "qa_response": "The Lord of the Rings.",
+    "qa_category": 5,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_201": {
+    "qa_question": "What is Joanna's favorite book series about?",
+    "qa_answer": "",
+    "qa_response": "Joanna's favorite book series is about magical adventure.",
+    "qa_category": 5,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_202": {
+    "qa_question": "What kind of lighting does Joanna's gaming room have?",
+    "qa_answer": "",
+    "qa_response": "The memories do not provide information about the lighting in Joanna's gaming room. \n\nAnswer: Unknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_203": {
+    "qa_question": "What game was the second tournament that Joanna won based on?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Joanna winning a second tournament or the game it was based on. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_204": {
+    "qa_question": "What is Nate's third screenplay about?",
+    "qa_answer": "",
+    "qa_response": "Nate's third screenplay is a suspenseful thriller set in a small Midwestern town. \n\n(Answer derived from Nate's memory at \"5:54 pm on 9 November, 2022\")",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_205": {
+    "qa_question": "What type of movies does Nate hate watching the most?",
+    "qa_answer": "",
+    "qa_response": "Based on the memories provided, there is no information about what type of movies Nate hates watching the most. The memories only mention his preferences for action, sci-fi, and movies in general.\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_206": {
+    "qa_question": "What genre is Joanna's first novella?",
+    "qa_answer": "",
+    "qa_response": "The memories do not specify the genre of Joanna's first novella. \n\nAnswer: Unknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_207": {
+    "qa_question": "What are Nate's plans for his finished screenplay in January 2022?",
+    "qa_answer": "",
+    "qa_response": "There is no information about Nate's plans for a finished screenplay in January 2022 in the provided memories. The earliest memory is from 15 April 2022. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_208": {
+    "qa_question": "For how long has Nate had his snakes?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Nate having snakes; they only mention turtles. \n\nAnswer: No snakes mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_209": {
+    "qa_question": "What did Nate think of the caramel ice cream he made?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Nate making or thinking about caramel ice cream. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_210": {
+    "qa_question": "What flavor of cake did Nate make for his friend on 25 February, 2022?",
+    "qa_answer": "",
+    "qa_response": "The flavor of cake Nate made for his friend on 25 February, 2022 is not mentioned in the memories. The memories only mention that Nate made ice cream for his friend on that date. \n\nAnswer: Not specified.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_211": {
+    "qa_question": "What was Nate's audition for?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"a writing gig.\" \n\n(From Nate's memory on 24 March 2022: \"Joanna had an audition for a writing gig...\")",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_212": {
+    "qa_question": "Why did Joanna choose the hair color she did?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Joanna's hair color or why she chose it. Therefore, the answer is:\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_213": {
+    "qa_question": "What are the main ingredients of the ice cream recipe shared by Joanna?",
+    "qa_answer": "",
+    "qa_response": "The main ingredients of the ice cream recipe shared by Joanna are blueberries, coconut milk, and a gluten-free crust. \n\n(Answer derived from the memory: \"11:15 am on 6 October, 2022: Joanna enjoys making a delicious dessert with blueberries, coconut milk, and a gluten-free crust, describing it as creamy and delicious.\")",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_214": {
+    "qa_question": "What is Nate's project called in the writers group?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"a suspenseful thriller\". \n\n(From Nate's memory at \"5:54 pm on 9 November, 2022\")",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_215": {
+    "qa_question": "Which activity helps Nate escape and numbs his mind?",
+    "qa_answer": "",
+    "qa_response": "Playing video games.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_216": {
+    "qa_question": "What filling did Nate use in the cake he made recently in May 2022?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Nate making a cake in May 2022. The most recent cake mentioned by Nate was on 7 February 2022 with berries. \n\nAnswer: No recent May cake.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_217": {
+    "qa_question": "Who did Joanna plan to invite to her gaming party in June 2022?",
+    "qa_answer": "",
+    "qa_response": "friends from tournaments and old teammates",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_218": {
+    "qa_question": "What special items did Joanna get for everyone at her gaming party?",
+    "qa_answer": "",
+    "qa_response": "custom controller decorations",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_219": {
+    "qa_question": "What supervillain is Joanna a fan of?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention any specific supervillain that Joanna is a fan of. \n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_220": {
+    "qa_question": "Which superhero toy figure does Joanna share a photo of?",
+    "qa_answer": "",
+    "qa_response": "Spider-Man.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_221": {
+    "qa_question": "What did Joanna make and share with her vegan diet group?",
+    "qa_answer": "",
+    "qa_response": "Based on the memories, Joanna made and shared **dairy-free chocolate cake**.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_222": {
+    "qa_question": "How many people attended the gaming party hosted by Joanna in June 2022?",
+    "qa_answer": "",
+    "qa_response": "The memories do not specify the exact number of attendees at Joanna's gaming party in June 2022. \n\nAnswer: Unknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_223": {
+    "qa_question": "Where did Nate go for a road trip for research?",
+    "qa_answer": "",
+    "qa_response": "There is no memory of Nate taking a road trip for research. The answer is \"No road trip for research.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_224": {
+    "qa_question": "What did Joanna discover at the museum in Woodhaven?",
+    "qa_answer": "",
+    "qa_response": "Joanna did not discover anything at the museum in Woodhaven; she found a book at the library. \n\n(Note: The memories mention Joanna visiting the library in Woodhaven and finding a book, but there is no mention of a museum.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_225": {
+    "qa_question": "What specific themes are explored in Nate's new book?",
+    "qa_answer": "",
+    "qa_response": "suspenseful thriller in Midwestern town",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_226": {
+    "qa_question": "How did Nate feel when someone wrote him a letter after reading his blog post?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Nate receiving a letter after someone read his blog post. The letters mentioned were received by Joanna, not Nate.\n\nAnswer: No relevant memories found.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_227": {
+    "qa_question": "What kind of impact does Joanna hope to have with her painting?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention anything about Joanna's painting or the impact she hopes to have with it. The memories focus on her writing, inspiration, and creative process, but not painting.\n\nAnswer: No information about painting.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_228": {
+    "qa_question": "What did Nate share with his writers group in August 2022?",
+    "qa_answer": "",
+    "qa_response": "The question asks about Nate sharing something with his writers group in August 2022. However, after examining all the memories from both Joanna and Nate, there is no mention of Nate sharing anything with a writers group in August 2022. The only relevant memory in August 2022 is from Joanna, where she shared her book with her writers group, not Nate.\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_229": {
+    "qa_question": "How did Nate celebrate after sharing his book with a writers group?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Nate sharing a book with a writers group. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_230": {
+    "qa_question": "How did Joanna celebrate winning the international tournament?",
+    "qa_answer": "",
+    "qa_response": "The memories do not contain any information about Joanna winning an international tournament. The only mention of an international tournament is from Nate's memory, which states \"Nate won an international tournament on an unspecified date.\" \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_231": {
+    "qa_question": "What substitution does Nate suggest for sugar in dairy-free baking?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Nate suggesting a substitution for sugar in dairy-free baking. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_232": {
+    "qa_question": "What type of show did Joanna host where she taught vegan ice cream recipes?",
+    "qa_answer": "",
+    "qa_response": "The memories do not indicate that Joanna hosted a show. Instead, Nate has a cooking show where he teaches vegan ice cream recipes. \n\nAnswer: Nate hosted the show.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_233": {
+    "qa_question": "What is Joanna's favorite dish from the cooking show she hosted?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Joanna hosting a cooking show or a favorite dish from such a show. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_234": {
+    "qa_question": "What dessert did Nate share a photo of that has an almond flour crust, chocolate ganache, and fresh raspberries?",
+    "qa_answer": "",
+    "qa_response": "chocolate raspberry tart",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_235": {
+    "qa_question": "What two main ingredients are part of the dessert Nate shared a photo of with blueberries, coconut milk, and a gluten-free crust?",
+    "qa_answer": "",
+    "qa_response": "The two main ingredients are blueberries and coconut milk.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_236": {
+    "qa_question": "What movie did Joanna recently watch and enjoy on October 6, 2022?",
+    "qa_answer": "",
+    "qa_response": "Little Women.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_237": {
+    "qa_question": "What did Nate make for one of the ladies at his writing club?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"a bookmark.\" \n\n(From Joanna's memory at \"11:15 am on 6 October, 2022: Joanna finished a cute little bookmark for one of the ladies at her writing club.\") \n\nNote: While Nate created something for Joanna (as per his memory at the same timestamp), the question specifically asks about \"one of the ladies at his writing club,\" which refers to Joanna's action, not Nate's. Nate did not make something for \"one of the ladies\" in the provided memories; Joanna did. If the question was about what Nate made for Joanna, the answer would differ. \n\nClarification: If the question was intended to refer to Nate's creations for others (not Joanna), the memories do not contain evidence of him making something for \"one of the ladies at his writing club.\" The only relevant creation is Joanna's bookmark. \n\nLet me know if you'd like to refine the question or context!",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_238": {
+    "qa_question": "What game has Joanna been playing nonstop with a futuristic setting and gameplay on October 9, 2022?",
+    "qa_answer": "",
+    "qa_response": "Cyberpunk 2077",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_239": {
+    "qa_question": "How did Nate describe the classic movie he watched?",
+    "qa_answer": "",
+    "qa_response": "\ngreat, praising acting and story.",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_240": {
+    "qa_question": "What does Nate recommend to make a living room comfy like his?",
+    "qa_answer": "",
+    "qa_response": "Weighted blanket, dimmable lights, fluffy couch.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_241": {
+    "qa_question": "What helps Joanna stay distracted and brings her sadness?",
+    "qa_answer": "",
+    "qa_response": "Writing about sadness and loss.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_242": {
+    "qa_question": "What does Nate do while he writes?",
+    "qa_answer": "",
+    "qa_response": "The memories do not provide information about what Nate does while he writes. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_243": {
+    "qa_question": "What does Nate do after receiving a rejection from a production company?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Nate receiving a rejection from a production company. Therefore, I cannot answer the question based on the given memories. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_244": {
+    "qa_question": "What does Joanna rely on for cheer and joy?",
+    "qa_answer": "",
+    "qa_response": "Writing and friends.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_245": {
+    "qa_question": "What does Nate use to remember his dog from Michigan?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"Nothing.\" \n\n(There is no mention in the memories of Nate having a dog from Michigan or using anything to remember such a dog.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_246": {
+    "qa_question": "What inspires Joanna to create music for her characters?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Joanna creating music for her characters. The memories focus on her writing, drawing inspiration from nature, personal experiences, and self-discovery. Therefore, there is no information available to answer the question about what inspires her to create music for her characters.\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_247": {
+    "qa_question": "What type of diet do Joanna's turtles have?",
+    "qa_answer": "",
+    "qa_response": "Joanna doesn't have turtles.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_248": {
+    "qa_question": "What did Nate find in old notebooks last week that prompted him to reflect on her progress as a writer?",
+    "qa_answer": "",
+    "qa_response": "Joanna's early writings.",
+    "qa_category": 5,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_249": {
+    "qa_question": "What game is Joanna currently playing and recommends to others on November 7, 2022?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention any specific game Joanna is currently playing or recommending on November 7, 2022. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_250": {
+    "qa_question": "What did Nate receive from his brother that brought back childhood memories?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Nate receiving something from his brother that brought back childhood memories. Therefore, the answer is:\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_251": {
+    "qa_question": "What is the type of game \"Xenoblade Chronicles\" that Joanna is playing?",
+    "qa_answer": "",
+    "qa_response": "The type of game \"Xenoblade Chronicles\" is a fantasy RPG. \n\n(Note: The answer is based on the memories from both users mentioning it as a \"fantasy RPG\".)",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_252": {
+    "qa_question": "What project is Nate working on in his notebook on November 9, 2022?",
+    "qa_answer": "",
+    "qa_response": "suspenseful thriller",
+    "qa_category": 5,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_253": {
+    "qa_question": "What is Joanna creating for YouTube on 9 November, 2022?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Joanna creating anything for YouTube on 9 November, 2022. \n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_254": {
+    "qa_question": "What inspired Joanna to start making gaming videos?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Joanna being inspired to start making gaming videos. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_255": {
+    "qa_question": "What new content is Nate creating for television?",
+    "qa_answer": "",
+    "qa_response": "Nate is not creating content for television.  \n\n(Note: The memories only mention Nate creating gaming content for YouTube, not television.)",
+    "qa_category": 5,
+    "labels": []
+  }
+}

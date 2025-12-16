@@ -1,0 +1,3351 @@
+{
+  "0_0": {
+    "qa_question": "What are John's suspected health problems?",
+    "qa_answer": "Obesity",
+    "qa_response": "None mentioned.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_1": {
+    "qa_question": "Which recreational activity was James pursuing on March 16, 2022?",
+    "qa_answer": "bowling",
+    "qa_response": "The memories do not contain any information about James's recreational activities on March 16, 2022. \n\nAnswer: No information available.",
+    "qa_category": 2,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_2": {
+    "qa_question": "Which places or events have John and James planned to meet at?",
+    "qa_answer": "VR Club, McGee's, baseball game",
+    "qa_response": "1. Volunteering opportunity over the weekend (19 June 2022)\n2. Gaming tournament for children's hospital (31 October 2022)\n3. Meeting up for a beer (26 August 2022)",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_3": {
+    "qa_question": "Do both James and John have pets?",
+    "qa_answer": "No",
+    "qa_response": "James: yes  \nJohn: no",
+    "qa_category": 1,
+    "labels": [
+      "1.2"
+    ]
+  },
+  "0_4": {
+    "qa_question": "When did John resume playing drums in his adulthood?",
+    "qa_answer": "February 2022",
+    "qa_response": "August 2022. \n\n(From John's memory at \"6:02 pm on 18 September, 2022: John has been playing the drums for a month.\" Calculating back one month from September 18, 2022, gives August 2022.)",
+    "qa_category": 2,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_5": {
+    "qa_question": "What are John and James' favorite games?",
+    "qa_answer": "John's favorite game is CS:GO, and James's is Apex Legends.",
+    "qa_response": "John's favorite game is CS:GO. James' favorite game is Apex Legends.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_6": {
+    "qa_question": "Does James live in Connecticut?",
+    "qa_answer": "Likely yes",
+    "qa_response": "No.",
+    "qa_category": 3,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_7": {
+    "qa_question": "In which state is the shelter from which James adopted the puppy?",
+    "qa_answer": "Connecticut.",
+    "qa_response": "The shelter is in Stamford. \n\n(Note: Stamford is a city in Connecticut, but since the question asks for the state and the memories only mention \"Stamford,\" the answer is based solely on the provided information.)",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_8": {
+    "qa_question": "How many pets does James have?",
+    "qa_answer": "Three dogs.",
+    "qa_response": "3 dogs.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_9": {
+    "qa_question": "What are the names of James's dogs?",
+    "qa_answer": "Ned, Daisy, Max",
+    "qa_response": "The names of James's dogs are Daisy, Max, and Ned.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_10": {
+    "qa_question": "When did James adopt Ned?",
+    "qa_answer": "first week of April 2022",
+    "qa_response": "The most recent memory indicating when James adopted Ned is from \"9:18 pm on 26 August, 2022,\" which states that he adopted Ned \"last week.\" \n\nCalculating \"last week\" from 26 August 2022:\n- 26 August 2022 minus 7 days = 19 August 2022\n\nAnswer: 19 August 2022",
+    "qa_category": 2,
+    "labels": [
+      "3.2"
+    ]
+  },
+  "0_11": {
+    "qa_question": "How was John feeling on April 10, 2022?",
+    "qa_answer": "seeking solitude",
+    "qa_response": "To determine how John was feeling on April 10, 2022, we look for memories from John around that date. The closest memory is from April 12, 2022, where John is described as a big video game fan who enjoys them to relax after a long day. However, there is no specific memory from April 10, 2022. \n\nAnswer: No data available.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_12": {
+    "qa_question": "Did James have a girlfriend during April 2022?",
+    "qa_answer": "Presumably not",
+    "qa_response": "No. \n\n(Explanation: The earliest mention of James having a girlfriend is on 4 September 2022, when he asked Samantha to be his girlfriend. There is no evidence in the memories that he had a girlfriend in April 2022.)",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_13": {
+    "qa_question": "When did James visit Italy?",
+    "qa_answer": "In 2021",
+    "qa_response": "2021.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_14": {
+    "qa_question": "When did James buy himself a new adventure book?",
+    "qa_answer": "April 26, 2022",
+    "qa_response": "The memories do not mention James buying a new adventure book. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 2,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "0_15": {
+    "qa_question": "When did James start playing Civilization VI?",
+    "qa_answer": "March 2022",
+    "qa_response": "1 September, 2022.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_16": {
+    "qa_question": "What is the game with different colored cards that was John talking about with James?",
+    "qa_answer": "UNO",
+    "qa_response": "The game is a card game with multi-colored cards and numbers.  \n\nAnswer: multi-colored card game",
+    "qa_category": 3,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "0_17": {
+    "qa_question": "What is the board game where you have to find the imposter that John mentions to James?",
+    "qa_answer": "Mafia",
+    "qa_response": "The board game is \"Dungeons of the Dragon.\"",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_18": {
+    "qa_question": "Which books has John recommended to James?",
+    "qa_answer": "The Name of the Wind, Stormlight Archive, Kingkiller Chronicles, Expanse",
+    "qa_response": "\"The Expanse\"",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_19": {
+    "qa_question": "Was James feeling lonely before meeting Samantha?",
+    "qa_answer": "Most likely yes, because he mentioned that the only creatures that gave him joy are dogs and he was actively trying to date.",
+    "qa_response": "No.  \n\n(Evidence: James had a close bond with his sister and dogs, met other girls, and had friends before meeting Samantha.)",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_20": {
+    "qa_question": "How many charity tournaments has John organized till date?",
+    "qa_answer": "two",
+    "qa_response": "2.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_21": {
+    "qa_question": "When did John first organize a charity tournament with his friends?",
+    "qa_answer": "May 7, 2022",
+    "qa_response": "The earliest mention of John organizing a charity tournament is from \"5:00 pm on 11 May, 2022.\" \n\nAnswer: 11 May 2022.",
+    "qa_category": 2,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "0_22": {
+    "qa_question": "Who or which organizations have been the beneficiaries of John's charity tournaments?",
+    "qa_answer": "animal shelter, homeless, children's hospital",
+    "qa_response": "The beneficiaries are a children's hospital and a local dog shelter.",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_23": {
+    "qa_question": "When will John start his new job?",
+    "qa_answer": "In July, 2022",
+    "qa_response": "July 2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_24": {
+    "qa_question": "What kind of games has James tried to develop?",
+    "qa_answer": "football simulator, virtual world inspired by Witcher 3",
+    "qa_response": "Strategy game, 2D adventure game.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_25": {
+    "qa_question": "Are John and James fans of the same football team?",
+    "qa_answer": "No, James is a Liverpool fan and John is a Manchester City fan.",
+    "qa_response": "No.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_26": {
+    "qa_question": "Which countries has James visited?",
+    "qa_answer": "Italy, Mexico, Turkey, Canada, Greenland",
+    "qa_response": "Italy, Turkey, Mexico, Nuuk.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_27": {
+    "qa_question": "What kind of classes has James joined?",
+    "qa_answer": "game design course, cooking classes",
+    "qa_response": "- Cooking class (4 September 2022)\n- Gaming and programming course (13 June 2022)\n\nAnswer: Cooking and gaming-programming classes.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_28": {
+    "qa_question": "When did James volunteer at an organization?",
+    "qa_answer": "May 2022",
+    "qa_response": "May 2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_29": {
+    "qa_question": "When did James depart for his trip to Canada?",
+    "qa_answer": "July 11, 2022",
+    "qa_response": "11 July 2022",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_30": {
+    "qa_question": "Which country did James book tickets for in July 2022?",
+    "qa_answer": "Canada",
+    "qa_response": "The answer is Canada. \n\n(From James' memory: \"5:13 pm on 9 July, 2022: James bought air tickets to Toronto and is leaving the day after tomorrow evening.\" and \"5:13 pm on 9 July, 2022: James plans to visit Vancouver during his trip to Canada...\")",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_31": {
+    "qa_question": "How many days did James plan to spend on his trip in Canada?",
+    "qa_answer": "19 days",
+    "qa_response": "To determine how many days James planned to spend on his trip in Canada, let's analyze the relevant memories:\n\n1. James bought air tickets to Toronto and is leaving \"the day after tomorrow evening\" on 9 July 2022 (so departure is 11 July 2022 evening).\n2. James planned to return from his trip on 20 July 2022 (as per both users' memories).\n\nCalculation:\n- Departure: 11 July (evening)\n- Return: 20 July\n- Duration: 20 - 11 = 9 days\n\nAnswer: 9 days",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_32": {
+    "qa_question": "Where was James at on July 12, 2022?",
+    "qa_answer": "Toronto, Canada",
+    "qa_response": "Based on the memories, James was in Toronto on July 12, 2022. \n\n(Calculation: He left for Toronto on July 11 evening (day after tomorrow from July 9) and planned to return on July 20.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_33": {
+    "qa_question": "Did John and James study together?",
+    "qa_answer": "Yes",
+    "qa_response": "No.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_34": {
+    "qa_question": "Which countries did James visit in July 2022?",
+    "qa_answer": "Canada, Greenland",
+    "qa_response": "Based on the memories, James visited Canada and Nuuk (Greenland) in July 2022. \n\nAnswer: Canada and Nuuk.",
+    "qa_category": 1,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_35": {
+    "qa_question": "What additional country did James visit during his trip to Canada?",
+    "qa_answer": "Greenland",
+    "qa_response": "Nuuk.",
+    "qa_category": 3,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_36": {
+    "qa_question": "Who is Jill?",
+    "qa_answer": "Most likely John's partner.",
+    "qa_response": "Jill is John's partner.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_37": {
+    "qa_question": "When did John spend time with his sister and dogs?",
+    "qa_answer": "July 21, 2022",
+    "qa_response": "Based on the provided memories, there is no record of John spending time with his sister and dogs. The memories mention John's interactions with his siblings and his appreciation for dogs, but no specific instance of him spending time with both his sister and dogs together is recorded.\n\nAnswer: No record found.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_38": {
+    "qa_question": "What happened to John's job situation in 2022?",
+    "qa_answer": "quit his IT Job, secured his dream job, aspires to become an eSports competition organizer",
+    "qa_response": "John left his IT job for gaming.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_39": {
+    "qa_question": "When did John start his job in IT?",
+    "qa_answer": "2019",
+    "qa_response": "To determine when John started his job in IT, we can use the memory from both users that mentions he left his IT job after three years on 6 August 2022. \n\nCalculation:\n- If he left on 6 August 2022 after 3 years, then he started in 2019.\n\nAnswer: 2019",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_40": {
+    "qa_question": "What kind of tricks do James's pets know?",
+    "qa_answer": "swimming, catching frisbees, balancing on a skateboard, sit, stay, paw, and rollover",
+    "qa_response": "The memories do not specify the exact tricks James's pets know. \n\nAnswer: Tricks not specified.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_41": {
+    "qa_question": "When did James meet Samantha?",
+    "qa_answer": "August 9, 2022",
+    "qa_response": "10 August, 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_42": {
+    "qa_question": "When did James take his 3 dogs to the beach?",
+    "qa_answer": "August 9, 2022",
+    "qa_response": "The memories do not provide a specific timestamp for when James took all three dogs to the beach. \n\nAnswer: No specific date found.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_43": {
+    "qa_question": "When did John plan his next meeting with his siblings?",
+    "qa_answer": "In September, 2022",
+    "qa_response": "September 2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_44": {
+    "qa_question": "Why didn't John want to go to Starbucks?",
+    "qa_answer": "Possibly because he likes to drink beer on his days off.",
+    "qa_response": "John prefers beer over coffee.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "0_45": {
+    "qa_question": "What kind of beer does McGee's bar serve?",
+    "qa_answer": "Stout, lager",
+    "qa_response": "The answer is: lager beer. \n\nThis is based on the memory from both James and John at \"9:23 pm on 4 September, 2022,\" where it is mentioned that Samantha loves a good lager beer at McGee's bar.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_46": {
+    "qa_question": "When did John and James meet at McGee's bar?",
+    "qa_answer": "August 27, 2022",
+    "qa_response": "4 September, 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_47": {
+    "qa_question": "When did James ask Samantha to be his girlfriend?",
+    "qa_answer": "September 3, 2022",
+    "qa_response": "4 September, 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_48": {
+    "qa_question": "When did James, Samantha and John go to the baseball game together?",
+    "qa_answer": "September 11, 2022",
+    "qa_response": "The baseball game was on 11 September 2022. \n\n(Calculated from \"next Sunday\" mentioned in the 4 September 2022 memory.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_49": {
+    "qa_question": "What gaming equipments did John buy or refurbish?",
+    "qa_answer": "Sennheiser headphones, Logitech mouse, gaming desk",
+    "qa_response": "John bought new devices, refurbished gaming desk, and Logitech mouse.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "0_50": {
+    "qa_question": "When did James start taking cooking classes?",
+    "qa_answer": "September 2, 2022",
+    "qa_response": "2 September, 2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_51": {
+    "qa_question": "Which new games did John start play during the course of the conversation with James?",
+    "qa_answer": "AC Valhalla, Witcher 3, FIFA 23, Dungeons of the Dragons, futuristic dystopian game",
+    "qa_response": "\"The Witcher 3, RPGs, strategy games.\"",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_52": {
+    "qa_question": "When did John start working on his 2D Adventure mobile game?",
+    "qa_answer": "approximately summer of 2022",
+    "qa_response": "Based on the memories, John started working on his 2D adventure mobile game \"for the past few months\" from the timestamp \"8:56 pm on 20 September, 2022.\" \n\nCalculating \"a few months\" prior to September 2022 would place the start around mid-2022 (approximately June-July 2022). \n\nThe answer is: **mid-2022**.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_53": {
+    "qa_question": "How long did it take for James to complete his Witcher-inspired game?",
+    "qa_answer": "six months",
+    "qa_response": "The memories do not provide specific information about the duration it took James to complete his Witcher-inspired game. \n\nAnswer: No duration specified.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_54": {
+    "qa_question": "What kind of programming-related events has John hosted?",
+    "qa_answer": "online programming competition, programming seminar",
+    "qa_response": "- Online competition (October 2022)  \n- Gaming tournament (October 2022)  \n- Programming seminar (October 2022)  \n- CS:GO tournament (May 2022)  \n\nAnswer: Online competitions, gaming tournaments, seminars.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_55": {
+    "qa_question": "When did John and his programming friends host an online programming competition?",
+    "qa_answer": "Last week before 13 October 2022.",
+    "qa_response": "The online programming competition was hosted on 6 October, 2022. \n\n(Calculated from \"last week\" in the 13 October, 2022 memory.)",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_56": {
+    "qa_question": "Which of James's family members have visited him in the last year?",
+    "qa_answer": "mother, sister",
+    "qa_response": "James's mother.",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "0_57": {
+    "qa_question": "When did James' mother and her friend visit him?",
+    "qa_answer": "October 19, 2022",
+    "qa_response": "19 October, 2022. \n\n(Calculated from the memory timestamp \"7:36 pm on 21 October, 2022\" which states the visit happened \"two days ago\". 21 October minus 2 days = 19 October.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_58": {
+    "qa_question": "When did James try Cyberpunk 2077 game?",
+    "qa_answer": "October 20, 2022",
+    "qa_response": "20 October 2022",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_59": {
+    "qa_question": "When did John and his gaming friends organize the charity tournament?",
+    "qa_answer": "On the night of October 30 to 31, 2022",
+    "qa_response": "31 October, 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "0_60": {
+    "qa_question": "What games has John played with his friends at charity tournaments?",
+    "qa_answer": "CS:GO, Fortnite, Overwatch and Apex Legends",
+    "qa_response": "Fortnite and CS:GO.",
+    "qa_category": 1,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "0_61": {
+    "qa_question": "What was James' big moment with Samantha in October 2023?",
+    "qa_answer": "They decided to live together and rented an apartment not far from McGee's bar.",
+    "qa_response": "There is no information about James' big moment with Samantha in October 2023 in the provided memories. The latest memory is from 7 November 2022. \n\nAnswer: No information available.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_62": {
+    "qa_question": "How long did James and Samantha date for before deciding to move in together?",
+    "qa_answer": "nearly three months",
+    "qa_response": "To determine how long James and Samantha dated before deciding to move in together, we need to find the dates when they started dating and when they decided to move in together.\n\n1. **Started Dating**: \n   - Memory from both James and John: \"9:23 pm on 4 September, 2022: James asked Samantha to become his girlfriend at the theater, and she agreed.\"\n   - This indicates they started dating on **4 September 2022**.\n\n2. **Decided to Move In Together**:\n   - Memory from both James and John: \"12:37 am on 31 October, 2022: James has decided to move in with Samantha.\"\n   - This indicates they decided to move in together on **31 October 2022**.\n\n3. **Duration**:\n   - From 4 September 2022 to 31 October 2022 is **1 month and 27 days**.\n\nAnswer: 1 month, 27 days.",
+    "qa_category": 2,
+    "labels": [
+      "3.2"
+    ]
+  },
+  "0_63": {
+    "qa_question": "When did James, his family and his dogs start on a road trip together?",
+    "qa_answer": "November 4, 2022",
+    "qa_response": "7 November 2022",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_64": {
+    "qa_question": "How long did John practice chess for before winning the chess tournament?",
+    "qa_answer": "nearly four months",
+    "qa_response": "3 months.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_65": {
+    "qa_question": "When did James and his family visit Mark and Josh?",
+    "qa_answer": "November 7, 2022",
+    "qa_response": "7 November 2022",
+    "qa_category": 2,
+    "labels": []
+  },
+  "0_66": {
+    "qa_question": "When did John work with a game developer on a project?",
+    "qa_answer": "November 5-6, 2022",
+    "qa_response": "7 November 2022",
+    "qa_category": 2,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "0_67": {
+    "qa_question": "What programming languages has James worked with?",
+    "qa_answer": "Python and C++",
+    "qa_response": "Python and C++.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_68": {
+    "qa_question": "What type of mobile application does James plan to build with John?",
+    "qa_answer": "An app for dog walking and pet care",
+    "qa_response": "dog walking and pet care",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_69": {
+    "qa_question": "How does James plan to make his dog-sitting app unique?",
+    "qa_answer": "By allowing users to customize their pup's preferences/needs",
+    "qa_response": "James will customize it for each owner and pup.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_70": {
+    "qa_question": "What has John mostly found with the metal detector so far?",
+    "qa_answer": "bottle caps",
+    "qa_response": "bottle caps",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_71": {
+    "qa_question": "What did James offer to do for John regarding pets?",
+    "qa_answer": "help find the perfect pet",
+    "qa_response": "The memories do not contain any information about James offering to do something for John regarding pets. \n\nAnswer: No information found.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_72": {
+    "qa_question": "What instrument is John learning to play as of 27 March, 2022?",
+    "qa_answer": "Drums",
+    "qa_response": "The instrument John is learning to play as of 27 March, 2022 is the drums. \n\nAnswer: drums.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_73": {
+    "qa_question": "How long has John been playing the drums as of 27 March, 2022?",
+    "qa_answer": "One month",
+    "qa_response": "Based on the memory from James at \"12:40 am on 27 March, 2022: John has been playing drums for a month,\" the answer is:\n\n1 month.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_74": {
+    "qa_question": "What game did John play in an intense tournament at the gaming convention in March 2022?",
+    "qa_answer": "CS:GO",
+    "qa_response": "CS:GO.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_75": {
+    "qa_question": "What game was James playing in the online gaming tournament in April 2022?",
+    "qa_answer": "Apex Legends",
+    "qa_response": "Apex Legends.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_76": {
+    "qa_question": "How does James communicate with his gaming team?",
+    "qa_answer": "voice chat",
+    "qa_response": "voice chat",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_77": {
+    "qa_question": "What advice did James receive from the famous players he met at the tournament?",
+    "qa_answer": "never put your ego above team success",
+    "qa_response": "gaming tips",
+    "qa_category": 4,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "0_78": {
+    "qa_question": "What did James adopt in April 2022?",
+    "qa_answer": "a pup",
+    "qa_response": "The answer is \"a puppy named Ned.\" \n\nHere's the step-by-step reasoning:\n1. The question asks what James adopted in April 2022.\n2. Looking at James's memories, the relevant memory is: \"9:52 am on 12 April, 2022: James feels that his days have been much happier since adopting Ned.\"\n3. This confirms that in April 2022, James adopted Ned, who is a puppy (as confirmed by other memories mentioning Ned as a puppy).\n4. No contradictory information exists in the memories for this timeframe.\n\nAnswer: a puppy named Ned",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_79": {
+    "qa_question": "What is the name of the pup that was adopted by James?",
+    "qa_answer": "Ned",
+    "qa_response": "The name of the pup adopted by James is Ned.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_80": {
+    "qa_question": "Why did James embody the appearance of the game character from the woman he saw during a walk?",
+    "qa_answer": "He found her appearance and eyes amazing.",
+    "qa_response": "James was infatuated with her.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_81": {
+    "qa_question": "What inspired James to create the game character in the virtual world?",
+    "qa_answer": "Appearance of a woman he saw during a walk",
+    "qa_response": "A stranger encountered during a walk.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_82": {
+    "qa_question": "Which country did James visit in 2021?",
+    "qa_answer": "Italy",
+    "qa_response": "Italy.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_83": {
+    "qa_question": "What impresses John about Japan?",
+    "qa_answer": "Technologically advanced megacities and tasty street food",
+    "qa_response": "The megacities, technological advancements, and huge screens.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_84": {
+    "qa_question": "What kind of assignment was giving John a hard time at work?",
+    "qa_answer": "Coding assignment",
+    "qa_response": "The difficult coding project.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_85": {
+    "qa_question": "What breed is Daisy, one of James' dogs?",
+    "qa_answer": "Labrador",
+    "qa_response": "Labrador.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_86": {
+    "qa_question": "What type of pizza is James' favorite?",
+    "qa_answer": "Pepperoni",
+    "qa_response": "James' favorite pizza is pepperoni.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_87": {
+    "qa_question": "What type of pizza is John's favorite?",
+    "qa_answer": "Hawaiian",
+    "qa_response": "Hawaiian pizza.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_88": {
+    "qa_question": "What did John organize with his friends on May 8, 2022?",
+    "qa_answer": "A tournament for CS:GO",
+    "qa_response": "The memories indicate that on May 8, 2022, John was organizing something with his friends, but there is no specific event mentioned for that exact date. The closest related event is the CS:GO tournament for charity, which was mentioned as a past event on May 11, 2022. \n\nAnswer: CS:GO tournament for charity.",
+    "qa_category": 4,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "0_89": {
+    "qa_question": "What did John and his friends do with the remaining money after helping the dog shelter?",
+    "qa_answer": "Bought groceries and cooked food for the homeless",
+    "qa_response": "bought groceries for homeless",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_90": {
+    "qa_question": "What was the main goal of the money raised from the charity tournament organized by John and his friends in May 2022?",
+    "qa_answer": "Raise money for a dog shelter",
+    "qa_response": "The main goal was to support a local dog shelter.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_91": {
+    "qa_question": "What did the system John created help the charitable foundation with?",
+    "qa_answer": "tracking inventory, resources, and donations",
+    "qa_response": "The answer is: \"streamlined their operations.\"",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_92": {
+    "qa_question": "What did John create for the charitable foundation that helped generate reports for analysis?",
+    "qa_answer": "computer application on smartphones",
+    "qa_response": "software tool",
+    "qa_category": 4,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "0_93": {
+    "qa_question": "What did John receive for achieving second place in the tournament?",
+    "qa_answer": "money and a trophy",
+    "qa_response": "trophy and money",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_94": {
+    "qa_question": "What project is James working on in his game design course?",
+    "qa_answer": "a new part of the football simulator, collecting player databases",
+    "qa_response": "football simulator",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_95": {
+    "qa_question": "Who does James support in football matches?",
+    "qa_answer": "Liverpool",
+    "qa_response": "Liverpool.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_96": {
+    "qa_question": "Which football club does John support?",
+    "qa_answer": "Manchester City",
+    "qa_response": "Manchester City.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_97": {
+    "qa_question": "What disagreement do James and John have about their football teams?",
+    "qa_answer": "debating on which team will perform better in the championship",
+    "qa_response": "Liverpool vs Manchester City.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_98": {
+    "qa_question": "What is Max good at doing according to James?",
+    "qa_answer": "catching frisbees in mid-air",
+    "qa_response": "catching frisbees mid-air",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_99": {
+    "qa_question": "What is the main focus of the organization that James volunteered with?",
+    "qa_answer": "providing necessary items to those who are less fortunate",
+    "qa_response": "The main focus of the organization is providing necessary items to the less fortunate. \n\n(Answer derived from James's memory: \"James volunteered with an organization that provides necessary items to those who are less fortunate.\")",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_100": {
+    "qa_question": "Will there be an interview required to volunteer with the organization James volunteered for?",
+    "qa_answer": "No",
+    "qa_response": "No information.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_101": {
+    "qa_question": "How did John relax in his free time on 9 July, 2022?",
+    "qa_answer": "Reading",
+    "qa_response": "Reading.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_102": {
+    "qa_question": "What did James enjoy doing on cold winter days?",
+    "qa_answer": "Reading while snuggled under the covers",
+    "qa_response": "Reading under the covers.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_103": {
+    "qa_question": "What new hobby did James become interested in on 9 July, 2022?",
+    "qa_answer": "Extreme sports",
+    "qa_response": "extreme sports",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_104": {
+    "qa_question": "Where did James plan to visit after Toronto?",
+    "qa_answer": "Vancouver",
+    "qa_response": "Vancouver.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_105": {
+    "qa_question": "When did James plan to return from his trip to Toronto and Vancouver?",
+    "qa_answer": "July 20",
+    "qa_response": "20 July 2022",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_106": {
+    "qa_question": "What online game did John start playing recently for improving strategy?",
+    "qa_answer": "Chess",
+    "qa_response": "Chess.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_107": {
+    "qa_question": "What made John leave his IT job?",
+    "qa_answer": "to focus on things that align with his values and passions",
+    "qa_response": "John wanted to pursue his passions.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_108": {
+    "qa_question": "Which game tournaments does John plan to organize besides CS:GO?",
+    "qa_answer": "Fortnite competitions",
+    "qa_response": "Fortnite and strategy/RPG games.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_109": {
+    "qa_question": "What happened to James's puppy during the recent visit to the clinic?",
+    "qa_answer": "routine examination and vaccination",
+    "qa_response": "The puppy was vaccinated.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_110": {
+    "qa_question": "What game genre did John start exploring instead of shooters?",
+    "qa_answer": "strategy and RPG games",
+    "qa_response": "Strategy and RPG.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_111": {
+    "qa_question": "Which RPG game is John playing and enjoying on 10 August, 2022?",
+    "qa_answer": "The Witcher 3",
+    "qa_response": "The Witcher 3.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_112": {
+    "qa_question": "What aspect of \"The Witcher 3\" does John find immersive?",
+    "qa_answer": "shaping the world with choices",
+    "qa_response": "The storytelling and character development.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_113": {
+    "qa_question": "Whose phone number did James receive during the beach outing?",
+    "qa_answer": "Samantha",
+    "qa_response": "The beautiful girl's.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_114": {
+    "qa_question": "What is James planning to do after receiving Samantha's phone number?",
+    "qa_answer": "call her",
+    "qa_response": "Ask her out on a date.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_115": {
+    "qa_question": "What is John organizing with his siblings?",
+    "qa_answer": "a gaming night",
+    "qa_response": "Based on the memories, the answer is: \"a family game night.\" \n\n(Note: Both users' memories from August 2022 mention this event, with the most recent being John's memory at \"9:18 pm on 26 August, 2022.\")",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_116": {
+    "qa_question": "What type of beer does John not like?",
+    "qa_answer": "dark beer",
+    "qa_response": "dark beer",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_117": {
+    "qa_question": "What were some difficulties James faced during the development of his game?",
+    "qa_answer": "balancing mechanics and ensuring fairness",
+    "qa_response": "Balancing game mechanics and debugging code.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "0_118": {
+    "qa_question": "What has John been teaching his siblings?",
+    "qa_answer": "coding",
+    "qa_response": "coding",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_119": {
+    "qa_question": "What kind of programs are John's siblings making?",
+    "qa_answer": "basic games and stories",
+    "qa_response": "text-based adventure games",
+    "qa_category": 4,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_120": {
+    "qa_question": "Which company's headphones did John choose for gaming?",
+    "qa_answer": "Sennheiser",
+    "qa_response": "Sennheiser.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_121": {
+    "qa_question": "What did James and Samantha discover they both enjoy at McGee's bar?",
+    "qa_answer": "Lager beer",
+    "qa_response": "good lager beer",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_122": {
+    "qa_question": "How much does James pay per cooking class?",
+    "qa_answer": "$10",
+    "qa_response": "$10 per class.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_123": {
+    "qa_question": "What did James learn to make in the cooking class besides omelette and meringue?",
+    "qa_answer": "Dough",
+    "qa_response": "dough",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_124": {
+    "qa_question": "Why did James sign up for a cooking class?",
+    "qa_answer": "He wanted to learn something new",
+    "qa_response": "To learn something new.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_125": {
+    "qa_question": "What did James prepare for the first time in the cooking class?",
+    "qa_answer": "Omelette",
+    "qa_response": "omelette, meringue, dough",
+    "qa_category": 4,
+    "labels": [
+      "2.1"
+    ]
+  },
+  "0_126": {
+    "qa_question": "What is the name of the board game John tried in September 2022?",
+    "qa_answer": "Dungeons of the Dragon",
+    "qa_response": "The name of the board game John tried in September 2022 is 'Dungeons of the Dragon'. \n\nAnswer: Dungeons of the Dragon.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_127": {
+    "qa_question": "Where does James get his ideas from?",
+    "qa_answer": "books, movies, dreams",
+    "qa_response": "books, movies, and dreams",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_128": {
+    "qa_question": "What kind of dream did James have recently?",
+    "qa_answer": "a dream with a medieval castle full of puzzles and traps",
+    "qa_response": "The answer is: medieval castle with puzzles and traps.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_129": {
+    "qa_question": "What kind of music does John like?",
+    "qa_answer": "electronic and rock music",
+    "qa_response": "electronic and rock music.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_130": {
+    "qa_question": "What instrument did James used to play when he was younger?",
+    "qa_answer": "guitar",
+    "qa_response": "guitar",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_131": {
+    "qa_question": "What did John use to play when he was younger to let off steam?",
+    "qa_answer": "drums",
+    "qa_response": "\ndrums.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_132": {
+    "qa_question": "What career milestone did John achieve recently in September 2022?",
+    "qa_answer": "making his first mobile game",
+    "qa_response": "John made his first mobile game.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_133": {
+    "qa_question": "What type of game is John's upcoming mobile game?",
+    "qa_answer": "2D adventure",
+    "qa_response": "2D adventure game.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_134": {
+    "qa_question": "What does John do to stay informed and constantly learn about game design?",
+    "qa_answer": "watch tutorials and keep up with developer forums",
+    "qa_response": "John watches tutorials and reads developer forums.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_135": {
+    "qa_question": "What kind of gig was John offered at the game dev non-profit organization?",
+    "qa_answer": "programming mentor for game developers",
+    "qa_response": "programming mentor for game developers",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_136": {
+    "qa_question": "What does John feel about starting the journey as a programming mentor for game developers?",
+    "qa_answer": "excited and inspired",
+    "qa_response": "Excited and inspired.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_137": {
+    "qa_question": "What kind of games is James excited to play with his new video card?",
+    "qa_answer": "RPGs",
+    "qa_response": "RPGs and MOBAs.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_138": {
+    "qa_question": "What inspired James to create his game?",
+    "qa_answer": "Witcher 3",
+    "qa_response": "\"Witcher 3 and childhood comics\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_139": {
+    "qa_question": "What sparked James' passion for gaming when he was a kid?",
+    "qa_answer": "Super Mario and The Legend of Zelda games",
+    "qa_response": "Super Mario and The Legend of Zelda.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_140": {
+    "qa_question": "What did James lose progress on due to a power outage?",
+    "qa_answer": "a game",
+    "qa_response": "\ngaming progress",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_141": {
+    "qa_question": "What games were played at the gaming tournament organized by John on 31 October, 2022?",
+    "qa_answer": "Fortnite, Overwatch, Apex Legends",
+    "qa_response": "Fortnite, Overwatch, Apex Legends.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_142": {
+    "qa_question": "What was the purpose of the gaming tournament organized by John on 31 October, 2022?",
+    "qa_answer": "To raise money for a children's hospital",
+    "qa_response": "The purpose was to raise funds for a children's hospital.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_143": {
+    "qa_question": "What decision did James and Samantha make on 31 October, 2022?",
+    "qa_answer": "To move in together",
+    "qa_response": "Move in together.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_144": {
+    "qa_question": "Where did James and Samantha decide to live together on 31 October, 2022?",
+    "qa_answer": "In an apartment not far from McGee's bar",
+    "qa_response": "near McGee's bar",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "0_145": {
+    "qa_question": "Why did James and Samantha choose an apartment near McGee's bar?",
+    "qa_answer": "They love spending time together at the bar",
+    "qa_response": "They love spending time there.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_146": {
+    "qa_question": "What game is John hooked on playing on 5 November, 2022?",
+    "qa_answer": "FIFA 23",
+    "qa_response": "FIFA 23.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_147": {
+    "qa_question": "What did John suggest James practice before playing FIFA 23 together?",
+    "qa_answer": "Control with a gamepad and timing",
+    "qa_response": "John suggested practicing a little.",
+    "qa_category": 4,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "0_148": {
+    "qa_question": "What project did John work on with a game developer by 7 November, 2022?",
+    "qa_answer": "An online board game",
+    "qa_response": "online board game",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_149": {
+    "qa_question": "What is the name of John's cousin's dog?",
+    "qa_answer": "Luna",
+    "qa_response": "Luna.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "0_150": {
+    "qa_question": "What did John adopt in April 2022?",
+    "qa_answer": "",
+    "qa_response": "pup named Ned",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_151": {
+    "qa_question": "What is the name of the kitten that was adopted by James?",
+    "qa_answer": "",
+    "qa_response": "There is no mention of a kitten in the memories. James adopted a puppy named Ned. \n\nAnswer: No kitten adopted.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_152": {
+    "qa_question": "What inspired John to create the game character in the virtual world?",
+    "qa_answer": "",
+    "qa_response": "A walk with his dogs.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_153": {
+    "qa_question": "Which country did John visit in 2021?",
+    "qa_answer": "",
+    "qa_response": "Japan.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_154": {
+    "qa_question": "What kind of assignment was giving James a hard time at work?",
+    "qa_answer": "",
+    "qa_response": "The answer is \"coding project.\" \n\nHere's the step-by-step reasoning:\n\n1. Looking through James' memories, the most relevant ones mention challenges at work:\n   - \"7:01 pm on 4 May, 2022: James encountered a major snag in his project due to a bug in the code that messed up the game mechanics.\"\n   - \"7:33 pm on 23 May, 2022: James finished a big project he had been working on for months, which was challenging because he had to learn a new language and handle many details.\"\n\n2. Both memories point to a coding-related project causing difficulties (bugs, learning a new language, handling details).\n\n3. No contradictory information exists in the memories, and these are the most specific references to work challenges.\n\n4. The answer is concise and directly pulled from the evidence.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_155": {
+    "qa_question": "What did James and his friends do with the remaining money after helping the dog shelter?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"Bought groceries for homeless.\" \n\nThis is based on John's memory from \"12:45 am on 8 May, 2022\" which states: \"John used leftover funds to buy groceries and cook food for the homeless.\" Though the question mentions \"James and his friends,\" the memory only attributes this action to John. No other relevant memories from James mention leftover funds or this activity.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_156": {
+    "qa_question": "What was the main goal of the money raised from the political campaign organized by John and his friends in May 2022?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention a political campaign organized by John and his friends in May 2022. Therefore, the answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "0_157": {
+    "qa_question": "What did the system John created help the illegal organization with?",
+    "qa_answer": "",
+    "qa_response": "The system John created helped streamline operations.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_158": {
+    "qa_question": "What did James create for the charitable foundation that helped generate reports for analysis?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the provided memories about James creating something for the charitable foundation that helped generate reports for analysis. The memories mention John creating a software tool for inventory management, but not James creating anything for report generation.\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_159": {
+    "qa_question": "Who does James support in cricket matches?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the provided memories about James supporting any cricket team. Therefore, the answer is:\n\nNo information.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_160": {
+    "qa_question": "What is Max good at doing according to John?",
+    "qa_answer": "",
+    "qa_response": "Max is good at catching frisbees mid-air.",
+    "qa_category": 5,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "0_161": {
+    "qa_question": "Will there be a background check required to volunteer with the organization James volunteered for?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about background checks for volunteering with the organization James volunteered for. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_162": {
+    "qa_question": "How did James relax in his free time on 9 July, 2022?",
+    "qa_answer": "",
+    "qa_response": "On 9 July, 2022, James relaxed by surfing.  \n\n(From John's memory: \"5:13 pm on 9 July, 2022: James went surfing three days ago and found it relaxing.\")",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_163": {
+    "qa_question": "What new hobby did John become interested in on 9 July, 2022?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention any new hobby that John became interested in on 9 July, 2022. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_164": {
+    "qa_question": "When did John plan to return from his trip to Toronto and Vancouver?",
+    "qa_answer": "",
+    "qa_response": "The answer is: July 20, 2022.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_165": {
+    "qa_question": "What made James leave his IT job?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"No information found.\" \n\n(After examining all memories, there is no information about James leaving an IT job. The memories about leaving an IT job only refer to John, not James.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_166": {
+    "qa_question": "Which game tournaments does James plan to organize besides CS:GO?",
+    "qa_answer": "",
+    "qa_response": "Strategy and RPG games.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_167": {
+    "qa_question": "What happened to James's kitten during the recent visit to the clinic?",
+    "qa_answer": "",
+    "qa_response": "There is no mention of a kitten in the memories.",
+    "qa_category": 5,
+    "labels": [
+      "1.2"
+    ]
+  },
+  "0_168": {
+    "qa_question": "What aspect of \"The Witcher 3\" does John find boring?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the memories indicating that John finds any aspect of \"The Witcher 3\" boring.  \n\nAnswer: None.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_169": {
+    "qa_question": "What is John planning to do after receiving Samantha's phone number?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention John receiving Samantha's phone number or any plans related to it. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_170": {
+    "qa_question": "What has James been teaching his siblings?",
+    "qa_answer": "",
+    "qa_response": "The memories do not indicate that James has been teaching his siblings anything. The teaching references are about John teaching his siblings coding. \n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_171": {
+    "qa_question": "How much does James pay per dance class?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention anything about dance classes or their cost. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_172": {
+    "qa_question": "What did James learn to make in the chemistry class besides omelette and meringue?",
+    "qa_answer": "",
+    "qa_response": "dough",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_173": {
+    "qa_question": "Why did James sign up for a ballet class?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention James signing up for a ballet class. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_174": {
+    "qa_question": "What did John prepare for the first time in the cooking class?",
+    "qa_answer": "",
+    "qa_response": "The question is about John preparing something in a cooking class, but according to the memories, it was James who attended the cooking class and prepared an omelette, meringue, and learned to make dough. John did not attend any cooking class mentioned in the memories.\n\nAnswer: John did not attend.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_175": {
+    "qa_question": "What is the name of the board game James tried in September 2022?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention James trying a board game in September 2022. The only board game mentioned is by John, who tried 'Dungeons of the Dragon' in September 2022. \n\nAnswer: None.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_176": {
+    "qa_question": "Where does John get his ideas from?",
+    "qa_answer": "",
+    "qa_response": "books, movies, and dreams.",
+    "qa_category": 5,
+    "labels": [
+      "1.2"
+    ]
+  },
+  "0_177": {
+    "qa_question": "What did James use to play when he was younger to let off steam?",
+    "qa_answer": "",
+    "qa_response": "Nintendo console.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_178": {
+    "qa_question": "What does James do to stay informed and constantly learn about game design?",
+    "qa_answer": "",
+    "qa_response": "James uses a magazine with tutorials and developer interviews.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_179": {
+    "qa_question": "What kind of gig was James offered at the game dev non-profit organization?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"programming mentor for game developers\".",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_180": {
+    "qa_question": "What does James feel about starting the journey as a programming mentor for game developers?",
+    "qa_answer": "",
+    "qa_response": "James is proud and inspired.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_181": {
+    "qa_question": "What inspired James to create his painting?",
+    "qa_answer": "",
+    "qa_response": "The answer is not present in the provided memories. The memories discuss James' inspiration for game creation and characters, but there is no mention of a painting. \n\nAnswer: Not mentioned in memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "0_182": {
+    "qa_question": "What games were played at the gaming tournament organized by James on 31 October, 2022?",
+    "qa_answer": "",
+    "qa_response": "The games played at the tournament on 31 October 2022 were Fortnite, Overwatch, and Apex Legends. \n\nAnswer: Fortnite, Overwatch, Apex Legends.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_183": {
+    "qa_question": "What was the purpose of the gaming tournament organized by James on 31 October, 2022?",
+    "qa_answer": "",
+    "qa_response": "The purpose was to raise funds for a children's hospital.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_184": {
+    "qa_question": "What decision did John and Samantha make on 31 October, 2022?",
+    "qa_answer": "",
+    "qa_response": "The answer is: moved in together.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_185": {
+    "qa_question": "Where did John and Samantha decide to live together on 31 October, 2022?",
+    "qa_answer": "",
+    "qa_response": "near McGee's bar",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_186": {
+    "qa_question": "Why did John and Samantha choose an apartment near McGee's bar?",
+    "qa_answer": "",
+    "qa_response": "They love spending time there.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_187": {
+    "qa_question": "What game is James hooked on playing on 5 November, 2022?",
+    "qa_answer": "",
+    "qa_response": "FIFA 23.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_188": {
+    "qa_question": "What project did James work on with a game developer by 7 November, 2022?",
+    "qa_answer": "",
+    "qa_response": "The answer is: online board game.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "0_189": {
+    "qa_question": "What is the name of James's cousin's dog?",
+    "qa_answer": "",
+    "qa_response": "Luna.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_0": {
+    "qa_question": "What kind of project was Jolene working on in the beginning of January 2023?",
+    "qa_answer": "electricity engineering project",
+    "qa_response": "electrical engineering project",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_1": {
+    "qa_question": "Which of Deborah`s family and friends have passed away?",
+    "qa_answer": "mother, father, her friend Karlie",
+    "qa_response": "Deborah's mother, father, and friend Karlie.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_2": {
+    "qa_question": "When did Deborah`s mother pass away?",
+    "qa_answer": "a few years before 2023",
+    "qa_response": "Deborah's mother passed away a few years ago. \n\n(Note: The exact year isn't specified in the memories, but the most recent memory from 21 August 2023 still refers to her as deceased, confirming it was before the recorded memories.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_3": {
+    "qa_question": "When did Jolene`s mother pass away?",
+    "qa_answer": "in 2022",
+    "qa_response": "2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_4": {
+    "qa_question": "When did Jolene's mom gift her a pendant?",
+    "qa_answer": "in 2010",
+    "qa_response": "The memories do not mention Jolene's mom gifting her a pendant. \n\nAnswer: No information available.",
+    "qa_category": 2,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "1_5": {
+    "qa_question": "In what country did Jolene's mother buy her the pendant?",
+    "qa_answer": "In France",
+    "qa_response": "The memories do not provide information about the country where Jolene's mother bought her the pendant. \n\nAnswer: Unknown.",
+    "qa_category": 3,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "1_6": {
+    "qa_question": "What symbolic gifts do Deborah and Jolene have from their mothers?",
+    "qa_answer": "pendants",
+    "qa_response": "Deborah: amulet, Jolene: pendant.",
+    "qa_category": 1,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "1_7": {
+    "qa_question": "Which country were Jolene and her mother visiting in 2010?",
+    "qa_answer": "France",
+    "qa_response": "There is no information in the provided memories about Jolene and her mother visiting any country in 2010. \n\nAnswer: No information available.",
+    "qa_category": 2,
+    "labels": [
+      "2.3"
+    ]
+  },
+  "1_8": {
+    "qa_question": "What helped Deborah find peace when grieving deaths of her loved ones?",
+    "qa_answer": "yoga, old photos, the roses and dahlias in a flower garden, nature",
+    "qa_response": "art, yoga, family memories",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_9": {
+    "qa_question": "When did Deborah's father pass away?",
+    "qa_answer": "January 25, 2023",
+    "qa_response": "25 January, 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_10": {
+    "qa_question": "When was Deborah's parents' wedding?",
+    "qa_answer": "in 1993",
+    "qa_response": "1993.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_11": {
+    "qa_question": "Is Deborah married?",
+    "qa_answer": "yes",
+    "qa_response": "Yes.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "1_12": {
+    "qa_question": "When did Deborah receive an appreciation letter from her community?",
+    "qa_answer": "January 26, 2023",
+    "qa_response": "27 January 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_13": {
+    "qa_question": "What places give Deborah peace?",
+    "qa_answer": "sitting in a spot by the window in her Mom's house, sitting by the beach, Bali, forest trail in a nearby park",
+    "qa_response": "1. Old home (27 January 2023)\n2. Bali (22 February 2023)\n3. Beach (15 September 2023)\n4. Nature (9 July 2023)\n5. Park with forest trail and beach (19 August 2023)\n6. Soothing spot with nice views (30 August 2023)\n\nAnswer: Home, Bali, beach, nature, park.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_14": {
+    "qa_question": "What were Deborah's mother's hobbies?",
+    "qa_answer": "reading, traveling, art, cooking",
+    "qa_response": "Reading, cooking, art, flowers.",
+    "qa_category": 1,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_15": {
+    "qa_question": "What pets does Jolene have?",
+    "qa_answer": "snakes",
+    "qa_response": "Jolene has snakes and Susie.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_16": {
+    "qa_question": "What are the names of Jolene's snakes?",
+    "qa_answer": "Susie, Seraphim",
+    "qa_response": "Susie and Seraphim.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_17": {
+    "qa_question": "When did Jolene buy her pet Seraphim?",
+    "qa_answer": "in 2022",
+    "qa_response": "To determine when Jolene bought her pet Seraphim, we look at the memories that mention this event:\n\n1. Deborah's memory at \"9:17 am on 26 June, 2023\" states: \"Jolene got her pet Seraphim last year.\"\n   - Since the timestamp is 26 June 2023, \"last year\" would be 2022.\n\n2. Jolene's memory at \"9:17 am on 26 June, 2023\" also states: \"Jolene got her pet Seraphim last year.\"\n   - Again, \"last year\" relative to 26 June 2023 is 2022.\n\nBoth memories agree that Jolene got Seraphim in 2022.\n\nAnswer: 2022.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_18": {
+    "qa_question": "In what country did Jolene buy snake Seraphim?",
+    "qa_answer": "In France",
+    "qa_response": "The memories do not provide information about the country where Jolene bought her snake Seraphim. \n\nAnswer: Unknown.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_19": {
+    "qa_question": "How many times has Jolene been to France?",
+    "qa_answer": "two times",
+    "qa_response": "None.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_20": {
+    "qa_question": "Which games have Jolene and her partner played together?",
+    "qa_answer": "Detroit, Walking Dead, Battlefield 1, It Takes Two, Overcooked 2",
+    "qa_response": "Based on the memories, Jolene and her partner have played the following games together:  \n\n- **Detroit**  \n- **It Takes Two**  \n- **Overcooked 2**  \n- **Walking Dead** (planned)  \n\n**Answer:** Detroit, It Takes Two, Overcooked 2.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_21": {
+    "qa_question": "When do Jolene and her partner plan to complete the game \"Walking Dead\"?",
+    "qa_answer": "Saturday after 27 January, 2023",
+    "qa_response": "Next Saturday.",
+    "qa_category": 2,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_22": {
+    "qa_question": "When did Deborah meet Anna?",
+    "qa_answer": "31 January, 2023",
+    "qa_response": "\n1 February, 2023",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_23": {
+    "qa_question": "Why did Jolene sometimes put off doing yoga?",
+    "qa_answer": "She's more interested in playing video games",
+    "qa_response": "Answer: To escape studying and work stress.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_24": {
+    "qa_question": "What new yoga poses did Deborah try?",
+    "qa_answer": "Warrior II, Dancer Pose (Natarajasana), Tree pose",
+    "qa_response": "Dancer Pose (Natarajasana).",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_25": {
+    "qa_question": "What are Jolene's favorite books?",
+    "qa_answer": "Sapiens, Avalanche by Neal Stephenson",
+    "qa_response": "'Sapiens' and 'Avalanche'.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_26": {
+    "qa_question": "Which book did Jolene read in January 2023?",
+    "qa_answer": "Avalanche by Neal Stephenson",
+    "qa_response": "The memories do not mention Jolene reading any book in January 2023. \n\nAnswer: None mentioned.",
+    "qa_category": 2,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_27": {
+    "qa_question": "When was Jolene in Bogota?",
+    "qa_answer": "in summer 2022",
+    "qa_response": "summer 2022",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_28": {
+    "qa_question": "In what country was Jolene during summer 2022?",
+    "qa_answer": "Colombia",
+    "qa_response": "Based on the memories, Jolene was in Bogota during summer 2022. \n\n(Calculated from \"9:48 am on 4 February, 2023: Jolene took a vacation last summer to Bogota\" - \"last summer\" relative to February 2023 would be summer 2022.)\n\nAnswer: Bogota, Colombia.",
+    "qa_category": 3,
+    "labels": []
+  },
+  "1_29": {
+    "qa_question": "When did Jolene have a mini-retreat to reflect on her career?",
+    "qa_answer": "Wednesday before 9 February, 2023",
+    "qa_response": "The mini-retreat was on 7 February, 2023. \n\n(Calculated from \"9:03 pm on 9 February, 2023: Jolene completed a mini retreat on the previous Wednesday to assess her life...\" - the previous Wednesday from 9 February 2023 was 7 February 2023.)",
+    "qa_category": 2,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "1_30": {
+    "qa_question": "When did Jolene have a dinner and drinks with her friends?",
+    "qa_answer": "21 February, 2023",
+    "qa_response": "22 February, 2023.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_31": {
+    "qa_question": "When was the last photo of Deborah and Karlie taken?",
+    "qa_answer": "in summer 2022",
+    "qa_response": "The last photo of Deborah and Karlie was taken in summer 2022. \n\n(Calculated from the memory timestamp \"4:12 pm on 22 February, 2023\" mentioning \"their last hike together in the summer\" - implying the previous summer, which would be 2022.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_32": {
+    "qa_question": "When was Deborah in Bali?",
+    "qa_answer": "in 2022",
+    "qa_response": "2022. \n\n(From Deborah's memory on 22 February 2023: \"Deborah traveled to Bali last year,\" which would be 2022 based on the timestamp.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_33": {
+    "qa_question": "How long have Jolene and her partner been together?",
+    "qa_answer": "for three years",
+    "qa_response": "3 years.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_34": {
+    "qa_question": "Which year did Jolene and her partner start dating?",
+    "qa_answer": "2020",
+    "qa_response": "2020.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_35": {
+    "qa_question": "When did Deborah go for her first morning jog in a nearby park?",
+    "qa_answer": "24 February, 2023",
+    "qa_response": "24 February 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_36": {
+    "qa_question": "How old is Jolene?",
+    "qa_answer": "likely no more than 30; since she's in school",
+    "qa_response": "The memories do not provide explicit information about Jolene's current age. Therefore, the answer is:\n\nUnknown.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_37": {
+    "qa_question": "When did Jolene take Seraphim to the park?",
+    "qa_answer": "Sunday before 2 March, 2023",
+    "qa_response": "The memory from \"7:18 pm on 2 March, 2023\" states that Jolene took Seraphim to the park \"last Sunday.\" Based on the timestamp, the answer is:\n\n26 February 2023.",
+    "qa_category": 2,
+    "labels": [
+      "2.1"
+    ]
+  },
+  "1_38": {
+    "qa_question": "When did Deborah start the yoga class in the neighborhood?",
+    "qa_answer": "Friday before 13 March, 2023",
+    "qa_response": "13 March 2023",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_39": {
+    "qa_question": "What time management techniques do Deborah and Jolene use?",
+    "qa_answer": "the Pomodoro Technique - 25 minutes work and 5-minute break, scheduler or to-do list, The Eisenhower Matrix, bullet journal",
+    "qa_response": "Deborah: Pomodoro Technique, planners. Jolene: Pomodoro Technique, bullet journal.",
+    "qa_category": 1,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_40": {
+    "qa_question": "Does Deborah live close to the beach or the mountains?",
+    "qa_answer": "beach",
+    "qa_response": "close to the beach",
+    "qa_category": 3,
+    "labels": []
+  },
+  "1_41": {
+    "qa_question": "What ways do Deborah and Jolene use to enhance their yoga practice?",
+    "qa_answer": "candles, music, essential oils",
+    "qa_response": "Deborah: candles, essential oils. Jolene: music, soothing scents.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_42": {
+    "qa_question": "What music pieces does Deborah listen to during her yoga practice?",
+    "qa_answer": "Savana, Sleep",
+    "qa_response": "Deborah listens to 'Savana' and 'Sleep'.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_43": {
+    "qa_question": "When did Deborah go for a bicycle ride with Anna?",
+    "qa_answer": "first week of April, 2023",
+    "qa_response": "The memories do not mention Deborah going for a bicycle ride with Anna. The closest memory is about Deborah biking with her neighbor on 9 April 2023, but Anna is not mentioned in that context.\n\nAnswer: Not mentioned.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_44": {
+    "qa_question": "When did Deborah go to an art show with Anna?",
+    "qa_answer": "on 9 April, 2023",
+    "qa_response": "The memories do not mention Deborah going to an art show with Anna. \n\nAnswer: Not mentioned.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_45": {
+    "qa_question": "When did Jolene finish her robotics project?",
+    "qa_answer": "May 2023",
+    "qa_response": "September 2023.",
+    "qa_category": 2,
+    "labels": [
+      "2.1"
+    ]
+  },
+  "1_46": {
+    "qa_question": "How long did Jolene work on the robotics project given to her by her Professor?",
+    "qa_answer": "four months",
+    "qa_response": "The robotics project was received on 1 February 2023 and wrapped up in September 2023. \n\nAnswer: 7 months.",
+    "qa_category": 2,
+    "labels": [
+      "2.1"
+    ]
+  },
+  "1_47": {
+    "qa_question": "When did Jolene do yoga at Talkeetna?",
+    "qa_answer": "on 5 June, 2023",
+    "qa_response": "5 June 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_48": {
+    "qa_question": "Which US state did Jolene visit during her internship?",
+    "qa_answer": "Alaska",
+    "qa_response": "The provided memories do not mention Jolene visiting any US state during her internship. \n\nAnswer: None mentioned.",
+    "qa_category": 3,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_49": {
+    "qa_question": "How long has Jolene been doing yoga and meditation?",
+    "qa_answer": "about 3 years",
+    "qa_response": "3 years.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_50": {
+    "qa_question": "Which year did Jolene start practicing yoga?",
+    "qa_answer": "2020",
+    "qa_response": "2020.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_51": {
+    "qa_question": "When did Jolene buy a new aquarium for Seraphim?",
+    "qa_answer": "24 June, 2023",
+    "qa_response": "24 June, 2023. \n\n(Calculated from the memory timestamp \"9:17 am on 26 June, 2023\" which mentions \"the day before yesterday.\")",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_52": {
+    "qa_question": "When did Jolene lose a lot of progress in her work?",
+    "qa_answer": "last week of July 2023",
+    "qa_response": "There is no mention of Jolene losing progress in her work in the provided memories.  \n\nAnswer: No information available.",
+    "qa_category": 2,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "1_53": {
+    "qa_question": "When did Jolene adopt her snake Susie?",
+    "qa_answer": "in 2021",
+    "qa_response": "Based on the most recent memory from Jolene at \"3:09 pm on 15 September, 2023,\" Jolene adopted Susie two years ago. \n\nCalculating from the timestamp (15 September 2023), two years ago would be 2021. \n\nAnswer: 2021.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_54": {
+    "qa_question": "Which pet did Jolene adopt first - Susie or Seraphim?",
+    "qa_answer": "Susie",
+    "qa_response": "To determine which pet Jolene adopted first, let's analyze the relevant memories:\n\n1. For Seraphim:\n- \"9:17 am on 26 June, 2023: Jolene got her pet Seraphim last year\" → 2022 (since \"last year\" relative to June 2023 is 2022)\n\n2. For Susie:\n- \"9:26 am on 1 August, 2023: Jolene adopted her pet, Susie, two years ago\" → 2021 (two years before August 2023)\n\nSince Susie was adopted in 2021 and Seraphim in 2022, the answer is: Susie.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_55": {
+    "qa_question": "Which pet did Jolene adopt more recently - Susie or Seraphim?",
+    "qa_answer": "Seraphim",
+    "qa_response": "To determine which pet Jolene adopted more recently, let's analyze the memories:\n\n1. For Seraphim:\n- Memory timestamped \"9:17 am on 26 June, 2023\" states Jolene got Seraphim \"last year\" (which would be 2022 based on the timestamp)\n\n2. For Susie:\n- Memory timestamped \"9:26 am on 1 August, 2023\" states Jolene adopted Susie \"two years ago\" (which would be 2021 based on the timestamp)\n\nComparing the adoption years:\n- Seraphim: 2022\n- Susie: 2021\n\nTherefore, Seraphim was adopted more recently.\n\nAnswer: Seraphim",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_56": {
+    "qa_question": "When did Deborah lead a meditation session during the sunset?",
+    "qa_answer": "week before 16 August, 2023",
+    "qa_response": "The memories do not provide specific information about Deborah leading a meditation session during the sunset. \n\nAnswer: No information found.",
+    "qa_category": 2,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_57": {
+    "qa_question": "When did Jolene gift her partner a new console?",
+    "qa_answer": "17 August, 2023",
+    "qa_response": "17 August, 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_58": {
+    "qa_question": "What games does Jolene recommend for Deborah?",
+    "qa_answer": "Zelda BOTW for Switch , Animal Crossing: New Horizons, Overcooked 2",
+    "qa_response": "Zelda BOTW, Animal Crossing, Overcooked 2.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_59": {
+    "qa_question": "What do Deborah and her husband do together?",
+    "qa_answer": "play detective games together, spend time outdoors and explore nature",
+    "qa_response": "play detective games",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_60": {
+    "qa_question": "When did Deborah go to a yoga retreat near her mom's place?",
+    "qa_answer": "a week before 24 August,2023",
+    "qa_response": "17 August 2023. \n\n(Calculated from \"24 August 2023: last week\" in Deborah's memory.)",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_61": {
+    "qa_question": "What projects is Jolene planning for next year?",
+    "qa_answer": "developing renewable energy finding ways to supply clean water to those with limited access",
+    "qa_response": "Renewable energy and clean water.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_62": {
+    "qa_question": "Where did Deborah get her cats?",
+    "qa_answer": "Luna is from the shelter and Max is her mother's cat",
+    "qa_response": "From shelter and her mother.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_63": {
+    "qa_question": "How old are Deborah's cats?",
+    "qa_answer": "Max is 8 years old and Luna is 5 years old",
+    "qa_response": "Max is 8, Luna is 5.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_64": {
+    "qa_question": "Does Deborah like cats?",
+    "qa_answer": "Yes",
+    "qa_response": "Yes.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_65": {
+    "qa_question": "Which country was Jolene located in during the last week of August 2023?",
+    "qa_answer": "Brazil",
+    "qa_response": "Based on the memories, Jolene was in Rio de Janeiro during the last week of August 2023. \n\nAnswer: Rio de Janeiro.",
+    "qa_category": 2,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "1_66": {
+    "qa_question": "When did Jolene and her partner return home from Rio de Janeiro?",
+    "qa_answer": "29 August, 2023",
+    "qa_response": "30 August 2023",
+    "qa_category": 2,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "1_67": {
+    "qa_question": "What was Jolene doing with her partner in Rio de Janeiro?",
+    "qa_answer": "they went on excursions, checked out some cool yoga classes, visited a lot of delicious cafes, visited an old temple",
+    "qa_response": "Attending yoga classes.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_68": {
+    "qa_question": "When did Deborah visit Brazil?",
+    "qa_answer": "2020",
+    "qa_response": "2020.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_69": {
+    "qa_question": "Have Deborah and Jolene been to Rio de Janeiro?",
+    "qa_answer": "yes",
+    "qa_response": "Yes, both have.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_70": {
+    "qa_question": "Is the friend who wrote Deborah the motivational quote no longer alive?",
+    "qa_answer": "likely yes",
+    "qa_response": "No.",
+    "qa_category": 3,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "1_71": {
+    "qa_question": "When did Deborah go to a community meetup?",
+    "qa_answer": "last week of August 2023",
+    "qa_response": "The most recent memory mentioning Deborah attending a community event is from \"2:14 pm on 3 September, 2023,\" where she attended an event \"last week.\" \n\nCalculating the date:\n- Memory timestamp: 3 September 2023\n- \"Last week\" would be the week before 3 September 2023, so around late August 2023.\n\nAnswer: late August 2023.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_72": {
+    "qa_question": "When did Jolene's parents give her first console?",
+    "qa_answer": "when she was 10",
+    "qa_response": "10 years old.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_73": {
+    "qa_question": "Did Jolene teach herself how to play the console?",
+    "qa_answer": "yes",
+    "qa_response": "Yes.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_74": {
+    "qa_question": "What do Deborah and Jolene plan to try when they meet in a new cafe?",
+    "qa_answer": "coffee and fresh pastries",
+    "qa_response": "The answer is: surfing. \n\nHere's the step-by-step reasoning:\n\n1. The question asks about what Deborah and Jolene plan to try when they meet in a new cafe. \n2. Looking at the memories, there are several references to surfing:\n   - Deborah has tried surfing and is excited to go surfing with Jolene (20 September 2023)\n   - Jolene has just started learning about surfing and is interested in joining Deborah for a surfing trip (20 September 2023)\n   - Deborah is excited about planning an adventure with Jolene related to trying surfing together (17 September 2023)\n3. While there are mentions of meeting at cafes, the specific activity they plan to try together is surfing, based on the most recent and relevant memories.\n4. The cafe meetings appear to be separate from their surfing plans.\n\nThus, the concise answer is \"surfing.\"",
+    "qa_category": 4,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "1_75": {
+    "qa_question": "What card game is Deborah talking about?",
+    "qa_answer": "Exploding Kittens",
+    "qa_response": "The card game Deborah is talking about is a \"cat-themed card game.\" \n\nAnswer: cat-themed card game.",
+    "qa_category": 3,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_76": {
+    "qa_question": "When did Jolene and her partner try scuba diving lessons?",
+    "qa_answer": "Friday before 17 September, 2023",
+    "qa_response": "17 September 2023",
+    "qa_category": 2,
+    "labels": [
+      "1.3"
+    ]
+  },
+  "1_77": {
+    "qa_question": "Where did Jolene and her partner find a cool diving spot?",
+    "qa_answer": "Phuket",
+    "qa_response": "Phuket.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_78": {
+    "qa_question": "Where did Jolene and her partner spend most of September 2023?",
+    "qa_answer": "Phuket",
+    "qa_response": "Phuket.",
+    "qa_category": 2,
+    "labels": []
+  },
+  "1_79": {
+    "qa_question": "Has Deborah tried surfing?",
+    "qa_answer": "yes",
+    "qa_response": "Yes.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_80": {
+    "qa_question": "Has Jolene tried surfing?",
+    "qa_answer": "no",
+    "qa_response": "No.",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_81": {
+    "qa_question": "When did the Deboran and Jolene agree to go surfing?",
+    "qa_answer": "in October 2023",
+    "qa_response": "The most recent memory indicating their agreement to go surfing is from \"1:24 pm on 17 September, 2023\" where Jolene is planning to arrange a surfing trip next month. \n\nAnswer: 17 September 2023.",
+    "qa_category": 2,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_82": {
+    "qa_question": "Which locations does Deborah practice her yoga at?",
+    "qa_answer": "at her mother's old home, park, yoga studio, beach",
+    "qa_response": "- Bali (from 22 February 2023 memory)  \n- Park near her house (from 19 August 2023 memory)  \n- Beach (from 15 September 2023 memory)  \n- Yoga retreat near mom's place (from 24 August 2023 memory)  \n- Old home (from 27 January 2023 memory)  \n\nAnswer: Bali, park, beach, retreat, home",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_83": {
+    "qa_question": "What kind of professional activities does Jolene participate in to gain more experience in her field?",
+    "qa_answer": "present work at virtual conference, attend workshops  and intern at firms",
+    "qa_response": "internships, workshops, networking",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_84": {
+    "qa_question": "What kind of engineering projects has Jolene worked on?",
+    "qa_answer": "electrical engineering, robotics, sustainable water purifier, productive and affordable aerial surveillance system",
+    "qa_response": "renewable energy and clean water",
+    "qa_category": 1,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_85": {
+    "qa_question": "Which community activities have Deborah and Anna participated in?",
+    "qa_answer": "yoga, running",
+    "qa_response": "- Running group  \n- Yoga classes  \n- Gardening class  \n- Cleanup project",
+    "qa_category": 1,
+    "labels": []
+  },
+  "1_86": {
+    "qa_question": "What gifts has Deborah received?",
+    "qa_answer": "an appreciate letter from her community, a flower bouqet from her friend, a motivational quote from a friend",
+    "qa_response": "- Bouquet from a friend (4 February 2023)\n- Letter from group members (27 January 2023)\n\nAnswer: Bouquet and letter.",
+    "qa_category": 1,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_87": {
+    "qa_question": "Which countries has Deborah traveled to?",
+    "qa_answer": "Thailand, Brazil",
+    "qa_response": "Bali, Rio de Janeiro.",
+    "qa_category": 1,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_88": {
+    "qa_question": "What activities does Deborah pursue besides practicing and teaching yoga?",
+    "qa_answer": "biking, going to art shows, running, organizing workshops to practice mindfulness and self-care, surfing, gardening",
+    "qa_response": "Based on the memories, Deborah also pursues meditation and organizing workshops. \n\nAnswer: Meditation and organizing workshops.",
+    "qa_category": 1,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "1_89": {
+    "qa_question": "What are the names of Jolene's snakes?",
+    "qa_answer": "Susie, Seraphim",
+    "qa_response": "Susie and Seraphim.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_90": {
+    "qa_question": "What are Jolene's favorite books?",
+    "qa_answer": "Sapiens, Avalanche by Neal Stephenson",
+    "qa_response": "'Sapiens' and 'Avalanche'.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_91": {
+    "qa_question": "What music pieces does Deborah listen to during her yoga practice?",
+    "qa_answer": "Savana, Sleep",
+    "qa_response": "Deborah listens to 'Savana' and 'Sleep'.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_92": {
+    "qa_question": "What games does Jolene recommend for Deborah?",
+    "qa_answer": "Zelda BOTW for Switch , Animal Crossing: New Horizons, Overcooked 2",
+    "qa_response": "Zelda BOTW, Animal Crossing, Overcooked 2.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_93": {
+    "qa_question": "What projects is Jolene planning for next year?",
+    "qa_answer": "developing renewable energy finding ways to supply clean water to those with limited access",
+    "qa_response": "Renewable energy and clean water.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_94": {
+    "qa_question": "Where did Deborah get her cats?",
+    "qa_answer": "Luna is from the shelter and Max is her mother's cat",
+    "qa_response": "From shelter and her mother.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_95": {
+    "qa_question": "How old are Deborah's cats?",
+    "qa_answer": "Max is 8 years old and Luna is 5 years old",
+    "qa_response": "Max is 8, Luna is 5.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_96": {
+    "qa_question": "What was Jolene doing with her partner in Rio de Janeiro?",
+    "qa_answer": "they went on excursions, checked out some cool yoga classes, visited a lot of delicious cafes, visited an old temple",
+    "qa_response": "Attending yoga classes.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_97": {
+    "qa_question": "Have Deborah and Jolene been to Rio de Janeiro?",
+    "qa_answer": "yes",
+    "qa_response": "Yes, both have.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_98": {
+    "qa_question": "When did Jolene's parents give her first console?",
+    "qa_answer": "when she was 10",
+    "qa_response": "10 years old.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_99": {
+    "qa_question": "What do Deborah and Jolene plan to try when they meet in a new cafe?",
+    "qa_answer": "coffee and fresh pastries",
+    "qa_response": "The answer is: surfing. \n\nHere's the step-by-step reasoning:\n\n1. The question asks about what Deborah and Jolene plan to try when they meet in a new cafe. \n2. Looking at the memories, the most relevant information is from Deborah's memory at \"10:17 am on 20 September, 2023\" which states: \"Deborah has tried surfing and is excited to go surfing with Jolene.\"\n3. Jolene's memory at \"1:24 pm on 17 September, 2023\" also supports this: \"Jolene believes that trying new things opens up a world of adventure,\" which aligns with the surfing plan.\n4. There is no contradictory information in the memories, and this is the most recent and direct reference to an activity they plan to try together.\n5. While they mention meeting at a cafe, the activity they plan to try is surfing, not something related to the cafe itself.\n\nThus, the answer is \"surfing.\"",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_100": {
+    "qa_question": "What project did Jolene finish last week before 23 January, 2023?",
+    "qa_answer": "an electrical engineering project",
+    "qa_response": "electrical engineering project",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_101": {
+    "qa_question": "When did Jolene buy her pet snake?",
+    "qa_answer": "A year ago",
+    "qa_response": "Based on the memories, Jolene got her pet Seraphim last year, which would be 2022 (from the memory timestamped \"9:17 am on 26 June, 2023\"). \n\nAnswer: 2022",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_102": {
+    "qa_question": "What project was Jolene working on as of 1 February, 2023?",
+    "qa_answer": "Robotics project",
+    "qa_response": "robotics project",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_103": {
+    "qa_question": "Where did Deborah meet her new neighbor Anna?",
+    "qa_answer": "yoga in the park",
+    "qa_response": "The answer is: \"in yoga classes.\" \n\nThis is based on the memory from Jolene: \"7:03 pm on 1 February, 2023: Deborah and her new neighbor Anna discussed how yoga has improved their lives and the sense of community it provides.\" This indicates they met through yoga.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_104": {
+    "qa_question": "What activity did Jolene and her partner plan to do together instead of resuming yoga?",
+    "qa_answer": "play the console",
+    "qa_response": "The answer is: \"camping trip.\"",
+    "qa_category": 4,
+    "labels": [
+      "2.2"
+    ]
+  },
+  "1_105": {
+    "qa_question": "What milestone did Jolene achieve recently on 4 February, 2023?",
+    "qa_answer": "Design and build a sustainable water purifier for a rural community",
+    "qa_response": "Designed and built a sustainable water purifier.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_106": {
+    "qa_question": "What is Jolene's favorite book which she mentioned on 4 February, 2023?",
+    "qa_answer": "\"Sapiens\"",
+    "qa_response": "The answer is \"Sapiens\".",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_107": {
+    "qa_question": "What does Deborah bring with her whenever she comes to reflect on her mom?",
+    "qa_answer": "amulet",
+    "qa_response": "amulet from her mom",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_108": {
+    "qa_question": "What new outlook did Jolene gain after her mini retreat on 9 February, 2023?",
+    "qa_answer": "A confidence boost",
+    "qa_response": "confidence boost",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_109": {
+    "qa_question": "What cool stuff did Jolene accomplish at the retreat on 9 February, 2023?",
+    "qa_answer": "Came up with neat solutions for her engineering project",
+    "qa_response": "Jolene achieved a confidence boost.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_110": {
+    "qa_question": "What idea did Jolene have to help underprivileged kids learn about STEM subjects on 9 February, 2023?",
+    "qa_answer": "A volunteer program where engineers teach STEM to underprivileged kids",
+    "qa_response": "Volunteer program teaching STEM.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_111": {
+    "qa_question": "How does Jolene plan to involve local engineers in her idea of teaching STEM to underprivileged kids?",
+    "qa_answer": "As guest speakers for workshops",
+    "qa_response": "Jolene plans to invite engineers as guest speakers.",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_112": {
+    "qa_question": "What gave Deborah peace in the garden she visited?",
+    "qa_answer": "Roses and dahlias",
+    "qa_response": "Flowers and tranquility.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_113": {
+    "qa_question": "Why did Deborah spend time in the garden?",
+    "qa_answer": "to find comfort after losing a friend",
+    "qa_response": "Deborah ran a gardening class.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_114": {
+    "qa_question": "How did Jolene and her partner initially meet?",
+    "qa_answer": "In an engineering class in college",
+    "qa_response": "In an engineering class.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_115": {
+    "qa_question": "What activity does Deborah incorporate into her daily routine after going for a morning jog in the park?",
+    "qa_answer": "spending time with loved ones",
+    "qa_response": "The answer is: \"yoga and meditation.\" \n\nThis is based on the memory from Deborah at \"4:50 pm on 25 February, 2023,\" which states she meditates and does yoga in the morning, and other memories that consistently mention yoga and meditation as part of her routine.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_116": {
+    "qa_question": "According to Jolene, what does exercise help her to feel?",
+    "qa_answer": "connected to her body",
+    "qa_response": "calmer and clearer",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_117": {
+    "qa_question": "What did Deb share a photo of, which brought a smile to Jolene's face?",
+    "qa_answer": "a yellow coffee cup with a handwritten message",
+    "qa_response": "The photo shared by Deborah was of tranquil and serene nature. \n\nAnswer: tranquil and serene nature.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_118": {
+    "qa_question": "What is one of Jolene's favorite dishes?",
+    "qa_answer": "lasagna",
+    "qa_response": "lasagna",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_119": {
+    "qa_question": "What picture did Jolene share related to feeling overwhelmed?",
+    "qa_answer": "a photo of a desk with a notebook and a computer monitor",
+    "qa_response": "The answer is: \"growth through obstacles.\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_120": {
+    "qa_question": "What did Jolene and Deb discuss as a helpful strategy for studying and time management?",
+    "qa_answer": "breaking tasks into smaller pieces and setting goals, using planners or schedulers",
+    "qa_response": "The helpful strategies discussed were using a bullet journal and meditation.",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_121": {
+    "qa_question": "What did Jolene ask Deb to help with on 13 March, 2023?",
+    "qa_answer": "time management",
+    "qa_response": "The memories do not mention Jolene asking Deb for help on 13 March 2023. \n\nAnswer: No mention.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_122": {
+    "qa_question": "What method does Deb suggest Jolene to try for organizing tasks based on importance and urgency?",
+    "qa_answer": "The Eisenhower Matrix",
+    "qa_response": "Eisenhower Matrix.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_123": {
+    "qa_question": "What did Jolene and Anna discuss while watching the sunset by the sea?",
+    "qa_answer": "They realized they inspire each other",
+    "qa_response": "The memories do not mention Jolene and Anna discussing anything while watching the sunset by the sea.  \n\nAnswer: No information available.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_124": {
+    "qa_question": "How does Jolene plan to pursue her dream of learning to surf?",
+    "qa_answer": "gathering information, watching videos, getting a beginners' guide",
+    "qa_response": "Jolene plans surf lessons.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_125": {
+    "qa_question": "What did Deborah buy to enhance her yoga practice besides the props?",
+    "qa_answer": "candle",
+    "qa_response": "candles and essential oils",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_126": {
+    "qa_question": "What type of music does Deborah find helpful during her yoga practice?",
+    "qa_answer": "instrumental tracks with mellow melodies and rhythms",
+    "qa_response": "The answer is: \"mellow instrumental tracks.\"",
+    "qa_category": 4,
+    "labels": [
+      "1.2"
+    ]
+  },
+  "1_127": {
+    "qa_question": "Who are the musicians mentioned by Jolene that she enjoys listening to during her yoga practice?",
+    "qa_answer": "Nils Frahm and Olafur Arnalds",
+    "qa_response": "Nils Frahm and Olafur Arnalds.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_128": {
+    "qa_question": "What album does Deborah recommend for meditation and deep relaxation?",
+    "qa_answer": "'Sleep'",
+    "qa_response": "The album Deborah recommends for meditation and deep relaxation is 'Sleep'. \n\nAnswer: 'Sleep'",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_129": {
+    "qa_question": "Which show did Deborah go to with a friend on 9 April, 2023?",
+    "qa_answer": "an art show",
+    "qa_response": "art show",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_130": {
+    "qa_question": "What does Deborah find comforting about going to art shows?",
+    "qa_answer": "It makes her feel like she's still experiencing it with her mom",
+    "qa_response": "The answer is: connection to her mom.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_131": {
+    "qa_question": "How does Jolene describe the time spent with her snakes and partner?",
+    "qa_answer": "Valuable and relaxing",
+    "qa_response": "Calming and bonding.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_132": {
+    "qa_question": "What does Jolene enjoy doing with her partner after a long day?",
+    "qa_answer": "Playing video games",
+    "qa_response": "Playing video games.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_133": {
+    "qa_question": "What is Jolene currently doing in June 2023?",
+    "qa_answer": "interning at a well-known engineering firm",
+    "qa_response": "In June 2023, Jolene is busy with her internship. \n\n(Source: Both Deborah's and Jolene's memories from \"9:17 am on 26 June, 2023\" explicitly state this.)",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_134": {
+    "qa_question": "For how long has Jolene had Seraphim as a pet?",
+    "qa_answer": "one year",
+    "qa_response": "1 year. \n\n(Calculated from \"last year\" in the memory timestamped 26 June 2023, meaning Seraphim was acquired in 2022.)",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_135": {
+    "qa_question": "How does Jolene feel when spending time with Seraphim?",
+    "qa_answer": "comforted",
+    "qa_response": "peaceful and joyful",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_136": {
+    "qa_question": "Which new yoga pose did Deborah share a photo of?",
+    "qa_answer": "tree pose",
+    "qa_response": "Dancer Pose (Natarajasana).",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_137": {
+    "qa_question": "What group activity did Deborah start with Anna?",
+    "qa_answer": "running group",
+    "qa_response": "running group",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_138": {
+    "qa_question": "What made being part of the running group easy for Deborah to stay motivated?",
+    "qa_answer": "helping and pushing each other during runs",
+    "qa_response": "Supportive group members cheering her.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_139": {
+    "qa_question": "Why did Jolene decide to get a snake as a pet?",
+    "qa_answer": "fascinated by reptiles and it felt like the perfect pet",
+    "qa_response": "Jolene was fascinated by reptiles.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_140": {
+    "qa_question": "What is the favorite game Jolene plays with her partner?",
+    "qa_answer": "It takes two",
+    "qa_response": "The favorite game Jolene plays with her partner is \"It Takes Two.\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_141": {
+    "qa_question": "What activity does Deborah do with her cats?",
+    "qa_answer": "take them out for a run in the park every morning and evening",
+    "qa_response": "Take them for runs.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_142": {
+    "qa_question": "How does Jolene describe the feeling of finding her snake snuggled under the bed after it got out?",
+    "qa_answer": "It really showed how much she loves her.",
+    "qa_response": "relieved and loving.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_143": {
+    "qa_question": "Why does Deborah take her cats out for a run in the park every day?",
+    "qa_answer": "Exercise and nature are important to her",
+    "qa_response": "Deborah values exercise and nature.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_144": {
+    "qa_question": "How did Jolene come to have her pet, Susie?",
+    "qa_answer": "She adopted her two years ago when feeling lonely.",
+    "qa_response": "Adopted two years ago.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_145": {
+    "qa_question": "What activities have been helping Jolene stay distracted during tough times?",
+    "qa_answer": "Video games and spending time with her pet, Susie",
+    "qa_response": "The activities that have been helping Jolene stay distracted during tough times are gaming, yoga, and meditation. \n\nAnswer: gaming, yoga, meditation",
+    "qa_category": 4,
+    "labels": [
+      "3.1"
+    ]
+  },
+  "1_146": {
+    "qa_question": "What kind of yoga routine does Deborah recommend to Jolene?",
+    "qa_answer": "A gentle flow routine focused on breathing and grounding",
+    "qa_response": "There is no information about Deborah recommending a yoga routine to Jolene.  \n\nAnswer: No recommendation found.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_147": {
+    "qa_question": "What did Jolene design inspired by their love for space and engines?",
+    "qa_answer": "Notebooks",
+    "qa_response": "Notebooks featuring galaxies and circuitry.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_148": {
+    "qa_question": "What journal has Jolene been using to help track tasks and stay organized?",
+    "qa_answer": "bullet journal",
+    "qa_response": "The answer is: bullet journal.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_149": {
+    "qa_question": "What game did Jolene recommend for being calming and cute?",
+    "qa_answer": "Animal Crossing: New Horizons",
+    "qa_response": "Animal Crossing: New Horizons.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_150": {
+    "qa_question": "What game did Jolene suggest as an awesome open-world game for the Nintendo Switch?",
+    "qa_answer": "Zelda BOTW",
+    "qa_response": "Zelda BOTW.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_151": {
+    "qa_question": "What did Deborah and her husband use to play to bond and make memories?",
+    "qa_answer": "video games",
+    "qa_response": "Detective games.",
+    "qa_category": 4,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_152": {
+    "qa_question": "What is special about the bench at the park near Deborah's house?",
+    "qa_answer": "It holds special memories of conversations with her mom",
+    "qa_response": "The bench holds memories with her mom.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_153": {
+    "qa_question": "What did Deborah and her mom chat about at their special bench in the park?",
+    "qa_answer": "dreams and life",
+    "qa_response": "dreams and life",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_154": {
+    "qa_question": "What feeling does Deborah get when she thinks about the time spent with her mom at their special spot?",
+    "qa_answer": "peace and gratitude",
+    "qa_response": "peace and gratitude",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_155": {
+    "qa_question": "What habits does Jolene practice to feel balanced?",
+    "qa_answer": "yoga, meditation, walks, and mindfulness",
+    "qa_response": "yoga and meditation",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_156": {
+    "qa_question": "Which yoga pose is Jolene a fan of for rest and calmness?",
+    "qa_answer": "savasana (the corpse pose)",
+    "qa_response": "The answer is \"savasana\" or \"corpse pose.\" \n\nHere's the step-by-step reasoning:\n1. Examining Jolene's memories reveals a direct mention at \"9:11 am on 21 August, 2023\": \"Jolene is a fan of savasana, also known as the corpse pose, as it is calming and helps her let go and surrender.\"\n2. No contradictory information exists in other memories.\n3. The answer directly addresses the question about her preferred pose for rest and calmness. \n\nFinal answer: savasana (corpse pose)",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_157": {
+    "qa_question": "How long has Jolene been doing yoga?",
+    "qa_answer": "3 years",
+    "qa_response": "3 years.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_158": {
+    "qa_question": "What did Jolene participate in recently that provided her with a rewarding experience?",
+    "qa_answer": "presenting at a virtual conference",
+    "qa_response": "The answer is: meditation retreat in Phuket.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_159": {
+    "qa_question": "How did Jolene feel after receiving positive feedback at the virtual conference?",
+    "qa_answer": "thrilled and rewarded",
+    "qa_response": "Thrilled and rewarded.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_160": {
+    "qa_question": "What kind of event did Jolene present at recently?",
+    "qa_answer": "virtual conference",
+    "qa_response": "virtual conference.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_161": {
+    "qa_question": "What did Jolene's mom stress the value of, which she wants to keep in mind for her engineering projects?",
+    "qa_answer": "Helping others",
+    "qa_response": "helping others",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_162": {
+    "qa_question": "What type of projects is Jolene interested in getting involved in the future?",
+    "qa_answer": "Sustainable initiatives and developing innovative solutions for environmental issues",
+    "qa_response": "Renewable energy and clean water.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_163": {
+    "qa_question": "How did Deborah get Luna, one of her cats?",
+    "qa_answer": "From the shelter",
+    "qa_response": "From the shelter.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_164": {
+    "qa_question": "How old is Max?",
+    "qa_answer": "8 years old",
+    "qa_response": "8 years old.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_165": {
+    "qa_question": "What type of classes did Jolene and her partner check out during their trip to Rio de Janeiro on 30 August, 2023?",
+    "qa_answer": "Yoga classes",
+    "qa_response": "yoga classes",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_166": {
+    "qa_question": "What type of place does Jolene visit to meditate?",
+    "qa_answer": "A tranquil spot by a pond",
+    "qa_response": "Jolene visits tranquil spots, retreats, and beaches to meditate. \n\nAnswer: tranquil spots, retreats, beaches",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_167": {
+    "qa_question": "What was the new plant Jolene got used as a reminder for on 30 August, 2023?",
+    "qa_answer": "To nurture herself and embrace fresh starts",
+    "qa_response": "The new plant Jolene got on 30 August, 2023 was used as a reminder to \"nurture herself and embrace fresh starts.\" \n\nAnswer: nurture herself and embrace fresh starts.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_168": {
+    "qa_question": "Why did Jolene get the new plant on 30 August, 2023?",
+    "qa_answer": "As a reminder to nurture herself and embrace fresh starts",
+    "qa_response": "To nurture herself and embrace fresh starts.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_169": {
+    "qa_question": "What has Jolene been focusing on lately besides studying?",
+    "qa_answer": "relationship with her partner",
+    "qa_response": "Based on the most recent memories from both users (up to 8 September 2023), Jolene has been focusing on **self-care activities like yoga and meditation**.  \n\nAnswer: Yoga and meditation.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_170": {
+    "qa_question": "How did Deborah's mom support her yoga practice when she first started?",
+    "qa_answer": "attended classes with her",
+    "qa_response": "Deborah's mom attended classes with her.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_171": {
+    "qa_question": "What was the video game console that Jolene's parents got her at age 10?",
+    "qa_answer": "nintendo game console",
+    "qa_response": "The memories do not specify the console.",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_172": {
+    "qa_question": "What was one of Jolene's favorite games to play with her mom on the nintendo wii game system?",
+    "qa_answer": "Monster Hunter: World",
+    "qa_response": "The memories do not mention any specific favorite games Jolene played with her mom on the Nintendo Wii system. \n\nAnswer: Not mentioned.",
+    "qa_category": 4,
+    "labels": [
+      "4.1"
+    ]
+  },
+  "1_173": {
+    "qa_question": "What course did Jolene sign up for on 6 September 2023?",
+    "qa_answer": "meditation",
+    "qa_response": "meditation course",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_174": {
+    "qa_question": "Why did Jolene have to reschedule their meeting with Deborah on September 8, 2023?",
+    "qa_answer": "Jolene already had plans",
+    "qa_response": "Deborah had plans.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_175": {
+    "qa_question": "Where did Jolene and her partner travel for a few weeks in September 2023?",
+    "qa_answer": "Phuket",
+    "qa_response": "Phuket.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_176": {
+    "qa_question": "What was the main focus of the session that stood out to Jolene during the retreat?",
+    "qa_answer": "releasing expectations and judgments and savoring the present",
+    "qa_response": "The main focus was releasing expectations and judgments.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_177": {
+    "qa_question": "How did Jolene feel about her progress in practicing mindfulness and gratitude?",
+    "qa_answer": "experiencing a new level of joy and happiness",
+    "qa_response": "Joyful and grateful.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_178": {
+    "qa_question": "What positive change did Jolene experience during the retreat?",
+    "qa_answer": "finding inner peace",
+    "qa_response": "The positive change Jolene experienced during the retreat was finding inner peace.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_179": {
+    "qa_question": "What did Jolene recently play that she described to Deb?",
+    "qa_answer": "a card game about cats",
+    "qa_response": "Overcooked 2.",
+    "qa_category": 4,
+    "labels": [
+      "1.2"
+    ]
+  },
+  "1_180": {
+    "qa_question": "What did Deborah do with their mom's old friends?",
+    "qa_answer": "reminisced and looked through photos",
+    "qa_response": "Looked through photos and reminisced.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_181": {
+    "qa_question": "Where did Deborah get married?",
+    "qa_answer": "on the beach",
+    "qa_response": "The answer is: at a beach.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_182": {
+    "qa_question": "What does yoga on the beach provide for Deborah?",
+    "qa_answer": "a peaceful atmosphere",
+    "qa_response": "Peace and relaxation.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_183": {
+    "qa_question": "How does Jolene describe their home room?",
+    "qa_answer": "little haven for peace and rest",
+    "qa_response": "Jolene describes her home room as a \"little haven for rest and recharge.\"",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_184": {
+    "qa_question": "What new activity did Deborah and her neighbor organize for the community on 16 September, 2023?",
+    "qa_answer": "Free gardening class",
+    "qa_response": "free gardening class",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_185": {
+    "qa_question": "What was Deborah's mom passionate about?",
+    "qa_answer": "Cooking",
+    "qa_response": "cooking, art, flowers, reading, travel",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_186": {
+    "qa_question": "What food did Deborah's mom make for her on birthdays?",
+    "qa_answer": "Pineapple cakes",
+    "qa_response": "pineapple birthday cakes",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_187": {
+    "qa_question": "What kind of cookies did Jolene used to bake with someone close to her?",
+    "qa_answer": "Chocolate chip cookies",
+    "qa_response": "The answer is: warm, gooey chocolate cookies.",
+    "qa_category": 4,
+    "labels": []
+  },
+  "1_188": {
+    "qa_question": "What outdoor activity did Jolene suggest doing together with Deborah?",
+    "qa_answer": "Surfing",
+    "qa_response": "watching the sunrise",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_189": {
+    "qa_question": "What activity did Deborah enjoy at the music festival with their pals on September 20, 2023?",
+    "qa_answer": "Dancing and bopping around",
+    "qa_response": "dancing",
+    "qa_category": 4,
+    "labels": [
+      "1.1"
+    ]
+  },
+  "1_190": {
+    "qa_question": "What did Deborah find freeing at the music festival?",
+    "qa_answer": "Dancing and bopping around",
+    "qa_response": "dancing and enjoying music",
+    "qa_category": 4,
+    "labels": [
+      "4.3"
+    ]
+  },
+  "1_191": {
+    "qa_question": "What are the names of Deborah's snakes?",
+    "qa_answer": "",
+    "qa_response": "Deborah does not have snakes.  \n\n(Note: The memories mention Jolene has snakes, but there's no record of Deborah having snakes.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_192": {
+    "qa_question": "What are Deborah's favorite books?",
+    "qa_answer": "",
+    "qa_response": "self-discovery books",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_193": {
+    "qa_question": "Where did Deborah get her dogs?",
+    "qa_answer": "",
+    "qa_response": "Deborah does not have dogs.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_194": {
+    "qa_question": "How old are Jolene's cats?",
+    "qa_answer": "",
+    "qa_response": "Jolene does not have cats.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_195": {
+    "qa_question": "When did Deborah's parents give her first console?",
+    "qa_answer": "",
+    "qa_response": "The memories do not contain any information about when Deborah's parents gave her first console. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_196": {
+    "qa_question": "When did Jolene release her pet snake?",
+    "qa_answer": "",
+    "qa_response": "There is no information in the memories about Jolene releasing her pet snake. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_197": {
+    "qa_question": "Where did Jolene meet her new friend Anna?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Jolene meeting a new friend named Anna. Therefore, the answer is:\n\nAnswer: Not mentioned in memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_198": {
+    "qa_question": "What is Deborah's favorite book which she mentioned on 4 February, 2023?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Deborah's favorite book on 4 February, 2023. \n\nAnswer: Not mentioned.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_199": {
+    "qa_question": "What cool stuff did Deborah accomplish at the retreat on 9 February, 2023?",
+    "qa_answer": "",
+    "qa_response": "The question asks about Deborah's accomplishments at the retreat on 9 February, 2023, but the memories provided only mention Jolene's accomplishments on that date. There is no information about Deborah's activities or accomplishments on that specific date in the given memories.\n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_200": {
+    "qa_question": "How does Deborah plan to involve local engineers in her idea of teaching STEM to underprivileged kids?",
+    "qa_answer": "",
+    "qa_response": "The answer is not found in the memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_201": {
+    "qa_question": "What gave Deborah anxiety in the garden she visited?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention anything about Deborah experiencing anxiety in the garden she visited. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_202": {
+    "qa_question": "Why did Jolene spend time in the garden?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"To nurture herself and embrace fresh starts.\" \n\nThis is based on Jolene's memory from \"11:46 am on 30 August, 2023,\" where she mentions getting a new plant as a reminder for self-nurturing and fresh starts.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_203": {
+    "qa_question": "How did Jolene and her rival initially meet?",
+    "qa_answer": "",
+    "qa_response": "\nIn an engineering class.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_204": {
+    "qa_question": "What activity does Jolene incorporate into her daily routine after going for a morning jog in the park?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Jolene going for a morning jog in the park or incorporating a specific activity after it. Therefore, the answer is: \n\n\"Not mentioned in memories.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_205": {
+    "qa_question": "What method does Jolene suggest Deborah to try for organizing tasks based on importance and urgency?",
+    "qa_answer": "",
+    "qa_response": "The answer is: \"Eisenhower Matrix.\" \n\nThis is based on Deborah's memory at \"5:35 pm on 22 March, 2023,\" where she mentions finding the Eisenhower Matrix useful for organizing and prioritizing tasks based on urgency and importance. Although the question is phrased as Jolene suggesting it to Deborah, the memories show that Deborah is the one who finds it useful, not Jolene suggesting it. However, since the question specifically asks for Jolene's suggestion and no memory indicates Jolene suggesting any method to Deborah, the closest relevant information is the Eisenhower Matrix mentioned by Deborah. \n\nIf the question is strictly about Jolene suggesting a method to Deborah, there is no direct evidence in the memories. But if it's about methods related to organizing tasks by importance and urgency, the Eisenhower Matrix is the only relevant method mentioned. \n\nFinal answer: \"Eisenhower Matrix.\" \n\n(Note: If the question requires Jolene to be the one suggesting, the answer would be \"None,\" as no memory shows Jolene suggesting a method to Deborah. Clarification may be needed.) \n\nHowever, based on the given context and the phrasing of the question, the most likely intended answer is: \n\n\"Eisenhower Matrix.\" \n\nBut strictly, the correct answer is: \n\n\"None.\" \n\n(No memory shows Jolene suggesting a method to Deborah.) \n\nGiven the ambiguity, the safest answer is: \n\n\"Eisenhower Matrix.\" \n\nBut to be precise: \n\nAnswer: \"None.\" \n\n(Since Jolene didn't suggest any method to Deborah in the memories.) \n\nHowever, the user likely expects \"Eisenhower Matrix,\" as it's the only method mentioned related to the question's topic. \n\nFinal answer: \"Eisenhower Matrix.\" \n\nBut to strictly adhere to the question's wording (Jolene suggesting to Deborah), the answer is: \n\nAnswer: \"None.\" \n\nClarification may be needed. \n\nFor the purpose of this exercise, the answer is: \n\n\"Eisenhower Matrix.\" \n\nBut the accurate answer based on the question is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah in memories.) \n\nFinal decision: \n\nAnswer: \"None.\" \n\n(Since the question specifies Jolene suggesting to Deborah, and no memory supports that.) \n\nHowever, if the question is interpreted as \"What method is related to organizing tasks by importance and urgency in the memories?\", the answer would be \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\nBut if the user made a phrasing error and meant \"What method does Deborah use for organizing tasks?\", the answer would be \"Eisenhower Matrix.\" \n\nGiven the current question, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah in memories.) \n\nBut to provide a helpful response despite the likely phrasing error: \n\nLikely intended answer: \"Eisenhower Matrix.\" \n\nStrict answer: \"None.\" \n\nFinal answer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut if the user confirms the question was phrased correctly, the answer remains \"None.\" If the question was meant to ask about methods Deborah uses, the answer would be \"Eisenhower Matrix.\" \n\nFor now, the answer is: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nHowever, the user may have intended to ask about methods Deborah uses, in which case the answer is \"Eisenhower Matrix.\" \n\nGiven the ambiguity, the strict answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase the question if they meant something else. \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut if the question was a typo and meant \"What method does Deborah use for organizing tasks?\", the answer is \"Eisenhower Matrix.\" \n\nFor now, the answer to the exact question is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah in memories.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nFinal answer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify the question if they meant something else. \n\nStrict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase the question if they meant \"What method does Deborah use for organizing tasks?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to clarify if they meant \"What method does Deborah use?\" \n\nFinal strict answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the phrasing, the answer is: \n\nAnswer: \"None.\" \n\n(No suggestion from Jolene to Deborah.) \n\nBut the user may want to rephrase if they meant \"What method does Deborah use?\" \n\nFinal answer: \n\nAnswer: \"None.\" \n\n(No memory of Jolene suggesting a method to Deborah.) \n\nBut the likely intended answer is \"Eisenhower Matrix.\" \n\nGiven the strict wording, the answer is: \n\nAnswer: \"None.\" \n\n(",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_206": {
+    "qa_question": "How does Jolene plan to pursue her dream of climbing mountains?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Jolene's plans for climbing mountains. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_207": {
+    "qa_question": "Who are the authors mentioned by Jolene that she enjoys reading during her yoga practice?",
+    "qa_answer": "",
+    "qa_response": "Nils Frahm and Olafur Arnalds.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_208": {
+    "qa_question": "Which show did Jolene go to with a friend on 9 April, 2023?",
+    "qa_answer": "",
+    "qa_response": "There is no mention of Jolene attending any show with a friend on 9 April, 2023 in the provided memories. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_209": {
+    "qa_question": "What does Deborah find comforting about going to horror movie screenings?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention anything about Deborah finding comfort in horror movie screenings. Therefore, the answer is:\n\nAnswer: Not mentioned in memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_210": {
+    "qa_question": "How does Deborah describe the time spent with her snakes and partner?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Deborah spending time with snakes. However, she enjoys playing detective games with her partner.  \n\nAnswer: Plays detective games together.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_211": {
+    "qa_question": "For how long has Jolene had Lucifer as a pet?",
+    "qa_answer": "",
+    "qa_response": "There is no mention of a pet named Lucifer in the provided memories. The pets mentioned are Susie, Seraphim, and snakes. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_212": {
+    "qa_question": "How does Deborah feel when spending time with Seraphim?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not contain any information about Deborah spending time with Seraphim. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_213": {
+    "qa_question": "What made being part of the running group easy for Jolene to stay motivated?",
+    "qa_answer": "",
+    "qa_response": "Deborah's help and pushes.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_214": {
+    "qa_question": "Why did Jolene decide to get a tarantula as a pet?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Jolene getting a tarantula as a pet. Therefore, the answer is:\n\nNo information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_215": {
+    "qa_question": "How did Deborah come to have her pet, Susie?",
+    "qa_answer": "",
+    "qa_response": "Deborah does not have Susie.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_216": {
+    "qa_question": "What did Deborah design inspired by their love for space and engines?",
+    "qa_answer": "",
+    "qa_response": "The answer is: Deborah did not design anything.  \n\n(Note: The memories show that Jolene designed notebooks featuring galaxies and circuitry, not Deborah.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_217": {
+    "qa_question": "What journal has Deborah been using to help track tasks and stay organized?",
+    "qa_answer": "",
+    "qa_response": "The answer is: bullet journal.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_218": {
+    "qa_question": "What game did Jolene recommend to Deborah for being thrilling and intense?",
+    "qa_answer": "",
+    "qa_response": "The game Jolene recommended to Deborah for being thrilling and intense is \"Monster Hunter: World.\" \n\n(From Deborah's memories: \"2:14 pm on 3 September, 2023: Jolene's favorite game to play with her mom was 'Monster Hunter: World', which she enjoys for its immersive story and open-world gaming.\")\n\nAnswer: \"Monster Hunter: World.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_219": {
+    "qa_question": "What game did Deborah suggest as an awesome open-world game for the Nintendo Switch?",
+    "qa_answer": "",
+    "qa_response": "The answer is: Zelda BOTW.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_220": {
+    "qa_question": "What is special about the bench at the park near Jolene's house?",
+    "qa_answer": "",
+    "qa_response": "The bench holds memories with Deborah's mom.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_221": {
+    "qa_question": "What did Jolene and her mom chat about at their special bench in the park?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Jolene and her mom chatting at a special bench in the park. The special bench is associated with Deborah and her mom, not Jolene. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_222": {
+    "qa_question": "How did Deborah feel after receiving positive feedback at the virtual conference?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention Deborah receiving positive feedback at a virtual conference. The answer is: \"No information available.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_223": {
+    "qa_question": "What kind of event did Deborah present at recently?",
+    "qa_answer": "",
+    "qa_response": "The most recent event Deborah presented at was a music festival on 20 September, 2023. \n\nAnswer: music festival",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_224": {
+    "qa_question": "What did Deborah's mom stress the value of, which she wants to keep in mind for her engineering projects?",
+    "qa_answer": "",
+    "qa_response": "helping others",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_225": {
+    "qa_question": "What type of projects is Deborah interested in getting involved in the future?",
+    "qa_answer": "",
+    "qa_response": "community cleanup, mindfulness workshops",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_226": {
+    "qa_question": "How did Jolene get Luna, one of her cats?",
+    "qa_answer": "",
+    "qa_response": "Jolene does not have Luna.  \n\n(From the memories: Deborah has two cats, Luna and Max. Jolene has snakes and a pet named Susie, but no mention of her having a cat named Luna.)",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_227": {
+    "qa_question": "What type of classes did Deborah and her partner check out during their trip to Rio de Janeiro on 30 August, 2023?",
+    "qa_answer": "",
+    "qa_response": "The answer is: yoga classes.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_228": {
+    "qa_question": "Why did Deborah get the new plant on 30 August, 2023?",
+    "qa_answer": "",
+    "qa_response": "The answer is: to nurture herself and embrace fresh starts.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_229": {
+    "qa_question": "How did Jolene's mom support her yoga practice when she first started?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Jolene's mom supporting her yoga practice.  \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_230": {
+    "qa_question": "What was the video game console that Deborah's parents got her at age 10?",
+    "qa_answer": "",
+    "qa_response": "The memories do not mention Deborah's parents getting her a video game console at age 10. The answer is: \"Not mentioned.\"",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_231": {
+    "qa_question": "What was one of Deborah's favorite games to play with her mom on the PlayStation game system?",
+    "qa_answer": "",
+    "qa_response": "\"Monster Hunter: World\"",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_232": {
+    "qa_question": "Where did Deborah and her partner travel for a few weeks in September 2023?",
+    "qa_answer": "",
+    "qa_response": "The memories do not contain any information about Deborah and her partner traveling for a few weeks in September 2023. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_233": {
+    "qa_question": "What did Jolene do with their mom's old friends?",
+    "qa_answer": "",
+    "qa_response": "Reconnected with them.",
+    "qa_category": 5,
+    "labels": [
+      "4.2"
+    ]
+  },
+  "1_234": {
+    "qa_question": "Where did Jolene get married?",
+    "qa_answer": "",
+    "qa_response": "Jolene is not married.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_235": {
+    "qa_question": "What new activity did Jolene and her neighbor organize for the community on 16 September, 2023?",
+    "qa_answer": "",
+    "qa_response": "The provided memories do not mention any activity organized by Jolene and her neighbor on 16 September, 2023. \n\nAnswer: Not mentioned in memories.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_236": {
+    "qa_question": "What food did Jolene's mom make for her on holidays?",
+    "qa_answer": "",
+    "qa_response": "The memories do not contain any information about what food Jolene's mom made for her on holidays. \n\nAnswer: No information available.",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_237": {
+    "qa_question": "What kind of cookies did Deborah used to bake with someone close to her?",
+    "qa_answer": "",
+    "qa_response": "pineapple birthday cakes",
+    "qa_category": 5,
+    "labels": []
+  },
+  "1_238": {
+    "qa_question": "What activity did Jolene enjoy at the music festival with their pals on September 20, 2023?",
+    "qa_answer": "",
+    "qa_response": "The memories do not specify what activity Jolene enjoyed at the music festival on September 20, 2023. \n\nAnswer: Not specified.",
+    "qa_category": 5,
+    "labels": []
+  }
+}
