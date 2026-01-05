@@ -1,199 +1,245 @@
-# 命令速查表
+# Command Cheatsheet
 
-## 🚀 常用命令
+## 🚀 Common Commands
 
-### 单模型诊断（快速）
+### Single Model Diagnosis (Fast)
 
 ```bash
-# DeepSeek单模型
+# DeepSeek single model
 python scripts/run_diagnosis.py deepseek --no-voting
 
-# GPT-4.1单模型
+# GPT-4.1 single model
 python scripts/run_diagnosis.py gpt4.1 --no-voting
 
-# GPT-5单模型
+# GPT-5 single model
 python scripts/run_diagnosis.py gpt5 --no-voting
 ```
 
-**输出目录**: `data/output/llm_annotation_single/`
+**Output Directory**: `data/output/llm_annotation_single/`
 
 ---
 
-### 投票诊断（精确）
+### Voting Diagnosis (Precise)
 
 ```bash
-# DeepSeek 3轮投票（默认）
+# DeepSeek 3-round voting (default)
 python scripts/run_diagnosis.py deepseek
 
-# DeepSeek 5轮投票
+# DeepSeek 5-round voting
 python scripts/run_diagnosis.py deepseek --num-votes 5
 
-# GPT-4.1 3轮投票
+# GPT-4.1 3-round voting
 python scripts/run_diagnosis.py gpt4.1 --voting
 
-# GPT-5 5轮投票
+# GPT-5 5-round voting
 python scripts/run_diagnosis.py gpt5 --num-votes 5
 ```
 
-**输出目录**: `data/output/llm_annotation_voting/`
+**Output Directory**: `data/output/llm_annotation_voting/`
 
 ---
 
-## 📊 快速决策
+### Multi-Model Discussion Diagnosis (Highest Precision)
 
-| 你的需求 | 推荐命令 |
-|----------|----------|
-| 🏃 快速测试 | `python scripts/run_diagnosis.py deepseek --no-voting` |
-| 💰 节省成本 | `python scripts/run_diagnosis.py deepseek --no-voting` |
-| 🎯 高准确性 | `python scripts/run_diagnosis.py deepseek --num-votes 5` |
-| ⚡ 大批量处理 | `python scripts/run_diagnosis.py deepseek --no-voting` |
-| 🔬 研究实验 | `python scripts/run_diagnosis.py gpt4.1 --num-votes 3` |
-| 📈 对比分析 | 运行多个配置，对比结果 |
+```bash
+# Default: 3 models (deepseek, gpt-4.1, gpt-5), 3 rounds per stage
+python scripts/run_diagnosis_discussion.py
 
----
+# Custom models
+python scripts/run_diagnosis_discussion.py --models deepseek gpt-4.1 gpt-5
 
-## 🔧 参数说明
+# Custom max rounds per stage
+python scripts/run_diagnosis_discussion.py --max-rounds 5
 
-### 基本参数
+# Specify input/output
+python scripts/run_diagnosis_discussion.py -i data/input/test.json -o results/
+```
 
-| 参数 | 作用 | 示例 |
-|------|------|------|
-| `deepseek` / `gpt4.1` / `gpt5` | 选择模型 | `python scripts/run_diagnosis.py gpt4.1` |
-| `--no-voting` | 单模型模式 | `python scripts/run_diagnosis.py --no-voting` |
-| `--voting` | 投票模式（默认） | `python scripts/run_diagnosis.py --voting` |
-| `--num-votes N` | 投票轮数 | `python scripts/run_diagnosis.py --num-votes 5` |
-
-### 文件参数
-
-| 参数 | 短参数 | 作用 | 示例 |
-|------|--------|------|------|
-| `--input` | `-i` | 指定输入文件 | `python scripts/run_diagnosis.py -i data/test.json` |
-| `--output-dir` | `-o` | 指定输出目录 | `python scripts/run_diagnosis.py -o results/` |
-| `--output-file` | `-f` | 指定输出文件名 | `python scripts/run_diagnosis.py -f output.json` |
-
-### 其他参数
-
-| 参数 | 作用 | 示例 |
-|------|------|------|
-| `--help` / `-h` | 显示帮助 | `python scripts/run_diagnosis.py --help` |
+**Output Directory**: `data/output/llm_annotation_discussion/`
 
 ---
 
-## 📈 统计与绘图
+## 📊 Quick Decision Guide
 
-### 1. 人工标注统计
+| Your Need | Recommended Command |
+|-----------|---------------------|
+| 🏃 Quick Test | `python scripts/run_diagnosis.py deepseek --no-voting` |
+| 💰 Cost Saving | `python scripts/run_diagnosis.py deepseek --no-voting` |
+| 🎯 High Accuracy | `python scripts/run_diagnosis.py deepseek --num-votes 5` |
+| 🏆 Highest Accuracy | `python scripts/run_diagnosis_discussion.py` |
+| ⚡ Batch Processing | `python scripts/run_diagnosis.py deepseek --no-voting` |
+| 🔬 Research Experiments | `python scripts/run_diagnosis.py gpt4.1 --num-votes 3` |
+| 🤝 Consensus-based | `python scripts/run_diagnosis_discussion.py --max-rounds 3` |
+| 📈 Comparative Analysis | Run multiple configurations and compare results |
+
+---
+
+## 🔧 Parameter Reference
+
+### Basic Parameters (run_diagnosis.py)
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `deepseek` / `gpt4.1` / `gpt5` | Select model | `python scripts/run_diagnosis.py gpt4.1` |
+| `--no-voting` | Single model mode | `python scripts/run_diagnosis.py --no-voting` |
+| `--voting` | Voting mode (default) | `python scripts/run_diagnosis.py --voting` |
+| `--num-votes N` | Number of voting rounds | `python scripts/run_diagnosis.py --num-votes 5` |
+
+### Discussion Parameters (run_diagnosis_discussion.py)
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `--models` | Models for discussion | `--models deepseek gpt-4.1 gpt-5` |
+| `--max-rounds N` | Max discussion rounds per stage | `--max-rounds 3` |
+
+### File Parameters
+
+| Parameter | Short | Description | Example |
+|-----------|-------|-------------|---------|
+| `--input` | `-i` | Specify input file | `-i data/test.json` |
+| `--output-dir` | `-o` | Specify output directory | `-o results/` |
+| `--output-file` | `-f` | Specify output filename | `-f output.json` |
+
+### Other Parameters
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `--help` / `-h` | Show help | `python scripts/run_diagnosis.py --help` |
+
+---
+
+## 📈 Statistics & Plotting
+
+### 1. Human Annotation Statistics
 
 ```bash
 python scripts/analyze_human_data.py
 ```
-- 输出: `data/output/evalresult/human_annotation_stats_[TIMESTAMP].txt`
+- Output: `data/output/evalresult/human_annotation_stats_[TIMESTAMP].txt`
 
-### 2. 模型标注统计 (投票结果)
+### 2. Model Annotation Statistics (Voting Results)
 
 ```bash
 python scripts/analyze_llm_results.py
 ```
-- 输入: `data/output/llm_annotation_voting/`
-- 输出: `data/output/evalresult/llm_annotation_voting_stats_[TIMESTAMP].txt`
+- Input: `data/output/llm_annotation_voting/`
+- Output: `data/output/evalresult/llm_annotation_voting_stats_[TIMESTAMP].txt`
 
-### 3. 人工 vs 模型 对比分析
+### 3. Human vs Model Comparison Analysis
 
 ```bash
 python scripts/compare_results.py \
     -H data/input/human_annotation \
     -L data/output/llm_annotation_voting/20251205
 ```
-- 输出:
+- Output:
     - `data/output/evalresult/model_phase_[TIMESTAMP].txt`
     - `data/output/evalresult/model_label_exact_[TIMESTAMP].txt`
     - `data/output/evalresult/human_vs_voting_final_phase_confusion_[TIMESTAMP].txt`
 
-### 4. 绘图命令
+### 4. Plotting Commands
 
-所有绘图脚本生成的图片均包含时间戳，防止覆盖。
+All plotting scripts generate images with timestamps to prevent overwriting.
 
 ```bash
-# 绘制投票结果统计图
+# Plot voting results statistics
 python plot/plot_voting_stats.py
 
-# 绘制人工标注统计图
+# Plot human annotation statistics
 python plot/plot_human_stats.py
 
-# 绘制模型一致性图
+# Plot model consistency
 python plot/plot_consistency.py
 
-# 绘制混淆矩阵
+# Plot confusion matrix
 python plot/plot_confusion_matrix.py
 ```
-- 输出目录: `data/output/plot_result/`
+- Output Directory: `data/output/plot_result/`
 
 ---
 
-## 📁 输出文件命名规则
+## 📁 Output File Naming Convention
 
-所有输出文件均包含时间戳 `_YYYYMMDD_HHMMSS`，例如：
+All output files include a timestamp `_YYYYMMDD_HHMMSS`, for example:
 
-### 单模型模式
+### Single Model Mode
 ```
 data/output/llm_annotation_single/
   └── [input_name]_single_deepseek_20251216_103000.json
 ```
 
-### 投票模式
+### Voting Mode
 ```
 data/output/llm_annotation_voting/
   └── [input_name]_voting_3rounds_deepseek_20251216_103000.json
 ```
 
----
-
-## ⚡ 性能参考
-
-| 配置 | 处理速度 | API调用 | 推荐场景 |
-|------|----------|---------|----------|
-| 单模型 | 1x | 1x | 日常使用 |
-| 3轮投票 | 0.33x | 3x | 标准评估 |
-| 5轮投票 | 0.20x | 5x | 高精度需求 |
-
----
-
-## 🆘 常见问题
-
-### Q: 如何中断正在运行的任务？
-```bash
-Ctrl + C  # 系统会自动保存当前进度
+### Discussion Mode
+```
+data/output/llm_annotation_discussion/
+  └── [input_name]_discussion_3rounds_deepseek_gpt41_gpt5_20251216_103000.json
 ```
 
-### Q: 如何继续被中断的任务？
+---
+
+## ⚡ Performance Reference
+
+| Configuration | Processing Speed | API Calls | Recommended Scenario |
+|---------------|------------------|-----------|----------------------|
+| Single Model | 1x | 1x | Daily use |
+| 3-round Voting | 0.33x | 3x | Standard evaluation |
+| 5-round Voting | 0.20x | 5x | High precision needs |
+| Discussion (3 models, 3 rounds) | ~0.11x | ~9x per stage | Highest precision, research |
+
+---
+
+## 🆘 FAQ
+
+### Q: How to interrupt a running task?
 ```bash
-# 再次运行相同的命令即可
+Ctrl + C  # The system will automatically save current progress
+```
+
+### Q: How to resume an interrupted task?
+```bash
+# Simply run the same command again
 python scripts/run_diagnosis.py deepseek --no-voting
 ```
 
-### Q: 如何查看当前进度？
+### Q: How to check current progress?
 ```bash
-# 查看输出文件中的条目数（需替换实际文件名）
+# Check the number of entries in the output file (replace with actual filename)
 python -c "import json; print(len(json.load(open('data/output/llm_annotation_single/your_file.json'))))"
 ```
 
+### Q: What happens when models disagree in discussion mode?
+The system uses majority voting after max rounds. If all models disagree (1:1:1), GPT-5's result is used as the tiebreaker.
+
 ---
 
-## 📝 完整示例
+## 📝 Complete Examples
 
 ```bash
-# 示例1: 快速单模型诊断
+# Example 1: Quick single model diagnosis
 $ python scripts/run_diagnosis.py deepseek --no-voting
-🚀 记忆诊断系统启动
-🤖 使用模型: deepseek
-📊 诊断模式: 单模型诊断
+🚀 Memory Diagnosis System Started
+🤖 Using model: deepseek
+📊 Diagnosis mode: Single model diagnosis
 ...
 
-# 示例2: 5轮投票诊断
+# Example 2: 5-round voting diagnosis
 $ python scripts/run_diagnosis.py gpt4.1 --num-votes 5
-🚀 记忆诊断系统启动
-🤖 使用模型: gpt-4.1
-📊 诊断模式: 投票机制 (5轮)
+🚀 Memory Diagnosis System Started
+🤖 Using model: gpt-4.1
+📊 Diagnosis mode: Voting mechanism (5 rounds)
+...
+
+# Example 3: Multi-model discussion diagnosis
+$ python scripts/run_diagnosis_discussion.py --models deepseek gpt-4.1 gpt-5 --max-rounds 3
+🚀 Memory Diagnosis System - Multi-Model Discussion Version Started
+🤖 Participating models: deepseek, gpt-4.1, gpt-5
+🔄 Max rounds per stage: 3
 ...
 ```
 
-**提示**: 将此文件保存为书签，方便随时查阅！
+**Tip**: Bookmark this file for quick reference!
