@@ -1,78 +1,126 @@
 # MemEval - Chain-of-Stage Diagnosis for LLM Memory Systems
 
-MemEval 是一个针对智能体记忆（Agentic Memory）的分阶段诊断系统，旨在精准定位记忆故障发生的具体环节。它采用“人工+大模型”的双轨诊断机制，将人工诊断与大模型自动诊断相结合，在分析记忆问题的同时评估两者的一致性。
+MemEval is a stage-by-stage diagnostic system for Agentic Memory, designed to precisely locate the specific stage where memory failures occur. It employs a dual-track diagnostic mechanism combining human annotation and LLM-based automatic diagnosis, analyzing memory issues while evaluating the consistency between the two approaches.
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 MemEval/
-├── data/                   # 数据文件
-│   ├── input/              # 输入数据 (mem0_mem, human_annotation, etc.)
-│   └── output/             # 结果输出 (llm_annotation_voting, etc.)
-├── docs/                   # 文档
-├── scripts/                # Python 脚本
-│   ├── run_diagnosis.py    # 核心诊断程序
+├── data/                   # Data files
+│   ├── input/              # Input data (mem0_mem, human_annotation, etc.)
+│   └── output/             # Output results (llm_annotation_voting, etc.)
+├── docs/                   # Documentation
+├── scripts/                # Python scripts
+│   ├── run_diagnosis.py              # Core diagnosis program
+│   ├── run_diagnosis_discussion.py   # Multi-model discussion diagnosis
 │   └── ...
-├── plot/                   # 绘图工具
-├── requirements.txt        # 项目依赖
-└── README.md               # 本文件
+├── plot/                   # Plotting utilities
+├── requirements.txt        # Project dependencies
+└── README.md               # This file
 ```
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1. 环境准备
+### 1. Environment Setup
 
-推荐使用 Python 3.8+。
+Python 3.8+ is recommended.
 
 ```bash
-# 安装依赖
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. 配置环境变量
+### 2. Configure Environment Variables
 
-复制 `env.example` 为 `.env` 并填写 API Key：
+Copy `env.example` to `.env` and fill in your API keys:
 
 ```bash
 cp env.example .env
 ```
 
-编辑 `.env` 文件，填入你的 LLM API Key (DeepSeek, OpenAI, DashScope 等)。
+Edit the `.env` file with your LLM API keys (DeepSeek, OpenAI, DashScope, etc.).
 
-### 3. 运行诊断
+### 3. Run Diagnosis
 
-#### 单模型诊断 (快速)
+#### Single Model Diagnosis (Fast)
 
 ```bash
 python scripts/run_diagnosis.py deepseek --no-voting
 ```
 
-#### 投票诊断 (高精度)
+#### Voting Diagnosis (High Precision)
 
 ```bash
 python scripts/run_diagnosis.py deepseek --voting --num-votes 3
 ```
 
-## 🛠️ 功能模块
+#### Multi-Model Discussion Diagnosis (Highest Precision)
 
-### 诊断阶段
-1. **一致性检查 (Stage 0)**: 检查回答是否与参考答案一致。
-2. **记忆提取 (Stage 1)**: 检查初始记忆提取是否充分、准确。
-3. **记忆更新 (Stage 2)**: 检查记忆更新操作（增删改）是否正确。
-4. **记忆检索 (Stage 3)**: 检查检索到的记忆是否包含回答问题所需的关键信息。
-5. **推理 (Stage 4)**: 如果上述阶段都通过，检查模型推理逻辑是否正确。
+The discussion-based diagnosis uses multiple models to independently analyze each stage, then engage in multi-round discussions to reach consensus or vote on the final decision.
 
-### 支持的模型
-- **DeepSeek** (`deepseek`): 默认推荐模型。
-- **GPT-4** (`gpt4.1`): 适用于高精度基准。
-- **GPT-5** (`gpt5`): 实验性支持。
-- **Qwen** (`qwen`): 通义千问模型。
+```bash
+# Default: 3 models (deepseek, gpt-4.1, gpt-5), 3 rounds per stage
+python scripts/run_diagnosis_discussion.py
 
-## 📊 更多用法
+# Custom models and rounds
+python scripts/run_diagnosis_discussion.py --models deepseek gpt-4.1 gpt-5 --max-rounds 3
 
-请参考 [COMMAND_CHEATSHEET.md](docs/COMMAND_CHEATSHEET.md) 获取详细的命令速查表。
+# Specify input/output files
+python scripts/run_diagnosis_discussion.py -i data/input/mem0_mem/sample/sampled_qa_50.json -o data/output/llm_annotation_discussion
+```
 
-## 📄 许可证
+**Discussion Mode Parameters:**
+- `--max-rounds N`: Maximum discussion rounds per stage (default: 3)
+- `--models`: List of models participating in discussion (default: deepseek gpt-4.1 gpt-5)
+- `-i, --input`: Input file path
+- `-o, --output-dir`: Output directory path
+- `-f, --output-file`: Output filename (auto-generated if not specified)
+
+## 🛠️ Features
+
+### Diagnosis Stages
+
+1. **Consistency Check (Stage 0)**: Verify if the response is semantically consistent with the reference answer.
+2. **Memory Extraction (Stage 1)**: Check if the initial memory extraction is sufficient and accurate.
+3. **Memory Update (Stage 2)**: Verify if memory update operations (add/delete/modify) are correct.
+4. **Memory Retrieval (Stage 3)**: Check if retrieved memories contain the key information needed to answer the question.
+5. **Reasoning (Stage 4)**: If all previous stages pass, check if the model's reasoning logic is correct.
+
+### Error Labels
+
+| Stage | Label | Description |
+|-------|-------|-------------|
+| Stage 1 | 1.1 | Missing key information |
+| Stage 1 | 1.2 | Incorrect or conflicting information |
+| Stage 1 | 1.3 | Ambiguous or overly generic information |
+| Stage 2 | 2.1 | Incorrect update (added wrong/fabricated details) |
+| Stage 2 | 2.2 | Deleted information (removed necessary entries) |
+| Stage 2 | 2.3 | Weakened information (diluted or less specific) |
+| Stage 3 | 3.1 | Failed to recall correct information |
+| Stage 3 | 3.2 | Unreasonable ranking (irrelevant info prioritized) |
+| Stage 4 | 4.1 | Correct memory entries were ignored |
+| Stage 4 | 4.2 | Reasoning error (invented details, over-specified) |
+| Stage 4 | 4.3 | Format or detail error (minor deviations) |
+
+### Diagnosis Modes
+
+| Mode | Command | Description |
+|------|---------|-------------|
+| Single Model | `run_diagnosis.py --no-voting` | Fast, single model analysis |
+| Voting | `run_diagnosis.py --voting --num-votes N` | Multiple runs with majority voting |
+| Discussion | `run_diagnosis_discussion.py` | Multi-model collaborative discussion |
+
+### Supported Models
+
+- **DeepSeek** (`deepseek`): Default recommended model.
+- **GPT-4.1** (`gpt-4.1`): Suitable for high-precision benchmarks.
+- **GPT-5** (`gpt-5`): Latest generation model.
+- **Qwen** (`qwen`): Alibaba's Tongyi Qianwen model.
+
+## 📊 More Usage
+
+Please refer to [COMMAND_CHEATSHEET.md](docs/COMMAND_CHEATSHEET.md) for a detailed command reference.
+
+## 📄 License
 
 [License Information]
-
