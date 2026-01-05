@@ -159,6 +159,56 @@ def plot_line_chart(
     print(f"Line chart saved to: {save_path}")
 
 
+def get_stage_colors(label_names):
+    """
+    根据label名称的阶段前缀，分配4种主色调系统的颜色。
+    Stage 1 (Extraction): 蓝色系 (深 -> 浅)
+    Stage 2 (Update): 橙色/黄色系 (深 -> 浅)
+    Stage 3 (Retrieval): 灰色/紫色系 (深 -> 浅)
+    Stage 4 (Utilization): 绿色/青色系 (深 -> 浅)
+    """
+    # 定义每个阶段的颜色渐变（从深到浅）
+    stage_color_maps = {
+        "1": [  # Extraction - 蓝色系
+            (0.12, 0.47, 0.71),  # 深蓝
+            (0.26, 0.63, 0.85),  # 中蓝
+            (0.50, 0.78, 0.95),  # 浅蓝
+        ],
+        "2": [  # Update - 橙色/黄色系
+            (0.90, 0.50, 0.13),  # 深橙
+            (0.98, 0.65, 0.30),  # 中橙
+            (1.00, 0.80, 0.40),  # 浅橙/黄
+        ],
+        "3": [  # Retrieval - 灰色/紫色系
+            (0.50, 0.40, 0.60),  # 深紫灰
+            (0.65, 0.55, 0.75),  # 中紫灰
+            (0.80, 0.75, 0.88),  # 浅紫灰
+        ],
+        "4": [  # Utilization - 绿色/青色系
+            (0.13, 0.59, 0.53),  # 深青绿
+            (0.30, 0.75, 0.68),  # 中青绿
+            (0.55, 0.88, 0.82),  # 浅青绿
+        ],
+    }
+    
+    colors = []
+    for label in label_names:
+        # 提取阶段编号（label格式如 "1.1", "2.3" 等）
+        stage = label.split(".")[0]
+        sub_idx = int(label.split(".")[1]) - 1  # 子项索引（从0开始）
+        
+        if stage in stage_color_maps:
+            color_list = stage_color_maps[stage]
+            # 根据子项索引选择颜色（循环使用）
+            color = color_list[sub_idx % len(color_list)]
+            colors.append(color)
+        else:
+            # 默认灰色
+            colors.append((0.7, 0.7, 0.7))
+    
+    return colors
+
+
 def plot_pie_charts(
     categories, label_names, counts, out_dir: Path, filename: str
 ):
@@ -166,9 +216,8 @@ def plot_pie_charts(
     fig, axes = plt.subplots(2, 2, figsize=(10, 8), dpi=300)
     axes = axes.flatten()
 
-    # 统一配色，使四个饼图颜色一致
-    cmap = plt.get_cmap("tab20")
-    colors = cmap(np.linspace(0, 1, len(label_names)))
+    # 使用基于阶段的配色方案
+    colors = get_stage_colors(label_names)
 
     for ax, cat in zip(axes, categories):
         data = np.array(counts[cat], dtype=float)
@@ -177,20 +226,133 @@ def plot_pie_charts(
             ax.text(0.5, 0.5, "No data", ha="center", va="center", fontsize=12)
             ax.set_axis_off()
             continue
+        
+        # 过滤掉数值为0的标签
+        filtered_labels = [label_names[i] if data[i] > 0 else '' for i in range(len(label_names))]
+        
+        # 绘制饼图，使用引线连接标签
         wedges, texts, autotexts = ax.pie(
             data,
-            labels=None,  # 不在扇区外侧标出 label 名称，仅显示百分比
-            autopct="%1.1f%%",
+            labels=filtered_labels,  # 只显示非0的label
+            autopct=lambda pct: f'{pct:.1f}%' if pct > 0 else '',
             startangle=90,
             colors=colors,
-            textprops={"fontsize": 10, "fontweight": "bold"},
-            pctdistance=0.8,
+            textprops={"fontsize": 9, "fontweight": "bold"},
+            pctdistance=0.75,
+            labeldistance=1.15,  # label距离圆心的距离
+            wedgeprops={"linewidth": 0.5, "edgecolor": "white"},
+            rotatelabels=False,
         )
-        ax.set_title(CAT_NAME.get(cat, f"Category {cat}"), fontsize=14)
-
-        for w in wedges:
-            w.set_linewidth(0.5)
-            w.set_edgecolor("white")
+        ax.set_title(CAT_NAME.get(cat, f"Category {cat}"), fontsize=18, fontweight="bold")
+        
+        # 只处理非空标签
+        valid_indices = [i for i, label in enumerate(filtered_labels) if label != '']
+        valid_texts = [texts[i] for i in valid_indices]
+        valid_wedges = [wedges[i] for i in valid_indices]
+        
+        if not valid_texts:
+            continue
+        
+        # 调整标签位置以避免重叠 - 改进版
+        positions = []
+        angles = []
+        wedge_sizes = []
+        
+        for i, (text, wedge) in enumerate(zip(valid_texts, valid_wedges)):
+            x, y = text.get_position()
+            angle = (wedge.theta2 + wedge.theta1) / 2.0
+            size = wedge.theta2 - wedge.theta1
+            positions.append([x, y])
+            angles.append(angle)
+            wedge_sizes.append(size)
+        
+        # 按角度排序，相邻的标签交替设置不同的距离
+        angle_order = np.argsort(angles)
+        base_distances = [1.15] * len(angles)
+        
+        for idx, i in enumerate(angle_order):
+            # 检查与前一个和后一个的角度差
+            if idx > 0:
+                prev_i = angle_order[idx - 1]
+                angle_diff = abs(angles[i] - angles[prev_i])
+                if angle_diff < 45:
+                    # 交替设置距离
+                    if idx % 2 == 0:
+                        base_distances[i] = 1.25
+                    else:
+                        base_distances[prev_i] = 1.25
+        
+        # 应用基础距离
+        for i, (angle, dist) in enumerate(zip(angles, base_distances)):
+            angle_rad = np.deg2rad(angle)
+            positions[i][0] = np.cos(angle_rad) * dist
+            positions[i][1] = np.sin(angle_rad) * dist
+        
+        # 检测并调整重叠的标签 - 优先沿切向调整以避免引线交叉
+        adjusted = True
+        max_iterations = 60
+        iteration = 0
+        min_distance = 0.18
+        max_radius = 1.3  # 限制标签最远距离
+        
+        while adjusted and iteration < max_iterations:
+            adjusted = False
+            iteration += 1
+            for i in range(len(positions)):
+                for j in range(i + 1, len(positions)):
+                    dx = positions[i][0] - positions[j][0]
+                    dy = positions[i][1] - positions[j][1]
+                    distance = np.sqrt(dx**2 + dy**2)
+                    
+                    # 如果两个标签距离太近
+                    if distance < min_distance:
+                        adjusted = True
+                        
+                        # 获取两个标签的角度
+                        angle_i = np.arctan2(positions[i][1], positions[i][0])
+                        angle_j = np.arctan2(positions[j][1], positions[j][0])
+                        
+                        # 优先沿切向（垂直于径向）推开，减少引线交叉
+                        # 切向方向：垂直于从原点到标签的方向
+                        tangent_i = np.array([-np.sin(angle_i), np.cos(angle_i)])
+                        tangent_j = np.array([-np.sin(angle_j), np.cos(angle_j)])
+                        
+                        # 判断应该向哪个切向方向推
+                        if angle_i < angle_j:
+                            push_i = -tangent_i * 0.06  # 逆时针推
+                            push_j = tangent_j * 0.06   # 顺时针推
+                        else:
+                            push_i = tangent_i * 0.06
+                            push_j = -tangent_j * 0.06
+                        
+                        # 推开两个标签
+                        new_pos_i = [positions[i][0] + push_i[0], positions[i][1] + push_i[1]]
+                        new_pos_j = [positions[j][0] + push_j[0], positions[j][1] + push_j[1]]
+                        
+                        # 检查是否超出最大半径
+                        radius_i = np.sqrt(new_pos_i[0]**2 + new_pos_i[1]**2)
+                        radius_j = np.sqrt(new_pos_j[0]**2 + new_pos_j[1]**2)
+                        
+                        if radius_i <= max_radius:
+                            positions[i] = new_pos_i
+                        if radius_j <= max_radius:
+                            positions[j] = new_pos_j
+        
+        # 应用调整后的位置
+        for text, pos in zip(valid_texts, positions):
+            text.set_position(pos)
+        
+        # 手动绘制引线：从扇形边缘到标签
+        for wedge, text in zip(valid_wedges, valid_texts):
+            # 获取扇形的中心角度
+            angle = (wedge.theta2 + wedge.theta1) / 2.0
+            # 计算扇形边缘的点（半径为1）
+            x1 = np.cos(np.deg2rad(angle))
+            y1 = np.sin(np.deg2rad(angle))
+            # 获取标签位置
+            x2, y2 = text.get_position()
+            # 绘制引线
+            ax.plot([x1, x2], [y1, y2], color='gray', linewidth=0.5, linestyle='-', alpha=0.6)
 
         # 只保留每个类别中前三大的百分比标注
         top3_idx = np.argsort(data)[-3:]
@@ -198,29 +360,15 @@ def plot_pie_charts(
             if idx not in top3_idx:
                 autotext.set_text("")
             else:
-                autotext.set_fontsize(12)
+                autotext.set_fontsize(10)
                 autotext.set_fontweight("bold")
 
     # 如果类别不足 4，剩余子图隐藏
     for j in range(len(categories), 4):
         axes[j].set_axis_off()
 
-    # 为饼图添加统一图例（颜色对应 label 类型）
-    legend_patches = [
-        Patch(facecolor=colors[i], edgecolor="white", label=label_names[i])
-        for i in range(len(label_names))
-    ]
-    fig.legend(
-        handles=legend_patches,
-        loc="center right",
-        ncol=1,
-        frameon=False,
-        bbox_to_anchor=(1.02, 0.5),
-        borderaxespad=0.0,
-        prop={"weight": "bold"},
-    )
-
-    fig.tight_layout(rect=[0.0, 0.0, 0.85, 1.0])
+    # 不再添加统一图例
+    fig.tight_layout()
 
     save_path = out_dir / filename
     fig.savefig(save_path, dpi=300, bbox_inches="tight")

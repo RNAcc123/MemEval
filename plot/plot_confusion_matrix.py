@@ -25,12 +25,12 @@ plt.rcParams.update(
 )
 
 
-PHASES = ["Phase 1", "Phase 2", "Phase 3", "Phase 4", "EMPTY"]
+STAGES = ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "EMPTY"]
 
 
 def load_confusion_matrix(path: Path):
     """
-    解析 human_vs_voting_final_phase_confusion.txt 中的混淆矩阵。
+    解析 human_vs_voting_final_phase_confusion.txt 或 stage_confusion.txt 中的混淆矩阵。
 
     返回:
         true_labels: list[str]  # 行标签顺序
@@ -42,21 +42,22 @@ def load_confusion_matrix(path: Path):
 
     header_line = None
     for line in lines:
-        if line.startswith("| True phase"):
+        if line.startswith("| True phase") or line.startswith("| True stage"):
             header_line = line
             break
     if header_line is None:
-        raise ValueError("未在文件中找到表头行 '| True phase | ... |'")
+        raise ValueError("未在文件中找到表头行 '| True phase/stage | ... |'")
 
     header_cells = [c.strip() for c in header_line.strip().strip("|").split("|")]
-    # header_cells: ['True phase', 'Phase 1', 'Phase 2', 'Phase 3', 'Phase 4', 'EMPTY']
-    pred_labels = header_cells[1:]
+    # header_cells: ['True phase/stage', 'Phase/Stage 1', 'Phase/Stage 2', 'Phase/Stage 3', 'Phase/Stage 4', 'EMPTY']
+    # 将 Phase 替换为 Stage
+    pred_labels = [label.replace("Phase", "Stage") for label in header_cells[1:]]
 
     true_labels = []
     perc_rows = []
     count_rows = []
 
-    row_pattern = re.compile(r"\|\s*Phase|\|\s*EMPTY")
+    row_pattern = re.compile(r"\|\s*Phase|\|\s*Stage|\|\s*EMPTY")
 
     for line in lines:
         stripped = line.strip()
@@ -70,9 +71,11 @@ def load_confusion_matrix(path: Path):
             continue
 
         true_label = cells[0]
-        if true_label == "True phase":
+        if true_label in ("True phase", "True stage"):
             # 已在上面解析过表头
             continue
+        # 将 Phase 替换为 Stage
+        true_label = true_label.replace("Phase", "Stage")
 
         # 每个单元格形如 "96.04% (364)"
         row_perc = []
@@ -113,9 +116,9 @@ def plot_confusion_heatmap(true_labels, pred_labels, perc, counts, out_path: Pat
     ax.set_xticklabels(pred_labels)
     ax.set_yticklabels(true_labels)
 
-    ax.set_xlabel("Llm predicted phase")
-    ax.set_ylabel("Human true phase")
-    ax.set_title("Human-LLM(Voting Ensemble) Confusion Matrix")
+    ax.set_xlabel("Llm predicted stage")
+    ax.set_ylabel("Human true stage")
+    ax.set_title("Human-LLM(Ensemble Voting) Confusion Matrix")
 
     # 不需要灰色背景网格，只保留色块本身
     ax.grid(False)
@@ -152,7 +155,7 @@ def main():
     script_path = Path(__file__).resolve()
     project_root = script_path.parent.parent
 
-    conf_path = project_root / "data" / "output" / "evalresult" / "human_vs_voting_final_phase_confusion.txt"
+    conf_path = project_root / "data" / "output" / "evalresult" / "human_vs_voting_final_phase_confusion_20251229_164353.txt" or project_root / "data" / "output" / "evalresult" / "human_vs_voting_final_stage_confusion_20251229_164353.txt"
     if not conf_path.exists():
         raise FileNotFoundError(f"未找到混淆矩阵文件: {conf_path}")
 
@@ -163,7 +166,7 @@ def main():
 
     from datetime import datetime
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_path = out_dir / f"human_vs_voting_final_phase_confusion_{timestamp}.png"
+    out_path = out_dir / f"human_vs_voting_final_stage_confusion_{timestamp}.png"
     plot_confusion_heatmap(true_labels, pred_labels, perc, counts, out_path)
 
 
