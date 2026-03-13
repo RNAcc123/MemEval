@@ -142,19 +142,38 @@ python scripts/compare_results.py \
 All plotting scripts generate images with timestamps to prevent overwriting.
 
 ```bash
-# Plot voting results statistics
+# 4.1 Plot voting-results label distribution
 python plot/plot_voting_stats.py
+python plot/plot_voting_stats.py --model voting_final
+python plot/plot_voting_stats.py --model deepseek -i data/output/evalresult/llm_annotation_voting_stats_YYYYMMDD_HHMMSS.txt
+python plot/plot_voting_stats.py --model gpt-5 -o data/output/plot_result/custom
 
-# Plot human annotation statistics
+# 4.2 Plot human-annotation label distribution
 python plot/plot_human_stats.py
+python plot/plot_human_stats.py -i data/output/evalresult/human_annotation_stats_YYYYMMDD_HHMMSS.txt
+python plot/plot_human_stats.py -o data/output/plot_result/custom
 
-# Plot model consistency
+# 4.3 Plot consistency bars (label-level + phase-level)
 python plot/plot_consistency.py
+python plot/plot_consistency.py --model voting_final
+python plot/plot_consistency.py --model deepseek --label-file data/output/evalresult/model_label_exact.txt --phase-file data/output/evalresult/model_phase.txt
+python plot/plot_consistency.py --model gpt-5 -o data/output/plot_result/custom
 
-# Plot confusion matrix
+# 4.4 Plot confusion matrix heatmap
 python plot/plot_confusion_matrix.py
+python plot/plot_confusion_matrix.py -i data/output/evalresult/human_vs_voting_final_phase_confusion_YYYYMMDD_HHMMSS.txt
+python plot/plot_confusion_matrix.py -o data/output/plot_result/custom
 ```
 - Output Directory: `data/output/plot_result/`
+
+#### Plot Script CLI Summary
+
+| Script | Key CLI Options |
+|--------|------------------|
+| `plot/plot_voting_stats.py` | `-m/--model`, `-i/--input`, `-o/--output` |
+| `plot/plot_human_stats.py` | `-i/--input`, `-o/--output` |
+| `plot/plot_consistency.py` | `-m/--model`, `--label-file`, `--phase-file`, `-o/--output` |
+| `plot/plot_confusion_matrix.py` | `-i/--input`, `-o/--output` |
 
 ---
 

@@ -1,3 +1,4 @@
+import argparse
 import re
 from pathlib import Path
 
@@ -30,13 +31,14 @@ STAGES = ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "EMPTY"]
 
 def load_confusion_matrix(path: Path):
     """
-    解析 human_vs_voting_final_phase_confusion.txt 或 stage_confusion.txt 中的混淆矩阵。
+    Parse confusion-matrix text from
+    human_vs_voting_final_phase_confusion*.txt or stage_confusion*.txt.
 
-    返回:
-        true_labels: list[str]  # 行标签顺序
-        pred_labels: list[str]  # 列标签顺序
-        perc: np.ndarray (n_true, n_pred)  # 百分比
-        counts: np.ndarray (n_true, n_pred)  # 计数
+    Returns:
+        true_labels: list[str]  # Row-label order
+        pred_labels: list[str]  # Column-label order
+        perc: np.ndarray (n_true, n_pred)  # Percentages
+        counts: np.ndarray (n_true, n_pred)  # Counts
     """
     lines = path.read_text(encoding="utf-8").splitlines()
 
@@ -46,11 +48,12 @@ def load_confusion_matrix(path: Path):
             header_line = line
             break
     if header_line is None:
-        raise ValueError("未在文件中找到表头行 '| True phase/stage | ... |'")
+        raise ValueError("Header row not found: '| True phase/stage | ... |'")
 
     header_cells = [c.strip() for c in header_line.strip().strip("|").split("|")]
-    # header_cells: ['True phase/stage', 'Phase/Stage 1', 'Phase/Stage 2', 'Phase/Stage 3', 'Phase/Stage 4', 'EMPTY']
-    # 将 Phase 替换为 Stage
+    # header_cells example:
+    # ['True phase/stage', 'Phase/Stage 1', ..., 'Phase/Stage 4', 'EMPTY']
+    # Normalize Phase -> Stage
     pred_labels = [label.replace("Phase", "Stage") for label in header_cells[1:]]
 
     true_labels = []
@@ -65,23 +68,23 @@ def load_confusion_matrix(path: Path):
             continue
         if not row_pattern.match(stripped):
             continue
-        # 去掉首尾竖线
+        # Trim leading/trailing separators
         cells = [c.strip() for c in stripped.strip("|").split("|")]
         if not cells:
             continue
 
         true_label = cells[0]
         if true_label in ("True phase", "True stage"):
-            # 已在上面解析过表头
+            # Header has already been parsed
             continue
-        # 将 Phase 替换为 Stage
+        # Normalize Phase -> Stage
         true_label = true_label.replace("Phase", "Stage")
 
-        # 每个单元格形如 "96.04% (364)"
+        # Each cell looks like "96.04% (364)"
         row_perc = []
         row_counts = []
         for cell in cells[1:]:
-            # 提取百分比和数字
+            # Extract percentage and count
             m = re.search(r"([\d.]+)%\s*\((\d+)\)", cell)
             if not m:
                 row_perc.append(0.0)
@@ -101,16 +104,16 @@ def load_confusion_matrix(path: Path):
 
 def plot_confusion_heatmap(true_labels, pred_labels, perc, counts, out_path: Path):
     """
-    绘制带数值标注的混淆矩阵热力图。
+    Draw a confusion-matrix heatmap with value annotations.
     """
     n_true, n_pred = perc.shape
 
     fig, ax = plt.subplots(figsize=(6, 5), dpi=300)
 
-    # 使用百分比作为颜色强度（0-100）
+    # Use percentage as color intensity (0-100)
     im = ax.imshow(perc, cmap="Blues", vmin=0, vmax=100)
 
-    # 坐标轴标签
+    # Axis labels
     ax.set_xticks(np.arange(n_pred))
     ax.set_yticks(np.arange(n_true))
     ax.set_xticklabels(pred_labels)
@@ -120,17 +123,17 @@ def plot_confusion_heatmap(true_labels, pred_labels, perc, counts, out_path: Pat
     ax.set_ylabel("Human true stage")
     ax.set_title("Human-LLM(Ensemble Voting) Confusion Matrix")
 
-    # 不需要灰色背景网格，只保留色块本身
+    # Keep only colored cells (no gray background grid)
     ax.grid(False)
 
-    # 横轴类别水平放置
+    # Keep x labels horizontal
     plt.setp(ax.get_xticklabels(), rotation=0, ha="center", rotation_mode="anchor")
 
-    # 在每个单元格中标注 "xx.xx%\n(n)"
+    # Annotate each cell as "xx.x%\n(n)"
     for i in range(n_true):
         for j in range(n_pred):
             text = f"{perc[i, j]:.1f}%\n({counts[i, j]})"
-            # 根据背景颜色深浅选择字体颜色
+            # Choose text color by background intensity
             color = "white" if perc[i, j] > 50 else "black"
             ax.text(
                 j,
@@ -151,15 +154,50 @@ def plot_confusion_heatmap(true_labels, pred_labels, perc, counts, out_path: Pat
 
 
 def main():
-    # 本脚本位于 MemEval/plot/，项目根目录为其上一级
+    parser = argparse.ArgumentParser(
+        description=(
+            "Plot a confusion-matrix heatmap from a confusion stats text file "
+            "(phase/stage confusion)."
+        )
+    )
+    parser.add_argument(
+        "-i",
+        "--input",
+        type=str,
+        default=None,
+        help=(
+            "Input confusion file path. If omitted, auto-select the newest file "
+            "matching human_vs_voting_final_*_confusion_*.txt in evalresult."
+        ),
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        default=None,
+        help="Output directory for figures (default: data/output/plot_result/).",
+    )
+    args = parser.parse_args()
+
+    # This script is in MemEval/plot/; project root is one level up
     script_path = Path(__file__).resolve()
     project_root = script_path.parent.parent
 
-    conf_path = project_root / "data" / "output" / "evalresult" / "human_vs_voting_final_phase_confusion_20251229_164353.txt" or project_root / "data" / "output" / "evalresult" / "human_vs_voting_final_stage_confusion_20251229_164353.txt"
+    if args.input:
+        conf_path = Path(args.input)
+    else:
+        eval_dir = project_root / "data" / "output" / "evalresult"
+        candidates = sorted(
+            eval_dir.glob("human_vs_voting_final_*_confusion_*.txt"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
+        conf_path = candidates[0] if candidates else Path("")
     if not conf_path.exists():
-        raise FileNotFoundError(f"未找到混淆矩阵文件: {conf_path}")
+        raise FileNotFoundError(f"Confusion-matrix file not found: {conf_path}")
+    print(f"Using confusion file: {conf_path}")
 
-    out_dir = project_root / "data" / "output" / "plot_result"
+    out_dir = Path(args.output) if args.output else (project_root / "data" / "output" / "plot_result")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     true_labels, pred_labels, perc, counts = load_confusion_matrix(conf_path)

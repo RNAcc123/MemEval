@@ -1,6 +1,6 @@
 # MemEval - Chain-of-Stage Diagnosis for LLM Memory Systems
 
-MemEval is a stage-by-stage diagnostic system for Agentic Memory, designed to precisely locate the specific stage where memory failures occur. It employs a dual-track diagnostic mechanism combining human annotation and LLM-based automatic diagnosis, analyzing memory issues while evaluating the consistency between the two approaches.
+MemEval is a stage-by-stage diagnostic system for Agentic Memory. It locates the exact stage where failures occur and supports both human-annotation analysis and LLM-based automatic diagnosis.
 
 ## 📁 Project Structure
 
@@ -8,83 +8,107 @@ MemEval is a stage-by-stage diagnostic system for Agentic Memory, designed to pr
 MemEval/
 ├── data/                   # Data files
 │   ├── input/              # Input data (mem0_mem, human_annotation, etc.)
-│   └── output/             # Output results (llm_annotation_voting, etc.)
+│   └── output/             # Output results
 ├── docs/                   # Documentation
-├── scripts/                # Python scripts
-│   ├── run_diagnosis.py              # Core diagnosis program
+├── scripts/                # Diagnosis and analysis scripts
+│   ├── run_diagnosis.py              # Single/voting diagnosis (supports multi-file + threads)
 │   ├── run_diagnosis_discussion.py   # Multi-model discussion diagnosis
-│   └── ...
+│   ├── analyze_human_data.py
+│   ├── analyze_llm_results.py
+│   └── compare_results.py
 ├── plot/                   # Plotting utilities
-├── requirements.txt        # Project dependencies
+├── requirements.txt        # Dependencies
 └── README.md               # This file
 ```
 
 ## 🚀 Quick Start
 
-### 1. Environment Setup
+### 1) Environment Setup
 
 Python 3.8+ is recommended.
 
 ```bash
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment Variables
-
-Copy `env.example` to `.env` and fill in your API keys:
+### 2) Configure Environment Variables
 
 ```bash
 cp env.example .env
 ```
 
-Edit the `.env` file with your LLM API keys (DeepSeek, OpenAI, DashScope, etc.).
+Then fill `.env` with your keys (DeepSeek, OpenAI, DashScope, Gemini, etc.).
 
-### 3. Run Diagnosis
+### 3) Run Diagnosis
 
-#### Single Model Diagnosis (Fast)
+#### A. Single Model (fastest)
 
 ```bash
 python scripts/run_diagnosis.py deepseek --no-voting
+python scripts/run_diagnosis.py gpt4.1 --no-voting
+python scripts/run_diagnosis.py gpt5 --no-voting
 ```
 
-#### Voting Diagnosis (High Precision)
+#### B. Voting (default mode)
 
 ```bash
-python scripts/run_diagnosis.py deepseek --voting --num-votes 3
+# 3 rounds (default)
+python scripts/run_diagnosis.py deepseek
+
+# 5 rounds
+python scripts/run_diagnosis.py deepseek --num-votes 5
 ```
 
-#### Multi-Model Discussion Diagnosis (Highest Precision)
-
-The discussion-based diagnosis uses multiple models to independently analyze each stage, then engage in multi-round discussions to reach consensus or vote on the final decision.
+#### C. Multi-Model Discussion (highest precision)
 
 ```bash
-# Default: 3 models (deepseek, gpt-4.1, gpt-5), 3 rounds per stage
+# Default: deepseek + gpt-4.1 + gpt-5, 3 rounds per stage
 python scripts/run_diagnosis_discussion.py
 
-# Custom models and rounds
-python scripts/run_diagnosis_discussion.py --models deepseek gpt-4.1 gpt-5 --max-rounds 3
+# Custom model set and rounds
+python scripts/run_diagnosis_discussion.py --models deepseek gpt-4.1 gpt-5 --max-rounds 5
 
-# Specify input/output files
+# Custom input/output
 python scripts/run_diagnosis_discussion.py -i data/input/mem0_mem/sample/sampled_qa_50.json -o data/output/llm_annotation_discussion
 ```
 
-**Discussion Mode Parameters:**
-- `--max-rounds N`: Maximum discussion rounds per stage (default: 3)
-- `--models`: List of models participating in discussion (default: deepseek gpt-4.1 gpt-5)
-- `-i, --input`: Input file path
-- `-o, --output-dir`: Output directory path
-- `-f, --output-file`: Output filename (auto-generated if not specified)
+## 🔧 CLI Highlights
 
-## 🛠️ Features
+### `scripts/run_diagnosis.py`
+
+- Model aliases: `deepseek`, `gpt4.1`, `gpt5`
+- Voting controls: `--voting` (default), `--no-voting`, `--num-votes N`
+- Input supports multiple items: `-i/--input file1.json file2.json dir_or_glob`
+- Parallel processing: `-t/--threads N`
+- Output controls: `-o/--output-dir`, `-f/--output-file` (single-file mode only)
+
+Examples:
+
+```bash
+# Process a directory with 5 threads
+python scripts/run_diagnosis.py deepseek -i data/input/mem0_mem/gpt4omini/ -t 5
+
+# Process multiple explicit files
+python scripts/run_diagnosis.py gpt4.1 --num-votes 3 -i part1.json part2.json part3.json -t 3
+```
+
+### `scripts/run_diagnosis_discussion.py`
+
+- `--max-rounds N`: max discussion rounds per stage (default: `3`)
+- `--models`: discussion models (default: `deepseek gpt-4.1 gpt-5`)
+- `-i/--input`: input file path
+- `-o/--output-dir`: output directory
+- `-f/--output-file`: optional output filename
+
+## 🧠 Diagnosis Framework
 
 ### Diagnosis Stages
 
-1. **Consistency Check (Stage 0)**: Verify if the response is semantically consistent with the reference answer.
-2. **Memory Extraction (Stage 1)**: Check if the initial memory extraction is sufficient and accurate.
-3. **Memory Update (Stage 2)**: Verify if memory update operations (add/delete/modify) are correct.
-4. **Memory Retrieval (Stage 3)**: Check if retrieved memories contain the key information needed to answer the question.
-5. **Reasoning (Stage 4)**: If all previous stages pass, check if the model's reasoning logic is correct.
+1. **Consistency Check (Stage 0)**: Is `qa_response` semantically consistent with `qa_answer`?
+2. **Memory Extraction (Stage 1)**: Are extracted memories sufficient and accurate?
+3. **Memory Update (Stage 2)**: Are update operations correct and complete?
+4. **Memory Retrieval (Stage 3)**: Are retrieved memories sufficient and properly prioritized?
+5. **Reasoning (Stage 4)**: If memory is correct, is reasoning still wrong?
 
 ### Error Labels
 
@@ -99,27 +123,43 @@ python scripts/run_diagnosis_discussion.py -i data/input/mem0_mem/sample/sampled
 | Stage 3 | 3.1 | Failed to recall correct information |
 | Stage 3 | 3.2 | Unreasonable ranking (irrelevant info prioritized) |
 | Stage 4 | 4.1 | Correct memory entries were ignored |
-| Stage 4 | 4.2 | Reasoning error (invented details, over-specified) |
-| Stage 4 | 4.3 | Format or detail error (minor deviations) |
+| Stage 4 | 4.2 | Reasoning error (invented details, unsupported inference) |
+| Stage 4 | 4.3 | Format/detail error (minor but meaning-changing deviation) |
 
-### Diagnosis Modes
+## 📊 Analysis and Plotting
 
-| Mode | Command | Description |
-|------|---------|-------------|
-| Single Model | `run_diagnosis.py --no-voting` | Fast, single model analysis |
-| Voting | `run_diagnosis.py --voting --num-votes N` | Multiple runs with majority voting |
-| Discussion | `run_diagnosis_discussion.py` | Multi-model collaborative discussion |
+```bash
+# 1) Human annotation stats
+python scripts/analyze_human_data.py
 
-### Supported Models
+# 2) LLM voting result stats
+python scripts/analyze_llm_results.py
 
-- **DeepSeek** (`deepseek`): Default recommended model.
-- **GPT-4.1** (`gpt-4.1`): Suitable for high-precision benchmarks.
-- **GPT-5** (`gpt-5`): Latest generation model.
-- **Qwen** (`qwen`): Alibaba's Tongyi Qianwen model.
+# Optional: specify custom input/output dirs
+python scripts/analyze_llm_results.py -i data/output/llm_annotation_voting -o data/output/evalresult
 
-## 📊 More Usage
+# 3) Human vs LLM comparison (phase + exact label + confusion matrix)
+python scripts/compare_results.py \
+  -H data/input/human_annotation \
+  -L data/output/llm_annotation_voting/20251205 \
+  -o data/output/evalresult
 
-Please refer to [COMMAND_CHEATSHEET.md](docs/COMMAND_CHEATSHEET.md) for a detailed command reference.
+# 4) Plotting
+python plot/plot_voting_stats.py
+python plot/plot_human_stats.py
+python plot/plot_consistency.py
+python plot/plot_confusion_matrix.py
+```
+
+Common output directories:
+
+- Diagnosis: `data/output/llm_annotation_single/`, `data/output/llm_annotation_voting/`, `data/output/llm_annotation_discussion/`
+- Statistics: `data/output/evalresult/`
+- Figures: `data/output/plot_result/`
+
+## 📚 More Commands
+
+See `docs/COMMAND_CHEATSHEET.md` for full command references and examples.
 
 ## 📄 License
 

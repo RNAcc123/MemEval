@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-统计 `llm_annotation_voting` 目录下大模型标注的整体情况（基于 merged_*_voting_3rounds_gpt_5.json）。
+Summarize overall statistics for LLM annotations under the `llm_annotation_voting` directory
+(based on merged_*_voting_3rounds_gpt_5.json).
 
-功能：
-- 默认读取 `../llm_annotation_voting` 下的 `merged_*_gpt4omini_voting_3rounds_gpt_5.json`
-- 也可以通过命令行参数 `--input-dir` 选择只统计某个子文件夹中的 merged 文件
-- 只统计 qa_category ∈ {1,2,3,4}（排除 5）
-- 对「最终 voting 结果」和「每个 used_model 的单独结果」分别输出表格：
-  - 每种 label 类型（1.1, 1.2, ..., 4.3, 5, …）的计数
-  - 总样本数
-  - 有 label 的样本数
-  - label 总数量（多标签累加；最终 voting 只有 0/1 个）
-  - 无 label 样本数
-  - 正确率 = 无 label 样本数 / 总样本数 * 100
-- 结果保存为：`evalresult/llm_annotation_voting_stats_full.txt`
+Features:
+- By default, read `merged_*_gpt4omini_voting_3rounds_gpt_5.json` under `../llm_annotation_voting`
+- Optionally, use `--input-dir` to restrict stats to a specific subfolder
+- Only count qa_category ∈ {1,2,3,4} (exclude 5)
+- Output tables for both the "final voting" result and each individual `used_model`:
+  - counts for each label type (1.1, 1.2, ..., 4.3, 5, …)
+  - total samples
+  - samples with a label
+  - total labels (multi-labels summed; final voting has 0/1)
+  - samples with no label
+  - accuracy = (no-label samples / total samples) * 100
+- Save results to: `evalresult/llm_annotation_voting_stats_full.txt`
 """
 
 import argparse
@@ -25,14 +26,14 @@ from collections import defaultdict
 from typing import Any, Dict, List, Set, Tuple
 
 
-# 默认输出目录与文件名（可通过命令行参数覆盖目录）
+# Default output directory (can be overridden by CLI args)
 DEFAULT_OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "output", "evalresult")
 
 
 def find_merged_files(dirpath: str) -> List[str]:
     """
-    查找给定目录下需要处理的 JSON 文件。
-    策略：选择该目录下所有文件名包含 'voting_annotation_' 的 .json 文件。
+    Find JSON files to process under the given directory.
+    Strategy: select all `.json` files whose filename contains 'voting_annotation_'.
     """
     files: List[str] = []
     for fn in sorted(os.listdir(dirpath)):
@@ -48,7 +49,7 @@ def load_json(path: str) -> Any:
 
 
 def _init_cat_stats() -> Dict[int, dict]:
-    """初始化按 category 统计的结构。"""
+    """Initialize the per-category statistics structure."""
     stats: Dict[int, dict] = {}
     for cat in (1, 2, 3, 4):
         stats[cat] = {
@@ -63,12 +64,13 @@ def _init_cat_stats() -> Dict[int, dict]:
 
 def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int, dict]], List[str]]:
     """
-    统计 voting 最终结果 & 各 used_model 结果的 label 分布及数量信息。
+    Compute label distributions and aggregate counts for the final voting result
+    and for each `used_model`.
 
-    返回：
-        final_stats: 按 category 聚合的 voting 最终结果
-        model_stats: model -> 按 category 聚合的结果
-        label_list: 所有出现过的 label（排序后）
+    Returns:
+        final_stats: per-category stats for the final voting result
+        model_stats: model -> per-category stats
+        label_list: all labels observed (sorted)
     """
     final_stats: Dict[int, dict] = _init_cat_stats()
     model_stats: Dict[str, Dict[int, dict]] = {}
@@ -91,7 +93,7 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
                 continue
 
             # ========================
-            # 1) voting 最终结果统计
+            # 1) Final voting stats
             # ========================
             fs = final_stats[cat_int]
             fs["total_items"] += 1
@@ -110,7 +112,7 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
                     fs["no_label_items"] += 1
 
             # ========================
-            # 2) 各 used_model 统计
+            # 2) Per-used_model stats
             # ========================
             voting = item.get("voting_details", {})
             individual = []
@@ -147,19 +149,19 @@ def _format_single_table(
     stats: Dict[int, dict],
     label_list: List[str],
 ) -> List[str]:
-    """为一个（voting_final 或某个 used_model）生成表格文本行。"""
+    """Generate table text lines for one entry (voting_final or a specific used_model)."""
     lines: List[str] = []
     lines.append(f"Model: {title}")
 
     header = ["Cat"] + label_list + [
-        "总样本数",
-        "有label样本数",
-        "label总数量",
-        "无label样本数",
-        "正确率(%)",
+        "Total samples",
+        "Samples with label",
+        "Total label count",
+        "Samples without label",
+        "Accuracy (%)",
     ]
 
-    # 构建行（各 category 的行）
+    # Build rows (one row per category)
     rows: List[List[str]] = []
     for cat in (1, 2, 3, 4):
         s = stats[cat]
@@ -183,7 +185,7 @@ def _format_single_table(
         )
         rows.append(row)
 
-    # 计算总体行（汇总 1-4 类的结果），作为表格最后一行
+    # Compute an overall row (aggregate categories 1-4) as the last table row
     total_items_all = sum(stats[c]["total_items"] for c in stats)
     labeled_items_all = sum(stats[c]["labeled_items"] for c in stats)
     total_labels_all = sum(stats[c]["total_labels"] for c in stats)
@@ -196,7 +198,7 @@ def _format_single_table(
         for lb, cnt in stats[c]["label_counts"].items():
             overall_label_counts[lb] += cnt
 
-    overall_row: List[str] = ["总计"]
+    overall_row: List[str] = ["Overall"]
     for lb in label_list:
         overall_row.append(str(overall_label_counts.get(lb, 0)))
     overall_row.extend(
@@ -210,7 +212,7 @@ def _format_single_table(
     )
     rows.append(overall_row)
 
-    # 计算列宽（包含总体行）
+    # Compute column widths (including the overall row)
     cols = list(zip(header, *rows))
     col_widths = [max(len(x) for x in col) for col in cols]
 
@@ -242,20 +244,20 @@ def format_and_save(
     label_list: List[str],
     out_path: str,
 ) -> None:
-    """生成最终文本并写入文件。"""
+    """Generate the final report text and write it to a file."""
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
     lines: List[str] = []
     lines.append(
         "Statistics for llm_annotation_voting (merged_*_gpt4omini_voting_3rounds_gpt_5.json)"
     )
-    lines.append("说明：正确率 = (无 label 的样本数 / 总样本数) * 100")
+    lines.append("Note: Accuracy = (samples without label / total samples) * 100")
     lines.append("")
 
-    # 先写 voting 最终结果
+    # First write final voting results
     lines.extend(_format_single_table("voting_final", final_stats, label_list))
 
-    # 再写各个 used_model 的表格
+    # Then write tables for each used_model
     for model_name in sorted(model_stats.keys()):
         lines.extend(_format_single_table(model_name, model_stats[model_name], label_list))
 
@@ -268,8 +270,10 @@ def format_and_save(
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "统计 llm_annotation_voting 中的大模型标注结果（基于 merged_*_gpt4omini_voting_3rounds_gpt_5.json）。\n"
-            "默认从 ../llm_annotation_voting 读取，也可通过 --input-dir 指定子目录。"
+            "Summarize annotation statistics in llm_annotation_voting "
+            "(based on merged_*_gpt4omini_voting_3rounds_gpt_5.json).\n"
+            "By default it reads from ../llm_annotation_voting, and you can also "
+            "specify a subdirectory with --input-dir."
         )
     )
     parser.add_argument(
@@ -278,8 +282,9 @@ def main() -> None:
         type=str,
         default=os.path.join("data", "output", "llm_annotation_voting"),
         help=(
-            "输入目录，可以是绝对路径，或相对于项目根目录/当前脚本上级目录的相对路径。"
-            "目录下将按模式 merged_*_gpt4omini_voting_3rounds_gpt_5.json 搜索文件。"
+            "Input directory. Can be an absolute path, or a path relative to the "
+            "project root / parent directory of this script. JSON files matching "
+            "merged_*_gpt4omini_voting_3rounds_gpt_5.json will be searched."
         ),
     )
     parser.add_argument(
@@ -288,13 +293,14 @@ def main() -> None:
         type=str,
         default="evalresult",
         help=(
-            "输出目录，可以是绝对路径，或相对于项目根目录/当前脚本上级目录的相对路径。"
-            "文件名固定为 llm_annotation_voting_stats_full.txt。"
+            "Output directory. Can be an absolute path, or a path relative to the "
+            "project root / parent directory of this script. "
+            "The output filename is llm_annotation_voting_stats_full.txt."
         ),
     )
     args = parser.parse_args()
 
-    # 解析输入目录：支持绝对路径，或相对于当前脚本上级目录的相对路径
+    # Resolve input dir: absolute, or relative to this script's parent directory
     if os.path.isabs(args.input_dir):
         base_dir = args.input_dir
     else:
@@ -311,13 +317,13 @@ def main() -> None:
 
     final_stats, model_stats, label_list = collect_stats(files)
 
-    # 解析输出目录：支持绝对路径，或相对于当前脚本上级目录的相对路径
+    # Resolve output dir: absolute, or relative to this script's parent directory
     if os.path.isabs(args.output_dir):
         out_dir = args.output_dir
     else:
         out_dir = os.path.join(os.path.dirname(__file__), "..", args.output_dir)
 
-    # 如果用户没改默认值，则保持与旧版本一致的默认目录
+    # If user didn't change the default, keep backward-compatible default directory
     if args.output_dir == "evalresult":
         out_dir = DEFAULT_OUT_DIR
 

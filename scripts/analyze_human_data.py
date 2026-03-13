@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-统计 `human_annotation` 目录下人工标注的整体情况。
+Summarize overall statistics for human annotations under the `human_annotation` directory.
 
-功能：
-- 读取 `../human_annotation/annotation_*_gpt4omini_fixed.json`
-- 只统计 qa_category ∈ {1,2,3,4}（排除 5）
-- 对每个 qa_category 统计：
-  - 每种 label 类型（1.1, 1.2, ..., 4.3, 5）的计数
-  - 总样本数
-  - 有 label 的样本数
-  - label 总数量（多标签累加）
-  - 无 label 样本数
-  - 正确率 = 无 label 样本数 / 总样本数 * 100
-- 将结果输出为 ASCII 表格，并附 Overall label counts
-- 结果保存为：`evalresult/human_annotation_stats_full.txt`
+Features:
+- Read `../human_annotation/annotation_*_gpt4omini_fixed.json`
+- Only count qa_category ∈ {1,2,3,4} (exclude 5)
+- For each qa_category, compute:
+  - counts for each label type (1.1, 1.2, ..., 4.3, 5)
+  - total samples
+  - samples with at least one label
+  - total number of labels (multi-labels summed)
+  - samples with no label
+  - accuracy = (no-label samples / total samples) * 100
+- Output an ASCII table and include overall label counts
+- Save results to: `evalresult/human_annotation_stats_full.txt`
 """
 
 import json
@@ -29,7 +29,7 @@ OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "output", "evalr
 
 
 def find_annotation_files(dirpath: str) -> List[str]:
-    """查找 human_annotation 目录下的 human_dataset_part*.json 文件。"""
+    """Find `human_dataset_part*.json` files under the human_annotation directory."""
     files: List[str] = []
     for fn in sorted(os.listdir(dirpath)):
         if fn.startswith("human_dataset_part") and fn.endswith(".json"):
@@ -44,13 +44,13 @@ def load_json(path: str):
 
 def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], List[str]]:
     """
-    统计每个 qa_category 的 label 分布及整体数量信息。
+    Compute label distribution and aggregate counts for each qa_category.
 
-    返回：
-        stats: 按 category 聚合的统计信息
-        label_list: 所有出现过的 label（排序后）
+    Returns:
+        stats: aggregated statistics per category
+        label_list: all labels observed (sorted)
     """
-    # stats[cat] 结构：
+    # stats[cat] structure:
     # {
     #   'total_items': int,
     #   'labeled_items': int,
@@ -72,11 +72,11 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], List[str]]:
 
     for fp in files:
         data = load_json(fp)
-        # human_annotation 的结构是一个 dict: key -> item
+        # human_annotation is typically a dict: key -> item
         if isinstance(data, dict):
             it = data.items()
         else:
-            # 兜底：如果将来变成 list，则逐个遍历
+            # Fallback: if it becomes a list in the future, iterate items one by one
             it = enumerate(data)
 
         for _, h in it:
@@ -113,23 +113,23 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], List[str]]:
 
 
 def format_and_save(stats: Dict[int, dict], label_list: List[str], out_path: str) -> None:
-    """按照既定格式生成 ASCII 表格，并保存到 out_path。"""
+    """Generate the ASCII table in the predefined format and save to out_path."""
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
     lines: List[str] = []
-    lines.append("人工标注 label 统计（按 qa_category，排除5，含各 label 计数）")
-    lines.append("说明：正确率 = (无 label 的样本数 / 总样本数) * 100")
+    lines.append("Human annotation label statistics (by qa_category, excluding 5, with per-label counts)")
+    lines.append("Note: Accuracy = (samples without label / total samples) * 100")
     lines.append("")
 
     header = ["Cat"] + label_list + [
-        "总样本数",
-        "有label样本数",
-        "label总数量",
-        "无label样本数",
-        "正确率(%)",
+        "Total samples",
+        "Samples with label",
+        "Total label count",
+        "Samples without label",
+        "Accuracy (%)",
     ]
 
-    # 构建每一行（各 category 的行）
+    # Build rows (one row per category)
     rows: List[List[str]] = []
     for cat in (1, 2, 3, 4):
         s = stats[cat]
@@ -153,7 +153,7 @@ def format_and_save(stats: Dict[int, dict], label_list: List[str], out_path: str
         )
         rows.append(row)
 
-    # 计算总体行（汇总 1-4 类的结果），作为表格最后一行
+    # Compute an overall row (aggregate categories 1-4) as the last table row
     total_items_all = sum(stats[c]["total_items"] for c in stats)
     labeled_items_all = sum(stats[c]["labeled_items"] for c in stats)
     total_labels_all = sum(stats[c]["total_labels"] for c in stats)
@@ -166,7 +166,7 @@ def format_and_save(stats: Dict[int, dict], label_list: List[str], out_path: str
         for lb, cnt in stats[c]["label_counts"].items():
             overall_label_counts[lb] += cnt
 
-    overall_row: List[str] = ["总计"]
+    overall_row: List[str] = ["Overall"]
     for lb in label_list:
         overall_row.append(str(overall_label_counts.get(lb, 0)))
     overall_row.extend(
@@ -180,7 +180,7 @@ def format_and_save(stats: Dict[int, dict], label_list: List[str], out_path: str
     )
     rows.append(overall_row)
 
-    # 计算列宽
+    # Compute column widths
     cols = list(zip(header, *rows))
     col_widths = [max(len(x) for x in col) for col in cols]
 

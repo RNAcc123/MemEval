@@ -1,53 +1,57 @@
 """
-记忆诊断系统 - 分阶段诊断QA对中的问题
+Memory diagnosis system - staged diagnosis for issues in QA pairs.
 
-该模块提供了一个分阶段的诊断框架，用于识别记忆系统中的问题类型：
-- 阶段0: 一致性检查
-- 阶段1: 记忆提取诊断
-- 阶段2: 记忆更新诊断
-- 阶段3: 记忆检索诊断
-- 阶段4: 推理诊断
+This module provides a staged diagnosis framework for identifying issue types
+in a memory system:
+- Stage 0: Consistency check
+- Stage 1: Memory extraction diagnosis
+- Stage 2: Memory update diagnosis
+- Stage 3: Memory retrieval diagnosis
+- Stage 4: Reasoning diagnosis
 """
 
-# 标准库导入
+# Standard library imports
+import glob as glob_module
 import json
 import logging
 import os
 import re
 import sys
 import time
+import threading
 import warnings
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
-# 第三方库导入
+# Third-party imports
 from dotenv import load_dotenv
 from requests.exceptions import RequestException, Timeout
 
-# 注意：AI API 相关的导入已移到各自的函数中（延迟导入）
-# 这样即使某些库未安装，也不会影响其他功能的使用
+# Note: AI API-related imports are moved into their respective functions (lazy imports).
+# This avoids breaking unrelated functionality when optional libraries are missing.
 
 # ============================================================================
-# 配置和初始化
+# Configuration and initialization
 # ============================================================================
 
-# 抑制gRPC警告
+# Suppress gRPC warnings
 logging.getLogger('grpc').setLevel(logging.ERROR)
 warnings.filterwarnings('ignore', module='grpc')
 
-# 加载环境变量
+# Load environment variables
 load_dotenv()
 os.environ['GRPC_ALTS_CREDENTIALS_ENVIRONMENT_OVERRIDE'] = '1'
 
 
 # ============================================================================
-# 枚举和常量定义
+# Enums and constants
 # ============================================================================
 
 class ModelType(str, Enum):
-    """支持的LLM模型类型"""
+    """Supported LLM model types."""
     QWEN = "qwen"
     DEEPSEEK = "deepseek"
     GPT_4_1 = "gpt-4.1"
@@ -56,7 +60,7 @@ class ModelType(str, Enum):
 
 
 class DiagnosisStage(str, Enum):
-    """诊断阶段枚举"""
+    """Diagnosis stage enum."""
     CONSISTENCY_CHECK = "0_consistency_check"
     MEMORY_EXTRACTION = "1_memory_extraction"
     MEMORY_UPDATE = "2_memory_update"
@@ -66,12 +70,12 @@ class DiagnosisStage(str, Enum):
 
 
 # ============================================================================
-# 配置类
+# Config dataclasses
 # ============================================================================
 
 @dataclass
 class APIConfig:
-    """API配置"""
+    """API configuration."""
     dashscope_api_key: str = field(default_factory=lambda: os.getenv("DASHSCOPE_API_KEY", ""))
     deepseek_api_key: str = field(default_factory=lambda: os.getenv("DEEPSEEK_API_KEY", ""))
     deepseek_api_url: str = field(default_factory=lambda: os.getenv("DEEPSEEK_API_URL", ""))
@@ -82,7 +86,7 @@ class APIConfig:
 
 @dataclass
 class DiagnosisConfig:
-    """诊断配置"""
+    """Diagnosis configuration."""
     model: ModelType = ModelType.DEEPSEEK
     max_retries: int = 3
     retry_delay: int = 5
@@ -91,49 +95,49 @@ class DiagnosisConfig:
 
 
 # ============================================================================
-# 数据类
+# Data containers
 # ============================================================================
 
 @dataclass
 class QAData:
-    """QA数据封装"""
+    """Container for QA data."""
     question: str
     answer: str
     response: str
     category: str = ""
     
     def to_json_str(self, field_name: str) -> str:
-        """将指定字段转换为JSON字符串"""
+        """Convert the specified field to a JSON string."""
         value = getattr(self, field_name.replace("qa_", ""))
         return json.dumps(value, ensure_ascii=False)
 
 
 @dataclass
 class MemoryData:
-    """记忆数据封装"""
+    """Container for memory data."""
     person1_memories: List[dict] = field(default_factory=list)
     person2_memories: List[dict] = field(default_factory=list)
     speaker1_retrieval: List[Dict] = field(default_factory=list)
     speaker2_retrieval: List[Dict] = field(default_factory=list)
     
     def to_json_str(self, field_name: str, exclude_keys: Optional[List[str]] = None) -> str:
-        """将指定字段转换为JSON字符串
+        """Convert the specified field to a JSON string.
         
         Args:
-            field_name: 字段名称
-            exclude_keys: 需要从每个记忆项中排除的键列表
+            field_name: field name
+            exclude_keys: keys to exclude from each memory item
             
         Returns:
-            JSON字符串
+            JSON string
         """
         value = getattr(self, field_name)
         
-        # 如果需要排除某些键，则过滤数据
+        # If we need to exclude keys, filter the data
         if exclude_keys and isinstance(value, list):
             filtered_value = []
             for item in value:
                 if isinstance(item, dict):
-                    # 创建一个新字典，排除指定的键
+                    # Create a new dict excluding specific keys
                     filtered_item = {k: v for k, v in item.items() if k not in exclude_keys}
                     filtered_value.append(filtered_item)
                 else:
@@ -145,7 +149,7 @@ class MemoryData:
 
 @dataclass
 class StageResult:
-    """阶段诊断结果"""
+    """Diagnosis result for a single stage."""
     stage_passed: bool
     label: Optional[str]
     reason: str
@@ -154,56 +158,126 @@ class StageResult:
 
 @dataclass
 class DiagnosisResult:
-    """完整诊断结果"""
+    """Full diagnosis result."""
     label: Optional[str]
     reason: str
     stage: DiagnosisStage
     used_model: Optional[str] = None
     voting_details: Optional[Dict] = None
+    usage_stats: Optional['UsageStats'] = None
 
 
-# 初始化全局配置
+@dataclass
+class UsageStats:
+    """API usage stats: track calls, latency, and token usage."""
+    total_calls: int = 0
+    total_latency: float = 0.0
+    total_prompt_tokens: int = 0
+    total_completion_tokens: int = 0
+    total_tokens: int = 0
+    call_details: List[Dict] = field(default_factory=list)
+
+    def record_call(
+        self,
+        latency: float,
+        prompt_tokens: int = 0,
+        completion_tokens: int = 0,
+        total_tokens: int = 0,
+        model: str = "",
+        stage: str = "",
+    ):
+        """Record statistics for one API call."""
+        self.total_calls += 1
+        self.total_latency += latency
+        self.total_prompt_tokens += prompt_tokens
+        self.total_completion_tokens += completion_tokens
+        self.total_tokens += total_tokens
+        self.call_details.append({
+            "model": model,
+            "stage": stage,
+            "latency_seconds": round(latency, 3),
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+            "total_tokens": total_tokens,
+        })
+
+    def to_dict(self) -> Dict:
+        """Convert to dict."""
+        return {
+            "total_calls": self.total_calls,
+            "total_latency_seconds": round(self.total_latency, 3),
+            "avg_latency_seconds": round(
+                self.total_latency / self.total_calls, 3
+            ) if self.total_calls > 0 else 0,
+            "total_prompt_tokens": self.total_prompt_tokens,
+            "total_completion_tokens": self.total_completion_tokens,
+            "total_tokens": self.total_tokens,
+            "call_details": self.call_details,
+        }
+
+    def merge(self, other: 'UsageStats'):
+        """Merge another UsageStats into this one."""
+        self.total_calls += other.total_calls
+        self.total_latency += other.total_latency
+        self.total_prompt_tokens += other.total_prompt_tokens
+        self.total_completion_tokens += other.total_completion_tokens
+        self.total_tokens += other.total_tokens
+        self.call_details.extend(other.call_details)
+
+    def print_summary(self):
+        """Print a usage summary."""
+        print(f"  📊 API call statistics:")
+        print(f"     Calls: {self.total_calls}")
+        print(f"     Total latency: {round(self.total_latency, 3)}s")
+        if self.total_calls > 0:
+            print(f"     Average latency: {round(self.total_latency / self.total_calls, 3)}s")
+        print(f"     Prompt tokens: {self.total_prompt_tokens}")
+        print(f"     Completion tokens: {self.total_completion_tokens}")
+        print(f"     Total tokens: {self.total_tokens}")
+
+
+# Initialize global config
 API_CONFIG = APIConfig()
 # ============================================================================
-# 工具函数
+# Utility functions
 # ============================================================================
 
 def load_json_file(file_path: str) -> Dict:
-    """加载JSON文件
+    """Load a JSON file.
     
     Args:
-        file_path: JSON文件路径
+        file_path: JSON file path
         
     Returns:
-        解析后的字典对象
+        Parsed dict
     """
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def clean_prompt(prompt: str) -> str:
-    """清理prompt中的特殊字符
+    """Remove special / zero-width characters from a prompt.
     
     Args:
-        prompt: 原始prompt文本
+        prompt: original prompt text
         
     Returns:
-        清理后的prompt文本
+        Cleaned prompt text
     """
     return re.sub(r"[\u200b\u200c\u200d\ufeff\u202a-\u202e]", "", prompt)
 
 
 def extract_json_from_response(response_text: str) -> Dict:
-    """从响应文本中提取JSON对象
+    """Extract a JSON object from the response text.
     
     Args:
-        response_text: LLM响应文本
+        response_text: LLM response text
         
     Returns:
-        解析后的JSON对象
+        Parsed JSON object
         
     Raises:
-        Exception: 解析失败时抛出异常
+        Exception: raised when parsing fails
     """
     response_text = response_text.strip()
     start = response_text.find("{")
@@ -216,26 +290,43 @@ def extract_json_from_response(response_text: str) -> Dict:
 
 
 # ============================================================================
-# LLM API调用函数
+# LLM API call functions
 # ============================================================================
 
+def _extract_usage_from_response(response) -> Dict:
+    """Extract token usage information from an OpenAI-compatible API response.
+
+    Args:
+        response: response object returned by the OpenAI client
+
+    Returns:
+        Dict containing prompt_tokens, completion_tokens, total_tokens
+    """
+    usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+    if hasattr(response, 'usage') and response.usage:
+        usage["prompt_tokens"] = getattr(response.usage, 'prompt_tokens', 0) or 0
+        usage["completion_tokens"] = getattr(response.usage, 'completion_tokens', 0) or 0
+        usage["total_tokens"] = getattr(response.usage, 'total_tokens', 0) or 0
+    return usage
+
+
 def call_deepseek_api(prompt: str, temperature: float = 0.1) -> Dict:
-    """调用DeepSeek API
+    """Call the DeepSeek API.
     
     Args:
-        prompt: 输入prompt
-        temperature: 温度参数
+        prompt: input prompt
+        temperature: temperature parameter
         
     Returns:
-        标准化的响应字典 {"output": {"text": "..."}}
+        Normalized response dict: {"output": {"text": "..."}}
         
     Raises:
-        Exception: API调用失败时抛出异常
+        Exception: raised when the API call fails
     """
     try:
         from openai import OpenAI
     except ImportError:
-        raise Exception("请安装 openai 库: pip install openai")
+        raise Exception("Please install the openai library: pip install openai")
     
     client = OpenAI(
         api_key=API_CONFIG.deepseek_api_key,
@@ -250,9 +341,10 @@ def call_deepseek_api(prompt: str, temperature: float = 0.1) -> Dict:
             "temperature": temperature,
         }
         response = client.chat.completions.create(**kwargs)
-        return {"output": {"text": response.choices[0].message.content}}
+        usage = _extract_usage_from_response(response)
+        return {"output": {"text": response.choices[0].message.content}, "usage": usage}
     except Exception as e:
-        # 打印详细的调试信息
+        # Print detailed debugging info
         try:
             resp = getattr(e, "response", None)
             if resp is not None:
@@ -261,9 +353,9 @@ def call_deepseek_api(prompt: str, temperature: float = 0.1) -> Dict:
         except Exception:
             pass
         
-        logging.error(f"DeepSeek API调用失败: {repr(e)}")
+        logging.error(f"DeepSeek API call failed: {repr(e)}")
         
-        # 如果是temperature参数问题，尝试不带temperature重试
+        # If this looks like a temperature-parameter issue, retry without temperature
         err_text = repr(e).lower()
         if "temperature" in err_text or "unsupported" in err_text:
             try:
@@ -273,7 +365,8 @@ def call_deepseek_api(prompt: str, temperature: float = 0.1) -> Dict:
                     "stream": False,
                 }
                 response = client.chat.completions.create(**kwargs)
-                return {"output": {"text": response.choices[0].message.content}}
+                usage = _extract_usage_from_response(response)
+                return {"output": {"text": response.choices[0].message.content}, "usage": usage}
             except Exception as e2:
                 logging.error(f"Retry (no temperature) also failed: {repr(e2)}")
                 raise Exception(f"DeepSeek API error: {str(e2)}")
@@ -282,27 +375,27 @@ def call_deepseek_api(prompt: str, temperature: float = 0.1) -> Dict:
 
 
 def call_openai_api(prompt: str, model: str = "gpt-4.1", temperature: float = 0.1) -> Dict:
-    """调用OpenAI API
+    """Call the OpenAI API.
     
     Args:
-        prompt: 输入prompt
-        model: 模型名称
-        temperature: 温度参数
+        prompt: input prompt
+        model: model name
+        temperature: temperature parameter
         
     Returns:
-        标准化的响应字典 {"output": {"text": "..."}}
+        Normalized response dict: {"output": {"text": "..."}}
         
     Raises:
-        Exception: API调用失败时抛出异常
+        Exception: raised when the API call fails
     """
     try:
         from openai import OpenAI
     except ImportError:
-        raise Exception("请安装 openai 库: pip install openai")
+        raise Exception("Please install the openai library: pip install openai")
     
     client = OpenAI(api_key=API_CONFIG.openai_api_key)
     
-    # 某些模型不支持temperature参数
+    # Some models do not support the temperature parameter
     temp_to_send = None if model == "gpt-5" else temperature
     
     try:
@@ -315,11 +408,12 @@ def call_openai_api(prompt: str, model: str = "gpt-4.1", temperature: float = 0.
             kwargs["temperature"] = temp_to_send
             
         response = client.chat.completions.create(**kwargs)
-        return {"output": {"text": response.choices[0].message.content}}
+        usage = _extract_usage_from_response(response)
+        return {"output": {"text": response.choices[0].message.content}, "usage": usage}
     except Exception as e:
-        logging.error(f"OpenAI API调用失败: {repr(e)}")
+        logging.error(f"OpenAI API call failed: {repr(e)}")
         
-        # 如果是temperature参数问题，尝试不带temperature重试
+        # If this looks like a temperature-parameter issue, retry without temperature
         err_text = repr(e).lower()
         if "temperature" in err_text or "unsupported" in err_text:
             try:
@@ -329,7 +423,8 @@ def call_openai_api(prompt: str, model: str = "gpt-4.1", temperature: float = 0.
                     "stream": False,
                 }
                 response = client.chat.completions.create(**kwargs)
-                return {"output": {"text": response.choices[0].message.content}}
+                usage = _extract_usage_from_response(response)
+                return {"output": {"text": response.choices[0].message.content}, "usage": usage}
             except Exception as e2:
                 logging.error(f"Retry (no temperature) also failed: {repr(e2)}")
                 raise Exception(f"OpenAI API error: {str(e2)}")
@@ -338,23 +433,23 @@ def call_openai_api(prompt: str, model: str = "gpt-4.1", temperature: float = 0.
 
 
 def call_gemini_api(prompt: str, model: str = "gemini-2.5-pro", temperature: float = 0.1) -> Dict:
-    """调用Gemini API
+    """Call the Gemini API.
     
     Args:
-        prompt: 输入prompt
-        model: 模型名称
-        temperature: 温度参数
+        prompt: input prompt
+        model: model name
+        temperature: temperature parameter
         
     Returns:
-        标准化的响应字典 {"output": {"text": "..."}}
+        Normalized response dict: {"output": {"text": "..."}}
         
     Raises:
-        Exception: API调用失败时抛出异常
+        Exception: raised when the API call fails
     """
     try:
         from openai import OpenAI
     except ImportError:
-        raise Exception("请安装 openai 库: pip install openai")
+        raise Exception("Please install the openai library: pip install openai")
     
     try:
         client = OpenAI(api_key=API_CONFIG.gemini_api_key, base_url=API_CONFIG.gemini_url)
@@ -367,11 +462,12 @@ def call_gemini_api(prompt: str, model: str = "gemini-2.5-pro", temperature: flo
             kwargs["temperature"] = temperature
             
         response = client.chat.completions.create(**kwargs)
-        return {"output": {"text": response.choices[0].message.content}}
+        usage = _extract_usage_from_response(response)
+        return {"output": {"text": response.choices[0].message.content}, "usage": usage}
     except Exception as e:
-        logging.error(f"Gemini API调用失败: {repr(e)}")
+        logging.error(f"Gemini API call failed: {repr(e)}")
         
-        # 如果是temperature参数问题，尝试不带temperature重试
+        # If this looks like a temperature-parameter issue, retry without temperature
         err_text = repr(e).lower()
         if "temperature" in err_text or "unsupported" in err_text:
             try:
@@ -381,7 +477,8 @@ def call_gemini_api(prompt: str, model: str = "gemini-2.5-pro", temperature: flo
                     "stream": False,
                 }
                 response = client.chat.completions.create(**kwargs)
-                return {"output": {"text": response.choices[0].message.content}}
+                usage = _extract_usage_from_response(response)
+                return {"output": {"text": response.choices[0].message.content}, "usage": usage}
             except Exception as e2:
                 logging.error(f"Retry (no temperature) also failed: {repr(e2)}")
                 raise Exception(f"Gemini API error: {str(e2)}")
@@ -391,40 +488,47 @@ def call_gemini_api(prompt: str, model: str = "gemini-2.5-pro", temperature: flo
 def call_llm_api(
     prompt: str,
     model: str = "deepseek",
-    config: Optional[DiagnosisConfig] = None
+    config: Optional[DiagnosisConfig] = None,
+    usage_stats: Optional[UsageStats] = None,
+    stage_name: str = "",
 ) -> Dict:
-    """调用LLM API的统一接口
+    """Unified entrypoint for calling an LLM API.
     
     Args:
-        prompt: 输入prompt文本
-        model: 模型名称，可以是字符串或ModelType枚举值
-        config: 诊断配置对象
+        prompt: input prompt text
+        model: model name (string or ModelType)
+        config: diagnosis configuration
+        usage_stats: optional UsageStats tracker (calls/latency/tokens)
+        stage_name: current diagnosis stage name (for stats)
         
     Returns:
-        解析后的JSON响应
+        Parsed JSON response
         
     Raises:
-        Exception: API调用或解析失败时抛出异常
+        Exception: raised when API call or parsing fails
     """
     if config is None:
         config = DiagnosisConfig()
     
-    # 清理prompt中的特殊字符
+    # Clean special characters in the prompt
     prompt = clean_prompt(prompt)
     
-    # 重试机制
+    # Track call start time
+    call_start_time = time.time()
+    
+    # Retry loop
     for attempt in range(config.max_retries):
         try:
-            # 根据模型类型调用对应的API
+            # Dispatch to the appropriate API based on model type
             if model == ModelType.QWEN or model == "qwen":
                 try:
                     import dashscope
                     from dashscope import Generation
-                    # 设置API密钥（如果还没设置）
+                    # Set API key (if not set yet)
                     if API_CONFIG.dashscope_api_key and not dashscope.api_key:
                         dashscope.api_key = API_CONFIG.dashscope_api_key
                 except ImportError:
-                    raise Exception("请安装 dashscope 库: pip install dashscope")
+                    raise Exception("Please install the dashscope library: pip install dashscope")
                 
                 response = Generation.call(
                     model="qwen-max",
@@ -452,13 +556,39 @@ def call_llm_api(
             break
         except (RequestException, Timeout, KeyboardInterrupt) as e:
             if attempt < config.max_retries - 1:
-                logging.warning(f"API调用失败，重试 {attempt + 1}/{config.max_retries}: {str(e)}")
+                logging.warning(f"API call failed, retry {attempt + 1}/{config.max_retries}: {str(e)}")
                 time.sleep(config.retry_delay)
                 continue
             else:
-                raise Exception(f"API调用失败（已重试{config.max_retries}次）: {str(e)}")
+                raise Exception(f"API call failed (retried {config.max_retries} times): {str(e)}")
     
-    # 解析响应
+    # Compute call latency
+    call_latency = time.time() - call_start_time
+    
+    # Extract token usage and record stats
+    if usage_stats is not None:
+        if model == ModelType.QWEN or model == "qwen":
+            # Qwen/DashScope uses input_tokens / output_tokens
+            qwen_usage = getattr(response, 'usage', None)
+            prompt_tokens = getattr(qwen_usage, 'input_tokens', 0) or 0 if qwen_usage else 0
+            completion_tokens = getattr(qwen_usage, 'output_tokens', 0) or 0 if qwen_usage else 0
+            total_tokens = prompt_tokens + completion_tokens
+        else:
+            api_usage = response.get("usage", {})
+            prompt_tokens = api_usage.get("prompt_tokens", 0)
+            completion_tokens = api_usage.get("completion_tokens", 0)
+            total_tokens = api_usage.get("total_tokens", 0)
+
+        usage_stats.record_call(
+            latency=call_latency,
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+            total_tokens=total_tokens,
+            model=str(model),
+            stage=stage_name,
+        )
+    
+    # Parse response
     try:
         if model == ModelType.QWEN or model == "qwen":
             response_text = response.output.text.strip()
@@ -467,38 +597,40 @@ def call_llm_api(
         
         return extract_json_from_response(response_text)
     except Exception as e:
-        raise Exception(f"解析响应失败: {str(e)}, 原始响应: {response_text[:200]}")
+        raise Exception(f"Failed to parse response: {str(e)}, raw response: {response_text[:200]}")
 
 
 # ============================================================================
-# 诊断阶段函数
+# Diagnosis stage functions
 # ============================================================================
 
 def _print_stage_header(stage_name: str, stage_number: int = 0):
-    """打印阶段标题"""
+    """Print a stage header."""
     print("=" * 60)
-    print(f"阶段{stage_number}: {stage_name}")
+    print(f"Stage {stage_number}: {stage_name}")
     print("=" * 60)
 
 
 def stage0_consistency_check(
     qa_data: QAData,
     model: str = "deepseek",
-    config: Optional[DiagnosisConfig] = None
+    config: Optional[DiagnosisConfig] = None,
+    usage_stats: Optional[UsageStats] = None,
 ) -> StageResult:
-    """阶段0：一致性检查
+    """Stage 0: consistency check.
     
-    检查模型回答是否与参考答案一致
+    Check whether the model response is consistent with the reference answer.
     
     Args:
-        qa_data: QA数据对象
-        model: 使用的模型
-        config: 诊断配置
+        qa_data: QAData instance
+        model: model to use
+        config: diagnosis configuration
+        usage_stats: optional UsageStats tracker
         
     Returns:
-        StageResult对象，包含诊断结果
+        StageResult containing the diagnosis outcome
     """
-    _print_stage_header("一致性检查", 0)
+    _print_stage_header("Consistency Check", 0)
     
     qa_question_str = qa_data.to_json_str("question")
     qa_answer_str = qa_data.to_json_str("answer")
@@ -530,7 +662,7 @@ Output:
 """
     
     try:
-        result = call_llm_api(prompt, model, config)
+        result = call_llm_api(prompt, model, config, usage_stats=usage_stats, stage_name="stage0_consistency_check")
         is_consistent = result.get("is_consistent", False)
         
         stage_result = StageResult(
@@ -540,16 +672,16 @@ Output:
             stage=DiagnosisStage.CONSISTENCY_CHECK
         )
         
-        print(f"✓ 一致性检查结果: {'通过' if is_consistent else '不通过'}")
-        print(f"  原因: {stage_result.reason}\n")
+        print(f"✓ Consistency check result: {'PASS' if is_consistent else 'FAIL'}")
+        print(f"  Reason: {stage_result.reason}\n")
         
         return stage_result
     except Exception as e:
-        logging.error(f"阶段0错误: {str(e)}")
+        logging.error(f"Stage 0 error: {str(e)}")
         return StageResult(
             stage_passed=False,
             label=None,
-            reason=f"阶段0错误: {str(e)}",
+            reason=f"Stage 0 error: {str(e)}",
             stage=DiagnosisStage.ERROR
         )
 
@@ -558,27 +690,29 @@ def stage1_memory_extraction(
     qa_data: QAData,
     memory_data: MemoryData,
     model: str = "deepseek",
-    config: Optional[DiagnosisConfig] = None
+    config: Optional[DiagnosisConfig] = None,
+    usage_stats: Optional[UsageStats] = None,
 ) -> StageResult:
-    """阶段1：记忆提取阶段
+    """Stage 1: memory extraction.
     
-    检查初始记忆提取是否充分
+    Check whether the initially extracted memories are sufficient.
     
     Args:
-        qa_data: QA数据对象
-        memory_data: 记忆数据对象
-        model: 使用的模型
-        config: 诊断配置
+        qa_data: QAData instance
+        memory_data: MemoryData instance
+        model: model to use
+        config: diagnosis configuration
+        usage_stats: optional UsageStats tracker
         
     Returns:
-        StageResult对象，包含诊断结果
+        StageResult containing the diagnosis outcome
     """
-    _print_stage_header("记忆提取阶段", 1)
+    _print_stage_header("Memory Extraction Stage", 1)
     
     qa_question_str = qa_data.to_json_str("question")
     qa_answer_str = qa_data.to_json_str("answer")
     qa_response_str = qa_data.to_json_str("response")
-    # 阶段1只看初始提取结果，同时保留time_stamp字段，方便进行时间相关判断
+    # Stage 1 uses only initial_results; keep time_stamp for time-related reasoning when needed
     memories1_initial_results = [
         {
             "time_stamp": item.get("time_stamp", ""),
@@ -666,7 +800,7 @@ Output format:
 """
     
     try:
-        result = call_llm_api(prompt, model, config)
+        result = call_llm_api(prompt, model, config, usage_stats=usage_stats, stage_name="stage1_memory_extraction")
         is_sufficient = result.get("is_sufficient", False)
         
         stage_result = StageResult(
@@ -676,18 +810,18 @@ Output format:
             stage=DiagnosisStage.MEMORY_EXTRACTION
         )
         
-        print(f"✓ 记忆提取结果: {'通过' if is_sufficient else '不通过'}")
+        print(f"✓ Memory extraction result: {'PASS' if is_sufficient else 'FAIL'}")
         if not is_sufficient:
-            print(f"  问题类型: {stage_result.label}")
-        print(f"  原因: {stage_result.reason}\n")
+            print(f"  Issue type: {stage_result.label}")
+        print(f"  Reason: {stage_result.reason}\n")
         
         return stage_result
     except Exception as e:
-        logging.error(f"阶段1错误: {str(e)}")
+        logging.error(f"Stage 1 error: {str(e)}")
         return StageResult(
             stage_passed=False,
             label=None,
-            reason=f"阶段1错误: {str(e)}",
+            reason=f"Stage 1 error: {str(e)}",
             stage=DiagnosisStage.ERROR
         )
 
@@ -696,27 +830,29 @@ def stage2_memory_update(
     qa_data: QAData,
     memory_data: MemoryData,
     model: str = "deepseek",
-    config: Optional[DiagnosisConfig] = None
+    config: Optional[DiagnosisConfig] = None,
+    usage_stats: Optional[UsageStats] = None,
 ) -> StageResult:
-    """阶段2：记忆更新阶段
+    """Stage 2: memory update.
     
-    检查记忆更新过程是否正确
+    Check whether the memory update process is correct.
     
     Args:
-        qa_data: QA数据对象
-        memory_data: 记忆数据对象
-        model: 使用的模型
-        config: 诊断配置
+        qa_data: QAData instance
+        memory_data: MemoryData instance
+        model: model to use
+        config: diagnosis configuration
+        usage_stats: optional UsageStats tracker
         
     Returns:
-        StageResult对象，包含诊断结果
+        StageResult containing the diagnosis outcome
     """
-    _print_stage_header("记忆更新阶段", 2)
+    _print_stage_header("Memory Update Stage", 2)
     
     qa_question_str = qa_data.to_json_str("question")
     qa_answer_str = qa_data.to_json_str("answer")
     qa_response_str = qa_data.to_json_str("response")
-    # 阶段2只看更新链，同时保留time_stamp字段，方便结合时间判断更新是否合理
+    # Stage 2 uses only update_chain; keep time_stamp to judge whether updates are time-consistent when needed
     memories1_update_chains = [
         {
             "time_stamp": item.get("time_stamp", ""),
@@ -812,7 +948,7 @@ Output format:
 """
     
     try:
-        result = call_llm_api(prompt, model, config)
+        result = call_llm_api(prompt, model, config, usage_stats=usage_stats, stage_name="stage2_memory_update")
         is_sufficient = result.get("is_sufficient", False)
         
         stage_result = StageResult(
@@ -822,18 +958,18 @@ Output format:
             stage=DiagnosisStage.MEMORY_UPDATE
         )
         
-        print(f"✓ 记忆更新结果: {'通过' if is_sufficient else '不通过'}")
+        print(f"✓ Memory update result: {'PASS' if is_sufficient else 'FAIL'}")
         if not is_sufficient:
-            print(f"  问题类型: {stage_result.label}")
-        print(f"  原因: {stage_result.reason}\n")
+            print(f"  Issue type: {stage_result.label}")
+        print(f"  Reason: {stage_result.reason}\n")
         
         return stage_result
     except Exception as e:
-        logging.error(f"阶段2错误: {str(e)}")
+        logging.error(f"Stage 2 error: {str(e)}")
         return StageResult(
             stage_passed=False,
             label=None,
-            reason=f"阶段2错误: {str(e)}",
+            reason=f"Stage 2 error: {str(e)}",
             stage=DiagnosisStage.ERROR
         )
 
@@ -842,22 +978,24 @@ def stage3_memory_retrieval(
     qa_data: QAData,
     memory_data: MemoryData,
     model: str = "deepseek",
-    config: Optional[DiagnosisConfig] = None
+    config: Optional[DiagnosisConfig] = None,
+    usage_stats: Optional[UsageStats] = None,
 ) -> StageResult:
-    """阶段3：记忆检索阶段
+    """Stage 3: memory retrieval.
     
-    检查记忆检索是否正确
+    Check whether memory retrieval is correct/sufficient.
     
     Args:
-        qa_data: QA数据对象
-        memory_data: 记忆数据对象
-        model: 使用的模型
-        config: 诊断配置
+        qa_data: QAData instance
+        memory_data: MemoryData instance
+        model: model to use
+        config: diagnosis configuration
+        usage_stats: optional UsageStats tracker
         
     Returns:
-        StageResult对象，包含诊断结果
+        StageResult containing the diagnosis outcome
     """
-    _print_stage_header("记忆检索阶段", 3)
+    _print_stage_header("Memory Retrieval Stage", 3)
     
     qa_question_str = qa_data.to_json_str("question")
     qa_answer_str = qa_data.to_json_str("answer")
@@ -914,7 +1052,7 @@ Output format:
 """
     
     try:
-        result = call_llm_api(prompt, model, config)
+        result = call_llm_api(prompt, model, config, usage_stats=usage_stats, stage_name="stage3_memory_retrieval")
         is_sufficient = result.get("is_sufficient", False)
         
         stage_result = StageResult(
@@ -924,18 +1062,18 @@ Output format:
             stage=DiagnosisStage.MEMORY_RETRIEVAL
         )
         
-        print(f"✓ 记忆检索结果: {'通过' if is_sufficient else '不通过'}")
+        print(f"✓ Memory retrieval result: {'PASS' if is_sufficient else 'FAIL'}")
         if not is_sufficient:
-            print(f"  问题类型: {stage_result.label}")
-        print(f"  原因: {stage_result.reason}\n")
+            print(f"  Issue type: {stage_result.label}")
+        print(f"  Reason: {stage_result.reason}\n")
         
         return stage_result
     except Exception as e:
-        logging.error(f"阶段3错误: {str(e)}")
+        logging.error(f"Stage 3 error: {str(e)}")
         return StageResult(
             stage_passed=False,
             label=None,
-            reason=f"阶段3错误: {str(e)}",
+            reason=f"Stage 3 error: {str(e)}",
             stage=DiagnosisStage.ERROR
         )
 
@@ -944,22 +1082,24 @@ def stage4_reasoning(
     qa_data: QAData,
     memory_data: MemoryData,
     model: str = "deepseek",
-    config: Optional[DiagnosisConfig] = None
+    config: Optional[DiagnosisConfig] = None,
+    usage_stats: Optional[UsageStats] = None,
 ) -> StageResult:
-    """阶段4：推理阶段
+    """Stage 4: reasoning.
     
-    如果前面阶段都通过，问题出在推理环节
+    If all previous stages pass, remaining issues are attributed to reasoning.
     
     Args:
-        qa_data: QA数据对象
-        memory_data: 记忆数据对象
-        model: 使用的模型
-        config: 诊断配置
+        qa_data: QAData instance
+        memory_data: MemoryData instance
+        model: model to use
+        config: diagnosis configuration
+        usage_stats: optional UsageStats tracker
         
     Returns:
-        StageResult对象，包含诊断结果
+        StageResult containing the diagnosis outcome
     """
-    _print_stage_header("推理阶段", 4)
+    _print_stage_header("Reasoning Stage", 4)
     
     qa_question_str = qa_data.to_json_str("question")
     qa_answer_str = qa_data.to_json_str("answer")
@@ -1031,7 +1171,7 @@ Output format:
 """
     
     try:
-        result = call_llm_api(prompt, model, config)
+        result = call_llm_api(prompt, model, config, usage_stats=usage_stats, stage_name="stage4_reasoning")
         
         stage_result = StageResult(
             stage_passed=False,
@@ -1040,22 +1180,22 @@ Output format:
             stage=DiagnosisStage.REASONING
         )
         
-        print(f"✓ 推理问题类型: {stage_result.label}")
-        print(f"  原因: {stage_result.reason}\n")
+        print(f"✓ Reasoning issue type: {stage_result.label}")
+        print(f"  Reason: {stage_result.reason}\n")
         
         return stage_result
     except Exception as e:
-        logging.error(f"阶段4错误: {str(e)}")
+        logging.error(f"Stage 4 error: {str(e)}")
         return StageResult(
             stage_passed=False,
             label="4.2",
-            reason=f"阶段4错误: {str(e)}",
+            reason=f"Stage 4 error: {str(e)}",
             stage=DiagnosisStage.ERROR
         )
 
 
 # ============================================================================
-# 主诊断函数
+# Main diagnosis function
 # ============================================================================
 
 def analyze_qa_pair(
@@ -1064,75 +1204,94 @@ def analyze_qa_pair(
     model: str = "deepseek",
     config: Optional[DiagnosisConfig] = None
 ) -> DiagnosisResult:
-    """分阶段诊断系统主函数
+    """Main staged diagnosis function.
     
-    按顺序执行各个诊断阶段，直到发现问题或全部通过
+    Execute diagnosis stages in order until an issue is found or all stages pass.
     
     Args:
-        qa_data: QA数据对象
-        memory_data: 记忆数据对象
-        model: 使用的模型
-        config: 诊断配置
+        qa_data: QAData instance
+        memory_data: MemoryData instance
+        model: model to use
+        config: diagnosis configuration
         
     Returns:
-        DiagnosisResult对象，包含完整的诊断结果
+        DiagnosisResult containing the full diagnosis outcome
     """
     print(f"\n{'='*70}")
-    print(f"🔍 开始分阶段诊断")
-    print(f"📝 问题: {qa_data.question}")
+    print(f"🔍 Start staged diagnosis")
+    print(f"📝 Question: {qa_data.question}")
     print(f"{'='*70}\n")
     
+    # Create a usage stats tracker
+    stats = UsageStats()
+    
     try:
-        # 阶段0: 一致性检查
-        stage0_result = stage0_consistency_check(qa_data, model, config)
+        # Stage 0: consistency check
+        stage0_result = stage0_consistency_check(qa_data, model, config, usage_stats=stats)
         if stage0_result.stage_passed:
-            return DiagnosisResult(
+            result = DiagnosisResult(
                 label=None,
                 reason=stage0_result.reason,
-                stage=DiagnosisStage.CONSISTENCY_CHECK
+                stage=DiagnosisStage.CONSISTENCY_CHECK,
+                usage_stats=stats,
             )
+            stats.print_summary()
+            return result
         
-        # 阶段1: 记忆提取阶段
-        stage1_result = stage1_memory_extraction(qa_data, memory_data, model, config)
+        # Stage 1: memory extraction
+        stage1_result = stage1_memory_extraction(qa_data, memory_data, model, config, usage_stats=stats)
         if not stage1_result.stage_passed:
-            return DiagnosisResult(
+            result = DiagnosisResult(
                 label=stage1_result.label,
                 reason=stage1_result.reason,
-                stage=DiagnosisStage.MEMORY_EXTRACTION
+                stage=DiagnosisStage.MEMORY_EXTRACTION,
+                usage_stats=stats,
             )
+            stats.print_summary()
+            return result
         
-        # 阶段2: 记忆更新阶段
-        stage2_result = stage2_memory_update(qa_data, memory_data, model, config)
+        # Stage 2: memory update
+        stage2_result = stage2_memory_update(qa_data, memory_data, model, config, usage_stats=stats)
         if not stage2_result.stage_passed:
-            return DiagnosisResult(
+            result = DiagnosisResult(
                 label=stage2_result.label,
                 reason=stage2_result.reason,
-                stage=DiagnosisStage.MEMORY_UPDATE
+                stage=DiagnosisStage.MEMORY_UPDATE,
+                usage_stats=stats,
             )
+            stats.print_summary()
+            return result
         
-        # 阶段3: 记忆检索阶段
-        stage3_result = stage3_memory_retrieval(qa_data, memory_data, model, config)
+        # Stage 3: memory retrieval
+        stage3_result = stage3_memory_retrieval(qa_data, memory_data, model, config, usage_stats=stats)
         if not stage3_result.stage_passed:
-            return DiagnosisResult(
+            result = DiagnosisResult(
                 label=stage3_result.label,
                 reason=stage3_result.reason,
-                stage=DiagnosisStage.MEMORY_RETRIEVAL
+                stage=DiagnosisStage.MEMORY_RETRIEVAL,
+                usage_stats=stats,
             )
+            stats.print_summary()
+            return result
         
-        # 阶段4: 推理阶段（前面都通过了，问题在推理）
-        stage4_result = stage4_reasoning(qa_data, memory_data, model, config)
-        return DiagnosisResult(
+        # Stage 4: reasoning (previous stages passed; issue is in reasoning)
+        stage4_result = stage4_reasoning(qa_data, memory_data, model, config, usage_stats=stats)
+        result = DiagnosisResult(
             label=stage4_result.label,
             reason=stage4_result.reason,
-            stage=DiagnosisStage.REASONING
+            stage=DiagnosisStage.REASONING,
+            usage_stats=stats,
         )
+        stats.print_summary()
+        return result
         
     except Exception as e:
-        logging.error(f"诊断过程出错: {str(e)}")
+        logging.error(f"Error during diagnosis: {str(e)}")
         return DiagnosisResult(
             label=None,
-            reason=f"诊断过程出错: {str(e)}",
-            stage=DiagnosisStage.ERROR
+            reason=f"Error during diagnosis: {str(e)}",
+            stage=DiagnosisStage.ERROR,
+            usage_stats=stats,
         )
 
 
@@ -1146,24 +1305,25 @@ def analyze_qa_pair_legacy(
     speaker2_memories: List[Dict],
     model: str = "deepseek"
 ) -> Dict:
-    """兼容旧接口的分析函数
+    """Legacy compatibility wrapper.
     
-    该函数保持与原有代码的兼容性，将参数转换为新的数据类后调用新的分析函数
+    Keeps compatibility with older code by converting arguments into the new
+    dataclasses and calling the new analysis function.
     
     Args:
-        qa_question: 问题文本
-        qa_answer: 参考答案
-        qa_response: 模型回答
-        memories1: person1的记忆数据
-        memories2: person2的记忆数据
-        speaker1_memories: speaker1的检索记忆
-        speaker2_memories: speaker2的检索记忆
-        model: 使用的模型
+        qa_question: question text
+        qa_answer: reference answer
+        qa_response: model response
+        memories1: person1 memory data
+        memories2: person2 memory data
+        speaker1_memories: retrieved memories for speaker1
+        speaker2_memories: retrieved memories for speaker2
+        model: model to use
         
     Returns:
-        诊断结果字典（兼容旧格式）
+        Diagnosis result dict (legacy format)
     """
-    # 创建数据对象
+    # Build data objects
     qa_data = QAData(
         question=qa_question,
         answer=qa_answer,
@@ -1177,10 +1337,10 @@ def analyze_qa_pair_legacy(
         speaker2_retrieval=speaker2_memories
     )
     
-    # 调用新函数
+    # Call the new function
     result = analyze_qa_pair(qa_data, memory_data, model)
     
-    # 转换为旧格式
+    # Convert to the legacy format
     return {
         "label": result.label,
         "reason": result.reason,
@@ -1198,26 +1358,26 @@ def analyze_qa_pair_with_voting(
     model: str = "deepseek",
     num_votes: int = 3
 ) -> Dict:
-    """使用投票机制分析QA对和检索记忆
+    """Analyze a QA pair (and retrieved memories) using a voting mechanism.
     
     Args:
-        qa_question: 问题文本
-        qa_answer: 参考答案
-        qa_response: 模型回答
-        memories1: person1的记忆数据
-        memories2: person2的记忆数据
-        speaker1_memories: speaker1的检索记忆
-        speaker2_memories: speaker2的检索记忆
-        model: 主要使用的模型
-        num_votes: 投票轮数
+        qa_question: question text
+        qa_answer: reference answer
+        qa_response: model response
+        memories1: person1 memory data
+        memories2: person2 memory data
+        speaker1_memories: retrieved memories for speaker1
+        speaker2_memories: retrieved memories for speaker2
+        model: primary model to use
+        num_votes: number of voting rounds
         
     Returns:
-        包含最终诊断结果和投票详情的字典
+        Dict containing the final diagnosis result and voting details
     """
-    print(f"\n🗳️  问题: {qa_question}")
-    print(f"📊 使用 {model} 作为主模型进行 {num_votes} 轮投票（每轮使用不同模型）\n")
+    print(f"\n🗳️  Question: {qa_question}")
+    print(f"📊 Run {num_votes} voting rounds with {model} as the primary model (a different model may be used each round)\n")
     
-    # 创建数据对象（只需创建一次，可复用）
+    # Build data objects (create once and reuse)
     qa_data = QAData(
         question=qa_question,
         answer=qa_answer,
@@ -1231,31 +1391,34 @@ def analyze_qa_pair_with_voting(
         speaker2_retrieval=speaker2_memories
     )
     
-    # 存储每轮的结果
+    # Store results for each round
     vote_results = []
     
-    # 定义模型列表，用于轮换
+    # Aggregate usage stats across all voting rounds
+    aggregated_stats = UsageStats()
+    
+    # Define the model list for rotation
     models = ["deepseek", "gpt-4.1", "gpt-5"]
     
-    # 确保主模型在列表中，如果不在则添加
+    # Ensure the primary model is in the list; insert if missing
     if model not in models:
         models.insert(0, model)
     else:
-        # 将主模型移到首位
+        # Move the primary model to the front
         models.remove(model)
         models.insert(0, model)
     
-    # 进行多轮投票，确保每轮使用不同模型
+    # Run multiple voting rounds, using different models each round
     used_models = []
     for i in range(num_votes):
-        # 选择模型：优先使用未使用过的模型
+        # Select model: prefer unused models
         current_model = None
         for m in models:
             if m not in used_models:
                 current_model = m
                 break
         
-        # 如果所有模型都已使用过，则从除了主模型外的模型中选择
+        # If all models have been used, choose from non-primary models when possible
         if current_model is None:
             unused_models = [m for m in models if m != model]
             if unused_models:
@@ -1264,12 +1427,15 @@ def analyze_qa_pair_with_voting(
                 current_model = models[len(used_models) % len(models)]
         
         used_models.append(current_model)
-        print(f"🔄 第 {i+1}/{num_votes} 轮分析，使用模型: {current_model}")
+        print(f"🔄 Round {i+1}/{num_votes}, model: {current_model}")
         
         try:
-            # 使用新的数据类接口
+            # Use the new dataclass-based interface
             result = analyze_qa_pair(qa_data, memory_data, model=current_model)
-            # 转换为字典格式并添加使用的模型信息
+            # Merge usage stats from this round
+            if result.usage_stats is not None:
+                aggregated_stats.merge(result.usage_stats)
+            # Convert to dict and attach model info
             result_dict = {
                 "label": result.label,
                 "reason": result.reason,
@@ -1277,58 +1443,58 @@ def analyze_qa_pair_with_voting(
                 "used_model": current_model
             }
             vote_results.append(result_dict)
-            print(f"   ✅ 第 {i+1} 轮完成: label={result.label}, model={current_model}\n")
+            print(f"   ✅ Round {i+1} completed: label={result.label}, model={current_model}\n")
         except Exception as e:
-            logging.error(f"第 {i+1} 轮分析失败: {str(e)}")
-            print(f"   ❌ 第 {i+1} 轮分析失败: {str(e)}\n")
-            # 如果某一轮失败，添加一个默认结果（标签为null）
+            logging.error(f"Round {i+1} analysis failed: {str(e)}")
+            print(f"   ❌ Round {i+1} analysis failed: {str(e)}\n")
+            # If a round fails, append a default result (label = null)
             vote_results.append({
                 "label": None,
-                "reason": f"API调用失败: {str(e)}",
+                "reason": f"API call failed: {str(e)}",
                 "stage": "error",
                 "used_model": current_model
             })
     
-    # 统计投票结果（包含None标签）
+    # Count vote results (including None labels)
     labels = [result["label"] for result in vote_results]
     
-    # 选择出现次数最多的标签（包括None）
+    # Pick the most frequent label (including None)
     label_counter = Counter(labels)
     most_common_label = label_counter.most_common(1)[0][0]
 
     
-    # 获取最终结果的详细信息
+    # Get the details for the final selected result
     final_result = None
     
-    # 检查是否所有投票结果都不同（即没有重复的标签）
+    # Check whether all vote results are different (no repeated labels)
     all_different = len(label_counter) == len(vote_results) and len(vote_results) > 1
     
     if all_different:
-        # 如果所有投票结果都不同，则使用主模型的结果
-        print(f"所有投票结果都不同，使用主模型 {model} 的结果")
+        # If all results differ, use the primary model's result
+        print(f"All voting results are different; use the primary model ({model}) result")
         for result in vote_results:
             if result.get("used_model") == model:
                 final_result = result
                 most_common_label = result["label"]
                 break
         
-        # 如果没有找到主模型的结果，则使用第一个结果
+        # If the primary model result is missing, fall back to the first result
         if final_result is None:
-            print(f"未找到主模型 {model} 结果，使用第一个结果")
+            print(f"Primary model result ({model}) not found; fall back to the first result")
             final_result = vote_results[0]
             most_common_label = final_result["label"]
     else:
-        # 根据得票数最多的标签来选择最终结果
+        # Select the final result by the most-voted label
         for result in vote_results:
             if result["label"] == most_common_label:
                 final_result = result
                 break
         
-        # 如果没有找到匹配的结果（理论上不应该发生），使用第一个结果
+        # If no matching result is found (should not happen), use the first result
         if final_result is None and vote_results:
             final_result = vote_results[0]
     
-    # 简化 voting_details，只包含每轮的标注结果
+    # Simplify voting_details: include only per-round annotation results
     final_result["voting_details"] = {
         "label_votes": dict(label_counter),
         "individual_results": [
@@ -1339,232 +1505,125 @@ def analyze_qa_pair_with_voting(
             } 
             for result in vote_results
         ],
-        "all_different": all_different  # 添加标记，表示是否所有结果都不同
+        "all_different": all_different  # Flag: whether all results are different
     }
     
-    # 打印投票汇总
-    print(f"{'='*70}")
-    print(f"📊 投票汇总")
-    print(f"{'='*70}")
-    print(f"🤖 使用的模型顺序: {used_models}")
+    # Attach aggregated usage stats to the final result
+    final_result["usage_stats"] = aggregated_stats.to_dict()
     
-    # 安全地打印投票结果
+    # Print voting summary
+    print(f"{'='*70}")
+    print(f"📊 Voting summary")
+    print(f"{'='*70}")
+    print(f"🤖 Model order used: {used_models}")
+    
+    # Print vote result safely
     vote_count = label_counter[most_common_label] if not all_different else 1
-    print(f"🏆 最终标签: {most_common_label} (得票数: {vote_count}/{num_votes})")
+    print(f"🏆 Final label: {most_common_label} (votes: {vote_count}/{num_votes})")
     if all_different:
-        print(f"⚠️  所有投票结果都不同，已选择deepseek模型的结果")
+        print(f"⚠️  All voting results are different; selected the DeepSeek model result")
+    
+    # Print API usage stats across all votes
+    aggregated_stats.print_summary()
     print(f"{'='*70}\n")
     
     return final_result
+
+
 # ============================================================================
-# 主程序入口
+# Single-file processing (thread-safe)
 # ============================================================================
 
-def main():
-    """主程序入口函数
-    
-    支持命令行参数：
-        python dignosis.py [model] [options]
-        
-    参数说明：
-        model: 可选模型 (deepseek, gpt4.1, gpt5)，默认：deepseek
-        --voting: 启用投票机制（默认）
-        --no-voting: 禁用投票，使用单个模型
-        --num-votes N: 投票轮数，默认：3
-        -i, --input: 输入文件路径
-        -o, --output-dir: 输出目录路径
-        -f, --output-file: 输出文件名
-        
-    示例：
-        python diagnosis.py deepseek --no-voting                    # 单模型诊断
-        python diagnosis.py deepseek --voting                       # 投票诊断（3轮）
-        python diagnosis.py deepseek --num-votes 5                  # 投票诊断（5轮）
-        python diagnosis.py -i data/input.json -o results/         # 自定义输入输出
-        python diagnosis.py --input data.json --output-file out.json # 指定文件
+# Thread-safe print lock
+_print_lock = threading.Lock()
+
+
+def _thread_print(*args, **kwargs):
+    """Thread-safe print helper."""
+    with _print_lock:
+        print(*args, **kwargs)
+
+
+def process_single_file(
+    input_file: str,
+    output_file: str,
+    model: str,
+    use_voting: bool,
+    num_votes: int,
+    thread_label: str = "",
+) -> Tuple[int, UsageStats]:
+    """Run diagnosis for a single input file.
+
+    This function is safe to call from multiple threads; each thread processes
+    an independent input/output file pair.
+
+    Args:
+        input_file: input JSON file path
+        output_file: output JSON file path
+        model: model name to use
+        use_voting: whether to use voting
+        num_votes: number of voting rounds
+        thread_label: thread label (for log prefix)
+
+    Returns:
+        Tuple of (num_processed_items, file_level_usage_stats)
     """
-    import argparse
-    import datetime
-    
-    # 创建参数解析器
-    parser = argparse.ArgumentParser(
-        description="记忆诊断系统 - 分阶段诊断QA对中的问题",
-        formatter_class=argparse.RawDescriptionHelpFormatter
-    )
-    
-    # 支持的模型
-    model_map = {
-        "deepseek": "deepseek",
-        "gpt4.1": "gpt-4.1",
-        "gpt5": "gpt-5",
-    }
-    
-    # 添加参数
-    parser.add_argument(
-        "model",
-        nargs="?",
-        default="deepseek",
-        choices=list(model_map.keys()),
-        help="选择使用的模型 (默认: deepseek)"
-    )
-    
-    parser.add_argument(
-        "--voting",
-        action="store_true",
-        default=True,
-        help="启用投票机制（默认启用）"
-    )
-    
-    parser.add_argument(
-        "--no-voting",
-        action="store_true",
-        help="禁用投票，使用单个模型诊断"
-    )
-    
-    parser.add_argument(
-        "--num-votes",
-        type=int,
-        default=3,
-        help="投票轮数 (默认: 3)"
-    )
-    
-    parser.add_argument(
-        "-i", "--input",
-        type=str,
-        default="data/input/mem0_mem/gpt4omini/mem0_dataset_part1.json",
-        help="输入文件路径 (默认: data/input/mem0_mem/gpt4omini/mem0_dataset_part1.json)"
-    )
-    
-    parser.add_argument(
-        "-o", "--output-dir",
-        type=str,
-        default=None,
-        help="输出目录路径 (默认: 根据诊断模式自动选择)"
-    )
-    
-    parser.add_argument(
-        "-f", "--output-file",
-        type=str,
-        default=None,
-        help="输出文件名 (默认: 根据诊断模式自动生成)"
-    )
-    
-    # 解析参数
-    args = parser.parse_args()
-    
-    # 确定是否使用投票
-    use_voting = args.voting and not args.no_voting
-    
-    # 获取模型
-    model = model_map[args.model]
-    
-    # 打印启动信息
-    print("\n" + "="*70)
-    print("🚀 记忆诊断系统启动")
-    print("="*70)
-    print(f"🤖 使用模型: {model}")
-    print(f"📊 诊断模式: {'投票机制 (' + str(args.num_votes) + '轮)' if use_voting else '单模型诊断'}")
-    print(f"⚙️  配置: {DiagnosisConfig()}")
-    print("="*70 + "\n")
-    
-    # 设置输入输出文件路径
-    input_file = args.input
-    
-    # 从输入文件名中提取标识（用于输出文件命名）
-    input_basename = os.path.splitext(os.path.basename(input_file))[0]
-    # 清理文件名中的特殊字符
-    input_identifier = input_basename.replace(" ", "_").replace("(", "").replace(")", "")
-    
-    # 根据诊断模式选择输出目录和文件名
-    if args.output_dir:
-        # 用户指定了输出目录
-        output_dir = args.output_dir
-    else:
-        # 自动选择输出目录
-        if use_voting:
-            output_dir = "data/output/llm_annotation_voting"
-        else:
-            output_dir = "data/output/llm_annotation_single"
-    
-    # 获取当前时间戳
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    prefix = f"[{thread_label}] " if thread_label else ""
 
-    if args.output_file:
-        # 用户指定了输出文件名
-        output_filename = args.output_file
-    else:
-        # 自动生成输出文件名（包含输入文件标识和时间戳）
-        if use_voting:
-            output_filename = f"{input_identifier}_voting_{args.num_votes}rounds_{model.replace('-', '_')}_{timestamp}.json"
-        else:
-            output_filename = f"{input_identifier}_single_{model.replace('-', '_')}_{timestamp}.json"
-    
-    # 创建输出目录
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # 组合完整的输出文件路径
-    output_file = os.path.join(output_dir, output_filename)
-    
-    print(f"📁 输入文件: {input_file}")
-    print(f"📁 输出目录: {output_dir}")
-    print(f"📁 输出文件: {output_file}\n")
-    
-    # 验证输入文件存在
+    # Validate input file
     if not os.path.exists(input_file):
-        print(f"❌ 错误: 输入文件不存在: {input_file}")
-        print(f"💡 提示: 请检查文件路径或使用 -i 参数指定正确的输入文件")
-        return
-    
-    # 加载输入数据
+        _thread_print(f"{prefix}❌ Error: Input file does not exist: {input_file}")
+        return 0, UsageStats()
+
+    # Load input data
     try:
         data = load_json_file(input_file)
-        print(f"✅ 成功加载 {len(data)} 个会话\n")
+        _thread_print(f"{prefix}✅ Loaded {input_file} successfully, total conversations: {len(data)}")
     except Exception as e:
-        logging.error(f"加载输入文件失败: {str(e)}")
-        print(f"❌ 错误: 无法解析输入文件: {str(e)}")
-        return
-    
-    # 加载已处理的结果（支持断点续传）
+        logging.error(f"{prefix}Failed to load input file: {str(e)}")
+        _thread_print(f"{prefix}❌ Error: Failed to parse input file: {str(e)}")
+        return 0, UsageStats()
+
+    # Load previously processed results (resume support)
     results = []
     if os.path.exists(output_file):
         try:
             with open(output_file, "r", encoding="utf-8") as f:
                 results = json.load(f)
-                logging.info(f"已加载 {len(results)} 条历史结果")
-        except (json.JSONDecodeError, FileNotFoundError) as e:
-            logging.warning(f"加载历史结果失败: {str(e)}，将从头开始")
+                _thread_print(f"{prefix}📂 Loaded {len(results)} historical results (resume enabled)")
+        except (json.JSONDecodeError, FileNotFoundError):
             results = []
-    
+
     processed_items = {item["conv_id_question_id"] for item in results}
-    
+
+    # File-level usage tracker
+    file_stats = UsageStats()
+
     try:
         total_convs = len(data)
-        print(f"📊 开始处理，共有 {total_convs} 个会话需要分析\n")
-        
+        _thread_print(f"{prefix}📊 Start processing, total conversations: {total_convs}\n")
+
         for conv_idx, (conv_id, qa_list) in enumerate(data.items(), 1):
-            print(f"\n{'='*70}")
-            print(f"📝 处理会话 {conv_id} ({conv_idx}/{total_convs})")
-            print(f"{'='*70}\n")
-            
+            _thread_print(f"\n{prefix}{'='*60}")
+            _thread_print(f"{prefix}📝 Processing conversation {conv_id} ({conv_idx}/{total_convs})")
+            _thread_print(f"{prefix}{'='*60}\n")
+
             for qa_idx, qa_item in enumerate(qa_list, 1):
                 item_id = f"{conv_id}_{qa_idx-1}"
-                
-                # 检查是否已处理
+
                 if item_id in processed_items:
-                    print(f"⏭️  跳过已处理的问题: {item_id}\n")
+                    _thread_print(f"{prefix}⏭️  Skip already processed item: {item_id}")
                     continue
-                
-                print(f"🔍 开始处理问题 {qa_idx}/{len(qa_list)}: {item_id}")
-                
+
+                _thread_print(f"{prefix}🔍 Processing question {qa_idx}/{len(qa_list)}: {item_id}")
+
                 try:
-                    # 提取数据
                     p1 = qa_item.get("person1", {})
                     p2 = qa_item.get("person2", {})
                     memories1 = p1.get("memories", [])
                     memories2 = p2.get("memories", [])
-                    
-                    # 根据配置选择诊断方式
+
                     if use_voting:
-                        # 使用投票机制
                         analysis = analyze_qa_pair_with_voting(
                             qa_question=qa_item["qa_question"],
                             qa_answer=qa_item["qa_answer"],
@@ -1574,10 +1633,9 @@ def main():
                             speaker1_memories=qa_item.get("speaker_1_memories", []),
                             speaker2_memories=qa_item.get("speaker_2_memories", []),
                             model=model,
-                            num_votes=args.num_votes
+                            num_votes=num_votes,
                         )
-                        
-                        # 构建结果对象（投票模式）
+
                         result = {
                             "conv_id_question_id": item_id,
                             "qa_question": qa_item["qa_question"],
@@ -1586,10 +1644,9 @@ def main():
                             "qa_category": qa_item.get("qa_category", ""),
                             "label": analysis["label"],
                             "reason": analysis["reason"],
-                            "diagnosis_mode": f"voting_{args.num_votes}rounds"
+                            "diagnosis_mode": f"voting_{num_votes}rounds",
                         }
-                        
-                        # 添加投票详情
+
                         if "voting_details" in analysis:
                             result["voting_details"] = {
                                 "label_votes": analysis["voting_details"]["label_votes"],
@@ -1597,30 +1654,38 @@ def main():
                                     {
                                         "label": ir["label"],
                                         "used_model": ir.get("used_model", "unknown"),
-                                        "reason": ir.get("reason", "")
+                                        "reason": ir.get("reason", ""),
                                     }
                                     for ir in analysis["voting_details"]["individual_results"]
                                 ],
-                                "all_different": analysis["voting_details"].get("all_different", False)
+                                "all_different": analysis["voting_details"].get("all_different", False),
                             }
+
+                        if "usage_stats" in analysis:
+                            result["usage_stats"] = analysis["usage_stats"]
+                            item_stats = UsageStats()
+                            item_stats.total_calls = analysis["usage_stats"]["total_calls"]
+                            item_stats.total_latency = analysis["usage_stats"]["total_latency_seconds"]
+                            item_stats.total_prompt_tokens = analysis["usage_stats"]["total_prompt_tokens"]
+                            item_stats.total_completion_tokens = analysis["usage_stats"]["total_completion_tokens"]
+                            item_stats.total_tokens = analysis["usage_stats"]["total_tokens"]
+                            item_stats.call_details = analysis["usage_stats"].get("call_details", [])
+                            file_stats.merge(item_stats)
                     else:
-                        # 使用单模型诊断
                         qa_data = QAData(
                             question=qa_item["qa_question"],
                             answer=qa_item["qa_answer"],
-                            response=qa_item["qa_response"]
+                            response=qa_item["qa_response"],
                         )
-                        
                         memory_data = MemoryData(
                             person1_memories=memories1,
                             person2_memories=memories2,
                             speaker1_retrieval=qa_item.get("speaker_1_memories", []),
-                            speaker2_retrieval=qa_item.get("speaker_2_memories", [])
+                            speaker2_retrieval=qa_item.get("speaker_2_memories", []),
                         )
-                        
+
                         diagnosis = analyze_qa_pair(qa_data, memory_data, model=model)
-                        
-                        # 构建结果对象（单模型模式）
+
                         result = {
                             "conv_id_question_id": item_id,
                             "qa_question": qa_item["qa_question"],
@@ -1630,39 +1695,316 @@ def main():
                             "label": diagnosis.label,
                             "reason": diagnosis.reason,
                             "stage": diagnosis.stage.value if isinstance(diagnosis.stage, DiagnosisStage) else diagnosis.stage,
-                            "diagnosis_mode": f"single_model_{model}"
+                            "diagnosis_mode": f"single_model_{model}",
                         }
-                    
+
+                        if diagnosis.usage_stats is not None:
+                            result["usage_stats"] = diagnosis.usage_stats.to_dict()
+                            file_stats.merge(diagnosis.usage_stats)
+
                     results.append(result)
-                    
-                    # 立即保存到文件（支持断点续传）
+
                     with open(output_file, "w", encoding="utf-8") as f:
                         json.dump(results, f, ensure_ascii=False, indent=2)
-                    
-                    print(f"✅ 问题 {item_id} 处理完成并已保存\n")
-                    
+
+                    _thread_print(f"{prefix}✅ {item_id} completed and saved\n")
+
                 except Exception as e:
-                    logging.error(f"处理问题 {item_id} 时发生错误: {str(e)}")
-                    print(f"❌ 处理问题 {item_id} 失败: {str(e)}\n")
+                    logging.error(f"{prefix}Error while processing {item_id}: {str(e)}")
+                    _thread_print(f"{prefix}❌ {item_id} failed: {str(e)}\n")
                     continue
-                    
+
     except KeyboardInterrupt:
-        print("\n⚠️  处理已中断，正在保存...\n")
+        _thread_print(f"\n{prefix}⚠️  Processing interrupted, saving...\n")
     except Exception as e:
-        logging.error(f"处理过程中发生未预期的错误: {str(e)}")
-        print(f"\n❌ 处理过程中发生错误: {str(e)}\n")
+        logging.error(f"{prefix}Error occurred during processing: {str(e)}")
+        _thread_print(f"\n{prefix}❌ Error occurred during processing: {str(e)}\n")
     finally:
-        # 确保最后结果被保存
         if results:
             with open(output_file, "w", encoding="utf-8") as f:
                 json.dump(results, f, ensure_ascii=False, indent=2)
-            
-            print("\n" + "="*70)
-            print("🎉 处理完成")
-            print("="*70)
-            print(f"✅ 共处理 {len(results)} 个问题")
-            print(f"📁 结果已保存到: {output_file}")
-            print("="*70 + "\n")
+
+    _thread_print(f"{prefix}🎉 File processing completed: {len(results)} questions -> {output_file}")
+    file_stats.print_summary()
+    return len(results), file_stats
+
+
+def _resolve_input_files(input_args: List[str]) -> List[str]:
+    """Resolve input arguments (file paths, directory paths, and glob patterns).
+
+    Args:
+        input_args: list of input args
+
+    Returns:
+        De-duplicated list of JSON file paths
+    """
+    files = []
+    for path in input_args:
+        if os.path.isdir(path):
+            files.extend(sorted(glob_module.glob(os.path.join(path, "*.json"))))
+        elif os.path.isfile(path):
+            files.append(path)
+        else:
+            expanded = sorted(glob_module.glob(path))
+            if expanded:
+                files.extend(expanded)
+            else:
+                logging.warning(f"Path does not exist or no files matched: {path}")
+    seen = set()
+    unique = []
+    for f in files:
+        real = os.path.realpath(f)
+        if real not in seen:
+            seen.add(real)
+            unique.append(f)
+    return unique
+
+
+def _generate_output_path(
+    input_file: str,
+    model: str,
+    use_voting: bool,
+    num_votes: int,
+    output_dir: Optional[str],
+    timestamp: str,
+) -> str:
+    """Generate the output file path for a given input file."""
+    input_basename = os.path.splitext(os.path.basename(input_file))[0]
+    input_identifier = input_basename.replace(" ", "_").replace("(", "").replace(")", "")
+
+    if output_dir is None:
+        output_dir = "data/output/llm_annotation_voting" if use_voting else "data/output/llm_annotation_single"
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    if use_voting:
+        filename = f"{input_identifier}_voting_{num_votes}rounds_{model.replace('-', '_')}_{timestamp}.json"
+    else:
+        filename = f"{input_identifier}_single_{model.replace('-', '_')}_{timestamp}.json"
+
+    return os.path.join(output_dir, filename)
+
+
+def _print_stage_summary(global_stats: UsageStats):
+    """Print per-stage aggregated statistics."""
+    stage_stats: Dict[str, Dict] = {}
+    for detail in global_stats.call_details:
+        stage = detail.get("stage", "unknown")
+        if stage not in stage_stats:
+            stage_stats[stage] = {
+                "calls": 0, "latency": 0.0,
+                "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0,
+            }
+        stage_stats[stage]["calls"] += 1
+        stage_stats[stage]["latency"] += detail.get("latency_seconds", 0)
+        stage_stats[stage]["prompt_tokens"] += detail.get("prompt_tokens", 0)
+        stage_stats[stage]["completion_tokens"] += detail.get("completion_tokens", 0)
+        stage_stats[stage]["total_tokens"] += detail.get("total_tokens", 0)
+
+    if stage_stats:
+        print(f"\n  📋 Per-stage summary:")
+        for stage_name, s in sorted(stage_stats.items()):
+            avg_lat = round(s["latency"] / s["calls"], 3) if s["calls"] > 0 else 0
+            print(f"     {stage_name}: {s['calls']} calls, "
+                  f"total latency {round(s['latency'], 3)}s (avg {avg_lat}s), "
+                  f"tokens {s['total_tokens']}")
+
+
+# ============================================================================
+# Main entrypoint
+# ============================================================================
+
+def main():
+    """Main entrypoint.
+
+    Supports CLI usage:
+        python run_diagnosis.py [model] [options]
+
+    Arguments:
+        model: model alias (deepseek, gpt4.1, gpt5), default: deepseek
+        --voting: enable voting (default)
+        --no-voting: disable voting and use a single model
+        --num-votes N: voting rounds, default: 3
+        -i, --input: input file/dir/glob paths (multiple supported)
+        -o, --output-dir: output directory
+        -f, --output-file: output filename (single-file mode only)
+        -t, --threads: number of worker threads, default: 1
+
+    Examples:
+        python run_diagnosis.py deepseek --no-voting -i file.json
+        python run_diagnosis.py deepseek -i data/input/mem0_mem/gpt4omini/ -t 5
+        python run_diagnosis.py deepseek -i part1.json part2.json part3.json -t 3
+        python run_diagnosis.py deepseek --num-votes 5 -i dir/ -t 5
+    """
+    import argparse
+    import datetime
+
+    parser = argparse.ArgumentParser(
+        description="Memory diagnosis system - staged diagnosis for issues in QA pairs",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+
+    model_map = {
+        "deepseek": "deepseek",
+        "gpt4.1": "gpt-4.1",
+        "gpt5": "gpt-5",
+    }
+
+    parser.add_argument(
+        "model",
+        nargs="?",
+        default="deepseek",
+        choices=list(model_map.keys()),
+        help="Model to use (default: deepseek)",
+    )
+    parser.add_argument(
+        "--voting",
+        action="store_true",
+        default=True,
+        help="Enable voting mode (enabled by default)",
+    )
+    parser.add_argument(
+        "--no-voting",
+        action="store_true",
+        help="Disable voting and use single-model diagnosis",
+    )
+    parser.add_argument(
+        "--num-votes",
+        type=int,
+        default=3,
+        help="Number of voting rounds (default: 3)",
+    )
+    parser.add_argument(
+        "-i", "--input",
+        nargs="+",
+        default=["data/input/mem0_mem/gpt4omini/mem0_dataset_part1.json"],
+        help="Input file path(s), directory path(s), or glob pattern(s) (supports multiple)",
+    )
+    parser.add_argument(
+        "-o", "--output-dir",
+        type=str,
+        default=None,
+        help="Output directory path (default: auto-selected by diagnosis mode)",
+    )
+    parser.add_argument(
+        "-f", "--output-file",
+        type=str,
+        default=None,
+        help="Output filename (single-file mode only)",
+    )
+    parser.add_argument(
+        "-t", "--threads",
+        type=int,
+        default=1,
+        help="Number of parallel threads (default: 1, recommended to match input file count)",
+    )
+
+    args = parser.parse_args()
+
+    use_voting = args.voting and not args.no_voting
+    model = model_map[args.model]
+    num_threads = max(1, args.threads)
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Resolve input files
+    input_files = _resolve_input_files(args.input)
+    if not input_files:
+        print("❌ Error: No valid input files found")
+        print(f"💡 Tip: Please check input paths {args.input}")
+        return
+
+    # Print startup info
+    print("\n" + "=" * 70)
+    print("🚀 Memory diagnosis system started")
+    print("=" * 70)
+    print(f"🤖 Model: {model}")
+    print(f"📊 Diagnosis mode: {'Voting (' + str(args.num_votes) + ' rounds)' if use_voting else 'Single-model diagnosis'}")
+    print(f"📁 Input files: {len(input_files)}")
+    for f in input_files:
+        print(f"   - {f}")
+    print(f"🧵 Parallel threads: {num_threads}")
+    print(f"⚙️  Config: {DiagnosisConfig()}")
+    print("=" * 70 + "\n")
+
+    # Generate output paths for each input file
+    file_pairs: List[Tuple[str, str]] = []
+    for idx, inp in enumerate(input_files):
+        if len(input_files) == 1 and args.output_file:
+            out_dir = args.output_dir or ("data/output/llm_annotation_voting" if use_voting else "data/output/llm_annotation_single")
+            os.makedirs(out_dir, exist_ok=True)
+            out = os.path.join(out_dir, args.output_file)
+        else:
+            out = _generate_output_path(inp, model, use_voting, args.num_votes, args.output_dir, timestamp)
+        file_pairs.append((inp, out))
+        print(f"📄 [{idx+1}] {inp}")
+        print(f"   → {out}")
+    print()
+
+    # ---------------------------------------------------------------
+    # Run diagnosis
+    # ---------------------------------------------------------------
+    global_stats = UsageStats()
+    total_processed = 0
+
+    if num_threads <= 1 or len(file_pairs) <= 1:
+        # Single-threaded sequential processing
+        for inp, out in file_pairs:
+            count, stats = process_single_file(
+                input_file=inp,
+                output_file=out,
+                model=model,
+                use_voting=use_voting,
+                num_votes=args.num_votes,
+                thread_label=os.path.basename(inp),
+            )
+            total_processed += count
+            global_stats.merge(stats)
+    else:
+        # Multi-threaded parallel processing
+        effective_threads = min(num_threads, len(file_pairs))
+        print(f"🧵 Start {effective_threads} threads to process {len(file_pairs)} files in parallel...\n")
+
+        futures_map = {}
+        with ThreadPoolExecutor(max_workers=effective_threads) as executor:
+            for inp, out in file_pairs:
+                future = executor.submit(
+                    process_single_file,
+                    input_file=inp,
+                    output_file=out,
+                    model=model,
+                    use_voting=use_voting,
+                    num_votes=args.num_votes,
+                    thread_label=os.path.basename(inp),
+                )
+                futures_map[future] = inp
+
+            for future in as_completed(futures_map):
+                inp = futures_map[future]
+                try:
+                    count, stats = future.result()
+                    total_processed += count
+                    global_stats.merge(stats)
+                    print(f"✅ Thread completed: {os.path.basename(inp)} ({count} questions)")
+                except Exception as e:
+                    logging.error(f"Thread error while processing {inp}: {str(e)}")
+                    print(f"❌ Thread failed: {os.path.basename(inp)}: {str(e)}")
+
+    # ---------------------------------------------------------------
+    # Global summary
+    # ---------------------------------------------------------------
+    print("\n" + "=" * 70)
+    print("🎉 All processing completed")
+    print("=" * 70)
+    print(f"✅ Processed {total_processed} questions in total ({len(file_pairs)} files)")
+    for _, out in file_pairs:
+        print(f"   📁 {out}")
+
+    print(f"\n{'=' * 70}")
+    print(f"📊 Global API call summary")
+    print(f"{'=' * 70}")
+    global_stats.print_summary()
+    _print_stage_summary(global_stats)
+    print("=" * 70 + "\n")
 
 
 if __name__ == "__main__":

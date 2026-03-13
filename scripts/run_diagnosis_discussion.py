@@ -1,17 +1,18 @@
 """
-记忆诊断系统 - 多模型讨论版
+Memory diagnosis system - multi-model discussion version
 
-该模块实现了一个多模型分阶段讨论框架：
-- 阶段0: 一致性检查 - 三模型讨论
-- 阶段1: 记忆提取诊断 - 三模型讨论
-- 阶段2: 记忆更新诊断 - 三模型讨论
-- 阶段3: 记忆检索诊断 - 三模型讨论
-- 阶段4: 推理诊断 - 三模型讨论
+This module implements a multi-model, stage-wise discussion framework:
+- Stage 0: Consistency check (3-model discussion)
+- Stage 1: Memory extraction diagnosis (3-model discussion)
+- Stage 2: Memory update diagnosis (3-model discussion)
+- Stage 3: Memory retrieval diagnosis (3-model discussion)
+- Stage 4: Reasoning diagnosis (3-model discussion)
 
-每个阶段内，三个模型先独立判断，然后进行多轮讨论达成共识或投票决定
+Within each stage, three models first make independent judgments, then run
+multiple discussion rounds to reach consensus or decide by voting.
 """
 
-# 标准库导入
+# Standard library imports
 import json
 import logging
 import os
@@ -24,12 +25,12 @@ from typing import Dict, List, Optional, Tuple
 import datetime
 import argparse
 
-# 第三方库导入
+# Third-party imports
 from dotenv import load_dotenv
 from requests.exceptions import RequestException, Timeout
 
 # ============================================================================
-# 配置和初始化
+# Configuration and initialization
 # ============================================================================
 
 logging.getLogger('grpc').setLevel(logging.ERROR)
@@ -38,7 +39,7 @@ warnings.filterwarnings('ignore', module='grpc')
 load_dotenv()
 os.environ['GRPC_ALTS_CREDENTIALS_ENVIRONMENT_OVERRIDE'] = '1'
 
-# 导入原有模块的类和函数
+# Import classes and helpers from the baseline module
 from run_diagnosis import (
     APIConfig, DiagnosisConfig, QAData, MemoryData, DiagnosisStage,
     StageResult, DiagnosisResult, API_CONFIG,
@@ -48,12 +49,12 @@ from run_diagnosis import (
 
 
 # ============================================================================
-# 讨论相关的数据类
+# Discussion-related dataclasses
 # ============================================================================
 
 @dataclass
 class StageOpinion:
-    """单个模型在某阶段的意见"""
+    """A single model's opinion for a given stage."""
     model_name: str
     stage_passed: bool
     label: Optional[str]
@@ -65,7 +66,7 @@ class StageOpinion:
 
 @dataclass
 class StageDiscussionResult:
-    """某阶段讨论的最终结果"""
+    """Final discussion outcome for a stage."""
     stage: DiagnosisStage
     consensus_reached: bool
     final_passed: bool
@@ -77,7 +78,7 @@ class StageDiscussionResult:
 
 @dataclass
 class FullDiscussionResult:
-    """完整诊断讨论结果"""
+    """Full diagnosis result produced by multi-stage discussions."""
     final_label: Optional[str]
     final_reason: str
     final_stage: DiagnosisStage
@@ -85,11 +86,11 @@ class FullDiscussionResult:
 
 
 # ============================================================================
-# 阶段讨论Prompt生成函数
+# Prompt builders (per stage)
 # ============================================================================
 
 def generate_stage0_prompt(qa_data: QAData, other_opinions: List[StageOpinion] = None) -> str:
-    """生成阶段0的prompt（一致性检查）"""
+    """Build the stage-0 prompt (consistency check)."""
     qa_question_str = json.dumps(qa_data.question, ensure_ascii=False)
     qa_answer_str = json.dumps(qa_data.answer, ensure_ascii=False)
     qa_response_str = json.dumps(qa_data.response, ensure_ascii=False)
@@ -141,7 +142,7 @@ def generate_stage1_prompt(
     memory_data: MemoryData, 
     other_opinions: List[StageOpinion] = None
 ) -> str:
-    """生成阶段1的prompt（记忆提取）"""
+    """Build the stage-1 prompt (memory extraction)."""
     qa_question_str = json.dumps(qa_data.question, ensure_ascii=False)
     qa_answer_str = json.dumps(qa_data.answer, ensure_ascii=False)
     qa_response_str = json.dumps(qa_data.response, ensure_ascii=False)
@@ -228,7 +229,7 @@ def generate_stage2_prompt(
     memory_data: MemoryData, 
     other_opinions: List[StageOpinion] = None
 ) -> str:
-    """生成阶段2的prompt（记忆更新）"""
+    """Build the stage-2 prompt (memory update)."""
     qa_question_str = json.dumps(qa_data.question, ensure_ascii=False)
     qa_answer_str = json.dumps(qa_data.answer, ensure_ascii=False)
     qa_response_str = json.dumps(qa_data.response, ensure_ascii=False)
@@ -301,7 +302,7 @@ def generate_stage3_prompt(
     memory_data: MemoryData, 
     other_opinions: List[StageOpinion] = None
 ) -> str:
-    """生成阶段3的prompt（记忆检索）"""
+    """Build the stage-3 prompt (memory retrieval)."""
     qa_question_str = json.dumps(qa_data.question, ensure_ascii=False)
     qa_answer_str = json.dumps(qa_data.answer, ensure_ascii=False)
     speaker1_memories_str = json.dumps(memory_data.speaker1_retrieval, ensure_ascii=False)
@@ -356,7 +357,7 @@ def generate_stage4_prompt(
     memory_data: MemoryData, 
     other_opinions: List[StageOpinion] = None
 ) -> str:
-    """生成阶段4的prompt（推理）"""
+    """Build the stage-4 prompt (reasoning)."""
     qa_question_str = json.dumps(qa_data.question, ensure_ascii=False)
     qa_answer_str = json.dumps(qa_data.answer, ensure_ascii=False)
     qa_response_str = json.dumps(qa_data.response, ensure_ascii=False)
@@ -410,7 +411,7 @@ Output format:
 
 
 # ============================================================================
-# 单阶段讨论函数
+# Single-stage discussion
 # ============================================================================
 
 def discuss_stage(
@@ -421,32 +422,32 @@ def discuss_stage(
     max_rounds: int = 3,
     config: Optional[DiagnosisConfig] = None
 ) -> StageDiscussionResult:
-    """在某个阶段进行多模型讨论
+    """Run a multi-model discussion for a single stage.
     
     Args:
-        stage: 当前诊断阶段
-        qa_data: QA数据
-        memory_data: 记忆数据
-        models: 参与讨论的模型列表
-        max_rounds: 最大讨论轮次
-        config: 诊断配置
+        stage: current diagnosis stage
+        qa_data: QA data
+        memory_data: memory data
+        models: list of models participating in the discussion
+        max_rounds: maximum number of discussion rounds
+        config: diagnosis configuration
         
     Returns:
-        StageDiscussionResult对象
+        A StageDiscussionResult instance.
     """
     stage_name_map = {
-        DiagnosisStage.CONSISTENCY_CHECK: "一致性检查",
-        DiagnosisStage.MEMORY_EXTRACTION: "记忆提取",
-        DiagnosisStage.MEMORY_UPDATE: "记忆更新",
-        DiagnosisStage.MEMORY_RETRIEVAL: "记忆检索",
-        DiagnosisStage.REASONING: "推理",
+        DiagnosisStage.CONSISTENCY_CHECK: "Consistency Check",
+        DiagnosisStage.MEMORY_EXTRACTION: "Memory Extraction",
+        DiagnosisStage.MEMORY_UPDATE: "Memory Update",
+        DiagnosisStage.MEMORY_RETRIEVAL: "Memory Retrieval",
+        DiagnosisStage.REASONING: "Reasoning",
     }
     
     print(f"\n{'='*60}")
-    print(f"📋 阶段: {stage.value} - {stage_name_map.get(stage, stage.value)}")
+    print(f"📋 Stage: {stage.value} - {stage_name_map.get(stage, stage.value)}")
     print(f"{'='*60}")
     
-    # 选择对应阶段的prompt生成函数
+    # Select the prompt generator for this stage
     prompt_generators = {
         DiagnosisStage.CONSISTENCY_CHECK: lambda ops: generate_stage0_prompt(qa_data, ops),
         DiagnosisStage.MEMORY_EXTRACTION: lambda ops: generate_stage1_prompt(qa_data, memory_data, ops),
@@ -459,22 +460,22 @@ def discuss_stage(
     discussion_history = []
     current_opinions = []
     
-    # 第一轮：独立判断
-    print(f"\n🔄 第 1 轮：独立判断")
+    # Round 1: independent judgments
+    print(f"\n🔄 Round 1: Independent judgments")
     
     for model in models:
-        print(f"   🤖 {model} 正在分析...")
-        prompt = generate_prompt(None)  # 第一轮没有其他意见
+        print(f"   🤖 {model} is analyzing...")
+        prompt = generate_prompt(None)  # No other opinions in round 1
         
         try:
             result = call_llm_api(clean_prompt(prompt), model, config)
             
-            # 根据阶段解析结果
+            # Parse results depending on the stage
             if stage == DiagnosisStage.CONSISTENCY_CHECK:
                 stage_passed = result.get("is_consistent", False)
                 label = None
             elif stage == DiagnosisStage.REASONING:
-                stage_passed = False  # 阶段4总是返回一个label
+                stage_passed = False  # Stage 4 always returns a label
                 label = result.get("label")
             else:
                 stage_passed = result.get("is_sufficient", False)
@@ -494,17 +495,17 @@ def discuss_stage(
             print(f"      ✓ {model}: passed={stage_passed}, label={label}")
             
         except Exception as e:
-            logging.error(f"模型 {model} 阶段 {stage.value} 分析失败: {str(e)}")
+            logging.error(f"Model {model} failed to analyze stage {stage.value}: {str(e)}")
             opinion = StageOpinion(
                 model_name=model,
                 stage_passed=False,
                 label=None,
-                reason=f"分析失败: {str(e)}",
+                reason=f"Analysis failed: {str(e)}",
                 round_num=1
             )
             current_opinions.append(opinion)
     
-    # 记录第一轮历史
+    # Record round-1 history
     discussion_history.append({
         "round": 1,
         "opinions": [
@@ -513,22 +514,22 @@ def discuss_stage(
         ]
     })
     
-    # 检查是否达成共识
+    # Check whether a consensus is reached
     def check_consensus(opinions: List[StageOpinion]) -> Tuple[bool, Optional[bool], Optional[str]]:
-        """检查是否达成共识，返回 (是否共识, 共识的passed值, 共识的label)"""
+        """Return (consensus?, consensus_passed, consensus_label)."""
         if stage == DiagnosisStage.REASONING:
-            # 阶段4只看label
+            # Stage 4: check label only
             labels = [op.label for op in opinions]
             if len(set(labels)) == 1:
                 return True, False, labels[0]
             return False, None, None
         else:
-            # 其他阶段先看passed，如果都不通过再看label
+            # Other stages: check passed first; if all failed then check label
             passed_values = [op.stage_passed for op in opinions]
             if len(set(passed_values)) == 1:
-                if passed_values[0]:  # 都通过
+                if passed_values[0]:  # all passed
                     return True, True, None
-                else:  # 都不通过，检查label
+                else:  # all failed, check label
                     labels = [op.label for op in opinions]
                     if len(set(labels)) == 1:
                         return True, False, labels[0]
@@ -537,7 +538,7 @@ def discuss_stage(
     consensus, consensus_passed, consensus_label = check_consensus(current_opinions)
     
     if consensus:
-        print(f"\n🎉 第 1 轮即达成共识！passed={consensus_passed}, label={consensus_label}")
+        print(f"\n🎉 Consensus reached in round 1! passed={consensus_passed}, label={consensus_label}")
         return StageDiscussionResult(
             stage=stage,
             consensus_reached=True,
@@ -548,24 +549,24 @@ def discuss_stage(
             discussion_history=discussion_history
         )
     
-    # 后续轮次：讨论
+    # Subsequent rounds: discussion
     for round_num in range(2, max_rounds + 1):
-        print(f"\n🔄 第 {round_num} 轮：讨论")
+        print(f"\n🔄 Round {round_num}: Discussion")
         
         new_opinions = []
         
         for model in models:
-            # 获取其他模型的意见
+            # Collect other models' opinions
             other_opinions = [op for op in current_opinions if op.model_name != model]
             current_model_opinion = next(op for op in current_opinions if op.model_name == model)
             
-            print(f"   🤖 {model} 正在参考其他意见...")
+            print(f"   🤖 {model} is considering other opinions...")
             prompt = generate_prompt(other_opinions)
             
             try:
                 result = call_llm_api(clean_prompt(prompt), model, config)
                 
-                # 根据阶段解析结果
+                # Parse results depending on the stage
                 if stage == DiagnosisStage.CONSISTENCY_CHECK:
                     stage_passed = result.get("is_consistent", False)
                     label = None
@@ -578,17 +579,17 @@ def discuss_stage(
                 
                 reason = result.get("reason", "")
                 
-                # 记录是否改变了意见
+                # Track whether the opinion changed
                 changed_from_passed = None
                 changed_from_label = None
                 if stage_passed != current_model_opinion.stage_passed:
                     changed_from_passed = current_model_opinion.stage_passed
-                    print(f"      ↪️ {model} 修改了判断: passed {current_model_opinion.stage_passed} → {stage_passed}")
+                    print(f"      ↪️ {model} changed judgment: passed {current_model_opinion.stage_passed} -> {stage_passed}")
                 elif label != current_model_opinion.label:
                     changed_from_label = current_model_opinion.label
-                    print(f"      ↪️ {model} 修改了标签: {current_model_opinion.label} → {label}")
+                    print(f"      ↪️ {model} changed label: {current_model_opinion.label} -> {label}")
                 else:
-                    print(f"      ✓ {model} 保持判断: passed={stage_passed}, label={label}")
+                    print(f"      ✓ {model} kept judgment: passed={stage_passed}, label={label}")
                 
                 opinion = StageOpinion(
                     model_name=model,
@@ -602,20 +603,20 @@ def discuss_stage(
                 new_opinions.append(opinion)
                 
             except Exception as e:
-                logging.error(f"模型 {model} 讨论失败: {str(e)}")
-                # 保持原意见
+                logging.error(f"Model {model} discussion failed: {str(e)}")
+                # Keep the previous opinion
                 opinion = StageOpinion(
                     model_name=model,
                     stage_passed=current_model_opinion.stage_passed,
                     label=current_model_opinion.label,
-                    reason=f"讨论失败，保持原意见: {str(e)}",
+                    reason=f"Discussion failed, keep previous opinion: {str(e)}",
                     round_num=round_num
                 )
                 new_opinions.append(opinion)
         
         current_opinions = new_opinions
         
-        # 记录本轮历史
+        # Record this round's history
         discussion_history.append({
             "round": round_num,
             "opinions": [
@@ -631,11 +632,11 @@ def discuss_stage(
             ]
         })
         
-        # 检查共识
+        # Check consensus
         consensus, consensus_passed, consensus_label = check_consensus(current_opinions)
         
         if consensus:
-            print(f"\n🎉 第 {round_num} 轮达成共识！passed={consensus_passed}, label={consensus_label}")
+            print(f"\n🎉 Consensus reached in round {round_num}! passed={consensus_passed}, label={consensus_label}")
             return StageDiscussionResult(
                 stage=stage,
                 consensus_reached=True,
@@ -646,81 +647,81 @@ def discuss_stage(
                 discussion_history=discussion_history
             )
     
-    # 未达成共识，投票决定
-    print(f"\n⚠️ {max_rounds} 轮后未达成共识，进行投票")
+    # No consensus; decide by voting
+    print(f"\n⚠️ No consensus after {max_rounds} rounds, proceed to voting")
     
-    # 辅助函数：检查是否所有结果都不同，如果是则使用 gpt-5 的结果
+    # Helper: if all results differ, prefer the gpt-5 opinion (when available)
     def get_gpt5_opinion(opinions: List[StageOpinion]) -> Optional[StageOpinion]:
-        """获取 gpt-5 的意见"""
+        """Get the opinion from gpt-5 (if present)."""
         for op in opinions:
             if op.model_name == "gpt-5":
                 return op
         return None
     
     if stage == DiagnosisStage.REASONING:
-        # 阶段4只投票label
+        # Stage 4: vote on label only
         labels = [op.label for op in current_opinions]
         label_counter = Counter(labels)
         
-        # 检查是否所有结果都不同（1:1:1）
+        # Check whether all results are different (e.g., 1:1:1)
         all_different = len(label_counter) == len(current_opinions) and len(current_opinions) > 1
         
         if all_different:
-            # 所有结果都不同，使用 gpt-5 的结果
+            # All results differ; use gpt-5's result
             gpt5_op = get_gpt5_opinion(current_opinions)
             if gpt5_op:
                 final_label = gpt5_op.label
-                print(f"📊 投票结果: {dict(label_counter)}")
-                print(f"⚠️ 所有结果都不同，使用 gpt-5 的结果")
-                print(f"🏆 选择标签: {final_label}")
+                print(f"📊 Voting results: {dict(label_counter)}")
+                print(f"⚠️ All results are different, use gpt-5 result")
+                print(f"🏆 Selected label: {final_label}")
             else:
                 final_label = label_counter.most_common(1)[0][0]
-                print(f"📊 投票结果: {dict(label_counter)}")
-                print(f"🏆 选择标签: {final_label}")
+                print(f"📊 Voting results: {dict(label_counter)}")
+                print(f"🏆 Selected label: {final_label}")
         else:
             final_label = label_counter.most_common(1)[0][0]
-            print(f"📊 投票结果: {dict(label_counter)}")
-            print(f"🏆 选择标签: {final_label} (得票最多)")
+            print(f"📊 Voting results: {dict(label_counter)}")
+            print(f"🏆 Selected label: {final_label} (most votes)")
         final_passed = False
     else:
-        # 先投票passed
+        # Vote on passed first
         passed_values = [op.stage_passed for op in current_opinions]
         passed_counter = Counter(passed_values)
         final_passed = passed_counter.most_common(1)[0][0]
         
         if final_passed:
             final_label = None
-            print(f"📊 投票结果: passed={dict(passed_counter)}")
-            print(f"🏆 阶段通过")
+            print(f"📊 Voting results: passed={dict(passed_counter)}")
+            print(f"🏆 Stage passed")
         else:
-            # 不通过时投票label
+            # If not passed, vote on label
             labels = [op.label for op in current_opinions if not op.stage_passed]
             if labels:
                 label_counter = Counter(labels)
                 
-                # 检查是否所有结果都不同（1:1:1）
+                # Check whether all results are different (e.g., 1:1:1)
                 all_different = len(label_counter) == len(labels) and len(labels) > 1
                 
                 if all_different:
-                    # 所有结果都不同，使用 gpt-5 的结果
+                    # All results differ; use gpt-5's result
                     gpt5_op = get_gpt5_opinion([op for op in current_opinions if not op.stage_passed])
                     if gpt5_op:
                         final_label = gpt5_op.label
-                        print(f"📊 投票结果: passed={dict(passed_counter)}, labels={dict(label_counter)}")
-                        print(f"⚠️ 所有结果都不同，使用 gpt-5 的结果")
-                        print(f"🏆 选择标签: {final_label}")
+                        print(f"📊 Voting results: passed={dict(passed_counter)}, labels={dict(label_counter)}")
+                        print(f"⚠️ All results are different, use gpt-5 result")
+                        print(f"🏆 Selected label: {final_label}")
                     else:
                         final_label = label_counter.most_common(1)[0][0]
-                        print(f"📊 投票结果: passed={dict(passed_counter)}, labels={dict(label_counter)}")
-                        print(f"🏆 选择标签: {final_label}")
+                        print(f"📊 Voting results: passed={dict(passed_counter)}, labels={dict(label_counter)}")
+                        print(f"🏆 Selected label: {final_label}")
                 else:
                     final_label = label_counter.most_common(1)[0][0]
-                    print(f"📊 投票结果: passed={dict(passed_counter)}, labels={dict(label_counter)}")
-                    print(f"🏆 选择标签: {final_label} (得票最多)")
+                    print(f"📊 Voting results: passed={dict(passed_counter)}, labels={dict(label_counter)}")
+                    print(f"🏆 Selected label: {final_label} (most votes)")
             else:
                 final_label = None
     
-    # 获取对应意见的reason
+    # Get the reason associated with the selected opinion
     final_opinion = None
     for op in current_opinions:
         if stage == DiagnosisStage.REASONING:
@@ -744,7 +745,7 @@ def discuss_stage(
 
 
 # ============================================================================
-# 完整诊断讨论函数
+# Full multi-stage discussion
 # ============================================================================
 
 def analyze_qa_pair_with_discussion(
@@ -759,37 +760,38 @@ def analyze_qa_pair_with_discussion(
     max_rounds: int = 3,
     config: Optional[DiagnosisConfig] = None
 ) -> Dict:
-    """使用多模型分阶段讨论机制分析QA对
+    """Analyze a QA pair using the multi-model, stage-wise discussion mechanism.
     
-    按顺序执行各阶段讨论，每个阶段三模型先独立判断再讨论达成共识
+    Stages are executed in order. In each stage, three models make independent
+    judgments first, then discuss for multiple rounds to reach consensus.
     
     Args:
-        qa_question: 问题文本
-        qa_answer: 参考答案
-        qa_response: 模型回答
-        memories1: person1的记忆数据
-        memories2: person2的记忆数据
-        speaker1_memories: speaker1的检索记忆
-        speaker2_memories: speaker2的检索记忆
-        models: 参与讨论的模型列表
-        max_rounds: 每个阶段最大讨论轮次
-        config: 诊断配置
+        qa_question: question text
+        qa_answer: reference answer
+        qa_response: model response
+        memories1: person1 memory data
+        memories2: person2 memory data
+        speaker1_memories: retrieved memories for speaker1
+        speaker2_memories: retrieved memories for speaker2
+        models: list of models participating in discussion
+        max_rounds: max discussion rounds per stage
+        config: diagnosis configuration
         
     Returns:
-        包含讨论结果的字典
+        A dict containing the discussion result.
     """
     if models is None:
         models = ["deepseek", "gpt-4.1", "gpt-5"]
     
     print(f"\n{'='*70}")
-    print(f"🗣️  多模型分阶段讨论诊断")
+    print(f"🗣️  Multi-model staged discussion diagnosis")
     print(f"{'='*70}")
-    print(f"📝 问题: {qa_question}")
-    print(f"🤖 参与模型: {', '.join(models)}")
-    print(f"🔄 每阶段最大轮次: {max_rounds}")
+    print(f"📝 Question: {qa_question}")
+    print(f"🤖 Participating models: {', '.join(models)}")
+    print(f"🔄 Max rounds per stage: {max_rounds}")
     print(f"{'='*70}")
     
-    # 创建数据对象
+    # Build data objects
     qa_data = QAData(
         question=qa_question,
         answer=qa_answer,
@@ -805,7 +807,7 @@ def analyze_qa_pair_with_discussion(
     
     stage_results = {}
     
-    # ========== 阶段0：一致性检查 ==========
+    # ========== Stage 0: consistency check ==========
     stage0_result = discuss_stage(
         DiagnosisStage.CONSISTENCY_CHECK,
         qa_data, memory_data, models, max_rounds, config
@@ -813,9 +815,9 @@ def analyze_qa_pair_with_discussion(
     stage_results["0_consistency_check"] = stage0_result
     
     if stage0_result.final_passed:
-        # 一致，直接返回
+        # Consistent, return directly
         print(f"\n{'='*70}")
-        print(f"✅ 诊断完成：回答与答案一致")
+        print(f"✅ Diagnosis completed: response is consistent with the answer")
         print(f"{'='*70}\n")
         
         return {
@@ -827,7 +829,7 @@ def analyze_qa_pair_with_discussion(
             "stage_results": _serialize_stage_results(stage_results)
         }
     
-    # ========== 阶段1：记忆提取 ==========
+    # ========== Stage 1: memory extraction ==========
     stage1_result = discuss_stage(
         DiagnosisStage.MEMORY_EXTRACTION,
         qa_data, memory_data, models, max_rounds, config
@@ -836,8 +838,8 @@ def analyze_qa_pair_with_discussion(
     
     if not stage1_result.final_passed:
         print(f"\n{'='*70}")
-        print(f"❌ 诊断完成：记忆提取阶段发现问题")
-        print(f"   标签: {stage1_result.final_label}")
+        print(f"❌ Diagnosis completed: issue found at memory extraction stage")
+        print(f"   Label: {stage1_result.final_label}")
         print(f"{'='*70}\n")
         
         return {
@@ -852,7 +854,7 @@ def analyze_qa_pair_with_discussion(
             "stage_results": _serialize_stage_results(stage_results)
         }
     
-    # ========== 阶段2：记忆更新 ==========
+    # ========== Stage 2: memory update ==========
     stage2_result = discuss_stage(
         DiagnosisStage.MEMORY_UPDATE,
         qa_data, memory_data, models, max_rounds, config
@@ -861,8 +863,8 @@ def analyze_qa_pair_with_discussion(
     
     if not stage2_result.final_passed:
         print(f"\n{'='*70}")
-        print(f"❌ 诊断完成：记忆更新阶段发现问题")
-        print(f"   标签: {stage2_result.final_label}")
+        print(f"❌ Diagnosis completed: issue found at memory update stage")
+        print(f"   Label: {stage2_result.final_label}")
         print(f"{'='*70}\n")
         
         return {
@@ -878,7 +880,7 @@ def analyze_qa_pair_with_discussion(
             "stage_results": _serialize_stage_results(stage_results)
         }
     
-    # ========== 阶段3：记忆检索 ==========
+    # ========== Stage 3: memory retrieval ==========
     stage3_result = discuss_stage(
         DiagnosisStage.MEMORY_RETRIEVAL,
         qa_data, memory_data, models, max_rounds, config
@@ -887,8 +889,8 @@ def analyze_qa_pair_with_discussion(
     
     if not stage3_result.final_passed:
         print(f"\n{'='*70}")
-        print(f"❌ 诊断完成：记忆检索阶段发现问题")
-        print(f"   标签: {stage3_result.final_label}")
+        print(f"❌ Diagnosis completed: issue found at memory retrieval stage")
+        print(f"   Label: {stage3_result.final_label}")
         print(f"{'='*70}\n")
         
         return {
@@ -905,7 +907,7 @@ def analyze_qa_pair_with_discussion(
             "stage_results": _serialize_stage_results(stage_results)
         }
     
-    # ========== 阶段4：推理 ==========
+    # ========== Stage 4: reasoning ==========
     stage4_result = discuss_stage(
         DiagnosisStage.REASONING,
         qa_data, memory_data, models, max_rounds, config
@@ -913,8 +915,8 @@ def analyze_qa_pair_with_discussion(
     stage_results["4_reasoning"] = stage4_result
     
     print(f"\n{'='*70}")
-    print(f"❌ 诊断完成：推理阶段发现问题")
-    print(f"   标签: {stage4_result.final_label}")
+    print(f"❌ Diagnosis completed: issue found at reasoning stage")
+    print(f"   Label: {stage4_result.final_label}")
     print(f"{'='*70}\n")
     
     return {
@@ -934,7 +936,7 @@ def analyze_qa_pair_with_discussion(
 
 
 def _serialize_stage_results(stage_results: Dict[str, StageDiscussionResult]) -> Dict:
-    """将阶段结果序列化为可JSON化的格式"""
+    """Serialize stage results into a JSON-serializable structure."""
     result = {}
     for stage_name, stage_data in stage_results.items():
         result[stage_name] = {
@@ -949,29 +951,29 @@ def _serialize_stage_results(stage_results: Dict[str, StageDiscussionResult]) ->
 
 
 # ============================================================================
-# 主程序入口
+# Main entrypoint
 # ============================================================================
 
 def main():
-    """主程序入口函数
+    """Main entrypoint.
     
-    支持命令行参数：
+    Supports CLI arguments:
         python run_diagnosis_discussion.py [options]
         
-    参数说明：
-        --max-rounds N: 每个阶段最大讨论轮次，默认：3
-        --models: 参与讨论的模型，默认：deepseek gpt-4.1 gpt-5
-        -i, --input: 输入文件路径
-        -o, --output-dir: 输出目录路径
-        -f, --output-file: 输出文件名
+    Arguments:
+        --max-rounds N: max discussion rounds per stage (default: 3)
+        --models: models participating in discussions (default: deepseek gpt-4.1 gpt-5)
+        -i, --input: input file path
+        -o, --output-dir: output directory
+        -f, --output-file: output filename
         
-    示例：
+    Examples:
         python run_diagnosis_discussion.py --max-rounds 3
         python run_diagnosis_discussion.py --models deepseek gpt-4.1 gpt-5
         python run_diagnosis_discussion.py -i data/input.json -o results/
     """
     parser = argparse.ArgumentParser(
-        description="记忆诊断系统 - 多模型分阶段讨论版",
+        description="Memory diagnosis system - multi-model staged discussion edition",
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     
@@ -979,45 +981,45 @@ def main():
         "--max-rounds",
         type=int,
         default=3,
-        help="每个阶段最大讨论轮次 (默认: 3)"
+        help="Maximum discussion rounds per stage (default: 3)"
     )
     
     parser.add_argument(
         "--models",
         nargs="+",
         default=["deepseek", "gpt-4.1", "gpt-5"],
-        help="参与讨论的模型列表 (默认: deepseek gpt-4.1 gpt-5)"
+        help="List of models participating in discussion (default: deepseek gpt-4.1 gpt-5)"
     )
     
     parser.add_argument(
         "-i", "--input",
         type=str,
         default="data/input/mem0_mem/sample/sampled_qa_50.json",
-        help="输入文件路径"
+        help="Input file path"
     )
     
     parser.add_argument(
         "-o", "--output-dir",
         type=str,
         default="data/output/llm_annotation_discussion",
-        help="输出目录路径"
+        help="Output directory path"
     )
     
     parser.add_argument(
         "-f", "--output-file",
         type=str,
         default=None,
-        help="输出文件名 (默认: 自动生成)"
+        help="Output filename (default: auto-generated)"
     )
     
     args = parser.parse_args()
     
     print("\n" + "="*70)
-    print("🚀 记忆诊断系统 - 多模型分阶段讨论版 启动")
+    print("🚀 Memory diagnosis system - multi-model staged discussion edition started")
     print("="*70)
-    print(f"🤖 参与模型: {', '.join(args.models)}")
-    print(f"🔄 每阶段最大讨论轮次: {args.max_rounds}")
-    print(f"⚙️  配置: {DiagnosisConfig()}")
+    print(f"🤖 Participating models: {', '.join(args.models)}")
+    print(f"🔄 Max rounds per stage: {args.max_rounds}")
+    print(f"⚙️  Config: {DiagnosisConfig()}")
     print("="*70 + "\n")
     
     input_file = args.input
@@ -1037,46 +1039,46 @@ def main():
     
     output_file = os.path.join(output_dir, output_filename)
     
-    print(f"📁 输入文件: {input_file}")
-    print(f"📁 输出目录: {output_dir}")
-    print(f"📁 输出文件: {output_file}\n")
+    print(f"📁 Input file: {input_file}")
+    print(f"📁 Output directory: {output_dir}")
+    print(f"📁 Output file: {output_file}\n")
     
     if not os.path.exists(input_file):
-        print(f"❌ 错误: 输入文件不存在: {input_file}")
+        print(f"❌ Error: Input file does not exist: {input_file}")
         return
     
     try:
         data = load_json_file(input_file)
-        print(f"✅ 成功加载 {len(data)} 个会话\n")
+        print(f"✅ Loaded {len(data)} conversations successfully\n")
     except Exception as e:
-        logging.error(f"加载输入文件失败: {str(e)}")
-        print(f"❌ 错误: 无法解析输入文件: {str(e)}")
+        logging.error(f"Failed to load input file: {str(e)}")
+        print(f"❌ Error: Failed to parse input file: {str(e)}")
         return
     
-    # 加载已处理的结果（支持断点续传）
+    # Load previously processed results (supports resume)
     results = []
     if os.path.exists(output_file):
         try:
             with open(output_file, "r", encoding="utf-8") as f:
                 results = json.load(f)
-                logging.info(f"已加载 {len(results)} 条历史结果")
+                logging.info(f"Loaded {len(results)} historical results")
         except (json.JSONDecodeError, FileNotFoundError) as e:
-            logging.warning(f"加载历史结果失败: {str(e)}，将从头开始")
+            logging.warning(f"Failed to load historical results: {str(e)}, starting from scratch")
             results = []
     
     processed_items = {item["conv_id_question_id"] for item in results}
     
     try:
         total_convs = len(data)
-        print(f"📊 开始处理，共有 {total_convs} 个会话需要分析\n")
+        print(f"📊 Start processing, total conversations to analyze: {total_convs}\n")
         
         for conv_idx, (conv_id, qa_list) in enumerate(data.items(), 1):
             print(f"\n{'='*70}")
-            print(f"📝 处理会话 {conv_id} ({conv_idx}/{total_convs})")
+            print(f"📝 Processing conversation {conv_id} ({conv_idx}/{total_convs})")
             print(f"{'='*70}\n")
             
             for qa_idx, qa_item in enumerate(qa_list, 1):
-                # 优先使用 original_source 中的索引，否则使用列表索引
+                # Prefer the index from original_source; otherwise use list index
                 original_source = qa_item.get("original_source", {})
                 if original_source and original_source.get("qa_index") is not None:
                     item_id = f"{conv_id}_{original_source['qa_index']}"
@@ -1084,10 +1086,10 @@ def main():
                     item_id = f"{conv_id}_{qa_idx-1}"
                 
                 if item_id in processed_items:
-                    print(f"⏭️  跳过已处理的问题: {item_id}\n")
+                    print(f"⏭️  Skip already processed question: {item_id}\n")
                     continue
                 
-                print(f"🔍 开始处理问题 {qa_idx}/{len(qa_list)}: {item_id}")
+                print(f"🔍 Start processing question {qa_idx}/{len(qa_list)}: {item_id}")
                 
                 try:
                     p1 = qa_item.get("person1", {})
@@ -1107,7 +1109,7 @@ def main():
                         max_rounds=args.max_rounds
                     )
                     
-                    # 获取原始位置信息
+                    # Capture original location info
                     original_source = qa_item.get("original_source", {})
                     if original_source:
                         original_id = f"{original_source.get('file', '')}_{original_source.get('key', '')}_{original_source.get('qa_index', '')}"
@@ -1136,18 +1138,18 @@ def main():
                     with open(output_file, "w", encoding="utf-8") as f:
                         json.dump(results, f, ensure_ascii=False, indent=2)
                     
-                    print(f"✅ 问题 {item_id} 处理完成并已保存\n")
+                    print(f"✅ Question {item_id} processed and saved\n")
                     
                 except Exception as e:
-                    logging.error(f"处理问题 {item_id} 时发生错误: {str(e)}")
-                    print(f"❌ 处理问题 {item_id} 失败: {str(e)}\n")
+                    logging.error(f"Error while processing question {item_id}: {str(e)}")
+                    print(f"❌ Failed to process question {item_id}: {str(e)}\n")
                     continue
                     
     except KeyboardInterrupt:
-        print("\n⚠️  处理已中断，正在保存...\n")
+        print("\n⚠️  Processing interrupted, saving...\n")
     except Exception as e:
-        logging.error(f"处理过程中发生未预期的错误: {str(e)}")
-        print(f"\n❌ 处理过程中发生错误: {str(e)}\n")
+        logging.error(f"Unexpected error during processing: {str(e)}")
+        print(f"\n❌ Error occurred during processing: {str(e)}\n")
     finally:
         if results:
             with open(output_file, "w", encoding="utf-8") as f:
@@ -1156,11 +1158,11 @@ def main():
             consensus_count = sum(1 for r in results if r.get("consensus_reached", False))
             
             print("\n" + "="*70)
-            print("🎉 处理完成")
+            print("🎉 Processing completed")
             print("="*70)
-            print(f"✅ 共处理 {len(results)} 个问题")
-            print(f"🤝 达成共识: {consensus_count}/{len(results)} ({100*consensus_count/len(results):.1f}%)")
-            print(f"📁 结果已保存到: {output_file}")
+            print(f"✅ Total processed questions: {len(results)}")
+            print(f"🤝 Consensus reached: {consensus_count}/{len(results)} ({100*consensus_count/len(results):.1f}%)")
+            print(f"📁 Results saved to: {output_file}")
             print("="*70 + "\n")
 
 

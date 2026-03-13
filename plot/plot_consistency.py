@@ -1,3 +1,4 @@
+import argparse
 import re
 from pathlib import Path
 
@@ -5,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# 保持与其他图一致的全局风格（Times New Roman、粗+斜体）
+# Keep global style consistent with other plots
 plt.style.use("seaborn-v0_8-whitegrid")
 plt.rcParams.update(
     {
@@ -34,36 +35,42 @@ CAT_NAME = {
 
 def load_label_level_category_rates(path: Path, model_name: str = "voting_final"):
     """
-    从 model_label_exact.txt 中解析指定模型的「Category X（含 EMPTY）label 精确匹配率」。
+    Parse category-level exact-match rates from model_label_exact.txt
+    for a given model.
 
-    返回:
+    Returns:
         categories: ['1','2','3','4']
-        rates: [float, ...]  # 百分比数值
+        rates: [float, ...]  # Percentage values
     """
     text = path.read_text(encoding="utf-8").splitlines()
 
-    # 找到 "[Label 精确匹配] 模型: xxx" 段落
+    # Locate target model section (English-first, with backward-compatible Chinese fallback)
     start_idx = None
-    header = f"[Label 精确匹配] 模型: {model_name}"
+    header_candidates = [
+        f"[Exact label match] Model: {model_name}",
+        f"[Label {'\u7cbe\u786e\u5339\u914d'}] {'\u6a21\u578b'}: {model_name}",
+    ]
     for i, line in enumerate(text):
-        if line.strip() == header:
+        if line.strip() in header_candidates:
             start_idx = i
             break
     if start_idx is None:
-        raise ValueError(f"在 {path} 中未找到段落: {header}")
+        raise ValueError(f"Section not found in {path}: any of {header_candidates}")
 
     categories = []
     rates = []
 
-    # 使用正则匹配: Category X（含 EMPTY）label 精确匹配率: Y%
+    # Regex supports both:
+    # - Category X exact label match rate (including EMPTY): Y%
+    # - legacy Chinese variant of the same line
     pattern = re.compile(
-        r"Category\s+(\d)（含 EMPTY）label 精确匹配率:\s*([\d.]+)%"
+        r"Category\s+(\d)\s*(?:exact label match rate \(including EMPTY\)|\uff08\u542b EMPTY\uff09label \u7cbe\u786e\u5339\u914d\u7387)\s*:\s*([\d.]+)%"
     )
 
     for line in text[start_idx + 1 :]:
         line = line.strip()
         if not line:
-            # 该段落结束
+            # Section end
             break
         m = pattern.search(line)
         if m:
@@ -74,10 +81,10 @@ def load_label_level_category_rates(path: Path, model_name: str = "voting_final"
 
     if not categories:
         raise ValueError(
-            f"在 {path} 的 {header} 段落中未解析到任何 Category 一致率行。"
+            f"No category-level exact-match lines parsed in section in {path}."
         )
 
-    # 按类别编号排序
+    # Sort by category id
     paired = sorted(zip(categories, rates), key=lambda x: int(x[0]))
     categories_sorted = [p[0] for p in paired]
     rates_sorted = [p[1] for p in paired]
@@ -86,37 +93,38 @@ def load_label_level_category_rates(path: Path, model_name: str = "voting_final"
 
 def load_phase_level_category_rates(path: Path, model_name: str = "voting_final"):
     """
-    从 model_phase.txt 中解析指定模型的各 Category 的 Overall 列（phase-level 一致率）。
+    Parse category-level phase match rates (Overall column) from model_phase.txt
+    for a given model.
 
-    返回:
+    Returns:
         categories: ['1','2','3','4']
-        rates: [float, ...]  # 百分比数值
+        rates: [float, ...]  # Percentage values
     """
     lines = path.read_text(encoding="utf-8").splitlines()
 
-    # 找到 "模型: xxx" 段落
+    # Locate target model section (English-first, with Chinese fallback)
     start_idx = None
-    header = f"模型: {model_name}"
+    header_candidates = [f"Model: {model_name}", f"{'\u6a21\u578b'}: {model_name}"]
     for i, line in enumerate(lines):
-        if line.strip() == header:
+        if line.strip() in header_candidates:
             start_idx = i
             break
     if start_idx is None:
-        raise ValueError(f"在 {path} 中未找到段落: {header}")
+        raise ValueError(f"Section not found in {path}: any of {header_candidates}")
 
     categories = []
     rates = []
 
-    # 在该模型段落内部，表头之后的数据行如：
+    # Inside model section, parse data rows after table header
     # |  1   |   97.4   | ... |  72.34   |
     in_table = False
     for line in lines[start_idx + 1 :]:
         stripped = line.strip()
         if not stripped:
-            # 段落结束
+            # Section end
             break
-        if stripped.startswith("总样本数:"):
-            # 统计信息之后的不再解析
+        if stripped.startswith("Total samples:") or stripped.startswith("\u603b\u6837\u672c\u6570:"):
+            # Stop before summary lines
             break
         if stripped.startswith("| Cat"):
             in_table = True
@@ -126,28 +134,28 @@ def load_phase_level_category_rates(path: Path, model_name: str = "voting_final"
         if not stripped.startswith("|"):
             continue
         if stripped.startswith("|---") or stripped.startswith("+"):
-            # 分隔线
+            # Separator line
             continue
 
-        # 去掉首尾的竖线，然后按 '|' 分列
+        # Trim surrounding '|' and split columns
         parts = [p.strip() for p in stripped.strip("|").split("|")]
         if not parts or parts[0] == "Cat":
             continue
 
         cat = parts[0]
-        # Overall 列是最后一列
+        # Overall is the last column
         try:
             overall_str = parts[-1]
             rate = float(overall_str)
         except ValueError as e:
-            raise ValueError(f"解析 Overall 列失败: 行内容={stripped}") from e
+            raise ValueError(f"Failed to parse Overall column: line={stripped}") from e
 
         categories.append(cat)
         rates.append(rate)
 
     if not categories:
         raise ValueError(
-            f"在 {path} 的 {header} 段落中未解析到任何 Category Overall 行。"
+            f"No category Overall rows parsed in model section in {path}."
         )
 
     paired = sorted(zip(categories, rates), key=lambda x: int(x[0]))
@@ -163,7 +171,7 @@ def plot_bar_chart(
     ylabel: str,
     out_path: Path,
 ):
-    """绘制单组数值的直方图。"""
+    """Plot a bar chart for one group of values."""
     x = np.arange(len(xlabels))
     width = 0.6
 
@@ -171,13 +179,13 @@ def plot_bar_chart(
     bars = ax.bar(x, rates, width=width, color="#4477AA", edgecolor="black")
 
     ax.set_xticks(x)
-    # 横轴标签水平（不再倾斜），按给定顺序正向排列
+    # Keep x-axis labels horizontal, in given order
     ax.set_xticklabels(xlabels, rotation=0, ha="center")
     ax.set_ylabel(ylabel)
     ax.set_title(title)
     ax.set_ylim(0, max(rates) * 1.15)
 
-    # 在柱子上方标数值
+    # Annotate values above bars
     for bar, rate in zip(bars, rates):
         height = bar.get_height()
         ax.text(
@@ -197,37 +205,82 @@ def plot_bar_chart(
 
 
 def main():
-    # 本脚本位于 MemEval/plot/，项目根目录为其上一级
+    parser = argparse.ArgumentParser(
+        description=(
+            "Plot category-level consistency bar charts from model_label_exact and "
+            "model_phase reports."
+        )
+    )
+    parser.add_argument(
+        "-m",
+        "--model",
+        type=str,
+        default="voting_final",
+        help="Model name to parse from report files (default: voting_final).",
+    )
+    parser.add_argument(
+        "--label-file",
+        type=str,
+        default=None,
+        help=(
+            "Path to the label-level report. If omitted, use "
+            "data/output/evalresult/model_label_exact.txt."
+        ),
+    )
+    parser.add_argument(
+        "--phase-file",
+        type=str,
+        default=None,
+        help=(
+            "Path to the phase-level report. If omitted, use "
+            "data/output/evalresult/model_phase.txt."
+        ),
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        default=None,
+        help="Output directory for figures (default: data/output/plot_result/).",
+    )
+    args = parser.parse_args()
+
+    # This script is in MemEval/plot/; project root is one level up
     script_path = Path(__file__).resolve()
     project_root = script_path.parent.parent
 
-    label_file = project_root / "data" / "output" / "evalresult" / "model_label_exact.txt"
-    phase_file = project_root / "data" / "output" / "evalresult" / "model_phase.txt"
+    label_file = Path(args.label_file) if args.label_file else (
+        project_root / "data" / "output" / "evalresult" / "model_label_exact.txt"
+    )
+    phase_file = Path(args.phase_file) if args.phase_file else (
+        project_root / "data" / "output" / "evalresult" / "model_phase.txt"
+    )
 
     if not label_file.exists():
-        raise FileNotFoundError(f"未找到文件: {label_file}")
+        raise FileNotFoundError(f"File not found: {label_file}")
     if not phase_file.exists():
-        raise FileNotFoundError(f"未找到文件: {phase_file}")
+        raise FileNotFoundError(f"File not found: {phase_file}")
 
-    out_dir = project_root / "data" / "output" / "plot_result"
+    out_dir = Path(args.output) if args.output else (project_root / "data" / "output" / "plot_result")
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # 使用 voting_final 的结果（按类别）
+    # Use specified model results (by category)
     categories_l, rates_l = load_label_level_category_rates(
-        label_file, model_name="voting_final"
+        label_file, model_name=args.model
     )
     categories_p, rates_p = load_phase_level_category_rates(
-        phase_file, model_name="voting_final"
+        phase_file, model_name=args.model
     )
 
-    # 将 Cat 编号映射为更直观的类别名称
+    # Map Cat IDs to more descriptive category names
     xlabels_l = [CAT_NAME.get(c, f"Cat {c}") for c in categories_l]
     xlabels_p = [CAT_NAME.get(c, f"Cat {c}") for c in categories_p]
 
-    # 为 label-level 绘制「按类别」直方图
+    # Plot category-level bars for label-level metrics
     from datetime import datetime
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_label = out_dir / f"model_label_exact_voting_final_bar_{timestamp}.png"
+    safe_model = args.model.replace(" ", "_")
+    out_label = out_dir / f"model_label_exact_{safe_model}_bar_{timestamp}.png"
     plot_bar_chart(
         xlabels_l,
         rates_l,
@@ -236,8 +289,8 @@ def main():
         out_path=out_label,
     )
 
-    # 为 phase-level 绘制「按类别」直方图
-    out_phase = out_dir / f"model_phase_voting_final_bar_{timestamp}.png"
+    # Plot category-level bars for phase-level metrics
+    out_phase = out_dir / f"model_phase_{safe_model}_bar_{timestamp}.png"
     plot_bar_chart(
         xlabels_p,
         rates_p,
