@@ -23,3 +23,10 @@ llm_annotation_single/
 # Logs
 *.log
 
+# LongMemEval local Mem0 runtime/output artifacts
+data/input/mem0_mem/longmemeval_s/local_mem0*/
+data/input/mem0_mem/longmemeval_s/local_mem0_workers/
+data/input/mem0_mem/longmemeval_s/logs/
+data/input/mem0_mem/longmemeval_s/*.lock
+data/input/mem0_mem/longmemeval_s/*.tmp
+data/input/mem0_mem/longmemeval_s/mem0_longmemeval_s_part*.json
