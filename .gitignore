@@ -30,3 +30,11 @@ data/input/mem0_mem/longmemeval_s/logs/
 data/input/mem0_mem/longmemeval_s/*.lock
 data/input/mem0_mem/longmemeval_s/*.tmp
 data/input/mem0_mem/longmemeval_s/mem0_longmemeval_s_part*.json
+
+# LoCoMo local Mem0 runtime/output artifacts
+data/input/mem0_mem/locomo10/local_mem0*/
+data/input/mem0_mem/locomo10/local_mem0_workers/
+data/input/mem0_mem/locomo10/logs/
+data/input/mem0_mem/locomo10/*.lock
+data/input/mem0_mem/locomo10/*.tmp
+data/input/mem0_mem/locomo10/mem0_locomo10_part*.json
