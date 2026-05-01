@@ -23,6 +23,9 @@ DEFAULT_MEM0_STORE = Path("/share/project/chenchen/code/MemEval/data/input/mem0_
 DEFAULT_MODEL = "gpt-4o-mini"
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
 DEFAULT_QWEN_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+EMBEDDING_MODEL_DIMS = {
+    "text-embedding-v4": 1024,
+}
 
 
 ANSWER_PROMPT = """You are answering a question using retrieved memories from two people's past conversations.
@@ -58,6 +61,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--embedding-model", default="env:EMBEDDING_MODEL")
     parser.add_argument("--llm-api-key-env", default="")
     parser.add_argument("--llm-base-url", default="")
+    parser.add_argument("--embedder-api-key-env", default="")
+    parser.add_argument("--embedder-base-url", default="")
     parser.add_argument("--env-file", type=Path, default=DEFAULT_ENV_FILE)
     parser.add_argument("--mem0-repo", type=Path, default=DEFAULT_MEM0_REPO)
     parser.add_argument("--mem0-store-dir", type=Path, default=DEFAULT_MEM0_STORE)
@@ -141,6 +146,40 @@ def build_llm_config(
     return config
 
 
+def build_embedder_config(
+    model: str,
+    *,
+    api_key_env: str = "",
+    base_url: str = "",
+    environ: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    environ = environ or os.environ
+    config: dict[str, Any] = {"model": model}
+    if api_key_env:
+        api_key = environ.get(api_key_env)
+        if not api_key:
+            raise ValueError(f"Environment variable {api_key_env} is not set")
+        config["api_key"] = api_key
+    if base_url:
+        config["openai_base_url"] = base_url
+    return config
+
+
+def embedding_model_dims(model: str) -> int:
+    return EMBEDDING_MODEL_DIMS.get(model, 1536)
+
+
+def build_vector_store_config(store_dir: Path, embedding_model: str) -> dict[str, Any]:
+    return {
+        "provider": "qdrant",
+        "config": {
+            "path": str(store_dir / "qdrant"),
+            "collection_name": "locomo10_memories",
+            "embedding_model_dims": embedding_model_dims(embedding_model),
+        },
+    }
+
+
 def create_mem0_client(
     mem0_repo: Path,
     store_dir: Path,
@@ -149,25 +188,20 @@ def create_mem0_client(
     embedding_model: str,
     llm_api_key_env: str = "",
     llm_base_url: str = "",
+    embedder_api_key_env: str = "",
+    embedder_base_url: str = "",
 ):
     load_env_file(env_file)
     add_mem0_repo_to_path(mem0_repo)
 
     from mem0 import Memory
 
-    vector_store_dir = store_dir / "qdrant"
     history_db = store_dir / "history.db"
-    vector_store_dir.mkdir(parents=True, exist_ok=True)
+    (store_dir / "qdrant").mkdir(parents=True, exist_ok=True)
     history_db.parent.mkdir(parents=True, exist_ok=True)
 
     config = {
-        "vector_store": {
-            "provider": "qdrant",
-            "config": {
-                "path": str(vector_store_dir),
-                "collection_name": "locomo10_memories",
-            },
-        },
+        "vector_store": build_vector_store_config(store_dir, embedding_model),
         "history_db_path": str(history_db),
         "llm": {
             "provider": "openai",
@@ -175,7 +209,11 @@ def create_mem0_client(
         },
         "embedder": {
             "provider": "openai",
-            "config": {"model": embedding_model},
+            "config": build_embedder_config(
+                embedding_model,
+                api_key_env=embedder_api_key_env,
+                base_url=embedder_base_url,
+            ),
         },
     }
     return Memory.from_config(config)
@@ -537,7 +575,11 @@ def load_part(output_file: Path) -> dict[str, list[dict[str, Any]]]:
 
 def part_key_completed(output_file: Path, part_local_key: str) -> bool:
     records = load_part(output_file).get(part_local_key) or []
-    return bool(records) and not records[0].get("error")
+    return records_completed(records)
+
+
+def records_completed(records: list[dict[str, Any]]) -> bool:
+    return bool(records) and all("error" not in record for record in records)
 
 
 def save_part_record(output_file: Path, part_local_key: str, traces: list[dict[str, Any]]) -> None:
@@ -608,6 +650,8 @@ def main() -> int:
         embedding_model,
         args.llm_api_key_env,
         args.llm_base_url,
+        args.embedder_api_key_env,
+        args.embedder_base_url,
     )
 
     for global_index in range(args.start, args.end):

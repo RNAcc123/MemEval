@@ -112,6 +112,53 @@ class LlmConfigTest(unittest.TestCase):
         )
 
 
+class EmbedderConfigTest(unittest.TestCase):
+    def test_build_embedder_config_uses_api_key_env_and_base_url(self):
+        environ = {"DASHSCOPE_API_KEY": "secret-key"}
+
+        config = run_locomo_mem0_trace.build_embedder_config(
+            "text-embedding-v4",
+            api_key_env="DASHSCOPE_API_KEY",
+            base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+            environ=environ,
+        )
+
+        self.assertEqual(
+            config,
+            {
+                "model": "text-embedding-v4",
+                "api_key": "secret-key",
+                "openai_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+            },
+        )
+
+
+class VectorStoreConfigTest(unittest.TestCase):
+    def test_text_embedding_v4_uses_1024_vector_dimensions(self):
+        config = run_locomo_mem0_trace.build_vector_store_config(
+            Path("/tmp/mem0-store"),
+            "text-embedding-v4",
+        )
+
+        self.assertEqual(config["config"]["embedding_model_dims"], 1024)
+
+
+class ResumeCompletionTest(unittest.TestCase):
+    def test_error_record_is_not_completed_for_resume(self):
+        records = [
+            {
+                "qa_question": "",
+                "qa_answer": "",
+                "qa_response": "",
+                "qa_category": -1,
+                "question_id": "conv-26_error",
+                "error": "Connection error.",
+            }
+        ]
+
+        self.assertFalse(run_locomo_mem0_trace.records_completed(records))
+
+
 class ConcurrentAddTest(unittest.TestCase):
     def test_adds_two_speaker_perspectives_in_same_session_concurrently(self):
         class FakeClient:
