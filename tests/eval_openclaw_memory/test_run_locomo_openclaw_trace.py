@@ -3,8 +3,11 @@ from __future__ import annotations
 import importlib.util
 import os
 import tempfile
+import time
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 
@@ -62,6 +65,23 @@ class OpenClawNativeMemoryTest(unittest.TestCase):
             ],
         )
 
+    def test_parse_json_output_ignores_openclaw_log_prefixes(self):
+        stdout = """[proxy] routing process HTTP traffic through external proxy http://127.0.0.1:7890
+[secrets] memory search: gateway secrets.resolve unavailable; resolved command secrets locally.
+{
+  "results": [
+    {
+      "text": "Alice adopted a cat yesterday.",
+      "score": 0.9
+    }
+  ]
+}
+"""
+
+        parsed = run_locomo_openclaw_trace.parse_json_output(stdout)
+
+        self.assertEqual(parsed["results"][0]["text"], "Alice adopted a cat yesterday.")
+
     def test_memory_prompt_uses_native_openclaw_not_openclaw_mem0_command(self):
         prompt = run_locomo_openclaw_trace.MEMORY_WRITE_PROMPT.lower()
         self.assertIn("native memory", prompt)
@@ -109,6 +129,41 @@ class OpenClawNativeMemoryTest(unittest.TestCase):
                 args = run_locomo_openclaw_trace.parse_args(["--env-file", str(env_file), "--dry-run"])
 
         self.assertEqual(args.agent_model, "openai/gpt-4o-mini")
+
+    def test_answer_question_serializes_openclaw_agent_session_writes(self):
+        active_commands = 0
+        max_active_commands = 0
+
+        def fake_run_command(*args, **kwargs):
+            nonlocal active_commands, max_active_commands
+            active_commands += 1
+            max_active_commands = max(max_active_commands, active_commands)
+            time.sleep(0.02)
+            active_commands -= 1
+            return SimpleNamespace(returncode=0, stdout="answer", stderr="")
+
+        with patch.object(run_locomo_openclaw_trace, "run_command", side_effect=fake_run_command):
+            with ThreadPoolExecutor(max_workers=2) as executor:
+                futures = [
+                    executor.submit(
+                        run_locomo_openclaw_trace.answer_question,
+                        "openclaw",
+                        "main",
+                        "",
+                        "run",
+                        "Alice",
+                        Path("."),
+                        f"question {index}",
+                        [],
+                        [],
+                        300.0,
+                    )
+                    for index in range(2)
+                ]
+                for future in futures:
+                    self.assertEqual(future.result(), "answer")
+
+        self.assertEqual(max_active_commands, 1)
 
 
 if __name__ == "__main__":

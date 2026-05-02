@@ -12,7 +12,9 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 
@@ -21,9 +23,12 @@ DEFAULT_DATASET = Path("/share/project/chenchen/data/locomo/locomo10.json")
 DEFAULT_OUTPUT_DIR = Path("/share/project/chenchen/code/MemEval/data/input/openclaw_mem/locomo10")
 DEFAULT_ENV_FILE = Path("/share/project/chenchen/code/MemEval/.env")
 DEFAULT_WORKSPACE_ROOT = Path("/share/project/chenchen/code/MemEval/data/input/openclaw_mem/locomo10/workspaces")
+DEFAULT_MEMORY_STATE_DIR = Path("/share/project/chenchen/code/MemEval/data/input/openclaw_mem/locomo10/memory_states")
 DEFAULT_OPENCLAW_BIN = "openclaw"
 DEFAULT_AGENT = "main"
-DEFAULT_AGENT_MODEL = "deepseek/deepseek-chat"
+OPENCLAW_SESSION_LOCK_ROOT = Path(os.getenv("MEMEVAL_OPENCLAW_SESSION_LOCK_ROOT", "/tmp"))
+_OPENCLAW_AGENT_LOCKS: dict[Path, threading.Lock] = {}
+_OPENCLAW_AGENT_LOCKS_GUARD = threading.Lock()
 
 
 ANSWER_PROMPT = """Answer the question using only OpenCLAW native memories and the retrieved memory snippets below.
@@ -67,10 +72,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--dataset", type=Path, default=DEFAULT_DATASET)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--workspace-root", type=Path, default=DEFAULT_WORKSPACE_ROOT)
+    parser.add_argument("--memory-state-dir", type=Path, default=DEFAULT_MEMORY_STATE_DIR)
     parser.add_argument("--env-file", type=Path, default=DEFAULT_ENV_FILE)
     parser.add_argument("--openclaw-bin", default=DEFAULT_OPENCLAW_BIN)
     parser.add_argument("--agent", default=DEFAULT_AGENT)
-    parser.add_argument("--agent-model", default=os.getenv("OPENCLAW_AGENT_MODEL", DEFAULT_AGENT_MODEL))
+    parser.add_argument("--phase", choices=["all", "memory", "answer"], default="all")
+    parser.add_argument("--agent-model", default="")
+    parser.add_argument(
+        "--session-prefix",
+        default="",
+        help="Optional prefix for OpenCLAW CLI session ids. Use a fresh value when rerunning memory writes.",
+    )
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--end", type=int, default=10)
     parser.add_argument("--part-size", type=int, default=10)
@@ -80,6 +92,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--fail-fast", action="store_true")
     parser.add_argument("--sleep-seconds", type=float, default=0.0)
     parser.add_argument("--request-timeout", type=float, default=300.0)
+    parser.add_argument("--qa-workers", type=int, default=1)
     return parser.parse_args(argv)
 
 
@@ -137,6 +150,19 @@ def safe_name(value: str) -> str:
     return safe or "user"
 
 
+def openclaw_agent_session_lock_path(agent: str) -> Path:
+    return OPENCLAW_SESSION_LOCK_ROOT / f"memeval-openclaw-{safe_name(agent)}-sessions.lock"
+
+
+def thread_lock_for_path(path: Path) -> threading.Lock:
+    with _OPENCLAW_AGENT_LOCKS_GUARD:
+        lock = _OPENCLAW_AGENT_LOCKS.get(path)
+        if lock is None:
+            lock = threading.Lock()
+            _OPENCLAW_AGENT_LOCKS[path] = lock
+        return lock
+
+
 def profile_for(user_id: str) -> str:
     return f"memeval-openclaw-{safe_name(user_id)}"
 
@@ -155,7 +181,7 @@ def build_openclaw_agent_command(
     agent_model: str,
     timeout: float,
 ) -> list[str]:
-    return [
+    cmd = [
         openclaw_bin,
         "agent",
         "--agent",
@@ -165,11 +191,12 @@ def build_openclaw_agent_command(
         prompt,
         "--session-id",
         session_id,
-        "--model",
-        agent_model,
         "--timeout",
         str(int(timeout)),
     ]
+    if agent_model:
+        cmd.extend(["--model", agent_model])
+    return cmd
 
 
 def run_command(
@@ -188,6 +215,45 @@ def run_command(
         timeout=timeout,
         check=False,
     )
+
+
+def run_openclaw_workspace_command(
+    cmd: list[str],
+    *,
+    agent: str,
+    profile: str,
+    timeout: float,
+    workspace: Path,
+) -> subprocess.CompletedProcess[str]:
+    lock_path = openclaw_agent_session_lock_path(agent)
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    thread_lock = thread_lock_for_path(lock_path)
+    with thread_lock:
+        with lock_path.open("w", encoding="utf-8") as lock_file:
+            fcntl.flock(lock_file, fcntl.LOCK_EX)
+            try:
+                setup_result = run_command(
+                    [cmd[0], "setup", "--workspace", str(workspace)],
+                    profile=profile,
+                    timeout=timeout,
+                    cwd=workspace,
+                )
+                if setup_result.returncode != 0:
+                    return setup_result
+                return run_command(cmd, profile=profile, timeout=timeout, cwd=workspace)
+            finally:
+                fcntl.flock(lock_file, fcntl.LOCK_UN)
+
+
+def run_openclaw_agent_command(
+    cmd: list[str],
+    *,
+    agent: str,
+    profile: str,
+    timeout: float,
+    cwd: Path,
+) -> subprocess.CompletedProcess[str]:
+    return run_openclaw_workspace_command(cmd, agent=agent, profile=profile, timeout=timeout, workspace=cwd)
 
 
 def ensure_openclaw_workspace(openclaw_bin: str, profile: str, workspace: Path, timeout: float) -> None:
@@ -288,6 +354,7 @@ def add_session_native_memory(
     openclaw_bin: str,
     agent: str,
     agent_model: str,
+    session_prefix: str,
     user_id: str,
     workspace: Path,
     session_id: str,
@@ -303,15 +370,20 @@ def add_session_native_memory(
         session_id=session_id,
         conversation=conversation_text(chats),
     )
-    result = run_command(
+    result = run_openclaw_agent_command(
         build_openclaw_agent_command(
             openclaw_bin,
             agent,
             prompt,
-            f"{safe_name(user_id)}-{safe_name(session_id)}",
+            "-".join(
+                part
+                for part in [safe_name(session_prefix) if session_prefix else "", safe_name(user_id), safe_name(session_id)]
+                if part
+            ),
             agent_model,
             timeout,
         ),
+        agent=agent,
         profile=profile_for(user_id),
         timeout=timeout,
         cwd=workspace,
@@ -335,6 +407,7 @@ def add_conversation_memories(
     openclaw_bin: str,
     agent: str,
     agent_model: str,
+    session_prefix: str,
     workspace_root: Path,
     item: dict[str, Any],
     global_index: int,
@@ -362,12 +435,32 @@ def add_conversation_memories(
         print(f"Sample {global_index}: OpenCLAW adding {session_key} {session_index}/{len(keys)}", flush=True)
         memories_a["memories"].append(
             add_session_native_memory(
-                openclaw_bin, agent, agent_model, user_a, workspace_a, session_key, timestamp, speaker_a, chats, timeout
+                openclaw_bin,
+                agent,
+                agent_model,
+                session_prefix,
+                user_a,
+                workspace_a,
+                session_key,
+                timestamp,
+                speaker_a,
+                chats,
+                timeout,
             )
         )
         memories_b["memories"].append(
             add_session_native_memory(
-                openclaw_bin, agent, agent_model, user_b, workspace_b, session_key, timestamp, speaker_b, chats, timeout
+                openclaw_bin,
+                agent,
+                agent_model,
+                session_prefix,
+                user_b,
+                workspace_b,
+                session_key,
+                timestamp,
+                speaker_b,
+                chats,
+                timeout,
             )
         )
     return memories_a, memories_b
@@ -380,10 +473,16 @@ def parse_json_output(stdout: str) -> Any:
     try:
         return json.loads(stdout)
     except json.JSONDecodeError:
-        match = re.search(r"(\{.*\}|\[.*\])", stdout, flags=re.DOTALL)
-        if not match:
-            return {"raw": stdout}
-        return json.loads(match.group(1))
+        decoder = json.JSONDecoder()
+        for index, char in enumerate(stdout):
+            if char not in "[{":
+                continue
+            try:
+                parsed, _ = decoder.raw_decode(stdout[index:])
+            except json.JSONDecodeError:
+                continue
+            return parsed
+        return {"raw": stdout}
 
 
 def normalize_search_results(raw: Any) -> list[dict[str, Any]]:
@@ -419,7 +518,7 @@ def search_native_memory(
     top_k: int,
     timeout: float,
 ) -> list[dict[str, Any]]:
-    result = run_command(
+    result = run_openclaw_workspace_command(
         [
             openclaw_bin,
             "memory",
@@ -432,9 +531,10 @@ def search_native_memory(
             agent,
             "--json",
         ],
+        agent=agent,
         profile=profile_for(user_id),
         timeout=timeout,
-        cwd=workspace,
+        workspace=workspace,
     )
     if result.returncode != 0:
         raise RuntimeError(f"openclaw memory search failed: {result.stderr or result.stdout}")
@@ -445,6 +545,7 @@ def answer_question(
     openclaw_bin: str,
     agent: str,
     agent_model: str,
+    session_prefix: str,
     user_id: str,
     workspace: Path,
     question: str,
@@ -457,15 +558,25 @@ def answer_question(
         speaker_2_memories=json.dumps(speaker_2_memories, ensure_ascii=False, indent=2),
         question=question,
     )
-    result = run_command(
+    result = run_openclaw_agent_command(
         build_openclaw_agent_command(
             openclaw_bin,
             agent,
             prompt,
-            f"{safe_name(user_id)}-answer-{hashlib.sha1(question.encode()).hexdigest()[:8]}",
+            "-".join(
+                part
+                for part in [
+                    safe_name(session_prefix) if session_prefix else "",
+                    safe_name(user_id),
+                    "answer",
+                    hashlib.sha1(question.encode()).hexdigest()[:8],
+                ]
+                if part
+            ),
             agent_model,
             timeout,
         ),
+        agent=agent,
         profile=profile_for(user_id),
         timeout=timeout,
         cwd=workspace,
@@ -510,6 +621,7 @@ def qa_trace(
     openclaw_bin: str,
     agent: str,
     agent_model: str,
+    session_prefix: str,
     item: dict[str, Any],
     qa: dict[str, Any],
     person1: dict[str, Any],
@@ -529,6 +641,7 @@ def qa_trace(
         openclaw_bin,
         agent,
         agent_model,
+        session_prefix,
         person1["name"],
         Path(person1["workspace"]),
         question,
@@ -554,13 +667,86 @@ def qa_trace(
     }
 
 
+def build_qa_traces(
+    openclaw_bin: str,
+    agent: str,
+    agent_model: str,
+    session_prefix: str,
+    item: dict[str, Any],
+    person1: dict[str, Any],
+    person2: dict[str, Any],
+    top_k: int,
+    timeout: float,
+    qa_workers: int,
+    global_index: int,
+) -> list[dict[str, Any]]:
+    qas = item["qa"]
+    if qa_workers <= 1:
+        traces = []
+        for qa_index, qa in enumerate(qas):
+            print(f"Sample {global_index}: OpenCLAW answering QA {qa_index + 1}/{len(qas)}", flush=True)
+            traces.append(
+                qa_trace(
+                    openclaw_bin,
+                    agent,
+                    agent_model,
+                    session_prefix,
+                    item,
+                    qa,
+                    person1,
+                    person2,
+                    top_k,
+                    timeout,
+                )
+            )
+        return traces
+
+    traces: list[dict[str, Any] | None] = [None] * len(qas)
+    max_workers = min(qa_workers, len(qas))
+    print(f"Sample {global_index}: OpenCLAW answering {len(qas)} QA with {max_workers} workers", flush=True)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_index = {
+            executor.submit(
+                qa_trace,
+                openclaw_bin,
+                agent,
+                agent_model,
+                session_prefix,
+                item,
+                qa,
+                person1,
+                person2,
+                top_k,
+                timeout,
+            ): qa_index
+            for qa_index, qa in enumerate(qas)
+        }
+        completed = 0
+        for future in as_completed(future_to_index):
+            qa_index = future_to_index[future]
+            traces[qa_index] = future.result()
+            completed += 1
+            print(
+                f"Sample {global_index}: OpenCLAW answered QA {completed}/{len(qas)} "
+                f"(question {qa_index + 1})",
+                flush=True,
+            )
+    return [trace for trace in traces if trace is not None]
+
+
 def output_location(output_dir: Path, global_index: int, part_size: int) -> tuple[int, str, Path]:
     part_id = global_index // part_size + 1
     part_local_key = str(global_index % part_size)
     return part_id, part_local_key, output_dir / f"openclaw_locomo10_part{part_id}.json"
 
 
-def load_part(output_file: Path) -> dict[str, list[dict[str, Any]]]:
+def memory_state_location(memory_state_dir: Path, global_index: int, part_size: int) -> tuple[int, str, Path]:
+    part_id = global_index // part_size + 1
+    part_local_key = str(global_index % part_size)
+    return part_id, part_local_key, memory_state_dir / f"openclaw_locomo10_memory_part{part_id}.json"
+
+
+def load_part(output_file: Path) -> dict[str, Any]:
     if not output_file.exists():
         return {}
     with output_file.open("r", encoding="utf-8") as f:
@@ -572,18 +758,34 @@ def part_key_completed(output_file: Path, part_local_key: str) -> bool:
     return bool(records) and not records[0].get("error")
 
 
-def save_part_record(output_file: Path, part_local_key: str, traces: list[dict[str, Any]]) -> None:
+def memory_state_completed(memory_state_file: Path, part_local_key: str) -> bool:
+    state = load_part(memory_state_file).get(part_local_key)
+    return isinstance(state, dict) and bool(state.get("person1")) and bool(state.get("person2"))
+
+
+def save_part_record(output_file: Path, part_local_key: str, record: Any) -> None:
     output_file.parent.mkdir(parents=True, exist_ok=True)
     lock_file = output_file.with_suffix(output_file.suffix + ".lock")
     tmp_file = output_file.with_suffix(output_file.suffix + f".{os.getpid()}.tmp")
     with lock_file.open("w", encoding="utf-8") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         results = load_part(output_file)
-        results[part_local_key] = traces
+        results[part_local_key] = record
         with tmp_file.open("w", encoding="utf-8") as f:
             json.dump(results, f, ensure_ascii=False, indent=2)
         os.replace(tmp_file, output_file)
         fcntl.flock(lock, fcntl.LOCK_UN)
+
+
+def build_memory_state(person1: dict[str, Any], person2: dict[str, Any]) -> dict[str, Any]:
+    return {"person1": person1, "person2": person2}
+
+
+def load_memory_state(memory_state_file: Path, part_local_key: str) -> tuple[dict[str, Any], dict[str, Any]]:
+    state = load_part(memory_state_file).get(part_local_key)
+    if not isinstance(state, dict) or "person1" not in state or "person2" not in state:
+        raise FileNotFoundError(f"Memory state missing for key {part_local_key}: {memory_state_file}")
+    return state["person1"], state["person2"]
 
 
 def build_error_trace(item: dict[str, Any], error: Exception) -> list[dict[str, Any]]:
@@ -619,6 +821,8 @@ def main() -> int:
     validate_range(args.start, args.end, len(data))
     if args.part_size <= 0:
         raise ValueError(f"Invalid part size: {args.part_size}")
+    if args.qa_workers <= 0:
+        raise ValueError(f"Invalid QA workers: {args.qa_workers}")
 
     if args.dry_run:
         run_dry_run(data, args.start, args.end)
@@ -629,41 +833,56 @@ def main() -> int:
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     args.workspace_root.mkdir(parents=True, exist_ok=True)
+    args.memory_state_dir.mkdir(parents=True, exist_ok=True)
 
     for global_index in range(args.start, args.end):
         _, part_local_key, output_file = output_location(args.output_dir, global_index, args.part_size)
-        if args.resume and part_key_completed(output_file, part_local_key):
+        _, memory_part_local_key, memory_state_file = memory_state_location(
+            args.memory_state_dir, global_index, args.part_size
+        )
+        if part_local_key != memory_part_local_key:
+            raise RuntimeError(f"Part key mismatch for sample {global_index}")
+        if args.phase in {"all", "answer"} and args.resume and part_key_completed(output_file, part_local_key):
             print(f"Skipping sample {global_index}: already in {output_file.name}", flush=True)
+            continue
+        if args.phase == "memory" and args.resume and memory_state_completed(memory_state_file, part_local_key):
+            print(f"Skipping sample {global_index}: memory already in {memory_state_file.name}", flush=True)
             continue
 
         item = data[global_index]
         print(f"Processing sample {global_index} ({item.get('sample_id')})", flush=True)
         try:
-            person1, person2 = add_conversation_memories(
+            if args.phase in {"all", "memory"}:
+                person1, person2 = add_conversation_memories(
+                    args.openclaw_bin,
+                    args.agent,
+                    args.agent_model,
+                    args.session_prefix,
+                    args.workspace_root,
+                    item,
+                    global_index,
+                    args.request_timeout,
+                )
+                save_part_record(memory_state_file, part_local_key, build_memory_state(person1, person2))
+                print(f"Saved memory state {memory_state_file.name}", flush=True)
+                if args.phase == "memory":
+                    continue
+            else:
+                person1, person2 = load_memory_state(memory_state_file, part_local_key)
+
+            traces = build_qa_traces(
                 args.openclaw_bin,
                 args.agent,
                 args.agent_model,
-                args.workspace_root,
+                args.session_prefix,
                 item,
-                global_index,
+                person1,
+                person2,
+                args.top_k,
                 args.request_timeout,
+                args.qa_workers,
+                global_index,
             )
-            traces = []
-            for qa_index, qa in enumerate(item["qa"]):
-                print(f"Sample {global_index}: OpenCLAW answering QA {qa_index + 1}/{len(item['qa'])}", flush=True)
-                traces.append(
-                    qa_trace(
-                        args.openclaw_bin,
-                        args.agent,
-                        args.agent_model,
-                        item,
-                        qa,
-                        person1,
-                        person2,
-                        args.top_k,
-                        args.request_timeout,
-                    )
-                )
             save_part_record(output_file, part_local_key, traces)
             print(f"Saved {output_file.name}", flush=True)
         except Exception as exc:  # noqa: BLE001

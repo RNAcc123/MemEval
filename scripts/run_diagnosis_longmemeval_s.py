@@ -23,8 +23,11 @@ from typing import Dict, Iterable, List, NamedTuple, Optional, Set, Tuple
 
 # ``run_diagnosis`` imports python-dotenv at module import time. Keep this
 # adapter importable in lean test environments where dotenv is not installed.
+DEFAULT_ENV_FILE = Path("/share/project/chenchen/code/MemEval/.env")
 try:
-    import dotenv  # noqa: F401
+    from dotenv import load_dotenv
+
+    load_dotenv(DEFAULT_ENV_FILE, override=True)
 except ImportError:
     dotenv_stub = types.ModuleType("dotenv")
     dotenv_stub.load_dotenv = lambda *args, **kwargs: False

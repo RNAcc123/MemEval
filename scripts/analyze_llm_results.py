@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Summarize overall statistics for LLM annotations under the `llm_annotation_voting` directory
-(based on merged_*_voting_3rounds_gpt_5.json).
+Summarize overall statistics for LLM annotation files.
 
 Features:
-- By default, read `merged_*_gpt4omini_voting_3rounds_gpt_5.json` under `../llm_annotation_voting`
-- Optionally, use `--input-dir` to restrict stats to a specific subfolder
+- By default, read voting annotation files under `data/output/llm_annotation_voting`.
+- Optionally, use `--input-file` to analyze one or more explicit JSON files,
+  including single-model diagnosis outputs under `llm_annotation_single`.
 - Only count qa_category ∈ {1,2,3,4} (exclude 5)
-- Output tables for both the "final voting" result and each individual `used_model`:
+- Output tables for the top-level result and each individual `used_model`:
   - counts for each label type (1.1, 1.2, ..., 4.3, 5, …)
   - total samples
   - samples with a label
-  - total labels (multi-labels summed; final voting has 0/1)
+  - total labels
   - samples with no label
   - accuracy = (no-label samples / total samples) * 100
-- Save results to: `evalresult/llm_annotation_voting_stats_full.txt`
 """
 
 import argparse
@@ -62,6 +61,32 @@ def _init_cat_stats() -> Dict[int, dict]:
     return stats
 
 
+def _record_label(stats: Dict[int, dict], cat_int: int, label: Any, labels_seen: Set[str]) -> None:
+    s = stats[cat_int]
+    s["total_items"] += 1
+    if label is None:
+        s["no_label_items"] += 1
+        return
+    lb_str = str(label).strip()
+    if not lb_str:
+        s["no_label_items"] += 1
+        return
+    s["labeled_items"] += 1
+    s["total_labels"] += 1
+    s["label_counts"][lb_str] += 1
+    labels_seen.add(lb_str)
+
+
+def _single_model_name(item: Dict[str, Any]) -> str:
+    if item.get("used_model"):
+        return str(item["used_model"])
+    mode = str(item.get("diagnosis_mode") or "")
+    prefix = "single_model_"
+    if mode.startswith(prefix):
+        return mode[len(prefix) :]
+    return "single_model"
+
+
 def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int, dict]], List[str]]:
     """
     Compute label distributions and aggregate counts for the final voting result
@@ -93,23 +118,9 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
                 continue
 
             # ========================
-            # 1) Final voting stats
+            # 1) Top-level result stats
             # ========================
-            fs = final_stats[cat_int]
-            fs["total_items"] += 1
-
-            final_label = item.get("label")
-            if final_label is None:
-                fs["no_label_items"] += 1
-            else:
-                lb_str = str(final_label).strip()
-                if lb_str:
-                    fs["labeled_items"] += 1
-                    fs["total_labels"] += 1
-                    fs["label_counts"][lb_str] += 1
-                    labels_seen.add(lb_str)
-                else:
-                    fs["no_label_items"] += 1
+            _record_label(final_stats, cat_int, item.get("label"), labels_seen)
 
             # ========================
             # 2) Per-used_model stats
@@ -119,26 +130,22 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
             if isinstance(voting, dict):
                 individual = voting.get("individual_results", []) or []
 
-            for res in individual:
+            if individual:
+                individual_results = individual
+            else:
+                individual_results = [
+                    {
+                        "used_model": _single_model_name(item),
+                        "label": item.get("label"),
+                    }
+                ]
+
+            for res in individual_results:
                 used_model = str(res.get("used_model") or "unknown")
                 if used_model not in model_stats:
                     model_stats[used_model] = _init_cat_stats()
 
-                ms = model_stats[used_model][cat_int]
-                ms["total_items"] += 1
-
-                lb = res.get("label")
-                if lb is None:
-                    ms["no_label_items"] += 1
-                else:
-                    lb_str = str(lb).strip()
-                    if lb_str:
-                        ms["labeled_items"] += 1
-                        ms["total_labels"] += 1
-                        ms["label_counts"][lb_str] += 1
-                        labels_seen.add(lb_str)
-                    else:
-                        ms["no_label_items"] += 1
+                _record_label(model_stats[used_model], cat_int, res.get("label"), labels_seen)
 
     label_list = sorted(labels_seen)
     return final_stats, model_stats, label_list
@@ -243,19 +250,18 @@ def format_and_save(
     model_stats: Dict[str, Dict[int, dict]],
     label_list: List[str],
     out_path: str,
+    source_label: str,
 ) -> None:
     """Generate the final report text and write it to a file."""
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
     lines: List[str] = []
-    lines.append(
-        "Statistics for llm_annotation_voting (merged_*_gpt4omini_voting_3rounds_gpt_5.json)"
-    )
+    lines.append(f"Statistics for {source_label}")
     lines.append("Note: Accuracy = (samples without label / total samples) * 100")
     lines.append("")
 
-    # First write final voting results
-    lines.extend(_format_single_table("voting_final", final_stats, label_list))
+    # First write top-level results.
+    lines.extend(_format_single_table("top_level", final_stats, label_list))
 
     # Then write tables for each used_model
     for model_name in sorted(model_stats.keys()):
@@ -288,6 +294,15 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--input-file",
+        nargs="+",
+        default=None,
+        help=(
+            "Explicit JSON file path(s) to analyze. Can be absolute or relative "
+            "to the project root. Use this for llm_annotation_single outputs."
+        ),
+    )
+    parser.add_argument(
         "-o",
         "--output-dir",
         type=str,
@@ -300,20 +315,34 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    # Resolve input dir: absolute, or relative to this script's parent directory
-    if os.path.isabs(args.input_dir):
-        base_dir = args.input_dir
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+    if args.input_file:
+        files = [
+            path if os.path.isabs(path) else os.path.join(project_root, path)
+            for path in args.input_file
+        ]
+        missing = [path for path in files if not os.path.isfile(path)]
+        if missing:
+            print("Input JSON file not found:", ", ".join(missing))
+            return
+        source_label = ", ".join(os.path.basename(path) for path in files)
     else:
-        base_dir = os.path.join(os.path.dirname(__file__), "..", args.input_dir)
+        # Resolve input dir: absolute, or relative to project root
+        if os.path.isabs(args.input_dir):
+            base_dir = args.input_dir
+        else:
+            base_dir = os.path.join(project_root, args.input_dir)
 
-    if not os.path.isdir(base_dir):
-        print("llm_annotation_voting directory not found:", base_dir)
-        return
+        if not os.path.isdir(base_dir):
+            print("llm_annotation_voting directory not found:", base_dir)
+            return
 
-    files = find_merged_files(base_dir)
-    if not files:
-        print("No .json files found in", base_dir)
-        return
+        files = find_merged_files(base_dir)
+        if not files:
+            print("No .json files found in", base_dir)
+            return
+        source_label = base_dir
 
     final_stats, model_stats, label_list = collect_stats(files)
 
@@ -321,20 +350,19 @@ def main() -> None:
     if os.path.isabs(args.output_dir):
         out_dir = args.output_dir
     else:
-        out_dir = os.path.join(os.path.dirname(__file__), "..", args.output_dir)
+        out_dir = os.path.join(project_root, args.output_dir)
 
     # If user didn't change the default, keep backward-compatible default directory
     if args.output_dir == "evalresult":
         out_dir = DEFAULT_OUT_DIR
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_path = os.path.join(out_dir, f"llm_annotation_voting_stats_{timestamp}.txt")
+    out_path = os.path.join(out_dir, f"llm_annotation_stats_{timestamp}.txt")
 
-    format_and_save(final_stats, model_stats, label_list, out_path)
+    format_and_save(final_stats, model_stats, label_list, out_path, source_label)
     print("Saved results to:", out_path)
 
 
 if __name__ == "__main__":
     main()
-
 

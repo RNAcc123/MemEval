@@ -80,6 +80,7 @@ class APIConfig:
     deepseek_api_key: str = field(default_factory=lambda: os.getenv("DEEPSEEK_API_KEY", ""))
     deepseek_api_url: str = field(default_factory=lambda: os.getenv("DEEPSEEK_API_URL", ""))
     openai_api_key: str = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))
+    openai_api_url: str = field(default_factory=lambda: os.getenv("OPENAI_API_URL", os.getenv("OPENAI_BASE_URL", "")))
     gemini_api_key: str = field(default_factory=lambda: os.getenv("GEMINI_API_KEY", ""))
     gemini_url: str = field(default_factory=lambda: os.getenv("GEMINI_URL", ""))
 
@@ -393,7 +394,10 @@ def call_openai_api(prompt: str, model: str = "gpt-4.1", temperature: float = 0.
     except ImportError:
         raise Exception("Please install the openai library: pip install openai")
     
-    client = OpenAI(api_key=API_CONFIG.openai_api_key)
+    client_kwargs = {"api_key": API_CONFIG.openai_api_key}
+    if API_CONFIG.openai_api_url:
+        client_kwargs["base_url"] = API_CONFIG.openai_api_url
+    client = OpenAI(**client_kwargs)
     
     # Some models do not support the temperature parameter
     temp_to_send = None if model == "gpt-5" else temperature
