@@ -75,6 +75,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--memory-state-dir", type=Path, default=DEFAULT_MEMORY_STATE_DIR)
     parser.add_argument("--env-file", type=Path, default=DEFAULT_ENV_FILE)
     parser.add_argument("--openclaw-bin", default=DEFAULT_OPENCLAW_BIN)
+    parser.add_argument(
+        "--openclaw-profile",
+        default="",
+        help="Optional OpenCLAW CLI profile. Use a distinct profile per worker for isolated config/sessions.",
+    )
     parser.add_argument("--agent", default=DEFAULT_AGENT)
     parser.add_argument("--phase", choices=["all", "memory", "answer"], default="all")
     parser.add_argument("--agent-model", default="")
@@ -150,8 +155,9 @@ def safe_name(value: str) -> str:
     return safe or "user"
 
 
-def openclaw_agent_session_lock_path(agent: str) -> Path:
-    return OPENCLAW_SESSION_LOCK_ROOT / f"memeval-openclaw-{safe_name(agent)}-sessions.lock"
+def openclaw_agent_session_lock_path(agent: str, openclaw_profile: str = "") -> Path:
+    profile_part = safe_name(openclaw_profile) if openclaw_profile else "default"
+    return OPENCLAW_SESSION_LOCK_ROOT / f"memeval-openclaw-{profile_part}-{safe_name(agent)}-sessions.lock"
 
 
 def thread_lock_for_path(path: Path) -> threading.Lock:
@@ -167,10 +173,22 @@ def profile_for(user_id: str) -> str:
     return f"memeval-openclaw-{safe_name(user_id)}"
 
 
+def command_profile(user_id: str, openclaw_profile: str) -> str:
+    return openclaw_profile or profile_for(user_id)
+
+
 def command_env(profile: str) -> dict[str, str]:
     env = os.environ.copy()
     env["OPENCLAW_PROFILE"] = profile
     return env
+
+
+def with_openclaw_profile(cmd: list[str], openclaw_profile: str) -> list[str]:
+    if not openclaw_profile:
+        return cmd
+    if len(cmd) > 2 and cmd[1] == "--profile":
+        return cmd
+    return [cmd[0], "--profile", openclaw_profile, *cmd[1:]]
 
 
 def build_openclaw_agent_command(
@@ -222,10 +240,11 @@ def run_openclaw_workspace_command(
     *,
     agent: str,
     profile: str,
+    openclaw_profile: str,
     timeout: float,
     workspace: Path,
 ) -> subprocess.CompletedProcess[str]:
-    lock_path = openclaw_agent_session_lock_path(agent)
+    lock_path = openclaw_agent_session_lock_path(agent, openclaw_profile)
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     thread_lock = thread_lock_for_path(lock_path)
     with thread_lock:
@@ -233,14 +252,19 @@ def run_openclaw_workspace_command(
             fcntl.flock(lock_file, fcntl.LOCK_EX)
             try:
                 setup_result = run_command(
-                    [cmd[0], "setup", "--workspace", str(workspace)],
+                    with_openclaw_profile([cmd[0], "setup", "--workspace", str(workspace)], openclaw_profile),
                     profile=profile,
                     timeout=timeout,
                     cwd=workspace,
                 )
                 if setup_result.returncode != 0:
                     return setup_result
-                return run_command(cmd, profile=profile, timeout=timeout, cwd=workspace)
+                return run_command(
+                    with_openclaw_profile(cmd, openclaw_profile),
+                    profile=profile,
+                    timeout=timeout,
+                    cwd=workspace,
+                )
             finally:
                 fcntl.flock(lock_file, fcntl.LOCK_UN)
 
@@ -250,16 +274,30 @@ def run_openclaw_agent_command(
     *,
     agent: str,
     profile: str,
+    openclaw_profile: str,
     timeout: float,
     cwd: Path,
 ) -> subprocess.CompletedProcess[str]:
-    return run_openclaw_workspace_command(cmd, agent=agent, profile=profile, timeout=timeout, workspace=cwd)
+    return run_openclaw_workspace_command(
+        cmd,
+        agent=agent,
+        profile=profile,
+        openclaw_profile=openclaw_profile,
+        timeout=timeout,
+        workspace=cwd,
+    )
 
 
-def ensure_openclaw_workspace(openclaw_bin: str, profile: str, workspace: Path, timeout: float) -> None:
+def ensure_openclaw_workspace(
+    openclaw_bin: str,
+    profile: str,
+    openclaw_profile: str,
+    workspace: Path,
+    timeout: float,
+) -> None:
     workspace.mkdir(parents=True, exist_ok=True)
     result = run_command(
-        [openclaw_bin, "setup", "--workspace", str(workspace)],
+        with_openclaw_profile([openclaw_bin, "setup", "--workspace", str(workspace)], openclaw_profile),
         profile=profile,
         timeout=timeout,
     )
@@ -352,6 +390,7 @@ def normalize_add_events(events: list[dict[str, Any]]) -> tuple[list[dict[str, A
 
 def add_session_native_memory(
     openclaw_bin: str,
+    openclaw_profile: str,
     agent: str,
     agent_model: str,
     session_prefix: str,
@@ -384,7 +423,8 @@ def add_session_native_memory(
             timeout,
         ),
         agent=agent,
-        profile=profile_for(user_id),
+        profile=command_profile(user_id, openclaw_profile),
+        openclaw_profile=openclaw_profile,
         timeout=timeout,
         cwd=workspace,
     )
@@ -405,6 +445,7 @@ def add_session_native_memory(
 
 def add_conversation_memories(
     openclaw_bin: str,
+    openclaw_profile: str,
     agent: str,
     agent_model: str,
     session_prefix: str,
@@ -423,7 +464,13 @@ def add_conversation_memories(
 
     for user_id, workspace in [(user_a, workspace_a), (user_b, workspace_b)]:
         reset_workspace(workspace)
-        ensure_openclaw_workspace(openclaw_bin, profile_for(user_id), workspace, timeout)
+        ensure_openclaw_workspace(
+            openclaw_bin,
+            command_profile(user_id, openclaw_profile),
+            openclaw_profile,
+            workspace,
+            timeout,
+        )
 
     memories_a = {"name": user_a, "workspace": str(workspace_a), "memories": []}
     memories_b = {"name": user_b, "workspace": str(workspace_b), "memories": []}
@@ -436,6 +483,7 @@ def add_conversation_memories(
         memories_a["memories"].append(
             add_session_native_memory(
                 openclaw_bin,
+                openclaw_profile,
                 agent,
                 agent_model,
                 session_prefix,
@@ -451,6 +499,7 @@ def add_conversation_memories(
         memories_b["memories"].append(
             add_session_native_memory(
                 openclaw_bin,
+                openclaw_profile,
                 agent,
                 agent_model,
                 session_prefix,
@@ -511,6 +560,7 @@ def normalize_search_results(raw: Any) -> list[dict[str, Any]]:
 
 def search_native_memory(
     openclaw_bin: str,
+    openclaw_profile: str,
     agent: str,
     user_id: str,
     workspace: Path,
@@ -532,7 +582,8 @@ def search_native_memory(
             "--json",
         ],
         agent=agent,
-        profile=profile_for(user_id),
+        profile=command_profile(user_id, openclaw_profile),
+        openclaw_profile=openclaw_profile,
         timeout=timeout,
         workspace=workspace,
     )
@@ -543,6 +594,7 @@ def search_native_memory(
 
 def answer_question(
     openclaw_bin: str,
+    openclaw_profile: str,
     agent: str,
     agent_model: str,
     session_prefix: str,
@@ -577,7 +629,8 @@ def answer_question(
             timeout,
         ),
         agent=agent,
-        profile=profile_for(user_id),
+        profile=command_profile(user_id, openclaw_profile),
+        openclaw_profile=openclaw_profile,
         timeout=timeout,
         cwd=workspace,
     )
@@ -619,6 +672,7 @@ def reference_person_shape(person: dict[str, Any]) -> dict[str, Any]:
 
 def qa_trace(
     openclaw_bin: str,
+    openclaw_profile: str,
     agent: str,
     agent_model: str,
     session_prefix: str,
@@ -632,13 +686,28 @@ def qa_trace(
     question = qa.get("question", "")
     evidence_ids = set(qa.get("evidence") or [])
     speaker_1_memories = search_native_memory(
-        openclaw_bin, agent, person1["name"], Path(person1["workspace"]), question, top_k, timeout
+        openclaw_bin,
+        openclaw_profile,
+        agent,
+        person1["name"],
+        Path(person1["workspace"]),
+        question,
+        top_k,
+        timeout,
     )
     speaker_2_memories = search_native_memory(
-        openclaw_bin, agent, person2["name"], Path(person2["workspace"]), question, top_k, timeout
+        openclaw_bin,
+        openclaw_profile,
+        agent,
+        person2["name"],
+        Path(person2["workspace"]),
+        question,
+        top_k,
+        timeout,
     )
     qa_response = answer_question(
         openclaw_bin,
+        openclaw_profile,
         agent,
         agent_model,
         session_prefix,
@@ -669,6 +738,7 @@ def qa_trace(
 
 def build_qa_traces(
     openclaw_bin: str,
+    openclaw_profile: str,
     agent: str,
     agent_model: str,
     session_prefix: str,
@@ -688,6 +758,7 @@ def build_qa_traces(
             traces.append(
                 qa_trace(
                     openclaw_bin,
+                    openclaw_profile,
                     agent,
                     agent_model,
                     session_prefix,
@@ -709,6 +780,7 @@ def build_qa_traces(
             executor.submit(
                 qa_trace,
                 openclaw_bin,
+                openclaw_profile,
                 agent,
                 agent_model,
                 session_prefix,
@@ -855,6 +927,7 @@ def main() -> int:
             if args.phase in {"all", "memory"}:
                 person1, person2 = add_conversation_memories(
                     args.openclaw_bin,
+                    args.openclaw_profile,
                     args.agent,
                     args.agent_model,
                     args.session_prefix,
@@ -872,6 +945,7 @@ def main() -> int:
 
             traces = build_qa_traces(
                 args.openclaw_bin,
+                args.openclaw_profile,
                 args.agent,
                 args.agent_model,
                 args.session_prefix,

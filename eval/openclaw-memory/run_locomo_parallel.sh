@@ -29,6 +29,11 @@ PREFLIGHT="${PREFLIGHT:-1}"
 CLEAN_PLUGIN_CACHE="${CLEAN_PLUGIN_CACHE:-0}"
 RESUME="${RESUME:-1}"
 RUN_ID="${RUN_ID:-locomo-memory-$(date +%Y%m%d-%H%M%S)-$$}"
+ISOLATE_OPENCLAW_PROFILES="${ISOLATE_OPENCLAW_PROFILES:-1}"
+OPENCLAW_PROFILE_BASE="${OPENCLAW_PROFILE_BASE:-memeval-locomo-${RUN_ID}}"
+OPENCLAW_CONFIG_SOURCE="${OPENCLAW_CONFIG_SOURCE:-${OPENCLAW_CONFIG_PATH:-${HOME}/.openclaw/openclaw.json}}"
+OPENCLAW_PROFILE_PARENT="${OPENCLAW_PROFILE_PARENT:-${HOME}}"
+OPENCLAW_RUNTIME_DEPS_SOURCE="${OPENCLAW_RUNTIME_DEPS_SOURCE:-${HOME}/.openclaw/plugin-runtime-deps}"
 
 OUTPUT_DIR="${OUTPUT_DIR:-${ROOT_DIR}/data/input/openclaw_mem/locomo10}"
 WORKSPACE_ROOT="${WORKSPACE_ROOT:-${OUTPUT_DIR}/workspaces}"
@@ -70,6 +75,11 @@ if [[ "${RESUME}" != "0" && "${RESUME}" != "1" ]]; then
   exit 1
 fi
 
+if [[ "${ISOLATE_OPENCLAW_PROFILES}" != "0" && "${ISOLATE_OPENCLAW_PROFILES}" != "1" ]]; then
+  echo "ISOLATE_OPENCLAW_PROFILES must be 0 or 1" >&2
+  exit 1
+fi
+
 if [[ "${PHASE}" != "all" && "${PHASE}" != "memory" && "${PHASE}" != "answer" ]]; then
   echo "PHASE must be all, memory, or answer" >&2
   exit 1
@@ -78,31 +88,6 @@ fi
 if [[ "${CLEAN_PLUGIN_CACHE}" == "1" ]]; then
   echo "Removing OpenCLAW plugin runtime cache before preflight"
   rm -rf /root/.openclaw/plugin-runtime-deps/openclaw-*
-fi
-
-if [[ "${PREFLIGHT}" == "1" ]]; then
-  preflight_log="${LOG_DIR}/preflight.log"
-  mkdir -p "${PREFLIGHT_WORKSPACE}"
-  preflight_model_args=()
-  if [[ -n "${AGENT_MODEL}" ]]; then
-    preflight_model_args+=(--model "${AGENT_MODEL}")
-  fi
-  echo "Running OpenCLAW preflight"
-  if ! "${OPENCLAW_BIN}" setup --workspace "${PREFLIGHT_WORKSPACE}" >"${preflight_log}" 2>&1; then
-    echo "OpenCLAW preflight setup failed. Log: ${preflight_log}" >&2
-    exit 1
-  fi
-  if ! OPENCLAW_PROFILE="memeval-openclaw-preflight" "${OPENCLAW_BIN}" agent \
-    --agent "${AGENT}" \
-    --local \
-    -m "Reply with OK." \
-    --session-id "memeval-openclaw-preflight" \
-    "${preflight_model_args[@]}" \
-    --timeout "${REQUEST_TIMEOUT}" \
-    >>"${preflight_log}" 2>&1; then
-    echo "OpenCLAW preflight agent failed. Log: ${preflight_log}" >&2
-    exit 1
-  fi
 fi
 
 TOTAL=$((END - START))
@@ -132,6 +117,67 @@ if [[ -n "${AGENT_MODEL}" ]]; then
 fi
 
 echo "OpenCLAW session prefix: ${RUN_ID}"
+if [[ "${ISOLATE_OPENCLAW_PROFILES}" == "1" ]]; then
+  echo "OpenCLAW profile isolation: ${OPENCLAW_PROFILE_BASE}-worker-N"
+fi
+
+safe_profile_name() {
+  local raw="$1"
+  local safe
+  safe="$(printf '%s' "${raw}" | tr -c 'A-Za-z0-9_.-' '_')"
+  safe="${safe##_}"
+  safe="${safe%%_}"
+  printf '%s' "${safe:-memeval-locomo-worker}"
+}
+
+init_openclaw_profile() {
+  local profile="$1"
+  local profile_dir="${OPENCLAW_PROFILE_PARENT}/.openclaw-${profile}"
+  if [[ ! -f "${OPENCLAW_CONFIG_SOURCE}" ]]; then
+    echo "OpenCLAW config source not found: ${OPENCLAW_CONFIG_SOURCE}" >&2
+    exit 1
+  fi
+  mkdir -p "${profile_dir}"
+  cp "${OPENCLAW_CONFIG_SOURCE}" "${profile_dir}/openclaw.json"
+  if [[ -d "${OPENCLAW_RUNTIME_DEPS_SOURCE}" ]]; then
+    mkdir -p "${profile_dir}/plugin-runtime-deps"
+    cp -a "${OPENCLAW_RUNTIME_DEPS_SOURCE}/." "${profile_dir}/plugin-runtime-deps/"
+  fi
+}
+
+if [[ "${PREFLIGHT}" == "1" ]]; then
+  preflight_log="${LOG_DIR}/preflight.log"
+  mkdir -p "${PREFLIGHT_WORKSPACE}"
+  preflight_model_args=()
+  preflight_profile_args=()
+  preflight_profile_env="memeval-openclaw-preflight"
+  if [[ -n "${AGENT_MODEL}" ]]; then
+    preflight_model_args+=(--model "${AGENT_MODEL}")
+  fi
+  if [[ "${ISOLATE_OPENCLAW_PROFILES}" == "1" ]]; then
+    preflight_profile="$(safe_profile_name "${OPENCLAW_PROFILE_BASE}-preflight")"
+    init_openclaw_profile "${preflight_profile}"
+    preflight_profile_args+=(--profile "${preflight_profile}")
+    preflight_profile_env="${preflight_profile}"
+  fi
+  echo "Running OpenCLAW preflight"
+  if ! OPENCLAW_PROFILE="${preflight_profile_env}" "${OPENCLAW_BIN}" "${preflight_profile_args[@]}" setup \
+    --workspace "${PREFLIGHT_WORKSPACE}" >"${preflight_log}" 2>&1; then
+    echo "OpenCLAW preflight setup failed. Log: ${preflight_log}" >&2
+    exit 1
+  fi
+  if ! OPENCLAW_PROFILE="${preflight_profile_env}" "${OPENCLAW_BIN}" "${preflight_profile_args[@]}" agent \
+    --agent "${AGENT}" \
+    --local \
+    -m "Reply with OK." \
+    --session-id "${RUN_ID}-preflight" \
+    "${preflight_model_args[@]}" \
+    --timeout "${REQUEST_TIMEOUT}" \
+    >>"${preflight_log}" 2>&1; then
+    echo "OpenCLAW preflight agent failed. Log: ${preflight_log}" >&2
+    exit 1
+  fi
+fi
 
 for worker in $(seq 0 $((WORKERS - 1))); do
   worker_start=$((START + worker * CHUNK))
@@ -144,10 +190,17 @@ for worker in $(seq 0 $((WORKERS - 1))); do
   fi
 
   log_file="${LOG_DIR}/worker_${worker_start}_${worker_end}.log"
+  openclaw_profile_args=()
+  if [[ "${ISOLATE_OPENCLAW_PROFILES}" == "1" ]]; then
+    worker_profile="$(safe_profile_name "${OPENCLAW_PROFILE_BASE}-worker-${worker}")"
+    init_openclaw_profile "${worker_profile}"
+    openclaw_profile_args+=(--openclaw-profile "${worker_profile}")
+  fi
 
   echo "Starting OpenCLAW worker ${worker}: ${worker_start}-${worker_end}"
   "${PYTHON}" "${RUNNER}" \
     --openclaw-bin "${OPENCLAW_BIN}" \
+    "${openclaw_profile_args[@]}" \
     --agent "${AGENT}" \
     "${agent_model_args[@]}" \
     --session-prefix "${RUN_ID}" \

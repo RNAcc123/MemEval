@@ -119,7 +119,7 @@ class OpenClawNativeMemoryTest(unittest.TestCase):
         self.assertIn("--timeout", command)
         self.assertIn("300", command)
 
-    def test_parse_args_uses_openclaw_agent_model_loaded_from_env_file(self):
+    def test_parse_args_does_not_use_openclaw_agent_model_loaded_from_env_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             env_file = Path(tmpdir) / ".env"
             env_file.write_text("OPENCLAW_AGENT_MODEL=openai/gpt-4o-mini\n", encoding="utf-8")
@@ -128,7 +128,24 @@ class OpenClawNativeMemoryTest(unittest.TestCase):
                 run_locomo_openclaw_trace.load_cli_env_file(["--env-file", str(env_file), "--dry-run"])
                 args = run_locomo_openclaw_trace.parse_args(["--env-file", str(env_file), "--dry-run"])
 
-        self.assertEqual(args.agent_model, "openai/gpt-4o-mini")
+        self.assertEqual(args.agent_model, "")
+
+    def test_with_openclaw_profile_inserts_global_profile_option(self):
+        command = run_locomo_openclaw_trace.with_openclaw_profile(
+            ["openclaw", "agent", "--agent", "main"],
+            "memeval-worker-0",
+        )
+
+        self.assertEqual(command[:3], ["openclaw", "--profile", "memeval-worker-0"])
+        self.assertEqual(command[3:], ["agent", "--agent", "main"])
+
+    def test_openclaw_lock_path_isolated_by_profile(self):
+        lock_a = run_locomo_openclaw_trace.openclaw_agent_session_lock_path("main", "worker-a")
+        lock_b = run_locomo_openclaw_trace.openclaw_agent_session_lock_path("main", "worker-b")
+
+        self.assertNotEqual(lock_a, lock_b)
+        self.assertIn("worker-a", str(lock_a))
+        self.assertIn("worker-b", str(lock_b))
 
     def test_answer_question_serializes_openclaw_agent_session_writes(self):
         active_commands = 0
@@ -148,6 +165,7 @@ class OpenClawNativeMemoryTest(unittest.TestCase):
                     executor.submit(
                         run_locomo_openclaw_trace.answer_question,
                         "openclaw",
+                        "",
                         "main",
                         "",
                         "run",
