@@ -2,10 +2,19 @@
 set -euo pipefail
 
 ROOT_DIR="/share/project/chenchen/code/MemEval"
+if [[ -f "${ROOT_DIR}/.env" ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "${ROOT_DIR}/.env"
+  set +a
+fi
+
 PYTHON="${PYTHON:-/share/project/chenchen/envs/memeval/bin/python}"
 RUNNER="${ROOT_DIR}/eval/locomo-memory/run_locomo_mem0_trace.py"
 
 MODEL="qwen3.5-122b-a10b"
+EMBEDDING_MODEL="${EMBEDDING_MODEL:-text-embedding-v4}"
+EMBEDDING_STORE_TAG="${EMBEDDING_MODEL//\//_}"
 BASE_URL="${BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}"
 API_KEY_ENV="${API_KEY_ENV:-DASHSCOPE_API_KEY}"
 
@@ -19,7 +28,7 @@ SLEEP_SECONDS="${SLEEP_SECONDS:-0}"
 REQUEST_TIMEOUT="${REQUEST_TIMEOUT:-120}"
 
 OUTPUT_DIR="${OUTPUT_DIR:-${ROOT_DIR}/data/input/mem0_mem/locomo10/${MODEL}}"
-STORE_ROOT="${STORE_ROOT:-${ROOT_DIR}/data/input/mem0_mem/locomo10/local_mem0_${MODEL}_workers}"
+STORE_ROOT="${STORE_ROOT:-${ROOT_DIR}/data/input/mem0_mem/locomo10/local_mem0_${MODEL}_${EMBEDDING_STORE_TAG}_workers}"
 LOG_DIR="${LOG_DIR:-${OUTPUT_DIR}/logs}"
 
 mkdir -p "${OUTPUT_DIR}" "${STORE_ROOT}" "${LOG_DIR}"
@@ -64,8 +73,11 @@ for worker in $(seq 0 $((WORKERS - 1))); do
   echo "Starting ${MODEL} worker ${worker}: ${worker_start}-${worker_end}"
   MEM0_DIR="${store_dir}/mem0_home" "${PYTHON}" "${RUNNER}" \
     --model "${MODEL}" \
+    --embedding-model "${EMBEDDING_MODEL}" \
     --llm-api-key-env "${API_KEY_ENV}" \
     --llm-base-url "${BASE_URL}" \
+    --embedder-api-key-env "${API_KEY_ENV}" \
+    --embedder-base-url "${BASE_URL}" \
     --output-dir "${OUTPUT_DIR}" \
     --mem0-store-dir "${store_dir}" \
     --start "${worker_start}" \

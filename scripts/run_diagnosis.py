@@ -80,6 +80,7 @@ class APIConfig:
     deepseek_api_key: str = field(default_factory=lambda: os.getenv("DEEPSEEK_API_KEY", ""))
     deepseek_api_url: str = field(default_factory=lambda: os.getenv("DEEPSEEK_API_URL", ""))
     openai_api_key: str = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))
+    openai_api_url: str = field(default_factory=lambda: os.getenv("OPENAI_API_URL", os.getenv("OPENAI_BASE_URL", "")))
     gemini_api_key: str = field(default_factory=lambda: os.getenv("GEMINI_API_KEY", ""))
     gemini_url: str = field(default_factory=lambda: os.getenv("GEMINI_URL", ""))
 
@@ -393,7 +394,10 @@ def call_openai_api(prompt: str, model: str = "gpt-4.1", temperature: float = 0.
     except ImportError:
         raise Exception("Please install the openai library: pip install openai")
     
-    client = OpenAI(api_key=API_CONFIG.openai_api_key)
+    client_kwargs = {"api_key": API_CONFIG.openai_api_key}
+    if API_CONFIG.openai_api_url:
+        client_kwargs["base_url"] = API_CONFIG.openai_api_url
+    client = OpenAI(**client_kwargs)
     
     # Some models do not support the temperature parameter
     temp_to_send = None if model == "gpt-5" else temperature
@@ -1550,6 +1554,7 @@ def process_single_file(
     model: str,
     use_voting: bool,
     num_votes: int,
+    qa_threads: int = 1,
     thread_label: str = "",
 ) -> Tuple[int, UsageStats]:
     """Run diagnosis for a single input file.
@@ -1563,6 +1568,7 @@ def process_single_file(
         model: model name to use
         use_voting: whether to use voting
         num_votes: number of voting rounds
+        qa_threads: number of worker threads for QA items within this file
         thread_label: thread label (for log prefix)
 
     Returns:
@@ -1603,6 +1609,7 @@ def process_single_file(
         total_convs = len(data)
         _thread_print(f"{prefix}📊 Start processing, total conversations: {total_convs}\n")
 
+        pending_items = []
         for conv_idx, (conv_id, qa_list) in enumerate(data.items(), 1):
             _thread_print(f"\n{prefix}{'='*60}")
             _thread_print(f"{prefix}📝 Processing conversation {conv_id} ({conv_idx}/{total_convs})")
@@ -1615,104 +1622,127 @@ def process_single_file(
                     _thread_print(f"{prefix}⏭️  Skip already processed item: {item_id}")
                     continue
 
-                _thread_print(f"{prefix}🔍 Processing question {qa_idx}/{len(qa_list)}: {item_id}")
+                pending_items.append((conv_id, qa_idx, len(qa_list), qa_item, item_id))
 
-                try:
-                    p1 = qa_item.get("person1", {})
-                    p2 = qa_item.get("person2", {})
-                    memories1 = p1.get("memories", [])
-                    memories2 = p2.get("memories", [])
+        def process_qa_item(task: Tuple[str, int, int, Dict, str]) -> Optional[Tuple[Dict, UsageStats]]:
+            _conv_id, qa_idx, qa_count, qa_item, item_id = task
+            _thread_print(f"{prefix}🔍 Processing question {qa_idx}/{qa_count}: {item_id}")
 
-                    if use_voting:
-                        analysis = analyze_qa_pair_with_voting(
-                            qa_question=qa_item["qa_question"],
-                            qa_answer=qa_item["qa_answer"],
-                            qa_response=qa_item["qa_response"],
-                            memories1=memories1,
-                            memories2=memories2,
-                            speaker1_memories=qa_item.get("speaker_1_memories", []),
-                            speaker2_memories=qa_item.get("speaker_2_memories", []),
-                            model=model,
-                            num_votes=num_votes,
-                        )
+            try:
+                p1 = qa_item.get("person1", {})
+                p2 = qa_item.get("person2", {})
+                memories1 = p1.get("memories", [])
+                memories2 = p2.get("memories", [])
+                item_stats = UsageStats()
 
-                        result = {
-                            "conv_id_question_id": item_id,
-                            "qa_question": qa_item["qa_question"],
-                            "qa_answer": qa_item["qa_answer"],
-                            "qa_response": qa_item["qa_response"],
-                            "qa_category": qa_item.get("qa_category", ""),
-                            "label": analysis["label"],
-                            "reason": analysis["reason"],
-                            "diagnosis_mode": f"voting_{num_votes}rounds",
+                if use_voting:
+                    analysis = analyze_qa_pair_with_voting(
+                        qa_question=qa_item["qa_question"],
+                        qa_answer=qa_item["qa_answer"],
+                        qa_response=qa_item["qa_response"],
+                        memories1=memories1,
+                        memories2=memories2,
+                        speaker1_memories=qa_item.get("speaker_1_memories", []),
+                        speaker2_memories=qa_item.get("speaker_2_memories", []),
+                        model=model,
+                        num_votes=num_votes,
+                    )
+
+                    result = {
+                        "conv_id_question_id": item_id,
+                        "qa_question": qa_item["qa_question"],
+                        "qa_answer": qa_item["qa_answer"],
+                        "qa_response": qa_item["qa_response"],
+                        "qa_category": qa_item.get("qa_category", ""),
+                        "label": analysis["label"],
+                        "reason": analysis["reason"],
+                        "diagnosis_mode": f"voting_{num_votes}rounds",
+                    }
+
+                    if "voting_details" in analysis:
+                        result["voting_details"] = {
+                            "label_votes": analysis["voting_details"]["label_votes"],
+                            "individual_results": [
+                                {
+                                    "label": ir["label"],
+                                    "used_model": ir.get("used_model", "unknown"),
+                                    "reason": ir.get("reason", ""),
+                                }
+                                for ir in analysis["voting_details"]["individual_results"]
+                            ],
+                            "all_different": analysis["voting_details"].get("all_different", False),
                         }
 
-                        if "voting_details" in analysis:
-                            result["voting_details"] = {
-                                "label_votes": analysis["voting_details"]["label_votes"],
-                                "individual_results": [
-                                    {
-                                        "label": ir["label"],
-                                        "used_model": ir.get("used_model", "unknown"),
-                                        "reason": ir.get("reason", ""),
-                                    }
-                                    for ir in analysis["voting_details"]["individual_results"]
-                                ],
-                                "all_different": analysis["voting_details"].get("all_different", False),
-                            }
+                    if "usage_stats" in analysis:
+                        result["usage_stats"] = analysis["usage_stats"]
+                        item_stats.total_calls = analysis["usage_stats"]["total_calls"]
+                        item_stats.total_latency = analysis["usage_stats"]["total_latency_seconds"]
+                        item_stats.total_prompt_tokens = analysis["usage_stats"]["total_prompt_tokens"]
+                        item_stats.total_completion_tokens = analysis["usage_stats"]["total_completion_tokens"]
+                        item_stats.total_tokens = analysis["usage_stats"]["total_tokens"]
+                        item_stats.call_details = analysis["usage_stats"].get("call_details", [])
+                else:
+                    qa_data = QAData(
+                        question=qa_item["qa_question"],
+                        answer=qa_item["qa_answer"],
+                        response=qa_item["qa_response"],
+                    )
+                    memory_data = MemoryData(
+                        person1_memories=memories1,
+                        person2_memories=memories2,
+                        speaker1_retrieval=qa_item.get("speaker_1_memories", []),
+                        speaker2_retrieval=qa_item.get("speaker_2_memories", []),
+                    )
 
-                        if "usage_stats" in analysis:
-                            result["usage_stats"] = analysis["usage_stats"]
-                            item_stats = UsageStats()
-                            item_stats.total_calls = analysis["usage_stats"]["total_calls"]
-                            item_stats.total_latency = analysis["usage_stats"]["total_latency_seconds"]
-                            item_stats.total_prompt_tokens = analysis["usage_stats"]["total_prompt_tokens"]
-                            item_stats.total_completion_tokens = analysis["usage_stats"]["total_completion_tokens"]
-                            item_stats.total_tokens = analysis["usage_stats"]["total_tokens"]
-                            item_stats.call_details = analysis["usage_stats"].get("call_details", [])
-                            file_stats.merge(item_stats)
-                    else:
-                        qa_data = QAData(
-                            question=qa_item["qa_question"],
-                            answer=qa_item["qa_answer"],
-                            response=qa_item["qa_response"],
-                        )
-                        memory_data = MemoryData(
-                            person1_memories=memories1,
-                            person2_memories=memories2,
-                            speaker1_retrieval=qa_item.get("speaker_1_memories", []),
-                            speaker2_retrieval=qa_item.get("speaker_2_memories", []),
-                        )
+                    diagnosis = analyze_qa_pair(qa_data, memory_data, model=model)
 
-                        diagnosis = analyze_qa_pair(qa_data, memory_data, model=model)
+                    result = {
+                        "conv_id_question_id": item_id,
+                        "qa_question": qa_item["qa_question"],
+                        "qa_answer": qa_item["qa_answer"],
+                        "qa_response": qa_item["qa_response"],
+                        "qa_category": qa_item.get("qa_category", ""),
+                        "label": diagnosis.label,
+                        "reason": diagnosis.reason,
+                        "stage": diagnosis.stage.value if isinstance(diagnosis.stage, DiagnosisStage) else diagnosis.stage,
+                        "diagnosis_mode": f"single_model_{model}",
+                    }
 
-                        result = {
-                            "conv_id_question_id": item_id,
-                            "qa_question": qa_item["qa_question"],
-                            "qa_answer": qa_item["qa_answer"],
-                            "qa_response": qa_item["qa_response"],
-                            "qa_category": qa_item.get("qa_category", ""),
-                            "label": diagnosis.label,
-                            "reason": diagnosis.reason,
-                            "stage": diagnosis.stage.value if isinstance(diagnosis.stage, DiagnosisStage) else diagnosis.stage,
-                            "diagnosis_mode": f"single_model_{model}",
-                        }
+                    if diagnosis.usage_stats is not None:
+                        result["usage_stats"] = diagnosis.usage_stats.to_dict()
+                        item_stats.merge(diagnosis.usage_stats)
 
-                        if diagnosis.usage_stats is not None:
-                            result["usage_stats"] = diagnosis.usage_stats.to_dict()
-                            file_stats.merge(diagnosis.usage_stats)
+                return result, item_stats
 
-                    results.append(result)
+            except Exception as e:
+                logging.error(f"{prefix}Error while processing {item_id}: {str(e)}")
+                _thread_print(f"{prefix}❌ {item_id} failed: {str(e)}\n")
+                return None
 
-                    with open(output_file, "w", encoding="utf-8") as f:
-                        json.dump(results, f, ensure_ascii=False, indent=2)
+        def save_processed_item(processed: Optional[Tuple[Dict, UsageStats]]) -> None:
+            if processed is None:
+                return
 
-                    _thread_print(f"{prefix}✅ {item_id} completed and saved\n")
+            result, item_stats = processed
+            results.append(result)
+            file_stats.merge(item_stats)
 
-                except Exception as e:
-                    logging.error(f"{prefix}Error while processing {item_id}: {str(e)}")
-                    _thread_print(f"{prefix}❌ {item_id} failed: {str(e)}\n")
-                    continue
+            with open(output_file, "w", encoding="utf-8") as f:
+                json.dump(results, f, ensure_ascii=False, indent=2)
+
+            _thread_print(f"{prefix}✅ {result['conv_id_question_id']} completed and saved\n")
+
+        effective_qa_threads = max(1, qa_threads)
+        if effective_qa_threads <= 1 or len(pending_items) <= 1:
+            for task in pending_items:
+                save_processed_item(process_qa_item(task))
+        else:
+            effective_qa_threads = min(effective_qa_threads, len(pending_items))
+            _thread_print(f"{prefix}🧵 Start {effective_qa_threads} QA threads inside this file...\n")
+            with ThreadPoolExecutor(max_workers=effective_qa_threads) as executor:
+                futures = [executor.submit(process_qa_item, task) for task in pending_items]
+                for future in as_completed(futures):
+                    save_processed_item(future.result())
 
     except KeyboardInterrupt:
         _thread_print(f"\n{prefix}⚠️  Processing interrupted, saving...\n")
@@ -1829,6 +1859,7 @@ def main():
         -o, --output-dir: output directory
         -f, --output-file: output filename (single-file mode only)
         -t, --threads: number of worker threads, default: 1
+        --qa-threads: number of worker threads for QA items within each file
 
     Examples:
         python run_diagnosis.py deepseek --no-voting -i file.json
@@ -1898,12 +1929,19 @@ def main():
         default=1,
         help="Number of parallel threads (default: 1, recommended to match input file count)",
     )
+    parser.add_argument(
+        "--qa-threads",
+        type=int,
+        default=1,
+        help="Number of QA worker threads inside each input file (default: 1)",
+    )
 
     args = parser.parse_args()
 
     use_voting = args.voting and not args.no_voting
     model = model_map[args.model]
     num_threads = max(1, args.threads)
+    qa_threads = max(1, args.qa_threads)
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # Resolve input files
@@ -1922,7 +1960,8 @@ def main():
     print(f"📁 Input files: {len(input_files)}")
     for f in input_files:
         print(f"   - {f}")
-    print(f"🧵 Parallel threads: {num_threads}")
+    print(f"🧵 File parallel threads: {num_threads}")
+    print(f"🧵 QA parallel threads per file: {qa_threads}")
     print(f"⚙️  Config: {DiagnosisConfig()}")
     print("=" * 70 + "\n")
 
@@ -1955,6 +1994,7 @@ def main():
                 model=model,
                 use_voting=use_voting,
                 num_votes=args.num_votes,
+                qa_threads=qa_threads,
                 thread_label=os.path.basename(inp),
             )
             total_processed += count
@@ -1974,6 +2014,7 @@ def main():
                     model=model,
                     use_voting=use_voting,
                     num_votes=args.num_votes,
+                    qa_threads=qa_threads,
                     thread_label=os.path.basename(inp),
                 )
                 futures_map[future] = inp

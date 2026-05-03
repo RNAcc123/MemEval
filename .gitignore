@@ -6,6 +6,7 @@ __pycache__/
 env/
 venv/
 .env
+.env.openclaw_eval
 .DS_Store
 .vscode/
 *.code-workspace
