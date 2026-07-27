@@ -23,7 +23,7 @@ from typing import Dict, Iterable, List, NamedTuple, Optional, Set, Tuple
 
 # ``run_diagnosis`` imports python-dotenv at module import time. Keep this
 # adapter importable in lean test environments where dotenv is not installed.
-DEFAULT_ENV_FILE = Path("/share/project/chenchen/code/MemEval/.env")
+DEFAULT_ENV_FILE = Path(os.getenv("MEMEVAL_ENV_FILE", ".env"))
 try:
     from dotenv import load_dotenv
 
@@ -33,7 +33,12 @@ except ImportError:
     dotenv_stub.load_dotenv = lambda *args, **kwargs: False
     sys.modules["dotenv"] = dotenv_stub
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
 from run_diagnosis import (
+    DIAGNOSIS_SCHEMA_VERSION,
     DiagnosisStage,
     MemoryData,
     QAData,
@@ -41,16 +46,18 @@ from run_diagnosis import (
     analyze_qa_pair,
     analyze_qa_pair_with_voting,
     load_json_file,
+    validate_trace_dataset,
 )
 
 
-DEFAULT_INPUT = Path(
-    "/share/project/chenchen/code/MemEval/data/input/mem0_mem/longmemeval_s/"
-    "mem0_longmemeval_s_part1.json"
-)
-DEFAULT_OUTPUT_DIR = Path(
-    "/share/project/chenchen/code/MemEval/data/output/llm_annotation_longmemeval_s"
-)
+DEFAULT_INPUT = Path(os.getenv(
+    "MEMEVAL_LONGMEMEVAL_TRACE",
+    "data/input/mem0_mem/longmemeval_s/mem0_longmemeval_s_part1.json",
+))
+DEFAULT_OUTPUT_DIR = Path(os.getenv(
+    "MEMEVAL_LONGMEMEVAL_DIAGNOSIS_OUTPUT",
+    "data/output/llm_annotation_longmemeval_s",
+))
 
 
 class DiagnosisTask(NamedTuple):
@@ -191,6 +198,7 @@ def usage_stats_from_dict(stats: Optional[Dict]) -> UsageStats:
 def build_output_record(task: DiagnosisTask, analysis: Dict, mode: str) -> Dict:
     """Build the JSON output record for one completed diagnosis."""
     result = {
+        "schema_version": DIAGNOSIS_SCHEMA_VERSION,
         "conv_id_question_id": task.item_id,
         "qa_question": task.qa_item.get("qa_question", ""),
         "qa_answer": task.qa_item.get("qa_answer", ""),
@@ -198,6 +206,8 @@ def build_output_record(task: DiagnosisTask, analysis: Dict, mode: str) -> Dict:
         "qa_category": task.qa_item.get("qa_category", ""),
         "label": analysis.get("label"),
         "reason": analysis.get("reason", ""),
+        "status": analysis.get("status", "completed"),
+        "answer_correct": analysis.get("answer_correct", analysis.get("label") is None),
         "diagnosis_mode": mode,
     }
     result.update(task.output_metadata)
@@ -235,6 +245,8 @@ def run_task(task: DiagnosisTask, model: str, use_voting: bool, num_votes: int) 
         "label": diagnosis.label,
         "reason": diagnosis.reason,
         "stage": stage,
+        "status": diagnosis.status.value,
+        "answer_correct": diagnosis.answer_correct,
         "usage_stats": diagnosis.usage_stats.to_dict() if diagnosis.usage_stats else None,
     }
     record = build_output_record(task, analysis, f"single_model_{model}")
@@ -285,7 +297,7 @@ def main() -> int:
     elif not output_file.is_absolute():
         output_file = args.output_dir / output_file
 
-    data = load_json_file(str(input_file))
+    data = validate_trace_dataset(load_json_file(str(input_file)))
     results = load_existing_results(output_file)
     processed_ids = processed_item_ids(results)
     tasks = list(iter_diagnosis_tasks(data, processed_ids))
@@ -331,6 +343,7 @@ def main() -> int:
                 failed += 1
                 logging.exception("Diagnosis failed for %s", task.item_id)
                 error_record = {
+                    "schema_version": DIAGNOSIS_SCHEMA_VERSION,
                     "conv_id_question_id": task.item_id,
                     "qa_question": task.qa_item.get("qa_question", ""),
                     "qa_answer": task.qa_item.get("qa_answer", ""),

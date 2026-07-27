@@ -102,7 +102,7 @@ def load_llm_voting_stats(path: Path, model_name: str = "voting_final"):
 
         if not line.startswith("|"):
             continue
-        if "| Overall |" in line or f"| {'\u603b\u8ba1'} |" in line:
+        if "| Overall |" in line or "| 总计 |" in line:
             # Skip overall row
             continue
 
@@ -534,7 +534,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 

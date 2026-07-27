@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 
-MODULE_PATH = Path(__file__).resolve().parent / "run_diagnosis_longmemeval_s.py"
+MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "run_diagnosis_longmemeval_s.py"
 SPEC = importlib.util.spec_from_file_location("run_diagnosis_longmemeval_s", MODULE_PATH)
 run_diagnosis_longmemeval_s = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None

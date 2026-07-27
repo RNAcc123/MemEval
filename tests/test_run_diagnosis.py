@@ -16,6 +16,110 @@ SPEC.loader.exec_module(run_diagnosis)
 
 
 class RunDiagnosisTest(unittest.TestCase):
+    def test_validate_judge_response_rejects_missing_failure_label(self):
+        with self.assertRaises(run_diagnosis.InvalidJudgeResponse):
+            run_diagnosis.validate_judge_response(
+                run_diagnosis.DiagnosisStage.MEMORY_EXTRACTION,
+                {"is_sufficient": False, "label": None, "reason": "Missing memory."},
+            )
+
+    def test_analyze_qa_pair_stops_when_a_stage_has_execution_error(self):
+        qa_data = run_diagnosis.QAData(question="q", answer="a", response="r")
+        memory_data = run_diagnosis.MemoryData()
+        stage_error = run_diagnosis.StageResult(
+            stage_passed=False,
+            label=None,
+            reason="provider unavailable",
+            stage=run_diagnosis.DiagnosisStage.ERROR,
+            status=run_diagnosis.DiagnosisStatus.ERROR,
+        )
+
+        with patch.object(run_diagnosis, "stage0_consistency_check", return_value=stage_error):
+            with patch.object(run_diagnosis, "stage1_memory_extraction") as stage1:
+                result = run_diagnosis.analyze_qa_pair(qa_data, memory_data)
+
+        self.assertEqual(result.status, run_diagnosis.DiagnosisStatus.ERROR)
+        self.assertEqual(result.stage, run_diagnosis.DiagnosisStage.ERROR)
+        self.assertIsNone(result.label)
+        stage1.assert_not_called()
+
+    def test_voting_excludes_failed_judgments(self):
+        completed = run_diagnosis.DiagnosisResult(
+            label="3.1",
+            reason="retrieval missed evidence",
+            stage=run_diagnosis.DiagnosisStage.MEMORY_RETRIEVAL,
+        )
+        failed = run_diagnosis.DiagnosisResult(
+            label=None,
+            reason="provider unavailable",
+            stage=run_diagnosis.DiagnosisStage.ERROR,
+            status=run_diagnosis.DiagnosisStatus.ERROR,
+        )
+
+        with patch.object(
+            run_diagnosis,
+            "analyze_qa_pair",
+            side_effect=[completed, failed, completed],
+        ):
+            result = run_diagnosis.analyze_qa_pair_with_voting(
+                qa_question="q",
+                qa_answer="a",
+                qa_response="r",
+                memories1=[],
+                memories2=[],
+                speaker1_memories=[],
+                speaker2_memories=[],
+                num_votes=3,
+            )
+
+        self.assertEqual(result["status"], "completed")
+        self.assertEqual(result["label"], "3.1")
+        self.assertEqual(result["voting_details"]["valid_votes"], 2)
+        self.assertEqual(result["voting_details"]["failed_votes"], 1)
+        self.assertEqual(result["voting_details"]["label_votes"], {"3.1": 2})
+
+    def test_voting_returns_error_when_valid_votes_are_insufficient(self):
+        failed = run_diagnosis.DiagnosisResult(
+            label=None,
+            reason="provider unavailable",
+            stage=run_diagnosis.DiagnosisStage.ERROR,
+            status=run_diagnosis.DiagnosisStatus.ERROR,
+        )
+        completed = run_diagnosis.DiagnosisResult(
+            label=None,
+            reason="answer is correct",
+            stage=run_diagnosis.DiagnosisStage.CONSISTENCY_CHECK,
+            answer_correct=True,
+        )
+
+        with patch.object(
+            run_diagnosis,
+            "analyze_qa_pair",
+            side_effect=[failed, failed, completed],
+        ):
+            result = run_diagnosis.analyze_qa_pair_with_voting(
+                qa_question="q",
+                qa_answer="a",
+                qa_response="r",
+                memories1=[],
+                memories2=[],
+                speaker1_memories=[],
+                speaker2_memories=[],
+                num_votes=3,
+            )
+
+        self.assertEqual(result["status"], "error")
+        self.assertEqual(result["stage"], "error")
+        self.assertIsNone(result["label"])
+        self.assertEqual(result["voting_details"]["valid_votes"], 1)
+
+    def test_retryable_provider_error_uses_sdk_type_name(self):
+        class RateLimitError(Exception):
+            pass
+
+        self.assertTrue(run_diagnosis.is_retryable_provider_error(RateLimitError()))
+        self.assertFalse(run_diagnosis.is_retryable_provider_error(ValueError("invalid configuration")))
+
     def test_process_single_file_can_process_qa_items_concurrently(self):
         data = {
             "conv-1": [

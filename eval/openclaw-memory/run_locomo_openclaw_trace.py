@@ -19,11 +19,11 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_DATASET = Path("/share/project/chenchen/data/locomo/locomo10.json")
-DEFAULT_OUTPUT_DIR = Path("/share/project/chenchen/code/MemEval/data/input/openclaw_mem/locomo10")
-DEFAULT_ENV_FILE = Path("/share/project/chenchen/code/MemEval/.env")
-DEFAULT_WORKSPACE_ROOT = Path("/share/project/chenchen/code/MemEval/data/input/openclaw_mem/locomo10/workspaces")
-DEFAULT_MEMORY_STATE_DIR = Path("/share/project/chenchen/code/MemEval/data/input/openclaw_mem/locomo10/memory_states")
+DEFAULT_DATASET = Path(os.getenv("MEMEVAL_LOCOMO_DATASET", "data/locomo/locomo10.json"))
+DEFAULT_OUTPUT_DIR = Path(os.getenv("MEMEVAL_LOCOMO_OPENCLAW_OUTPUT", "data/input/openclaw_mem/locomo10"))
+DEFAULT_ENV_FILE = Path(os.getenv("MEMEVAL_ENV_FILE", ".env"))
+DEFAULT_WORKSPACE_ROOT = Path(os.getenv("MEMEVAL_OPENCLAW_WORKSPACE_ROOT", "data/input/openclaw_mem/locomo10/workspaces"))
+DEFAULT_MEMORY_STATE_DIR = Path(os.getenv("MEMEVAL_OPENCLAW_MEMORY_STATE_DIR", "data/input/openclaw_mem/locomo10/memory_states"))
 DEFAULT_OPENCLAW_BIN = "openclaw"
 DEFAULT_AGENT = "main"
 OPENCLAW_SESSION_LOCK_ROOT = Path(os.getenv("MEMEVAL_OPENCLAW_SESSION_LOCK_ROOT", "/tmp"))

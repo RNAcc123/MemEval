@@ -48,7 +48,7 @@ def load_label_level_category_rates(path: Path, model_name: str = "voting_final"
     start_idx = None
     header_candidates = [
         f"[Exact label match] Model: {model_name}",
-        f"[Label {'\u7cbe\u786e\u5339\u914d'}] {'\u6a21\u578b'}: {model_name}",
+        f"[Label 精确匹配] 模型: {model_name}",
     ]
     for i, line in enumerate(text):
         if line.strip() in header_candidates:
@@ -104,7 +104,7 @@ def load_phase_level_category_rates(path: Path, model_name: str = "voting_final"
 
     # Locate target model section (English-first, with Chinese fallback)
     start_idx = None
-    header_candidates = [f"Model: {model_name}", f"{'\u6a21\u578b'}: {model_name}"]
+    header_candidates = [f"Model: {model_name}", f"模型: {model_name}"]
     for i, line in enumerate(lines):
         if line.strip() in header_candidates:
             start_idx = i
@@ -302,6 +302,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 

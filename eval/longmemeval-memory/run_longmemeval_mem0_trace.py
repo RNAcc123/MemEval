@@ -12,12 +12,16 @@ import time
 from pathlib import Path
 from typing import Any
 
+from memeval.runners import retry_call
+from memeval.datasets import LongMemEvalAdapter
+from memeval.memory import Mem0Backend
 
-DEFAULT_DATASET = Path("/share/project/chenchen/data/longmemeval-cleaned/longmemeval_s_cleaned.json")
-DEFAULT_OUTPUT_DIR = Path("/share/project/chenchen/code/MemEval/data/input/mem0_mem/longmemeval_s")
-DEFAULT_ENV_FILE = Path("/share/project/chenchen/code/MemEval/.env")
-DEFAULT_MEM0_REPO = Path("/share/project/chenchen/code/mem0")
-DEFAULT_MEM0_STORE = Path("/share/project/chenchen/code/MemEval/data/input/mem0_mem/longmemeval_s/local_mem0")
+
+DEFAULT_DATASET = Path(os.getenv("MEMEVAL_LONGMEMEVAL_DATASET", "data/longmemeval/longmemeval_s_cleaned.json"))
+DEFAULT_OUTPUT_DIR = Path(os.getenv("MEMEVAL_LONGMEMEVAL_MEM0_OUTPUT", "data/input/mem0_mem/longmemeval_s"))
+DEFAULT_ENV_FILE = Path(os.getenv("MEMEVAL_ENV_FILE", ".env"))
+DEFAULT_MEM0_REPO = Path(os.getenv("MEMEVAL_MEM0_REPO", ""))
+DEFAULT_MEM0_STORE = Path(os.getenv("MEMEVAL_LONGMEMEVAL_MEM0_STORE", "data/input/mem0_mem/longmemeval_s/local_mem0"))
 DEFAULT_MODEL = "gpt-4o-mini"
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
 
@@ -64,7 +68,9 @@ def parse_args() -> argparse.Namespace:
 def load_dataset(path: Path) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8") as f:
         data = json.load(f)
-
+    LongMemEvalAdapter().validate(data)
+    if not isinstance(data, list):
+        raise ValueError("LongMemEval dataset must be a list")
     for idx, item in enumerate(data):
         lengths = (
             len(item["haystack_dates"]),
@@ -117,18 +123,6 @@ def normalize_add_events(result: Any) -> tuple[list[dict[str, Any]], list[dict[s
     if not initial_results and events == [{"error": "No memory in that message"}]:
         initial_results = events
     return initial_results, events
-
-
-def retry_call(fn, *, retries: int = 3, delay_seconds: float = 2.0):
-    last_error = None
-    for attempt in range(retries):
-        try:
-            return fn()
-        except Exception as exc:  # noqa: BLE001 - preserve API exception messages in trace.
-            last_error = exc
-            if attempt < retries - 1:
-                time.sleep(delay_seconds)
-    raise last_error
 
 
 def load_env_file(env_file: Path = DEFAULT_ENV_FILE) -> None:
@@ -227,8 +221,17 @@ def normalize_search_results(raw_memories: Any) -> list[dict[str, Any]]:
 
 
 def search_memories(client: Any, question: str, user_id: str, top_k: int) -> list[dict[str, Any]]:
-    memories = retry_call(lambda: client.search(question, filters={"user_id": user_id}, top_k=top_k))
-    return normalize_search_results(memories)
+    backend = Mem0Backend(client)
+    memories = retry_call(lambda: backend.search(user_id, question, top_k))
+    return [
+        {
+            "memory": item.memory,
+            "timestamp": item.timestamp,
+            "session_id": item.session_id,
+            "score": round(item.score, 2),
+        }
+        for item in memories
+    ]
 
 
 def answer_question(question: str, memories: list[dict[str, Any]], model: str, request_timeout: float) -> str:

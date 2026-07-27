@@ -17,6 +17,7 @@ import json
 import logging
 import os
 import re
+import sys
 import time
 import warnings
 from collections import Counter
@@ -24,6 +25,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 import datetime
 import argparse
+from pathlib import Path
 
 # Third-party imports
 from dotenv import load_dotenv
@@ -39,12 +41,19 @@ warnings.filterwarnings('ignore', module='grpc')
 load_dotenv()
 os.environ['GRPC_ALTS_CREDENTIALS_ENVIRONMENT_OVERRIDE'] = '1'
 
-# Import classes and helpers from the baseline module
+# Import classes and helpers from the baseline module. Keep direct script
+# execution and import-based tests working until the package migration lands.
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
 from run_diagnosis import (
-    APIConfig, DiagnosisConfig, QAData, MemoryData, DiagnosisStage,
+    APIConfig, DiagnosisConfig, QAData, MemoryData, DiagnosisStage, DiagnosisStatus,
+    DIAGNOSIS_SCHEMA_VERSION,
     StageResult, DiagnosisResult, API_CONFIG,
     load_json_file, clean_prompt, extract_json_from_response,
-    call_llm_api
+    call_llm_api, validate_judge_response,
+    validate_trace_dataset,
 )
 
 
@@ -62,6 +71,7 @@ class StageOpinion:
     round_num: int
     changed_from_passed: Optional[bool] = None
     changed_from_label: Optional[str] = None
+    status: DiagnosisStatus = DiagnosisStatus.COMPLETED
 
 
 @dataclass
@@ -74,6 +84,7 @@ class StageDiscussionResult:
     final_reason: str
     total_rounds: int
     discussion_history: List[Dict]
+    status: DiagnosisStatus = DiagnosisStatus.COMPLETED
 
 
 @dataclass
@@ -459,6 +470,15 @@ def discuss_stage(
     generate_prompt = prompt_generators[stage]
     discussion_history = []
     current_opinions = []
+    minimum_valid_opinions = len(models) // 2 + 1
+
+    def parse_opinion(result: Dict) -> Tuple[bool, Optional[str], str]:
+        validated = validate_judge_response(stage, result)
+        if stage == DiagnosisStage.CONSISTENCY_CHECK:
+            return validated["is_consistent"], None, validated["reason"]
+        if stage == DiagnosisStage.REASONING:
+            return False, validated["label"], validated["reason"]
+        return validated["is_sufficient"], validated["label"], validated["reason"]
     
     # Round 1: independent judgments
     print(f"\n🔄 Round 1: Independent judgments")
@@ -470,18 +490,7 @@ def discuss_stage(
         try:
             result = call_llm_api(clean_prompt(prompt), model, config)
             
-            # Parse results depending on the stage
-            if stage == DiagnosisStage.CONSISTENCY_CHECK:
-                stage_passed = result.get("is_consistent", False)
-                label = None
-            elif stage == DiagnosisStage.REASONING:
-                stage_passed = False  # Stage 4 always returns a label
-                label = result.get("label")
-            else:
-                stage_passed = result.get("is_sufficient", False)
-                label = None if stage_passed else result.get("label")
-            
-            reason = result.get("reason", "")
+            stage_passed, label, reason = parse_opinion(result)
             
             opinion = StageOpinion(
                 model_name=model,
@@ -501,7 +510,8 @@ def discuss_stage(
                 stage_passed=False,
                 label=None,
                 reason=f"Analysis failed: {str(e)}",
-                round_num=1
+                round_num=1,
+                status=DiagnosisStatus.ERROR,
             )
             current_opinions.append(opinion)
     
@@ -509,7 +519,13 @@ def discuss_stage(
     discussion_history.append({
         "round": 1,
         "opinions": [
-            {"model": op.model_name, "passed": op.stage_passed, "label": op.label, "reason": op.reason}
+            {
+                "model": op.model_name,
+                "passed": op.stage_passed,
+                "label": op.label,
+                "reason": op.reason,
+                "status": op.status.value,
+            }
             for op in current_opinions
         ]
     })
@@ -517,6 +533,9 @@ def discuss_stage(
     # Check whether a consensus is reached
     def check_consensus(opinions: List[StageOpinion]) -> Tuple[bool, Optional[bool], Optional[str]]:
         """Return (consensus?, consensus_passed, consensus_label)."""
+        opinions = [op for op in opinions if op.status == DiagnosisStatus.COMPLETED]
+        if len(opinions) < minimum_valid_opinions:
+            return False, None, None
         if stage == DiagnosisStage.REASONING:
             # Stage 4: check label only
             labels = [op.label for op in opinions]
@@ -557,7 +576,11 @@ def discuss_stage(
         
         for model in models:
             # Collect other models' opinions
-            other_opinions = [op for op in current_opinions if op.model_name != model]
+            other_opinions = [
+                op
+                for op in current_opinions
+                if op.model_name != model and op.status == DiagnosisStatus.COMPLETED
+            ]
             current_model_opinion = next(op for op in current_opinions if op.model_name == model)
             
             print(f"   🤖 {model} is considering other opinions...")
@@ -566,18 +589,7 @@ def discuss_stage(
             try:
                 result = call_llm_api(clean_prompt(prompt), model, config)
                 
-                # Parse results depending on the stage
-                if stage == DiagnosisStage.CONSISTENCY_CHECK:
-                    stage_passed = result.get("is_consistent", False)
-                    label = None
-                elif stage == DiagnosisStage.REASONING:
-                    stage_passed = False
-                    label = result.get("label")
-                else:
-                    stage_passed = result.get("is_sufficient", False)
-                    label = None if stage_passed else result.get("label")
-                
-                reason = result.get("reason", "")
+                stage_passed, label, reason = parse_opinion(result)
                 
                 # Track whether the opinion changed
                 changed_from_passed = None
@@ -610,7 +622,8 @@ def discuss_stage(
                     stage_passed=current_model_opinion.stage_passed,
                     label=current_model_opinion.label,
                     reason=f"Discussion failed, keep previous opinion: {str(e)}",
-                    round_num=round_num
+                    round_num=round_num,
+                    status=current_model_opinion.status,
                 )
                 new_opinions.append(opinion)
         
@@ -625,6 +638,7 @@ def discuss_stage(
                     "passed": op.stage_passed, 
                     "label": op.label, 
                     "reason": op.reason,
+                    "status": op.status.value,
                     "changed_from_passed": op.changed_from_passed,
                     "changed_from_label": op.changed_from_label
                 }
@@ -649,6 +663,21 @@ def discuss_stage(
     
     # No consensus; decide by voting
     print(f"\n⚠️ No consensus after {max_rounds} rounds, proceed to voting")
+    valid_opinions = [op for op in current_opinions if op.status == DiagnosisStatus.COMPLETED]
+    if len(valid_opinions) < minimum_valid_opinions:
+        return StageDiscussionResult(
+            stage=stage,
+            consensus_reached=False,
+            final_passed=False,
+            final_label=None,
+            final_reason=(
+                f"Insufficient valid model opinions: {len(valid_opinions)}/{minimum_valid_opinions}"
+            ),
+            total_rounds=max_rounds,
+            discussion_history=discussion_history,
+            status=DiagnosisStatus.ERROR,
+        )
+    current_opinions = valid_opinions
     
     # Helper: if all results differ, prefer the gpt-5 opinion (when available)
     def get_gpt5_opinion(opinions: List[StageOpinion]) -> Optional[StageOpinion]:
@@ -806,6 +835,21 @@ def analyze_qa_pair_with_discussion(
     )
     
     stage_results = {}
+
+    def execution_error(result: StageDiscussionResult) -> Dict:
+        return {
+            "label": None,
+            "reason": result.final_reason,
+            "stage": DiagnosisStage.ERROR.value,
+            "status": DiagnosisStatus.ERROR.value,
+            "answer_correct": False,
+            "consensus_reached": False,
+            "total_stage_rounds": {
+                stage_name: stage_result.total_rounds
+                for stage_name, stage_result in stage_results.items()
+            },
+            "stage_results": _serialize_stage_results(stage_results),
+        }
     
     # ========== Stage 0: consistency check ==========
     stage0_result = discuss_stage(
@@ -813,6 +857,8 @@ def analyze_qa_pair_with_discussion(
         qa_data, memory_data, models, max_rounds, config
     )
     stage_results["0_consistency_check"] = stage0_result
+    if stage0_result.status == DiagnosisStatus.ERROR:
+        return execution_error(stage0_result)
     
     if stage0_result.final_passed:
         # Consistent, return directly
@@ -824,6 +870,8 @@ def analyze_qa_pair_with_discussion(
             "label": None,
             "reason": stage0_result.final_reason,
             "stage": DiagnosisStage.CONSISTENCY_CHECK.value,
+            "status": DiagnosisStatus.COMPLETED.value,
+            "answer_correct": True,
             "consensus_reached": stage0_result.consensus_reached,
             "total_stage_rounds": {"0_consistency_check": stage0_result.total_rounds},
             "stage_results": _serialize_stage_results(stage_results)
@@ -835,6 +883,8 @@ def analyze_qa_pair_with_discussion(
         qa_data, memory_data, models, max_rounds, config
     )
     stage_results["1_memory_extraction"] = stage1_result
+    if stage1_result.status == DiagnosisStatus.ERROR:
+        return execution_error(stage1_result)
     
     if not stage1_result.final_passed:
         print(f"\n{'='*70}")
@@ -846,6 +896,8 @@ def analyze_qa_pair_with_discussion(
             "label": stage1_result.final_label,
             "reason": stage1_result.final_reason,
             "stage": DiagnosisStage.MEMORY_EXTRACTION.value,
+            "status": DiagnosisStatus.COMPLETED.value,
+            "answer_correct": False,
             "consensus_reached": stage1_result.consensus_reached,
             "total_stage_rounds": {
                 "0_consistency_check": stage0_result.total_rounds,
@@ -860,6 +912,8 @@ def analyze_qa_pair_with_discussion(
         qa_data, memory_data, models, max_rounds, config
     )
     stage_results["2_memory_update"] = stage2_result
+    if stage2_result.status == DiagnosisStatus.ERROR:
+        return execution_error(stage2_result)
     
     if not stage2_result.final_passed:
         print(f"\n{'='*70}")
@@ -871,6 +925,8 @@ def analyze_qa_pair_with_discussion(
             "label": stage2_result.final_label,
             "reason": stage2_result.final_reason,
             "stage": DiagnosisStage.MEMORY_UPDATE.value,
+            "status": DiagnosisStatus.COMPLETED.value,
+            "answer_correct": False,
             "consensus_reached": stage2_result.consensus_reached,
             "total_stage_rounds": {
                 "0_consistency_check": stage0_result.total_rounds,
@@ -886,6 +942,8 @@ def analyze_qa_pair_with_discussion(
         qa_data, memory_data, models, max_rounds, config
     )
     stage_results["3_memory_retrieval"] = stage3_result
+    if stage3_result.status == DiagnosisStatus.ERROR:
+        return execution_error(stage3_result)
     
     if not stage3_result.final_passed:
         print(f"\n{'='*70}")
@@ -897,6 +955,8 @@ def analyze_qa_pair_with_discussion(
             "label": stage3_result.final_label,
             "reason": stage3_result.final_reason,
             "stage": DiagnosisStage.MEMORY_RETRIEVAL.value,
+            "status": DiagnosisStatus.COMPLETED.value,
+            "answer_correct": False,
             "consensus_reached": stage3_result.consensus_reached,
             "total_stage_rounds": {
                 "0_consistency_check": stage0_result.total_rounds,
@@ -913,6 +973,8 @@ def analyze_qa_pair_with_discussion(
         qa_data, memory_data, models, max_rounds, config
     )
     stage_results["4_reasoning"] = stage4_result
+    if stage4_result.status == DiagnosisStatus.ERROR:
+        return execution_error(stage4_result)
     
     print(f"\n{'='*70}")
     print(f"❌ Diagnosis completed: issue found at reasoning stage")
@@ -923,6 +985,8 @@ def analyze_qa_pair_with_discussion(
         "label": stage4_result.final_label,
         "reason": stage4_result.final_reason,
         "stage": DiagnosisStage.REASONING.value,
+        "status": DiagnosisStatus.COMPLETED.value,
+        "answer_correct": False,
         "consensus_reached": stage4_result.consensus_reached,
         "total_stage_rounds": {
             "0_consistency_check": stage0_result.total_rounds,
@@ -945,7 +1009,8 @@ def _serialize_stage_results(stage_results: Dict[str, StageDiscussionResult]) ->
             "final_label": stage_data.final_label,
             "final_reason": stage_data.final_reason,
             "total_rounds": stage_data.total_rounds,
-            "discussion_history": stage_data.discussion_history
+            "discussion_history": stage_data.discussion_history,
+            "status": stage_data.status.value,
         }
     return result
 
@@ -1048,7 +1113,7 @@ def main():
         return
     
     try:
-        data = load_json_file(input_file)
+        data = validate_trace_dataset(load_json_file(input_file))
         print(f"✅ Loaded {len(data)} conversations successfully\n")
     except Exception as e:
         logging.error(f"Failed to load input file: {str(e)}")
@@ -1117,6 +1182,7 @@ def main():
                         original_id = item_id
                     
                     result = {
+                        "schema_version": DIAGNOSIS_SCHEMA_VERSION,
                         "conv_id_question_id": item_id,
                         "original_id": original_id,
                         "original_source": original_source,
@@ -1127,6 +1193,8 @@ def main():
                         "label": analysis["label"],
                         "reason": analysis["reason"],
                         "stage": analysis["stage"],
+                        "status": analysis["status"],
+                        "answer_correct": analysis["answer_correct"],
                         "diagnosis_mode": f"discussion_{args.max_rounds}rounds_per_stage",
                         "consensus_reached": analysis["consensus_reached"],
                         "total_stage_rounds": analysis["total_stage_rounds"],
@@ -1143,6 +1211,22 @@ def main():
                 except Exception as e:
                     logging.error(f"Error while processing question {item_id}: {str(e)}")
                     print(f"❌ Failed to process question {item_id}: {str(e)}\n")
+                    results.append({
+                        "schema_version": DIAGNOSIS_SCHEMA_VERSION,
+                        "conv_id_question_id": item_id,
+                        "qa_question": qa_item.get("qa_question", ""),
+                        "qa_answer": qa_item.get("qa_answer", ""),
+                        "qa_response": qa_item.get("qa_response", ""),
+                        "qa_category": qa_item.get("qa_category", ""),
+                        "label": None,
+                        "reason": f"Diagnosis failed: {str(e)}",
+                        "stage": DiagnosisStage.ERROR.value,
+                        "status": DiagnosisStatus.ERROR.value,
+                        "answer_correct": False,
+                        "diagnosis_mode": "error",
+                    })
+                    with open(output_file, "w", encoding="utf-8") as f:
+                        json.dump(results, f, ensure_ascii=False, indent=2)
                     continue
                     
     except KeyboardInterrupt:
@@ -1156,16 +1240,17 @@ def main():
                 json.dump(results, f, ensure_ascii=False, indent=2)
             
             consensus_count = sum(1 for r in results if r.get("consensus_reached", False))
+            error_count = sum(1 for r in results if r.get("status") == DiagnosisStatus.ERROR.value)
             
             print("\n" + "="*70)
             print("🎉 Processing completed")
             print("="*70)
             print(f"✅ Total processed questions: {len(results)}")
             print(f"🤝 Consensus reached: {consensus_count}/{len(results)} ({100*consensus_count/len(results):.1f}%)")
+            print(f"❌ Failed diagnoses: {error_count}/{len(results)}")
             print(f"📁 Results saved to: {output_file}")
             print("="*70 + "\n")
 
 
 if __name__ == "__main__":
     main()
-

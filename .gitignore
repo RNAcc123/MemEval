@@ -5,6 +5,8 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
+*.egg-info/
 .env
 .env.openclaw_eval
 .DS_Store
@@ -23,6 +25,7 @@ llm_annotation_single/
 
 # Logs
 *.log
+runs/
 
 # LongMemEval local Mem0 runtime/output artifacts
 data/input/mem0_mem/longmemeval_s/local_mem0*/

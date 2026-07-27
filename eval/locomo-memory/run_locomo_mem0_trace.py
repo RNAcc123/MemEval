@@ -14,12 +14,16 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
 
+from memeval.runners import retry_call
+from memeval.datasets import LoCoMoAdapter
+from memeval.memory import Mem0Backend
 
-DEFAULT_DATASET = Path("/share/project/chenchen/data/locomo/locomo10.json")
-DEFAULT_OUTPUT_DIR = Path("/share/project/chenchen/code/MemEval/data/input/mem0_mem/locomo10")
-DEFAULT_ENV_FILE = Path("/share/project/chenchen/code/MemEval/.env")
-DEFAULT_MEM0_REPO = Path("/share/project/chenchen/code/mem0")
-DEFAULT_MEM0_STORE = Path("/share/project/chenchen/code/MemEval/data/input/mem0_mem/locomo10/local_mem0")
+
+DEFAULT_DATASET = Path(os.getenv("MEMEVAL_LOCOMO_DATASET", "data/locomo/locomo10.json"))
+DEFAULT_OUTPUT_DIR = Path(os.getenv("MEMEVAL_LOCOMO_MEM0_OUTPUT", "data/input/mem0_mem/locomo10"))
+DEFAULT_ENV_FILE = Path(os.getenv("MEMEVAL_ENV_FILE", ".env"))
+DEFAULT_MEM0_REPO = Path(os.getenv("MEMEVAL_MEM0_REPO", ""))
+DEFAULT_MEM0_STORE = Path(os.getenv("MEMEVAL_LOCOMO_MEM0_STORE", "data/input/mem0_mem/locomo10/local_mem0"))
 DEFAULT_MODEL = "gpt-4o-mini"
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
 DEFAULT_QWEN_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
@@ -77,8 +81,8 @@ def parse_args() -> argparse.Namespace:
 def load_dataset(path: Path) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8") as f:
         data = json.load(f)
-
-    if not isinstance(data, list):
+    LoCoMoAdapter().validate(data)
+    if not isinstance(data, list):  # narrowed for type checkers after validation
         raise ValueError("LoCoMo dataset must be a list")
     for idx, item in enumerate(data):
         for key in ["sample_id", "conversation", "qa"]:
@@ -229,18 +233,6 @@ def resolve_model(model_arg: str, *, default: str | None = None) -> str:
     return model_arg
 
 
-def retry_call(fn, *, retries: int = 3, delay_seconds: float = 2.0):
-    last_error = None
-    for attempt in range(retries):
-        try:
-            return fn()
-        except Exception as exc:  # noqa: BLE001
-            last_error = exc
-            if attempt < retries - 1:
-                time.sleep(delay_seconds)
-    raise last_error
-
-
 def message_content(chat: dict[str, Any]) -> str:
     pieces = [f"{chat.get('speaker', '')}: {chat.get('text', '')}".strip()]
     caption = chat.get("blip_caption")
@@ -358,7 +350,9 @@ def add_conversation_memories(client: Any, item: dict[str, Any], global_index: i
                 for user_id, messages, metadata, _memory_bucket in add_jobs
             ]
 
-        for future, (_user_id, _messages, _metadata, memory_bucket) in zip(futures, add_jobs, strict=True):
+        if len(futures) != len(add_jobs):
+            raise RuntimeError("Internal error: Mem0 add jobs and futures are misaligned")
+        for future, (_user_id, _messages, _metadata, memory_bucket) in zip(futures, add_jobs):
             result = future.result()
             initial_results, update_chain = normalize_add_events(result)
             memory_bucket["memories"].append(
@@ -390,8 +384,16 @@ def normalize_search_results(raw_memories: Any) -> list[dict[str, Any]]:
 
 
 def search_memories(client: Any, question: str, user_id: str, top_k: int) -> list[dict[str, Any]]:
-    raw = retry_call(lambda: client.search(question, filters={"user_id": user_id}, top_k=top_k))
-    return normalize_search_results(raw)
+    backend = Mem0Backend(client)
+    memories = retry_call(lambda: backend.search(user_id, question, top_k))
+    return [
+        {
+            "memory": item.memory,
+            "timestamp": item.timestamp,
+            "score": round(item.score, 2),
+        }
+        for item in memories
+    ]
 
 
 def answer_question(

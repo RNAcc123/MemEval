@@ -17,7 +17,8 @@ MemEval/
 │   ├── analyze_llm_results.py
 │   └── compare_results.py
 ├── plot/                   # Plotting utilities
-├── requirements.txt        # Dependencies
+├── pyproject.toml          # Package and development dependencies
+├── src/memeval/            # Shared schemas, providers, adapters, storage
 └── README.md               # This file
 ```
 
@@ -25,10 +26,21 @@ MemEval/
 
 ### 1) Environment Setup
 
-Python 3.8+ is recommended.
+Python 3.11+ is required.
 
 ```bash
-pip install -r requirements.txt
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+For development and test dependencies:
+
+```bash
+pip install -e '.[dev]'
+
+# Verify the offline installation
+python -m pytest -q
 ```
 
 ### 2) Configure Environment Variables
@@ -78,6 +90,7 @@ python scripts/run_diagnosis_discussion.py -i data/input/mem0_mem/sample/sampled
 
 - Model aliases: `deepseek`, `gpt4.1`, `gpt5`
 - Voting controls: `--voting` (default), `--no-voting`, `--num-votes N`
+- Reliability control: `--min-valid-votes N` (default: strict majority)
 - Input supports multiple items: `-i/--input file1.json file2.json dir_or_glob`
 - Parallel processing: `-t/--threads N`
 - Output controls: `-o/--output-dir`, `-f/--output-file` (single-file mode only)
@@ -157,9 +170,29 @@ Common output directories:
 - Statistics: `data/output/evalresult/`
 - Figures: `data/output/plot_result/`
 
+Every new diagnosis record includes a `status` field. `completed` records contain
+a valid diagnosis; `error` records represent provider, validation, or execution
+failures and are excluded from voting and statistics. Legacy records without a
+status field are treated as completed for backward compatibility.
+
+New run infrastructure can append results without rewriting an entire JSON array:
+
+```text
+runs/<run_id>/manifest.json
+runs/<run_id>/results.jsonl
+runs/<run_id>/errors.jsonl
+runs/<run_id>/summary.json
+```
+
+The analysis command also writes `metrics.json` next to its legacy text report.
+Use the structured file for downstream automation and keep the text report for
+human review.
+
 ## 📚 More Commands
 
 See `docs/COMMAND_CHEATSHEET.md` for full command references and examples.
+See `docs/architecture.md`, `docs/provenance.md`, and `data/README.md` for
+module boundaries, reproducibility requirements, and artifact lifecycle.
 
 ## 📄 License
 

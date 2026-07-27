@@ -87,7 +87,7 @@ def _single_model_name(item: Dict[str, Any]) -> str:
     return "single_model"
 
 
-def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int, dict]], List[str]]:
+def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int, dict]], List[str], Dict[str, int]]:
     """
     Compute label distributions and aggregate counts for the final voting result
     and for each `used_model`.
@@ -100,6 +100,7 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
     final_stats: Dict[int, dict] = _init_cat_stats()
     model_stats: Dict[str, Dict[int, dict]] = {}
     labels_seen: Set[str] = set()
+    coverage = {"completed_records": 0, "excluded_error_records": 0, "excluded_error_votes": 0}
 
     for fp in files:
         data = load_json(fp)
@@ -107,6 +108,9 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
             continue
 
         for item in data:
+            if item.get("status", "completed") != "completed":
+                coverage["excluded_error_records"] += 1
+                continue
             cat = item.get("qa_category")
             if cat is None:
                 continue
@@ -116,6 +120,7 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
                 continue
             if cat_int == 5 or cat_int not in final_stats:
                 continue
+            coverage["completed_records"] += 1
 
             # ========================
             # 1) Top-level result stats
@@ -141,6 +146,9 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
                 ]
 
             for res in individual_results:
+                if res.get("status", "completed") != "completed":
+                    coverage["excluded_error_votes"] += 1
+                    continue
                 used_model = str(res.get("used_model") or "unknown")
                 if used_model not in model_stats:
                     model_stats[used_model] = _init_cat_stats()
@@ -148,7 +156,7 @@ def collect_stats(files: List[str]) -> Tuple[Dict[int, dict], Dict[str, Dict[int
                 _record_label(model_stats[used_model], cat_int, res.get("label"), labels_seen)
 
     label_list = sorted(labels_seen)
-    return final_stats, model_stats, label_list
+    return final_stats, model_stats, label_list, coverage
 
 
 def _format_single_table(
@@ -251,6 +259,7 @@ def format_and_save(
     label_list: List[str],
     out_path: str,
     source_label: str,
+    coverage: Dict[str, int],
 ) -> None:
     """Generate the final report text and write it to a file."""
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
@@ -258,6 +267,12 @@ def format_and_save(
     lines: List[str] = []
     lines.append(f"Statistics for {source_label}")
     lines.append("Note: Accuracy = (samples without label / total samples) * 100")
+    lines.append(
+        "Coverage: "
+        f"{coverage['completed_records']} completed records; "
+        f"{coverage['excluded_error_records']} error records excluded; "
+        f"{coverage['excluded_error_votes']} error votes excluded"
+    )
     lines.append("")
 
     # First write top-level results.
@@ -271,6 +286,32 @@ def format_and_save(
     print(content)
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(content)
+
+    # Keep the human-readable report for compatibility, but make structured
+    # metrics the canonical input for future analysis and plotting tools.
+    def plain(value: Any) -> Any:
+        if isinstance(value, defaultdict):
+            return {str(key): plain(item) for key, item in value.items()}
+        if isinstance(value, dict):
+            return {str(key): plain(item) for key, item in value.items()}
+        return value
+
+    metrics_path = os.path.join(os.path.dirname(out_path), "metrics.json")
+    with open(metrics_path, "w", encoding="utf-8") as metrics_file:
+        json.dump(
+            {
+                "schema_version": "1.0",
+                "source": source_label,
+                "coverage": coverage,
+                "labels": label_list,
+                "final_stats": plain(final_stats),
+                "model_stats": plain(model_stats),
+            },
+            metrics_file,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
 
 
 def main() -> None:
@@ -344,7 +385,7 @@ def main() -> None:
             return
         source_label = base_dir
 
-    final_stats, model_stats, label_list = collect_stats(files)
+    final_stats, model_stats, label_list, coverage = collect_stats(files)
 
     # Resolve output dir: absolute, or relative to this script's parent directory
     if os.path.isabs(args.output_dir):
@@ -359,10 +400,9 @@ def main() -> None:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     out_path = os.path.join(out_dir, f"llm_annotation_stats_{timestamp}.txt")
 
-    format_and_save(final_stats, model_stats, label_list, out_path, source_label)
+    format_and_save(final_stats, model_stats, label_list, out_path, source_label, coverage)
     print("Saved results to:", out_path)
 
 
 if __name__ == "__main__":
     main()
-

@@ -72,7 +72,7 @@ def load_human_annotation_stats(path: Path):
     for line in lines:
         if not line.startswith("|"):
             continue
-        if "| Overall |" in line or f"| {'\u603b\u8ba1'} |" in line:
+        if "| Overall |" in line or "| 总计 |" in line:
             # Skip overall row
             continue
 
@@ -489,5 +489,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 

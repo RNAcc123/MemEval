@@ -10,12 +10,17 @@ def load_json_file(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+
+def is_completed_result(item):
+    """Treat legacy records as completed and exclude explicit execution errors."""
+    return isinstance(item, dict) and item.get("status", "completed") == "completed"
+
 def analyze_model_label_matching_strict(human_file, llm_file):
     human_data = load_json_file(human_file)
     llm_data = load_json_file(llm_file)
     llm_dict = {}
     for item in llm_data:
-        if isinstance(item, dict):
+        if is_completed_result(item):
             llm_dict[item["conv_id_question_id"]] = item
 
     # stats[model][qa_category][phase] = {"total": 0, "matched": 0}
@@ -45,6 +50,8 @@ def analyze_model_label_matching_strict(human_file, llm_file):
         # Collect all models (per-conversation to avoid model_set accumulating across conversations)
         model_set = set()
         for r in voting.get("individual_results", []):
+            if not is_completed_result(r):
+                continue
             model = r.get("used_model", "unknown")
             model_set.add(model)
         # For each model, add 1 sample (even if its label is missing in this conversation),
@@ -65,6 +72,8 @@ def analyze_model_label_matching_strict(human_file, llm_file):
         stats["voting_final"][human_category][human_phase]["total"] += 1
         # Matching stats
         for r in voting.get("individual_results", []):
+            if not is_completed_result(r):
+                continue
             model = r.get("used_model", "unknown")
             model_label = r.get("label", None)
             # Treat empty model label as "EMPTY" and compare only by phase
@@ -93,7 +102,7 @@ def analyze_model_label_matching_exact(human_file, llm_file):
     llm_data = load_json_file(llm_file)
     llm_dict = {}
     for item in llm_data:
-        if isinstance(item, dict):
+        if is_completed_result(item):
             llm_dict[item["conv_id_question_id"]] = item
 
     # stats_exact[model][category][label] = {"total", "matched"}
@@ -129,6 +138,8 @@ def analyze_model_label_matching_exact(human_file, llm_file):
         # Collect all models participating in voting (per conversation)
         model_set = set()
         for r in voting.get("individual_results", []):
+            if not is_completed_result(r):
+                continue
             model = r.get("used_model", "unknown")
             model_set.add(model)
 
@@ -150,6 +161,8 @@ def analyze_model_label_matching_exact(human_file, llm_file):
 
         # Match stats (per model)
         for r in voting.get("individual_results", []):
+            if not is_completed_result(r):
+                continue
             model = r.get("used_model", "unknown")
             model_label = r.get("label", None)
             if model_label is None or str(model_label).strip().lower() in (
@@ -183,7 +196,7 @@ def collect_phase_confusion_voting_final(human_file, llm_file):
 
     llm_dict = {}
     for item in llm_data:
-        if isinstance(item, dict):
+        if is_completed_result(item):
             llm_dict[item["conv_id_question_id"]] = item
 
     phases = ["1", "2", "3", "4", "EMPTY"]
