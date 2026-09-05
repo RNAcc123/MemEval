@@ -1,15 +1,8 @@
 from __future__ import annotations
 
-import importlib.util
 import json
-from pathlib import Path
 
-
-MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "analyze_llm_results.py"
-SPEC = importlib.util.spec_from_file_location("analyze_llm_results", MODULE_PATH)
-analyze_llm_results = importlib.util.module_from_spec(SPEC)
-assert SPEC.loader is not None
-SPEC.loader.exec_module(analyze_llm_results)
+from memeval.analysis.llm_stats import collect_stats
 
 
 def test_collect_stats_excludes_error_records_and_votes(tmp_path):
@@ -38,7 +31,7 @@ def test_collect_stats_excludes_error_records_and_votes(tmp_path):
         encoding="utf-8",
     )
 
-    final_stats, model_stats, labels, coverage = analyze_llm_results.collect_stats([str(input_file)])
+    final_stats, model_stats, labels, coverage = collect_stats([str(input_file)])
 
     assert final_stats[1]["total_items"] == 1
     assert final_stats[1]["label_counts"] == {"1.1": 1}

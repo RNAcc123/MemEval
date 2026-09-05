@@ -21,7 +21,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Dict, Iterable, List, NamedTuple, Optional, Set, Tuple
 
-# ``run_diagnosis`` imports python-dotenv at module import time. Keep this
+# ``memeval.diagnosis`` imports python-dotenv at module import time. Keep this
 # adapter importable in lean test environments where dotenv is not installed.
 DEFAULT_ENV_FILE = Path(os.getenv("MEMEVAL_ENV_FILE", ".env"))
 try:
@@ -33,19 +33,17 @@ except ImportError:
     dotenv_stub.load_dotenv = lambda *args, **kwargs: False
     sys.modules["dotenv"] = dotenv_stub
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-if str(SCRIPT_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPT_DIR))
-
-from run_diagnosis import (
+from memeval.diagnosis import (
+    analyze_qa_pair,
+    analyze_qa_pair_with_voting,
+    load_json_file,
+)
+from memeval.schema import (
     DIAGNOSIS_SCHEMA_VERSION,
     DiagnosisStage,
     MemoryData,
     QAData,
     UsageStats,
-    analyze_qa_pair,
-    analyze_qa_pair_with_voting,
-    load_json_file,
     validate_trace_dataset,
 )
 
@@ -106,20 +104,13 @@ def iter_diagnosis_tasks(data: Dict, processed_ids: Set[str]) -> Iterable[Diagno
             if item_id in processed_ids:
                 continue
 
-            p1 = qa_item.get("person1") or {}
-            p2 = qa_item.get("person2") or {}
             qa_data = QAData(
                 question=qa_item.get("qa_question", ""),
                 answer=qa_item.get("qa_answer", ""),
                 response=qa_item.get("qa_response", ""),
                 category=qa_item.get("qa_category", ""),
             )
-            memory_data = MemoryData(
-                person1_memories=p1.get("memories", []),
-                person2_memories=p2.get("memories", []),
-                speaker1_retrieval=qa_item.get("speaker_1_memories", []),
-                speaker2_retrieval=qa_item.get("speaker_2_memories", []),
-            )
+            memory_data = MemoryData.from_qa_item(qa_item)
             output_metadata = {
                 "sample_key": sample_key,
                 "question_index": question_index,
@@ -225,14 +216,19 @@ def run_task(task: DiagnosisTask, model: str, use_voting: bool, num_votes: int) 
     """Run diagnosis for one task and return an output record plus usage stats."""
     thread_print(f"🔍 Processing {task.item_id}")
     if use_voting:
+        subjects = [
+            {
+                "subject_id": subject.subject_id,
+                "memories": subject.memories,
+                "retrieval": subject.retrieval,
+            }
+            for subject in task.memory_data.subjects
+        ]
         analysis = analyze_qa_pair_with_voting(
             qa_question=task.qa_data.question,
             qa_answer=task.qa_data.answer,
             qa_response=task.qa_data.response,
-            memories1=task.memory_data.person1_memories,
-            memories2=task.memory_data.person2_memories,
-            speaker1_memories=task.memory_data.speaker1_retrieval,
-            speaker2_memories=task.memory_data.speaker2_retrieval,
+            subjects=subjects,
             model=model,
             num_votes=num_votes,
         )

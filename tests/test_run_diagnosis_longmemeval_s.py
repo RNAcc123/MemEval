@@ -64,8 +64,10 @@ class LongMemEvalTaskTest(unittest.TestCase):
         self.assertEqual(task.sample_key, "25")
         self.assertEqual(task.question_index, 0)
         self.assertEqual(task.qa_data.question, "How many comedians did I watch?")
-        self.assertEqual(task.memory_data.person2_memories, [])
-        self.assertEqual(task.memory_data.speaker2_retrieval, [])
+        self.assertEqual(len(task.memory_data.subjects), 2)
+        self.assertEqual(task.memory_data.subjects[0].subject_id, "longmemeval_s_25")
+        self.assertEqual(task.memory_data.subjects[1].memories, [])
+        self.assertEqual(task.memory_data.subjects[1].retrieval, [])
         self.assertEqual(
             task.output_metadata,
             {

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="/share/project/chenchen/code/MemEval"
-PYTHON_BIN="${PYTHON_BIN:-/share/project/chenchen/envs/memeval/bin/python}"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON_BIN="${PYTHON_BIN:-python}"
 RUNNER="${RUNNER:-$ROOT_DIR/scripts/run_diagnosis_longmemeval_s.py}"
 
 INPUT_FILE="${INPUT_FILE:-$ROOT_DIR/data/input/mem0_mem/longmemeval_s/mem0_longmemeval_s_part1.json}"

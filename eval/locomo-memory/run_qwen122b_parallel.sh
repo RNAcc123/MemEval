@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="/share/project/chenchen/code/MemEval"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 if [[ -f "${ROOT_DIR}/.env" ]]; then
   set -a
   # shellcheck disable=SC1091
@@ -9,7 +9,7 @@ if [[ -f "${ROOT_DIR}/.env" ]]; then
   set +a
 fi
 
-PYTHON="${PYTHON:-/share/project/chenchen/envs/memeval/bin/python}"
+PYTHON="${PYTHON:-python}"
 RUNNER="${ROOT_DIR}/eval/locomo-memory/run_locomo_mem0_trace.py"
 
 MODEL="qwen3.5-122b-a10b"

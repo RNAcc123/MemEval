@@ -20,6 +20,20 @@ def _validate_record(record: object, location: str) -> None:
     missing = sorted(REQUIRED_TRACE_FIELDS - record.keys())
     if missing:
         raise TraceValidationError(f"{location} missing required fields: {', '.join(missing)}")
+    if "subjects" in record:
+        subjects = record["subjects"]
+        if not isinstance(subjects, list):
+            raise TraceValidationError(f"{location}.subjects must be a list")
+        for index, subject in enumerate(subjects):
+            subject_location = f"{location}.subjects[{index}]"
+            if not isinstance(subject, Mapping):
+                raise TraceValidationError(f"{subject_location} must be an object")
+            for list_field in ("memories", "retrieval"):
+                value = subject.get(list_field, [])
+                if not isinstance(value, list):
+                    raise TraceValidationError(f"{subject_location}.{list_field} must be a list")
+        return
+    # Legacy shape: fixed person1/person2 + speaker_1_memories/speaker_2_memories keys.
     for person_key in ("person1", "person2"):
         person = record.get(person_key, {})
         if person is not None and not isinstance(person, Mapping):

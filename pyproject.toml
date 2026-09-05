@@ -15,6 +15,7 @@ dependencies = [
     "openai>=1.0.0",
     "python-dotenv>=1.0.0",
     "requests>=2.31.0",
+    "typer>=0.12",
 ]
 
 [project.optional-dependencies]
@@ -22,6 +23,17 @@ dev = [
     "pytest>=8.0.0",
     "ruff>=0.6.0",
 ]
+# Memory backends are optional: each pulls heavy or service-specific deps, and
+# the diagnosis/analysis commands work without any of them installed.
+mem0 = ["mem0ai>=0.1.0"]
+amem = ["chromadb>=0.4.0", "sentence-transformers>=2.2.0"]
+memoryos = ["memoryos-pro>=0.1.0"]
+# openclaw is a CLI binary, not a Python package; install it separately and
+# make sure `openclaw` is on PATH.
+backends = ["memeval[mem0,amem,memoryos]"]
+
+[project.scripts]
+memeval = "memeval.cli:app"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

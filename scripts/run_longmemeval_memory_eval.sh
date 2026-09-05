@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="/share/project/chenchen/code/MemEval"
-PYTHON_BIN="${PYTHON_BIN:-/share/project/chenchen/envs/memeval/bin/python}"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON_BIN="${PYTHON_BIN:-python}"
 RUNNER="${RUNNER:-$ROOT_DIR/eval/longmemeval-memory/run_longmemeval_mem0_trace.py}"
 
-DATASET="${DATASET:-/share/project/chenchen/data/longmemeval-cleaned/longmemeval_s_cleaned.json}"
+DATASET="${DATASET:-$ROOT_DIR/data/input/longmemeval/longmemeval_s_cleaned.json}"
 OUTPUT_DIR="${OUTPUT_DIR:-$ROOT_DIR/data/input/mem0_mem/longmemeval_s}"
 ENV_FILE="${ENV_FILE:-$ROOT_DIR/.env}"
-MEM0_REPO="${MEM0_REPO:-/share/project/chenchen/code/mem0}"
+MEM0_REPO="${MEM0_REPO:-$ROOT_DIR/../mem0}"
 STORE_BASE="${STORE_BASE:-$OUTPUT_DIR/local_mem0_workers}"
 LOG_DIR="${LOG_DIR:-$OUTPUT_DIR/logs}"
 

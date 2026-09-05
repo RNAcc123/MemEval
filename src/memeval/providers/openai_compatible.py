@@ -6,7 +6,7 @@ import logging
 
 from memeval.config import APIConfig, DiagnosisConfig
 
-from .base import JudgeProvider, ProviderResponse, classify_provider_exception, normalize_usage
+from .base import ProviderResponse, classify_provider_exception, normalize_usage
 from .errors import ProviderResponseError
 
 

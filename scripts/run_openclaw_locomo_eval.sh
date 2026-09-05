@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="/share/project/chenchen/code/MemEval"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ENV_FILE="${ENV_FILE:-$ROOT_DIR/.env.openclaw_eval}"
 
 if [[ ! -f "$ENV_FILE" ]]; then
@@ -9,7 +9,7 @@ if [[ ! -f "$ENV_FILE" ]]; then
   exit 2
 fi
 
-# shellcheck source=/share/project/chenchen/code/MemEval/.env.openclaw_eval
+# shellcheck disable=SC1090
 source "$ENV_FILE"
 
 PYTHON_BIN="${PYTHON_BIN:-$OPENCLAW_EVAL_PYTHON}"

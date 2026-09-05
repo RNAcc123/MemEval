@@ -8,7 +8,6 @@ import fcntl
 import json
 import os
 import re
-import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -17,6 +16,7 @@ from typing import Any
 from memeval.runners import retry_call
 from memeval.datasets import LoCoMoAdapter
 from memeval.memory import Mem0Backend
+from memeval.memory.mem0_config import add_mem0_repo_to_path
 
 
 DEFAULT_DATASET = Path(os.getenv("MEMEVAL_LOCOMO_DATASET", "data/locomo/locomo10.json"))
@@ -123,12 +123,6 @@ def load_env_file_plain(env_file: Path) -> None:
             continue
         key, value = line.split("=", 1)
         os.environ.setdefault(key.strip(), value.strip().strip("'\""))
-
-
-def add_mem0_repo_to_path(mem0_repo: Path) -> None:
-    repo = str(mem0_repo)
-    if repo not in sys.path:
-        sys.path.insert(0, repo)
 
 
 def build_llm_config(

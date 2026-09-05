@@ -54,24 +54,59 @@ class QAData:
 
 
 @dataclass
+class SubjectMemoryData:
+    """Memory evolution and retrieval data for one subject in a QA record."""
+
+    subject_id: str = ""
+    memories: list[dict] = field(default_factory=list)
+    retrieval: list[dict] = field(default_factory=list)
+
+
+@dataclass
 class MemoryData:
-    """Normalized memory evolution and retrieval data for a QA record."""
+    """Normalized memory evolution and retrieval data for a QA record.
 
-    person1_memories: list[dict] = field(default_factory=list)
-    person2_memories: list[dict] = field(default_factory=list)
-    speaker1_retrieval: list[dict] = field(default_factory=list)
-    speaker2_retrieval: list[dict] = field(default_factory=list)
+    ``subjects`` holds one entry per party whose memory contributed to the
+    QA record: length 1 for single-party datasets (e.g. LongMemEval), length 2
+    for dual-party datasets (e.g. LoCoMo's speaker_a/speaker_b), and length N
+    for any dataset with more parties. Diagnosis stages iterate this list
+    instead of assuming exactly two hardcoded subjects.
+    """
 
-    def to_json_str(self, field_name: str, exclude_keys: list[str] | None = None) -> str:
-        value = getattr(self, field_name)
-        if exclude_keys and isinstance(value, list):
-            value = [
-                {key: item_value for key, item_value in item.items() if key not in exclude_keys}
-                if isinstance(item, dict)
-                else item
-                for item in value
-            ]
-        return json.dumps(value, ensure_ascii=False)
+    subjects: list[SubjectMemoryData] = field(default_factory=list)
+
+    @classmethod
+    def from_qa_item(cls, qa_item: dict) -> "MemoryData":
+        """Build from either the current ``subjects`` shape or legacy on-disk data.
+
+        Legacy files (``data/input/**``) use fixed ``person1``/``person2`` +
+        ``speaker_1_memories``/``speaker_2_memories`` keys; new trace output
+        uses a ``subjects`` list. Both are accepted so existing datasets keep
+        working without a migration pass.
+        """
+        if "subjects" in qa_item:
+            return cls(subjects=[
+                SubjectMemoryData(
+                    subject_id=subject.get("subject_id", subject.get("name", "")),
+                    memories=subject.get("memories", []),
+                    retrieval=subject.get("retrieval", []),
+                )
+                for subject in (qa_item.get("subjects") or [])
+            ])
+        subjects = []
+        for person_key, retrieval_key in (
+            ("person1", "speaker_1_memories"),
+            ("person2", "speaker_2_memories"),
+        ):
+            if person_key not in qa_item and retrieval_key not in qa_item:
+                continue
+            person = qa_item.get(person_key) or {}
+            subjects.append(SubjectMemoryData(
+                subject_id=person.get("name", ""),
+                memories=person.get("memories", []),
+                retrieval=qa_item.get(retrieval_key, []),
+            ))
+        return cls(subjects=subjects)
 
 
 @dataclass

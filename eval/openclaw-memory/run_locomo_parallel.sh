@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="/share/project/chenchen/code/MemEval"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 if [[ -f "${ROOT_DIR}/.env" ]]; then
   set -a
   # shellcheck disable=SC1091
@@ -9,7 +9,7 @@ if [[ -f "${ROOT_DIR}/.env" ]]; then
   set +a
 fi
 
-PYTHON="${PYTHON:-/share/project/chenchen/envs/memeval/bin/python}"
+PYTHON="${PYTHON:-python}"
 RUNNER="${ROOT_DIR}/eval/openclaw-memory/run_locomo_openclaw_trace.py"
 
 START="${START:-0}"

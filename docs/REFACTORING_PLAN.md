@@ -517,7 +517,7 @@ Tasks:
 - [x] Add run manifests and stable run IDs.
 - [x] Add a JSONL append-only store for incremental traces, diagnoses, and errors.
 - [x] Provide an explicit completed-id/resume contract.
-- [ ] Merge `eval/matching.py` and `scripts/compare_results.py`.
+- [x] Merge `eval/matching.py` and `scripts/compare_results.py`.
 - [x] Generate structured `metrics.json` alongside legacy formatted reports.
 - [x] Report missing, duplicate, invalid, and matched record counts through the metrics API.
 
